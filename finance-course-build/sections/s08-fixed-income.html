@@ -1,0 +1,474 @@
+<section class="lesson" id="s08" data-num="08" data-title="Fixed Income: Bonds and Interest Rates">
+  <p class="eyebrow">Part II · Financial Markets &amp; Instruments</p>
+  <h2>8. Fixed Income: Bonds and Interest Rates</h2>
+  <p class="lede">The bond market is bigger than the stock market, and it is where interest rates — the price of money itself — actually get set. By the end of this section you will be able to price a bond from scratch, explain why prices and yields move in opposite directions, read a yield curve, and estimate exactly how much a rate move will cost a bondholder.</p>
+
+  <h3 id="s08-anatomy">Bond anatomy: a loan cut into pieces</h3>
+  <p>A <dfn class="term" tabindex="0" data-def="A tradable loan: the buyer lends money to the issuer in exchange for scheduled interest payments plus repayment of principal.">bond</dfn> is a loan that has been sliced into standardized, tradable pieces. When you buy a bond you are the lender; the <dfn class="term" tabindex="0" data-def="The entity that borrows by selling the bond — a government, company, or agency.">issuer</dfn> is the borrower. Because the payments are contractually fixed in advance, this whole asset class is called <dfn class="term" tabindex="0" data-def="The asset class of debt securities with contractually scheduled payments — bonds, bills, notes.">fixed income</dfn>.</p>
+  <p>Three numbers define the contract. The <dfn class="term" tabindex="0" data-def="The principal amount repaid at maturity, and the base for coupon calculations. Also called par value.">face value</dfn> (or <dfn class="term" tabindex="0" data-def="Same as face value — the amount repaid at maturity, typically $1,000 per bond in the US.">par value</dfn>, typically $1,000) is what you get back at the end. The <dfn class="term" tabindex="0" data-def="The fixed interest payment a bond makes, usually quoted as an annual percentage of face value.">coupon</dfn> is the interest payment — a 5% coupon on $1,000 face pays $50 a year (US bonds actually pay half every six months; we will use annual payments to keep the math clean). The <dfn class="term" tabindex="0" data-def="The date the issuer repays the face value and the bond ceases to exist.">maturity</dfn> is when the principal comes back. That is it: a bond is a fully specified cash-flow schedule, known on day one. The name "coupon" is literal — paper bonds once had detachable coupons you clipped and mailed in to collect interest.</p>
+  <p>Who issues them? Four big families:</p>
+  <ul>
+    <li><strong>Treasuries</strong> — debt of the US federal government (see <a href="#s05">Section 5</a> for why it borrows). <dfn class="term" tabindex="0" data-def="US government debt maturing in one year or less, sold at a discount to face value instead of paying coupons.">T-bills</dfn> mature within a year, notes run 2–10 years, bonds 20–30. Treated as the closest thing to a risk-free benchmark, so everything else is quoted relative to them.</li>
+    <li><strong>Corporates</strong> — companies borrowing for factories, acquisitions, or buybacks. Riskier than Treasuries, so they must pay more (we quantify how much in the credit subsection).</li>
+    <li><strong><dfn class="term" tabindex="0" data-def="Bonds issued by states, cities, and local authorities; interest is often exempt from US federal income tax.">Munis</dfn></strong> — state and local government bonds, often federally tax-exempt, which is why their quoted yields look low.</li>
+    <li><strong><dfn class="term" tabindex="0" data-def="Bonds from government-sponsored entities like Fannie Mae and Freddie Mac, largely packaging home mortgages.">Agencies</dfn></strong> — government-sponsored entities such as Fannie Mae, mostly issuing bonds backed by pools of home mortgages.</li>
+  </ul>
+  <p>Now the surprise for stock-market-centric readers: globally, bonds outstanding total roughly $140 trillion, versus roughly $110–120 trillion for all stocks. Why? Every company has exactly one class of common stock but may have dozens of bond issues alive at once; governments — the biggest borrowers on Earth — issue bonds but no equity at all (the US Treasury market alone is around $27 trillion); and mortgages, car loans, and credit-card balances get bundled into bonds too. Almost all of this trades <dfn class="term" tabindex="0" data-def="Over the counter: trading via a network of dealers rather than a central exchange.">over the counter</dfn> through dealer banks rather than on an exchange like the NYSE — the plumbing from <a href="#s06">Section 6</a> in action.</p>
+
+  <h3 id="s08-pricing">Pricing a bond: it is just discounted cash flows</h3>
+  <p>Here is the good news: you already learned the entire pricing model in <a href="#s01">Section 1</a>. A bond is a known list of future cash flows, and the price of any known cash-flow list is the sum of its present values. No new theory required — only a discount rate.</p>
+  <div class="formula">
+    <div class="formula-main">P = Σ<sub>t=1…n</sub> C ÷ (1 + y)<sup>t</sup> &nbsp;+&nbsp; F ÷ (1 + y)<sup>n</sup></div>
+    <div class="formula-legend">P = price · C = annual coupon in dollars · F = face value · y = market yield per year · n = years to maturity</div>
+  </div>
+  <p>The discount rate <em>y</em> is the <dfn class="term" tabindex="0" data-def="The single discount rate that makes a bond's present value equal its market price; the annualized return if held to maturity with coupons reinvested at that rate.">yield to maturity</dfn> (YTM): the going market rate for money of this maturity and riskiness. Crucially, <em>y</em> is set by the market every minute, while C, F, and n are frozen in the contract. Keep that asymmetry in mind — it is about to explain everything.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example: a 3-year, 5% coupon bond at three different yields</p>
+    <p>Face value $1,000, so the cash flows are $50, $50, $1,050 at years 1, 2, 3.</p>
+    <p><strong>Market yield 5%</strong> (equal to the coupon): 50÷1.05 + 50÷1.05² + 1,050÷1.05³ = 47.62 + 45.35 + 907.03 = <strong>$1,000.00</strong>. Exactly par.</p>
+    <p><strong>Market yield 7%</strong>: 50÷1.07 + 50÷1.07² + 1,050÷1.07³ = 46.73 + 43.67 + 857.11 = <strong>$947.51</strong>. Below par.</p>
+    <p><strong>Market yield 3%</strong>: 48.54 + 47.13 + 960.90 = <strong>$1,056.57</strong>. Above par.</p>
+    <p>Same bond, same cash flows — three prices. Only the discount rate moved.</p>
+  </div>
+  <figure class="fig">
+    <svg viewBox="0 0 720 330" role="img" aria-label="Timeline of a 3-year 5% coupon bond showing cash flows of 50, 50, and 1,050 dollars discounted back to a present value of 1,000 dollars at a 5% yield">
+      <defs>
+        <marker id="s08-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--axis)"/></marker>
+      </defs>
+      <line x1="100" y1="170" x2="650" y2="170" style="stroke:var(--axis)" stroke-width="2"/>
+      <line x1="110" y1="163" x2="110" y2="177" style="stroke:var(--axis)" stroke-width="2"/>
+      <line x1="280" y1="163" x2="280" y2="177" style="stroke:var(--axis)" stroke-width="2"/>
+      <line x1="450" y1="163" x2="450" y2="177" style="stroke:var(--axis)" stroke-width="2"/>
+      <line x1="620" y1="163" x2="620" y2="177" style="stroke:var(--axis)" stroke-width="2"/>
+      <text x="110" y="192" text-anchor="middle" font-size="13" style="fill:var(--muted)">Today</text>
+      <text x="280" y="192" text-anchor="middle" font-size="13" style="fill:var(--muted)">Year 1</text>
+      <text x="450" y="192" text-anchor="middle" font-size="13" style="fill:var(--muted)">Year 2</text>
+      <text x="620" y="192" text-anchor="middle" font-size="13" style="fill:var(--muted)">Year 3</text>
+      <line x1="280" y1="163" x2="280" y2="122" style="stroke:var(--c1)" stroke-width="2.5" marker-end="url(#s08-arr)"/>
+      <line x1="450" y1="163" x2="450" y2="122" style="stroke:var(--c1)" stroke-width="2.5" marker-end="url(#s08-arr)"/>
+      <line x1="620" y1="163" x2="620" y2="52" style="stroke:var(--c1)" stroke-width="2.5" marker-end="url(#s08-arr)"/>
+      <text x="280" y="110" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">$50</text>
+      <text x="450" y="110" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">$50</text>
+      <text x="620" y="40" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">$1,050</text>
+      <text x="620" y="72" text-anchor="middle" font-size="12" style="fill:var(--muted)">coupon + face</text>
+      <path d="M270,198 C 235,222 205,225 172,226" fill="none" style="stroke:var(--axis)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#s08-arr)"/>
+      <path d="M440,200 C 340,252 250,254 172,254" fill="none" style="stroke:var(--axis)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#s08-arr)"/>
+      <path d="M610,202 C 440,286 260,282 172,282" fill="none" style="stroke:var(--axis)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#s08-arr)"/>
+      <text x="252" y="218" font-size="12" style="fill:var(--muted)">÷ 1.05</text>
+      <text x="330" y="244" font-size="12" style="fill:var(--muted)">÷ 1.05²</text>
+      <text x="430" y="272" font-size="12" style="fill:var(--muted)">÷ 1.05³</text>
+      <text x="160" y="230" text-anchor="end" font-size="13" style="fill:var(--ink)">$47.62</text>
+      <text x="160" y="258" text-anchor="end" font-size="13" style="fill:var(--ink)">$45.35</text>
+      <text x="160" y="286" text-anchor="end" font-size="13" style="fill:var(--ink)">$907.03</text>
+      <line x1="70" y1="296" x2="165" y2="296" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="160" y="316" text-anchor="end" font-size="14" font-weight="700" style="fill:var(--accent)">$1,000.00</text>
+      <text x="178" y="316" font-size="12" style="fill:var(--muted)">= price at a 5% yield</text>
+    </svg>
+    <figcaption><strong>Figure 8.1</strong> — A bond price is nothing new: discount each promised cash flow back to today and add them up. At a 5% yield, the 5% coupon bond is worth exactly its $1,000 face value.</figcaption>
+  </figure>
+  <div class="callout co-you"><p class="co-label">Your edge</p><p>Bond pricing is a five-line function: loop over t, accumulate <code>cf / (1+y)**t</code>, done. Every readout in this section's widget — price, duration, the whole price–yield curve — falls out of that one loop. When a finance person says "we ran the bond math," they mean someone vectorized this in NumPy.</p></div>
+
+  <h3 id="s08-seesaw">The seesaw: why price and yield move in opposite directions</h3>
+  <p>This is the single most important fact in fixed income, and once you see it you cannot unsee it: <strong>when market yields rise, existing bond prices fall — and vice versa.</strong> Not sometimes. Always, mechanically, by arithmetic.</p>
+  <p>The intuition needs no formula. Suppose you own that 5% coupon bond, and new bonds of identical maturity and risk start being issued with 7% coupons because rates rose. Nobody will pay $1,000 for your $50-a-year bond when $70-a-year is on the shelf next to it. To find a buyer, your bond's price must drop until its fixed cash flows deliver the buyer a 7% return — which is precisely $947.51 for the 3-year bond above. The cash flows are bolted down by contract; <em>price is the only part that can move</em>. So when the required yield goes up, price is forced down, and when yields fall, old higher-coupon bonds become prized and trade above face value.</p>
+  <div class="callout co-analogy"><p class="co-label">Analogy: the seesaw</p><p>Picture a playground seesaw with <strong>price</strong> on one seat and <strong>yield</strong> on the other. Push yield up, price sinks; push yield down, price rises. They are two views of the same object: yield is just the price restated as an annualized return. Saying "bonds sold off today" and "yields rose today" is the same sentence.</p></div>
+  <p>The relationship between coupon and market yield sorts every bond into one of three states:</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>State</th><th>Condition</th><th>Price</th><th>3-year example</th></tr></thead>
+    <tbody>
+      <tr><td><dfn class="term" tabindex="0" data-def="Trading above face value, which happens when the coupon rate exceeds the market yield.">Premium</dfn></td><td>coupon &gt; market yield</td><td class="td-num">above $1,000</td><td class="td-num">$1,056.57 at 3%</td></tr>
+      <tr><td>Par</td><td>coupon = market yield</td><td class="td-num">exactly $1,000</td><td class="td-num">$1,000.00 at 5%</td></tr>
+      <tr><td><dfn class="term" tabindex="0" data-def="Trading below face value, which happens when the coupon rate is below the market yield.">Discount</dfn></td><td>coupon &lt; market yield</td><td class="td-num">below $1,000</td><td class="td-num">$947.51 at 7%</td></tr>
+    </tbody>
+  </table></div>
+  <p>One trap to defuse early: there are three different "yields" floating around, and news headlines mix them freely. The <dfn class="term" tabindex="0" data-def="The bond's fixed annual interest as a percentage of face value; set at issue and never changes.">coupon rate</dfn> is frozen at issue ($50 ÷ $1,000 = 5%, forever). The <dfn class="term" tabindex="0" data-def="Annual coupon divided by the current market price; ignores the pull toward face value at maturity.">current yield</dfn> is coupon over today's price ($50 ÷ $947.51 = 5.28%). The YTM (7% here) is the full internal rate of return, counting both the coupons <em>and</em> the guaranteed drift from $947.51 back up to $1,000 at maturity. YTM is the one that matters for comparing bonds; the other two are partial views.</p>
+  <div class="callout co-key"><p class="co-label">Key idea</p><p>A bond's cash flows never change; its price does. Yield up ⇒ price down. Buy at a discount and the market yield exceeds the coupon; buy at a premium and it is the reverse. Everything else in fixed income is a footnote to this seesaw.</p></div>
+
+  <div class="widget" id="s08-seesaw-widget">
+    <div class="widget-head">
+      <h4>The bond seesaw</h4>
+      <p>Drag the market yield past the coupon rate and watch the price cross par — then stretch the maturity and see the seesaw get more violent.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Coupon rate <output class="ctl-val">5.0%</output><input type="range" min="0" max="10" step="0.25" value="5"></label>
+        <label class="ctl">Years to maturity <output class="ctl-val">10 yrs</output><input type="range" min="1" max="30" step="1" value="10"></label>
+        <label class="ctl">Market yield (YTM) <output class="ctl-val">7.0%</output><input type="range" min="0" max="12" step="0.25" value="7"></label>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">Price ($1,000 face)</span><span class="stat-value" data-ro="price">$859.53</span></div>
+        <div class="stat"><span class="stat-label">Trading at</span><span class="stat-value" data-ro="badge">Discount</span></div>
+        <div class="stat"><span class="stat-label">Modified duration</span><span class="stat-value" data-ro="dur">7.42 yrs</span></div>
+        <div class="stat"><span class="stat-label">Current yield</span><span class="stat-value" data-ro="cy">5.82%</span></div>
+      </div>
+      <svg viewBox="0 0 720 300" role="img" aria-label="Live chart of bond price versus market yield with the current yield marked as a point on a downward-sloping convex curve">
+        <line x1="80" y1="16" x2="80" y2="264" style="stroke:var(--axis)" stroke-width="1.5"/>
+        <line x1="80" y1="264" x2="700" y2="264" style="stroke:var(--axis)" stroke-width="1.5"/>
+        <g data-ro="xgrid"></g>
+        <line x1="80" y1="140" x2="700" y2="140" style="stroke:var(--grid)" stroke-width="1"/>
+        <text x="90" y="290" text-anchor="middle" font-size="13" style="fill:var(--muted)" data-ro="xl0">0%</text>
+        <text x="235" y="290" text-anchor="middle" font-size="13" style="fill:var(--muted)">3%</text>
+        <text x="390" y="290" text-anchor="middle" font-size="13" style="fill:var(--muted)">6%</text>
+        <text x="545" y="290" text-anchor="middle" font-size="13" style="fill:var(--muted)">9%</text>
+        <text x="694" y="290" text-anchor="middle" font-size="13" style="fill:var(--muted)">12%</text>
+        <text x="72" y="22" text-anchor="end" font-size="12" style="fill:var(--muted)" data-ro="ytop">$1,500</text>
+        <text x="72" y="144" text-anchor="end" font-size="12" style="fill:var(--muted)" data-ro="ymid">$1,000</text>
+        <text x="72" y="264" text-anchor="end" font-size="12" style="fill:var(--muted)" data-ro="ybot">$600</text>
+        <line x1="80" y1="140" x2="700" y2="140" stroke-dasharray="6 5" style="stroke:var(--muted)" stroke-width="1.5" data-ro="parline"/>
+        <text x="688" y="134" text-anchor="end" font-size="12" style="fill:var(--muted)" data-ro="parlbl">par $1,000</text>
+        <path d="" fill="none" style="stroke:var(--c1)" stroke-width="2.5" data-ro="curve"/>
+        <circle r="6" style="fill:var(--accent);stroke:var(--surface)" stroke-width="2" data-ro="dot"/>
+      </svg>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s08-seesaw-widget');
+    if (!root) return;
+    var sliders = root.querySelectorAll('input[type=range]');
+    var outs = root.querySelectorAll('output.ctl-val');
+    var cIn = sliders[0], nIn = sliders[1], yIn = sliders[2];
+    function ro(name) { return root.querySelector('[data-ro="' + name + '"]'); }
+    var priceEl = ro('price'), badgeEl = ro('badge'), durEl = ro('dur'), cyEl = ro('cy');
+    var curveEl = ro('curve'), dotEl = ro('dot'), parLine = ro('parline'), parLbl = ro('parlbl');
+    var yTop = ro('ytop'), yMid = ro('ymid'), yBot = ro('ybot');
+    var L = 80, R = 700, T = 16, B = 264;
+    function clamp(v, lo, hi) { v = parseFloat(v); if (isNaN(v)) v = lo; return Math.min(hi, Math.max(lo, v)); }
+    function bond(c, n, y) {
+      var C = 10 * c, r = y / 100, P = 0, W = 0, t, cf, pv;
+      for (t = 1; t <= n; t++) {
+        cf = C + (t === n ? 1000 : 0);
+        pv = cf / Math.pow(1 + r, t);
+        P += pv; W += t * pv;
+      }
+      return { p: P, mod: (W / P) / (1 + r) };
+    }
+    function money(v, dec) {
+      return '$' + v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec });
+    }
+    function xPos(y) { return L + (y / 12) * (R - L); }
+    function update() {
+      var c = clamp(cIn.value, 0, 10), n = Math.round(clamp(nIn.value, 1, 30)), y = clamp(yIn.value, 0, 12);
+      outs[0].textContent = c.toFixed(2) + '%';
+      outs[1].textContent = n + (n === 1 ? ' yr' : ' yrs');
+      outs[2].textContent = y.toFixed(1) + '%';
+      var res = bond(c, n, y);
+      priceEl.textContent = money(res.p, 2);
+      var diff = res.p - 1000;
+      if (Math.abs(diff) < 0.5) {
+        badgeEl.textContent = 'Par'; badgeEl.style.color = 'var(--accent)';
+      } else if (diff > 0) {
+        badgeEl.textContent = 'Premium'; badgeEl.style.color = 'var(--up)';
+      } else {
+        badgeEl.textContent = 'Discount'; badgeEl.style.color = 'var(--down)';
+      }
+      durEl.textContent = res.mod.toFixed(2) + ' yrs';
+      cyEl.textContent = ((10 * c / res.p) * 100).toFixed(2) + '%';
+      var pts = [], yy, lo = Infinity, hi = -Infinity, i;
+      for (yy = 0; yy <= 12.0001; yy += 0.25) {
+        var p = bond(c, n, yy).p;
+        pts.push([yy, p]);
+        if (p < lo) lo = p;
+        if (p > hi) hi = p;
+      }
+      lo *= 0.97; hi *= 1.03;
+      if (hi - lo < 1) { hi = lo + 1; }
+      function yPos(p) { return B - ((p - lo) / (hi - lo)) * (B - T); }
+      var d = '';
+      for (i = 0; i < pts.length; i++) {
+        d += (i === 0 ? 'M' : 'L') + xPos(pts[i][0]).toFixed(1) + ',' + yPos(pts[i][1]).toFixed(1);
+      }
+      curveEl.setAttribute('d', d);
+      dotEl.setAttribute('cx', xPos(y).toFixed(1));
+      dotEl.setAttribute('cy', yPos(res.p).toFixed(1));
+      var parY = yPos(1000);
+      parLine.setAttribute('y1', parY.toFixed(1));
+      parLine.setAttribute('y2', parY.toFixed(1));
+      parLbl.setAttribute('y', (parY - 6).toFixed(1));
+      yTop.textContent = money(hi, 0);
+      yMid.setAttribute('y', ((T + B) / 2 + 4).toFixed(1));
+      yMid.textContent = money((lo + hi) / 2, 0);
+      yBot.textContent = money(lo, 0);
+    }
+    for (var k = 0; k < sliders.length; k++) sliders[k].addEventListener('input', update);
+    update();
+  })();
+  </script>
+
+  <h3 id="s08-curve">The yield curve: the market's forecast in one line</h3>
+  <p>Take one issuer — the US Treasury — and plot the yield of its bonds against their maturities, from 3-month bills out to 30-year bonds. That plot is the <dfn class="term" tabindex="0" data-def="A plot of yields against maturities for bonds of the same issuer and credit quality, usually US Treasuries.">yield curve</dfn>, and it is arguably the most-watched chart in finance, because it compresses the market's entire forecast of growth, inflation, and central-bank policy into a single line.</p>
+  <p>Why does its shape carry information? A 10-year yield has to compete with the alternative of rolling over short-term bills for ten years. So long yields embed the market's expected <em>path</em> of the short rates the Fed controls (<a href="#s04">Section 4</a>), plus a <dfn class="term" tabindex="0" data-def="Extra yield investors demand for locking money up longer and bearing more interest-rate risk.">term premium</dfn> — compensation for locking up money longer and eating more price risk while you wait. Three canonical shapes result:</p>
+  <ul>
+    <li><strong>Normal (upward-sloping):</strong> long yields above short. The default state — steady growth expected, term premium doing its job.</li>
+    <li><strong>Flat:</strong> little difference across maturities. A transition state — the market thinks the rate cycle is near a turning point.</li>
+    <li><strong><dfn class="term" tabindex="0" data-def="A yield curve where short-term yields exceed long-term yields; historically a recession warning.">Inverted</dfn>:</strong> short yields <em>above</em> long. The market is saying today's policy rate is unusually high and will be cut — and central banks cut aggressively mostly when the economy is heading into trouble.</li>
+  </ul>
+  <p>That last shape has a famous track record: an inversion of the 10-year-minus-2-year (or 10-year-minus-3-month) Treasury spread has preceded every US recession of the past half-century, typically by 6 to 24 months — the pattern behind the recession indicators in <a href="#s03">Section 3</a>. It is a strong signal, not a law of physics: the lead time is wildly variable, and the deep 2022–2024 inversion was followed by an unusually long wait, reminding everyone that "preceded every recession" is not the same as "is always followed promptly by one."</p>
+
+  <div class="widget" id="s08-curve-widget">
+    <div class="widget-head">
+      <h4>Yield curve explorer</h4>
+      <p>Flip between the three classic shapes and read what each one says about the future (illustrative data).</p>
+    </div>
+    <div class="widget-body">
+      <div class="btn-group">
+        <button class="btn is-active" data-shape="normal">Normal</button>
+        <button class="btn" data-shape="flat">Flat</button>
+        <button class="btn" data-shape="inverted">Inverted</button>
+      </div>
+      <svg viewBox="0 0 720 260" role="img" aria-label="Yield curve chart showing Treasury yields across maturities from 3 months to 30 years, redrawn for normal, flat, and inverted shapes">
+        <line x1="70" y1="20" x2="70" y2="210" style="stroke:var(--axis)" stroke-width="1.5"/>
+        <line x1="70" y1="210" x2="690" y2="210" style="stroke:var(--axis)" stroke-width="1.5"/>
+        <line x1="70" y1="180" x2="690" y2="180" style="stroke:var(--grid)" stroke-width="1"/>
+        <line x1="70" y1="120" x2="690" y2="120" style="stroke:var(--grid)" stroke-width="1"/>
+        <line x1="70" y1="60" x2="690" y2="60" style="stroke:var(--grid)" stroke-width="1"/>
+        <text x="62" y="184" text-anchor="end" font-size="12" style="fill:var(--muted)">3%</text>
+        <text x="62" y="124" text-anchor="end" font-size="12" style="fill:var(--muted)">4%</text>
+        <text x="62" y="64" text-anchor="end" font-size="12" style="fill:var(--muted)">5%</text>
+        <text x="90" y="232" text-anchor="middle" font-size="12" style="fill:var(--muted)">3m</text>
+        <text x="190" y="232" text-anchor="middle" font-size="12" style="fill:var(--muted)">1y</text>
+        <text x="300" y="232" text-anchor="middle" font-size="12" style="fill:var(--muted)">2y</text>
+        <text x="420" y="232" text-anchor="middle" font-size="12" style="fill:var(--muted)">5y</text>
+        <text x="540" y="232" text-anchor="middle" font-size="12" style="fill:var(--muted)">10y</text>
+        <text x="660" y="232" text-anchor="middle" font-size="12" style="fill:var(--muted)">30y</text>
+        <text x="380" y="252" text-anchor="middle" font-size="12" style="fill:var(--muted)">maturity</text>
+        <path d="" fill="none" style="stroke:var(--c1)" stroke-width="2.5" data-ro="cpath"/>
+        <g data-ro="cdots"></g>
+      </svg>
+      <p data-ro="cnote">A normal curve: longer lending earns more. The market expects steady growth and policy roughly where it is, and investors collect a term premium for tying money up.</p>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s08-curve-widget');
+    if (!root) return;
+    var xs = [90, 190, 300, 420, 540, 660];
+    var data = {
+      normal:   [3.0, 3.2, 3.4, 3.8, 4.2, 4.6],
+      flat:     [4.2, 4.2, 4.2, 4.2, 4.25, 4.3],
+      inverted: [5.3, 5.1, 4.8, 4.3, 4.0, 4.1]
+    };
+    var notes = {
+      normal: 'A normal curve: longer lending earns more. The market expects steady growth and policy roughly where it is, and investors collect a term premium for tying money up.',
+      flat: 'A flat curve: you get almost nothing extra for lending long. The market senses a turning point — either rate hikes are ending or growth is cooling enough that cuts are on the horizon.',
+      inverted: 'An inverted curve: short-term cash out-yields 10-year bonds. The market is betting the central bank will have to cut rates substantially — historically the classic warning that a recession may be 6 to 24 months away.'
+    };
+    var path = root.querySelector('[data-ro="cpath"]');
+    var dotsG = root.querySelector('[data-ro="cdots"]');
+    var note = root.querySelector('[data-ro="cnote"]');
+    var btns = root.querySelectorAll('.btn-group .btn');
+    var svgNS = 'http://www.w3.org/2000/svg';
+    var dots = [];
+    for (var i = 0; i < xs.length; i++) {
+      var c = document.createElementNS(svgNS, 'circle');
+      c.setAttribute('r', '4.5');
+      c.setAttribute('cx', xs[i]);
+      c.style.fill = 'var(--c1)';
+      dotsG.appendChild(c);
+      dots.push(c);
+    }
+    function yPos(v) { return 210 - ((v - 2.5) / 3) * 180; }
+    function draw(shape) {
+      var ys = data[shape] || data.normal;
+      var d = '';
+      for (var i = 0; i < xs.length; i++) {
+        d += (i === 0 ? 'M' : 'L') + xs[i] + ',' + yPos(ys[i]).toFixed(1);
+        dots[i].setAttribute('cy', yPos(ys[i]).toFixed(1));
+      }
+      path.setAttribute('d', d);
+      note.textContent = notes[shape] || notes.normal;
+    }
+    for (var b = 0; b < btns.length; b++) {
+      btns[b].addEventListener('click', function () {
+        for (var j = 0; j < btns.length; j++) btns[j].classList.remove('is-active');
+        this.classList.add('is-active');
+        draw(this.getAttribute('data-shape'));
+      });
+    }
+    draw('normal');
+  })();
+  </script>
+
+  <h3 id="s08-duration">Duration and convexity: how hard does the seesaw swing?</h3>
+  <p>The seesaw tells you the <em>direction</em> of a price move; <dfn class="term" tabindex="0" data-def="A measure of a bond's price sensitivity to interest-rate changes; roughly the percent price drop per one-point yield rise.">duration</dfn> tells you the <em>size</em>. Play with the widget above and you will notice the pattern yourself: stretch maturity from 10 to 30 years and the price curve gets dramatically steeper. Long bonds are the far end of the seesaw plank — same push, much bigger swing.</p>
+  <p>The cleanest way to see why: <dfn class="term" tabindex="0" data-def="The weighted-average time until a bond's cash flows arrive, weighting each payment date by its share of present value.">Macaulay duration</dfn> is the weighted-average arrival time of the bond's cash flows, where each date is weighted by the present value it delivers. To a data person, that is just a center of mass. Picture the discounted cash flows as weights sitting on a plank: the small coupons barely matter, and the giant final payment drags the balance point out toward maturity. For our 10-year, 5% bond at a 7% yield the balance point sits at 7.94 years. The farther out your money's center of mass, the longer it stays exposed to compounding at the wrong rate — and the harder the price reacts.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 300" role="img" aria-label="A plank balancing on a fulcrum, with small bars for discounted coupon payments in years one through nine and one tall bar for the final payment in year ten; the balance point sits at 7.9 years">
+      <rect x="121" y="196" width="30" height="14" rx="2" style="fill:var(--c1)"/>
+      <rect x="173" y="197" width="30" height="13" rx="2" style="fill:var(--c1)"/>
+      <rect x="225" y="198" width="30" height="12" rx="2" style="fill:var(--c1)"/>
+      <rect x="277" y="199" width="30" height="11" rx="2" style="fill:var(--c1)"/>
+      <rect x="329" y="199" width="30" height="11" rx="2" style="fill:var(--c1)"/>
+      <rect x="381" y="200" width="30" height="10" rx="2" style="fill:var(--c1)"/>
+      <rect x="433" y="201" width="30" height="9" rx="2" style="fill:var(--c1)"/>
+      <rect x="485" y="201" width="30" height="9" rx="2" style="fill:var(--c1)"/>
+      <rect x="537" y="202" width="30" height="8" rx="2" style="fill:var(--c1)"/>
+      <rect x="589" y="50" width="30" height="160" rx="2" style="fill:var(--c2)"/>
+      <text x="330" y="185" text-anchor="middle" font-size="13" style="fill:var(--muted)">PV of $50 coupons (small weights)</text>
+      <text x="604" y="38" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">PV of final $1,050</text>
+      <line x1="110" y1="212" x2="630" y2="212" style="stroke:var(--axis)" stroke-width="3"/>
+      <path d="M523,216 L503,258 L543,258 Z" style="fill:var(--accent)"/>
+      <line x1="100" y1="258" x2="640" y2="258" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="136" y="234" text-anchor="middle" font-size="12" style="fill:var(--muted)">1</text>
+      <text x="240" y="234" text-anchor="middle" font-size="12" style="fill:var(--muted)">3</text>
+      <text x="344" y="234" text-anchor="middle" font-size="12" style="fill:var(--muted)">5</text>
+      <text x="448" y="234" text-anchor="middle" font-size="12" style="fill:var(--muted)">7</text>
+      <text x="604" y="234" text-anchor="middle" font-size="12" style="fill:var(--muted)">10 yrs</text>
+      <text x="523" y="282" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--accent)">balance point ≈ 7.9 years = Macaulay duration</text>
+    </svg>
+    <figcaption><strong>Figure 8.2</strong> — Duration is a center of mass. The huge discounted final payment drags the balance point of a 10-year, 5% bond out to 7.9 years; a zero-coupon bond's duration would sit exactly at maturity.</figcaption>
+  </figure>
+  <p>For day-to-day use, traders quote <dfn class="term" tabindex="0" data-def="Macaulay duration divided by (1 + yield); the percent price change per one-percentage-point yield move.">modified duration</dfn> (Macaulay ÷ (1 + y)), because it plugs straight into the most-used rule of thumb in fixed income:</p>
+  <div class="formula">
+    <div class="formula-main">ΔP ÷ P ≈ −D<sub>mod</sub> × Δy</div>
+    <div class="formula-legend">ΔP ÷ P = percent price change · D<sub>mod</sub> = modified duration · Δy = change in yield (in percentage points)</div>
+  </div>
+  <div class="callout co-ex"><p class="co-label">Worked example: pricing a rate shock</p>
+    <p>Our 10-year, 5% bond at a 7% yield: price $859.53, modified duration 7.42 (the widget's default readout). Yields jump one percentage point to 8%. Predicted move: −7.42% × $859.53 ≈ −$63.78, so about <strong>$795.75</strong>. Exact repricing gives <strong>$798.70</strong>. The linear rule nailed the damage to within $3 — and note which way it missed: the true price fell <em>less</em> than predicted.</p>
+  </div>
+  <p>That systematic miss is <dfn class="term" tabindex="0" data-def="The curvature of the price-yield relationship; prices fall less than duration predicts when yields rise and gain more when yields fall.">convexity</dfn>. The price–yield curve bows toward the origin, so the straight-line duration estimate always sits below it: for a plain bond, losses come in smaller than the linear forecast and gains come in bigger. Duration is the first derivative of price with respect to yield; convexity is the second — a Taylor expansion you have met many times, wearing a suit. It is why the rule of thumb is trustworthy for small moves (a few <dfn class="term" tabindex="0" data-def="One hundredth of a percentage point; 25 basis points equals 0.25%.">basis points</dfn>) and only approximate for big ones.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 360" role="img" aria-label="Downward-sloping convex price-yield curve for a 10-year 5% coupon bond, with a dashed straight tangent line at the 7% yield point lying below the curve on both sides">
+      <line x1="70" y1="40" x2="70" y2="320" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="70" y1="320" x2="680" y2="320" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="70" y1="187" x2="680" y2="187" style="stroke:var(--grid)" stroke-width="1" stroke-dasharray="4 4"/>
+      <text x="676" y="181" text-anchor="end" font-size="12" style="fill:var(--muted)">par $1,000</text>
+      <path d="M70,40 C 130,84 150,90 171.7,107.9 L273.3,163.5 L324.2,187.4 L375,209.1 L425.8,228.8 L476.7,246.7 L578.3,277.9 L680,303.9" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>
+      <line x1="280" y1="174.9" x2="576" y2="284.3" stroke-dasharray="6 5" style="stroke:var(--c2)" stroke-width="2"/>
+      <circle cx="425.8" cy="228.8" r="6" style="fill:var(--accent)"/>
+      <circle cx="324.2" cy="187.4" r="5" fill="none" style="stroke:var(--ink)" stroke-width="2"/>
+      <text x="324.2" y="172" text-anchor="middle" font-size="13" style="fill:var(--ink)">yield = coupon ⇒ par</text>
+      <text x="452" y="250" font-size="13" style="fill:var(--ink)">bond at 7% yield</text>
+      <text x="560" y="308" text-anchor="end" font-size="13" style="fill:var(--c2)">duration tangent (linear estimate)</text>
+      <text x="150" y="60" font-size="13" style="fill:var(--muted)">Premium zone (yield &lt; coupon)</text>
+      <text x="676" y="286" text-anchor="end" font-size="13" style="fill:var(--muted)">Discount zone</text>
+      <text x="120" y="345" font-size="13" style="fill:var(--muted)">yield →</text>
+      <text x="90" y="345" font-size="13" style="fill:var(--muted)">0%</text>
+      <text x="676" y="345" text-anchor="end" font-size="13" style="fill:var(--muted)">12%</text>
+      <text x="62" y="46" text-anchor="end" font-size="12" style="fill:var(--muted)">$1,500</text>
+      <text x="62" y="324" text-anchor="end" font-size="12" style="fill:var(--muted)">$550</text>
+      <text x="30" y="180" font-size="13" style="fill:var(--muted)" transform="rotate(-90 30 180)">price</text>
+    </svg>
+    <figcaption><strong>Figure 8.3</strong> — The price–yield curve is convex: it always sits above its own tangent line. Duration is the tangent's slope; convexity is the friendly gap — smaller losses than predicted when yields rise, bigger gains when they fall.</figcaption>
+  </figure>
+  <div class="callout co-real"><p class="co-label">Real world: 2022, the worst bond year in modern history</p>
+    <p>Duration stopped being an abstraction in 2022. Bonds had been issued for years at rock-bottom coupons, which makes durations long (small coupons = the plank's weight is almost all at the far end). Then the Fed hiked from near 0% to over 4% in nine months. Run the rule: broad bond-index duration around 6.5 and yields up roughly 2.5 points ⇒ ≈ −16% before coupon income. The Bloomberg US Aggregate index finished 2022 down about 13% — its worst year since records began in 1976 — and long-maturity Treasuries lost around 30%, a stock-crash-sized loss in the "safe" asset.</p>
+    <p>Silicon Valley Bank was the corporate casualty of the same arithmetic: it parked deposits in long-duration Treasuries and agency mortgage bonds, rates rose, and the mark-to-market hole grew to roughly the size of its entire equity. Depositors noticed and ran. There was no exotic credit bet involved — just unhedged duration. <a href="#s16">Section 16</a> dissects the risk-management failure in full.</p>
+  </div>
+  <div class="callout co-warn"><p class="co-label">Common pitfall</p><p>Duration measures sensitivity to a small, parallel shift in yields — it is a local linear model, not a crystal ball. For big moves you need the convexity term; for twists in the curve's shape (short yields up, long yields down) a single duration number can badly mislead.</p></div>
+
+  <h3 id="s08-credit">Credit: getting paid for the risk of not getting paid</h3>
+  <p>Everything so far assumed the cash flows arrive. For Treasuries that is a working assumption; for everyone else there is <dfn class="term" tabindex="0" data-def="Failure to make a promised bond payment on time; the bond equivalent of breaking the loan contract.">default</dfn> risk, and the market charges for it.</p>
+  <p>The pricing of that risk starts with a <dfn class="term" tabindex="0" data-def="An agency's letter-grade opinion of how likely a borrower is to repay, from AAA down to D.">credit rating</dfn> — a letter grade on repayment odds from Moody's, S&amp;P, or Fitch. The scale runs from AAA (a fortress) down through the alphabet to D (already in default). One line matters more than all others: BBB− and above is <dfn class="term" tabindex="0" data-def="Bonds rated BBB− or higher; considered lower-risk, and many institutions may hold only these.">investment grade</dfn> (IG); BB+ and below is <dfn class="term" tabindex="0" data-def="Bonds rated below investment grade; higher default risk, higher promised yield. Politely, high yield.">high yield</dfn> — universally nicknamed junk. The line is regulatory as well as reputational: many pension funds and insurers are barred from holding junk, so a downgrade across it (a "fallen angel") triggers forced selling.</p>
+  <p>The price of credit risk is the <dfn class="term" tabindex="0" data-def="The extra yield a bond pays over a Treasury of the same maturity, compensating for default and liquidity risk.">credit spread</dfn>: the bond's yield minus a same-maturity Treasury yield. A BBB corporate yielding 5.5% while the 10-year Treasury pays 4% carries a 150-basis-point spread. Spreads breathe with the market's mood, which makes them a superb fear gauge: US high-yield spreads run roughly 3–4 points in calm times, blew out past 20 points in the 2008 crisis, and spiked above 10 in March 2020 before the Fed intervened. When spreads gap wider, the bond market is repricing the probability of a wave of defaults — often before equity markets fully react.</p>
+  <p>Default is also not a total loss. Bondholders stand ahead of stockholders in bankruptcy (the payoff hierarchy from <a href="#s07">Section 7</a>), and the <dfn class="term" tabindex="0" data-def="The fraction of face value creditors actually receive after a default, historically around 40% for senior unsecured bonds.">recovery rate</dfn> on senior unsecured corporate bonds has historically averaged around 40 cents on the dollar. So a rough model of a fair spread is expected loss: default probability × (1 − recovery), plus a cushion for risk aversion and illiquidity — a one-line expected-value calculation you could code in your sleep.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 380" role="img" aria-label="Ratings ladder from AAA to D with bars showing typical credit spreads over Treasuries widening from about 0.4 percent at AAA to 9 percent at CCC, with the investment-grade cutoff marked below BBB">
+      <text x="40" y="32" font-size="13" font-weight="600" style="fill:var(--muted)">Rating</text>
+      <text x="230" y="32" font-size="13" font-weight="600" style="fill:var(--muted)">Typical spread over Treasuries (illustrative)</text>
+      <text x="40" y="65" font-size="15" font-weight="700" style="fill:var(--ink)">AAA</text>
+      <rect x="230" y="50" width="19" height="20" rx="4" style="fill:var(--c1)"/>
+      <text x="257" y="65" font-size="13" style="fill:var(--ink)">≈ 0.4%</text>
+      <text x="40" y="103" font-size="15" font-weight="700" style="fill:var(--ink)">AA</text>
+      <rect x="230" y="88" width="29" height="20" rx="4" style="fill:var(--c1)"/>
+      <text x="267" y="103" font-size="13" style="fill:var(--ink)">≈ 0.6%</text>
+      <text x="40" y="141" font-size="15" font-weight="700" style="fill:var(--ink)">A</text>
+      <rect x="230" y="126" width="43" height="20" rx="4" style="fill:var(--c1)"/>
+      <text x="281" y="141" font-size="13" style="fill:var(--ink)">≈ 0.9%</text>
+      <text x="40" y="179" font-size="15" font-weight="700" style="fill:var(--ink)">BBB</text>
+      <rect x="230" y="164" width="72" height="20" rx="4" style="fill:var(--c1)"/>
+      <text x="310" y="179" font-size="13" style="fill:var(--ink)">≈ 1.5%</text>
+      <line x1="40" y1="198" x2="690" y2="198" style="stroke:var(--accent)" stroke-width="2" stroke-dasharray="7 5"/>
+      <text x="690" y="192" text-anchor="end" font-size="13" font-weight="600" style="fill:var(--accent)">investment grade above · high yield (junk) below</text>
+      <text x="40" y="231" font-size="15" font-weight="700" style="fill:var(--ink)">BB</text>
+      <rect x="230" y="216" width="134" height="20" rx="4" style="fill:var(--c2)"/>
+      <text x="372" y="231" font-size="13" style="fill:var(--ink)">≈ 2.8%</text>
+      <text x="40" y="269" font-size="15" font-weight="700" style="fill:var(--ink)">B</text>
+      <rect x="230" y="254" width="216" height="20" rx="4" style="fill:var(--c2)"/>
+      <text x="454" y="269" font-size="13" style="fill:var(--ink)">≈ 4.5%</text>
+      <text x="40" y="307" font-size="15" font-weight="700" style="fill:var(--ink)">CCC</text>
+      <rect x="230" y="292" width="432" height="20" rx="4" style="fill:var(--c2)"/>
+      <text x="656" y="307" text-anchor="end" font-size="13" font-weight="600" style="fill:var(--surface)">≈ 9%+</text>
+      <text x="40" y="345" font-size="15" font-weight="700" style="fill:var(--down)">D</text>
+      <text x="230" y="345" font-size="13" style="fill:var(--down)">in default — trades on expected recovery (~40¢ on the dollar historically)</text>
+    </svg>
+    <figcaption><strong>Figure 8.4</strong> — The ratings ladder. Spreads widen slowly through investment grade, then explode below the BBB−/BB+ line. Spread levels shown are rough mid-cycle values; in a crisis every bar stretches.</figcaption>
+  </figure>
+
+  <h3 id="s08-money">Money markets: the plumbing where cash lives</h3>
+  <p>Below one year to maturity, fixed income stops feeling like investing and starts feeling like infrastructure. The <dfn class="term" tabindex="0" data-def="The market for high-quality debt maturing in under a year — T-bills, repo, commercial paper, CDs.">money market</dfn> is where corporations, funds, and governments park and borrow cash by the trillions, overnight to a few months.</p>
+  <p>The instruments are refreshingly simple. <strong>T-bills</strong> pay no coupon at all: you buy at a discount and collect face value — pay $980.39 today for $1,000 in six months and you have locked in 2% over the period (about 4% annualized). <strong><dfn class="term" tabindex="0" data-def="Short-term unsecured IOUs issued by corporations to fund payroll and inventory, usually maturing within 270 days.">Commercial paper</dfn></strong> is the corporate version — unsecured IOUs blue-chip firms roll over routinely to fund payroll and inventory.</p>
+  <p>The strangest-sounding and most important one is <strong><dfn class="term" tabindex="0" data-def="A repurchase agreement: selling a security with a commitment to buy it back tomorrow at a slightly higher price — economically an overnight collateralized loan.">repo</dfn></strong> (a repurchase agreement): I sell you a Treasury today and commit to buying it back tomorrow at a slightly higher price. Squint and it is an overnight loan collateralized by the Treasury, with the price difference as interest. Trillions of dollars of repo roll every night; it is how dealers finance their inventories, and it anchors SOFR, the benchmark rate that replaced LIBOR in most floating-rate contracts. The Fed itself steers short-term rates partly through repo operations (<a href="#s04">Section 4</a>). When people say the financial system's plumbing froze in 2008, the repo and commercial-paper markets are literally what they mean.</p>
+  <p>Finally, <strong><dfn class="term" tabindex="0" data-def="Mutual funds holding only short-term high-quality debt, engineered to keep a stable $1 share price.">money-market funds</dfn></strong> are where all of this gets packaged for everyone else: mutual funds holding T-bills, repo, and commercial paper, engineered to hold a $1.00 share price so they feel like a bank account with a yield. That $1.00 is a promise, not a law.</p>
+  <div class="callout co-real"><p class="co-label">Real world: breaking the buck</p><p>In September 2008, the Reserve Primary Fund — a money-market fund holding Lehman Brothers commercial paper — marked its shares at $0.97 when Lehman failed. "Breaking the buck" by three cents sounds trivial; it triggered a $300+ billion institutional run on money funds within days, froze the commercial-paper market that companies use to make payroll, and forced the US Treasury to guarantee money funds outright. The lesson: the most boring corner of finance is the one nobody can function without.</p></div>
+
+  <details class="deep"><summary>Deep dive: real-world bond math conventions</summary>
+    <p>Everything above used annual coupons for clarity, but US convention is semiannual: a 5% coupon pays $25 every six months, and quoted YTMs are semiannual rates doubled (a "bond-equivalent yield"). The mechanics are identical — halve the coupon and rate, double the period count. Our 10-year, 5% bond at a 7% quoted yield becomes 20 payments of $25 discounted at 3.5% per half-year, giving $857.88 rather than $859.53. Same seesaw, slightly different arithmetic.</p>
+    <p>Two other conventions you will hit in practice. First, prices are quoted per $100 of face ("95.75" means 95.75% of par) and <em>clean</em> — excluding interest accrued since the last coupon, which the buyer pays on top (the "dirty" price is what actually changes hands). Second, day-count conventions (30/360 for corporates, actual/actual for Treasuries) decide exactly how that accrued interest is computed. None of this changes the concepts; all of it changes the fourth decimal place, which is precisely the sort of thing an analytics team gets paid to reconcile.</p>
+    <p>One elegant special case worth knowing: a <dfn class="term" tabindex="0" data-def="A bond with no coupons that is bought at a discount and pays only face value at maturity.">zero-coupon bond</dfn> (like a T-bill, or Treasury STRIPS at longer maturities) has its entire cash flow at maturity, so its Macaulay duration <em>equals</em> its maturity — the balance-point picture with one single weight at the far end of the plank. Zeros are therefore the purest, most rate-sensitive bonds you can hold.</p>
+  </details>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. Market interest rates rise from 4% to 6%. What happens to the price of an existing fixed-coupon bond?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">It rises, because the bond now earns more interest</button>
+        <button class="quiz-opt" data-correct>It falls, so that its fixed cash flows deliver the new higher yield to a buyer</button>
+        <button class="quiz-opt">It is unchanged — the coupon was fixed in the contract</button>
+      </div>
+      <p class="quiz-explain">The cash flows cannot change, so the price must. Nobody pays par for a 4% coupon when new bonds pay 6%; the price drops until the old bond's fixed payments yield 6% from the lower purchase price.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. A bond with a 6% coupon trades at $1,080 (above its $1,000 face). What do you know about its yield to maturity?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">It is above 6%</button>
+        <button class="quiz-opt">It is exactly 6%</button>
+        <button class="quiz-opt" data-correct>It is below 6%</button>
+        <button class="quiz-opt">It cannot be determined from the price</button>
+      </div>
+      <p class="quiz-explain">Premium price means coupon &gt; market yield. Paying $1,080 for cash flows built on $1,000 also guarantees a capital loss at maturity, dragging the all-in return (YTM) below the 6% coupon rate.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. The 2-year Treasury yields 5.0% while the 10-year yields 4.2%. Historically, what has this configuration signaled?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Accelerating growth — investors are rushing into short-term bonds</button>
+        <button class="quiz-opt" data-correct>Elevated recession risk — the market expects the Fed to cut rates substantially</button>
+        <button class="quiz-opt">Nothing — short yields normally exceed long yields</button>
+      </div>
+      <p class="quiz-explain">That is an inverted curve. Long yields sit below short ones only when the market expects short rates to be cut a lot — and deep cuts historically arrive with recessions. Inversions have preceded every US recession of the past half-century, with variable lead times.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. A bond fund has a modified duration of 6. Yields rise by 0.5 percentage points. Approximately what happens to the fund's value?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Down about 0.5%</button>
+        <button class="quiz-opt">Down about 6%</button>
+        <button class="quiz-opt" data-correct>Down about 3%</button>
+        <button class="quiz-opt">Up about 3%</button>
+      </div>
+      <p class="quiz-explain">ΔP ÷ P ≈ −D × Δy = −6 × 0.5% = −3%. Duration converts a yield move into a percent price move — and thanks to convexity the true loss would be slightly smaller than 3%.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. High-yield credit spreads jump from 350 to 800 basis points in a month. What is the bond market saying?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-correct>It is pricing a much higher probability of corporate defaults ahead</button>
+        <button class="quiz-opt">Treasury yields have collapsed, mechanically widening the gap</button>
+        <button class="quiz-opt">Junk-rated companies have become safer, so their bonds are in demand</button>
+      </div>
+      <p class="quiz-explain">The spread is the market's charge for default risk over Treasuries. Widening from 3.5 to 8 points means investors demand far more compensation to hold risky corporate debt — a classic fear signal that often precedes trouble showing up in equities.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>A bond is a tradable loan with contractually fixed cash flows: coupons plus face value at maturity. Globally, bonds outstanding exceed the value of all stocks.</li>
+      <li>Price = sum of discounted cash flows, exactly as in <a href="#s01">Section 1</a>. The cash flows are frozen; the market yield — and therefore the price — is not.</li>
+      <li>The seesaw: yields up ⇒ prices down, always. Coupon above market yield ⇒ premium; below ⇒ discount; equal ⇒ par. YTM is the all-in return; the coupon rate never changes.</li>
+      <li>The yield curve plots Treasury yields across maturities and encodes the expected path of Fed policy. Inversions have preceded every US recession in half a century, with 6–24-month (and sometimes longer) lead times.</li>
+      <li>Duration is the center of mass of discounted cash flows and the price-sensitivity dial: ΔP ÷ P ≈ −D × Δy. Convexity makes real losses slightly smaller and gains slightly bigger than that linear estimate.</li>
+      <li>Low coupons and long maturities mean high duration — the arithmetic behind 2022's record bond losses and SVB's collapse (<a href="#s16">Section 16</a>).</li>
+      <li>Credit spreads price default risk over Treasuries; the BBB−/BB+ line splits investment grade from junk, and widening spreads are one of the market's best fear gauges.</li>
+      <li>Money markets — T-bills, repo, commercial paper, money funds — are the system's cash plumbing; when they seize (2008), everything else stops.</li>
+    </ul>
+  </div>
+</section>

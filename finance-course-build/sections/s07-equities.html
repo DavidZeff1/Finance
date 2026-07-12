@@ -1,0 +1,466 @@
+<section class="lesson" id="s07" data-num="07" data-title="Equities: The Stock Market">
+  <p class="eyebrow">Part II · Financial Markets &amp; Instruments</p>
+  <h2>7. Equities: The Stock Market</h2>
+  <p class="lede">Stocks are the asset class most people mean when they say "the market," and they're where most long-run wealth in public markets has been created — and occasionally vaporized. By the end of this section you'll know exactly what a share is, where equity returns actually come from, how indices are built, and how to read a stock quote like an analyst instead of a tourist.</p>
+
+  <h3 id="s07-what-is-a-share">What a share actually is</h3>
+  <p>A <dfn class="term" tabindex="0" data-def="A unit of ownership in a corporation, entitling the holder to a slice of profits and a vote on major decisions.">share</dfn> of stock is a fractional ownership claim on a corporation. If a company has issued 1 billion shares and you own 100 of them, you own 0.00001% of the business — a ten-millionth of every factory, every patent, every dollar of profit it ever earns. <dfn class="term" tabindex="0" data-def="Ownership interest in a company; what is left of the assets after all debts are paid.">Equity</dfn> is the formal word for this ownership interest.</p>
+  <p>Two legal features make this claim interesting. First, shareholders are the <dfn class="term" tabindex="0" data-def="The party paid last, after all other obligations; they receive whatever remains, whether huge or zero.">residual claimants</dfn>: employees, suppliers, tax authorities, and lenders all get paid first, and shareholders get whatever is left. That's why equity is riskier than debt — and why it can pay so much more. Second, <dfn class="term" tabindex="0" data-def="Shareholders can lose at most what they paid for their shares; company creditors cannot pursue their personal assets.">limited liability</dfn> caps your downside at what you paid. If the company collapses owing billions, your shares go to zero but nobody comes for your house. Unlimited upside, floored downside — that asymmetry is the deal.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="The capital stack: secured debt is paid first, then unsecured debt, then preferred stock, and common equity is paid last.">
+      <text x="360" y="28" text-anchor="middle" font-size="15" font-weight="700" style="fill:var(--ink)">The capital stack: who gets paid first if things go wrong</text>
+      <rect x="180" y="50" width="280" height="52" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="320" y="72" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Secured debt</text>
+      <text x="320" y="91" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">loans backed by specific collateral</text>
+      <rect x="180" y="112" width="280" height="52" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="320" y="134" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Unsecured bonds</text>
+      <text x="320" y="153" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">general IOUs — see Section 8</text>
+      <rect x="180" y="174" width="280" height="52" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="320" y="196" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Preferred stock</text>
+      <text x="320" y="215" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">fixed dividend, usually no vote</text>
+      <rect x="180" y="236" width="280" height="60" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)"/>
+      <text x="320" y="260" text-anchor="middle" font-size="14.5" font-weight="700" style="fill:var(--ink)">Common equity (you)</text>
+      <text x="320" y="281" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">paid last · keeps all the residual upside</text>
+      <line x1="130" y1="60" x2="130" y2="290" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <path d="M 126 282 L 130 292 L 134 282 Z" style="fill:var(--axis)"/>
+      <text x="118" y="70" text-anchor="end" font-size="13" style="fill:var(--muted)">paid first</text>
+      <text x="118" y="290" text-anchor="end" font-size="13" style="fill:var(--muted)">paid last</text>
+      <line x1="510" y1="290" x2="510" y2="60" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <path d="M 506 68 L 510 58 L 514 68 Z" style="fill:var(--axis)"/>
+      <text x="522" y="290" font-size="13" style="fill:var(--muted)">lowest risk,</text>
+      <text x="522" y="307" font-size="13" style="fill:var(--muted)">lowest expected return</text>
+      <text x="522" y="66" font-size="13" style="fill:var(--muted)">highest risk,</text>
+      <text x="522" y="83" font-size="13" style="fill:var(--muted)">highest expected return</text>
+    </svg>
+    <figcaption><strong>Figure 7.1</strong> — Equity sits at the bottom of the capital stack: last in line for payment, but the only claim with unlimited upside. <a href="#s08">Section 8 (Fixed Income)</a> covers the layers above.</figcaption>
+  </figure>
+  <p>Why would a company sell pieces of itself? Because growing costs money, and equity is money you never have to repay. A founder with a great idea but no capital sells 30% of the company to investors, uses the cash to build the product, and keeps 70% of something big instead of 100% of nothing. The alternative — borrowing — creates a fixed obligation that can bankrupt you in a bad year. Equity investors share the pain of bad years, which is exactly why they demand a share of the good ones.</p>
+  <div class="callout co-analogy"><p class="co-label">Analogy</p><p>Think of a company's claims as a priority queue. Debt holders enqueued first get dequeued (paid) first, with a fixed payout. Shareholders sit at the back holding a claim on <em>whatever remains</em> — which is why the value of a share is so sensitive to small changes in expectations. If a firm is worth 100 and owes 90, equity is worth 10; if the firm's value rises just 10% to 110, equity doubles to 20.</p></div>
+
+  <h3 id="s07-caps-classes">Market cap, share classes, and dilution</h3>
+  <p>The headline size of a public company is its <dfn class="term" tabindex="0" data-def="Share price times number of shares outstanding: the total market value of a company's equity.">market capitalization</dfn> ("market cap"): share price × shares outstanding. A $50 stock with 4 billion shares is a $200 billion company; a $500 stock with 20 million shares is a $10 billion one. This is the first myth to kill: <strong>the share price alone tells you nothing about how big or "expensive" a company is</strong>. Price per share is just market cap divided by an arbitrary share count — the same pizza cut into 8 slices or 80.</p>
+  <p>Analysts sort companies into buckets: <dfn class="term" tabindex="0" data-def="Companies with market caps above roughly $10 billion; the giants of the market.">large-cap</dfn> (&gt;$10B), mid-cap ($2–10B), and <dfn class="term" tabindex="0" data-def="Companies with market caps roughly between $250 million and $2 billion; typically younger and riskier.">small-cap</dfn> (&lt;$2B). Size matters because it correlates with risk, <dfn class="term" tabindex="0" data-def="How easily an asset can be bought or sold quickly without moving its price.">liquidity</dfn>, and analyst coverage.</p>
+  <p>Not all shares are equal. Companies can issue multiple <dfn class="term" tabindex="0" data-def="Categories of stock in the same company with different voting rights or dividend terms.">share classes</dfn> with different voting rights. Alphabet's Class A shares (<code>GOOGL</code>) carry one vote each, Class C (<code>GOOG</code>) carry none, and the founders' Class B shares carry ten — letting insiders keep control while selling most of the economics. Meta and many tech firms use the same structure. When you see "dual-class," read: the founders answer to almost no one.</p>
+  <p>Your ownership percentage isn't fixed, either. When a company issues new shares — to raise cash, pay employees in stock, or fund an acquisition — every existing share becomes a smaller fraction of the company. That's <dfn class="term" tabindex="0" data-def="The reduction in existing shareholders' ownership percentage when a company issues new shares.">dilution</dfn>. Own 10% of a firm with 1 million shares, and if it issues 250,000 new ones, you now own 100,000 of 1,250,000 shares: 8%. Dilution isn't automatically bad — if the cash raised creates more value than the ownership given up, everyone wins — but stock-based compensation that quietly grows the share count 3% a year is a real cost that headline profits can hide. You'll learn to spot it in <a href="#s11">Section 11 (Financial Statements)</a>.</p>
+  <p>Finally, most companies aren't on the stock market at all. A <dfn class="term" tabindex="0" data-def="A company whose shares trade on a stock exchange and that must publish audited financials.">public company</dfn> has shares anyone can buy on an exchange and must file audited reports with the SEC; a <dfn class="term" tabindex="0" data-def="A company whose shares do not trade on an exchange; ownership changes hands in private negotiated deals.">private company</dfn> doesn't. The number of US public companies has roughly halved since the mid-1990s (from ~8,000 to ~4,000): regulation post-Enron made being public costlier, and a flood of <dfn class="term" tabindex="0" data-def="Investment funds that buy entire companies privately, restructure them, and sell later — see Section 10.">private equity</dfn> and venture money means firms can raise billions without ever listing. Companies now go public later, larger, and more reluctantly — which means more of the early growth accrues to private investors before the public ever gets a ticket.</p>
+
+  <h3 id="s07-total-return">Where returns come from: price + dividends = total return</h3>
+  <p>Owning a stock pays you in exactly two ways. The price can rise (<dfn class="term" tabindex="0" data-def="The gain or loss from a change in an asset's price, excluding any income it pays.">price appreciation</dfn>), and the company can mail you cash (a <dfn class="term" tabindex="0" data-def="A cash payment a company makes to shareholders, usually quarterly, out of its profits.">dividend</dfn>). Add them and you get <dfn class="term" tabindex="0" data-def="Price change plus income (dividends), the complete return an investor actually earns.">total return</dfn> — the only return that matters:</p>
+  <div class="formula">
+    <div class="formula-main">Total return = <span class="frac"><span>P<sub>1</sub> − P<sub>0</sub> + D</span><span>P<sub>0</sub></span></span> = price return + dividend yield</div>
+    <div class="formula-legend">P<sub>0</sub> = starting price · P<sub>1</sub> = ending price · D = dividends received over the period</div>
+  </div>
+  <p>Dividends look small — a 2–3% <dfn class="term" tabindex="0" data-def="Annual dividends per share divided by the share price; the cash income rate on a stock.">dividend yield</dfn> next to double-digit price swings — but reinvested over decades they are enormous, because reinvesting buys more shares, which pay more dividends, which buy more shares. It's the compounding loop from <a href="#s01">Section 1</a> running on two engines at once: your per-share price grows at the price return while your share <em>count</em> grows at the dividend yield, so wealth compounds at roughly (1 + g)(1 + d) − 1.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example</p><p>$10,000 in a stock returning 5% in price with a 3% yield, dividends reinvested, for 30 years. The compound rate is 1.05 × 1.03 = 1.0815, i.e. 8.15% per year. After 30 years: $10,000 × 1.0815<sup>30</sup> ≈ <strong>$104,900</strong>. Price alone: $10,000 × 1.05<sup>30</sup> ≈ <strong>$43,219</strong>. The "small" dividend, reinvested, ends up responsible for more than half of the final wealth — and your share count has grown 1.03<sup>30</sup> ≈ 2.43× along the way.</p></div>
+
+  <div class="widget" id="s07-trm">
+    <div class="widget-head">
+      <h4>Total return machine</h4>
+      <p>Set a price return and a dividend yield, then flip reinvestment on and off — watch what decades of reinvested dividends do to the gap.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Starting investment <output class="ctl-val">$10,000</output><input type="number" class="num-in" id="s07-trm-pv" min="100" max="10000000" step="100" value="10000"></label>
+        <label class="ctl">Years <output class="ctl-val">30</output><input type="range" id="s07-trm-yrs" min="1" max="40" step="1" value="30"></label>
+      </div>
+      <div class="ctl-row">
+        <label class="ctl">Price return / yr <output class="ctl-val">5.0%</output><input type="range" id="s07-trm-g" min="-2" max="12" step="0.5" value="5"></label>
+        <label class="ctl">Dividend yield <output class="ctl-val">3.0%</output><input type="range" id="s07-trm-d" min="0" max="5" step="0.25" value="3"></label>
+        <div class="btn-group">
+          <button class="btn is-active" id="s07-trm-re-on" type="button">Reinvest dividends</button>
+          <button class="btn" id="s07-trm-re-off" type="button">Take as cash</button>
+        </div>
+      </div>
+      <svg id="s07-trm-chart" viewBox="0 0 720 340" role="img" aria-label="Growth of the investment over time: total return versus price-only return"></svg>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">Total return ends at</span><span class="stat-value" id="s07-trm-tot">—</span></div>
+        <div class="stat"><span class="stat-label">Price-only ends at</span><span class="stat-value" id="s07-trm-px">—</span></div>
+        <div class="stat"><span class="stat-label">Dividends added</span><span class="stat-value" id="s07-trm-gap">—</span></div>
+        <div class="stat"><span class="stat-label">Share count growth</span><span class="stat-value" id="s07-trm-sh">—</span></div>
+      </div>
+    </div>
+  </div>
+  <script>
+(function () {
+  var root = document.getElementById('s07-trm');
+  if (!root) return;
+  var pvIn = root.querySelector('#s07-trm-pv');
+  var yrsIn = root.querySelector('#s07-trm-yrs');
+  var gIn = root.querySelector('#s07-trm-g');
+  var dIn = root.querySelector('#s07-trm-d');
+  var btnOn = root.querySelector('#s07-trm-re-on');
+  var btnOff = root.querySelector('#s07-trm-re-off');
+  var svg = root.querySelector('#s07-trm-chart');
+  var outTot = root.querySelector('#s07-trm-tot');
+  var outPx = root.querySelector('#s07-trm-px');
+  var outGap = root.querySelector('#s07-trm-gap');
+  var outSh = root.querySelector('#s07-trm-sh');
+  var reinvest = true;
+
+  function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
+  function money(v) { return '$' + Math.round(v).toLocaleString('en-US', { maximumFractionDigits: 0 }); }
+  function moneyShort(v) {
+    if (v >= 1e6) return '$' + (v / 1e6).toFixed(v >= 1e7 ? 0 : 1) + 'M';
+    if (v >= 1e3) return '$' + Math.round(v / 1e3).toLocaleString('en-US') + 'k';
+    return '$' + Math.round(v);
+  }
+  function niceStep(raw) {
+    var p = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10));
+    var m = raw / p;
+    var f = m <= 1 ? 1 : m <= 2 ? 2 : m <= 2.5 ? 2.5 : m <= 5 ? 5 : 10;
+    return f * p;
+  }
+
+  function series(pv, g, d, yrs) {
+    var tot = [], px = [], t, v;
+    for (t = 0; t <= yrs; t++) {
+      px.push(pv * Math.pow(1 + g, t));
+      if (reinvest) {
+        tot.push(pv * Math.pow((1 + g) * (1 + d), t));
+      } else {
+        // shares fixed; dividends collected as cash (uninvested):
+        // cash after t years = pv*d * sum_{k=0..t-1} (1+g)^k
+        var cash = (Math.abs(g) < 1e-9) ? pv * d * t : pv * d * (Math.pow(1 + g, t) - 1) / g;
+        tot.push(pv * Math.pow(1 + g, t) + cash);
+      }
+    }
+    return { tot: tot, px: px };
+  }
+
+  function draw() {
+    var pv = clamp(parseFloat(pvIn.value) || 10000, 100, 10000000);
+    var yrs = clamp(parseInt(yrsIn.value, 10) || 30, 1, 40);
+    var g = clamp(parseFloat(gIn.value), -2, 12) / 100;
+    var d = clamp(parseFloat(dIn.value), 0, 5) / 100;
+    root.querySelectorAll('.ctl-val')[0].textContent = money(pv);
+    root.querySelectorAll('.ctl-val')[1].textContent = String(yrs);
+    root.querySelectorAll('.ctl-val')[2].textContent = (g * 100).toFixed(1) + '%';
+    root.querySelectorAll('.ctl-val')[3].textContent = (d * 100).toFixed(1) + '%';
+
+    var s = series(pv, g, d, yrs);
+    var finTot = s.tot[yrs], finPx = s.px[yrs];
+    var maxV = Math.max(finTot, finPx, pv * 1.05);
+    var minV = Math.min(0, finPx, finTot);
+    if (minV > 0) minV = 0;
+    var step = niceStep((maxV - minV) / 4.5);
+    var top = Math.ceil(maxV / step) * step;
+
+    var L = 78, R = 640, T = 18, B = 300;
+    function x(t) { return L + (R - L) * (t / yrs); }
+    function y(v) { return B - (B - T) * ((v - minV) / (top - minV)); }
+
+    var el = [];
+    var gv;
+    for (gv = minV; gv <= top + step * 0.01; gv += step) {
+      el.push('<line x1="' + L + '" y1="' + y(gv).toFixed(1) + '" x2="' + R + '" y2="' + y(gv).toFixed(1) + '" style="stroke:var(--grid)" stroke-width="1"/>');
+      el.push('<text x="' + (L - 8) + '" y="' + (y(gv) + 4).toFixed(1) + '" text-anchor="end" font-size="12.5" style="fill:var(--muted)">' + moneyShort(gv) + '</text>');
+    }
+    el.push('<line x1="' + L + '" y1="' + y(0).toFixed(1) + '" x2="' + R + '" y2="' + y(0).toFixed(1) + '" style="stroke:var(--axis)" stroke-width="1.5"/>');
+    var ticks = yrs <= 10 ? 1 : yrs <= 20 ? 5 : 10;
+    var t;
+    for (t = 0; t <= yrs; t += ticks) {
+      el.push('<text x="' + x(t).toFixed(1) + '" y="' + (B + 20) + '" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">' + (t === 0 ? 'yr 0' : t) + '</text>');
+    }
+    function path(arr) {
+      var p = '', i;
+      for (i = 0; i < arr.length; i++) {
+        p += (i === 0 ? 'M ' : ' L ') + x(i).toFixed(1) + ' ' + y(arr[i]).toFixed(1);
+      }
+      return p;
+    }
+    el.push('<path d="' + path(s.px) + '" fill="none" style="stroke:var(--c2)" stroke-width="2.5"/>');
+    el.push('<path d="' + path(s.tot) + '" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>');
+    var yTot = y(finTot), yPx = y(finPx);
+    if (Math.abs(yTot - yPx) < 16) { yPx = yTot + 16; }
+    el.push('<text x="' + (R + 6) + '" y="' + (yTot + 4).toFixed(1) + '" font-size="13" font-weight="600" style="fill:var(--c1)">total return</text>');
+    el.push('<text x="' + (R + 6) + '" y="' + (yPx + 4).toFixed(1) + '" font-size="13" font-weight="600" style="fill:var(--c2)">price only</text>');
+    svg.innerHTML = el.join('');
+
+    outTot.textContent = money(finTot);
+    outPx.textContent = money(finPx);
+    outGap.textContent = '+' + money(finTot - finPx);
+    outGap.style.color = 'var(--up)';
+    outSh.textContent = reinvest ? Math.pow(1 + d, yrs).toFixed(2) + '× shares' : '1.00× (unchanged)';
+  }
+
+  function setMode(on) {
+    reinvest = on;
+    btnOn.classList.toggle('is-active', on);
+    btnOff.classList.toggle('is-active', !on);
+    draw();
+  }
+  btnOn.addEventListener('click', function () { setMode(true); });
+  btnOff.addEventListener('click', function () { setMode(false); });
+  pvIn.addEventListener('input', draw);
+  yrsIn.addEventListener('input', draw);
+  gIn.addEventListener('input', draw);
+  dIn.addEventListener('input', draw);
+  pvIn.addEventListener('change', function () { pvIn.value = clamp(parseFloat(pvIn.value) || 10000, 100, 10000000); draw(); });
+  draw();
+})();
+  </script>
+
+  <p>How much do equities pay for all this risk? Over the last century, US stocks have delivered roughly 7% per year <em>after inflation</em> — the long-run <dfn class="term" tabindex="0" data-def="The extra return equities have earned over safe government debt, as compensation for bearing more risk.">equity risk premium</dfn> over safe government debt has been around 4–6 percentage points. At 7% real, purchasing power doubles about every 10 years (the Rule of 72 from <a href="#s01">Section 1</a>). No other broadly accessible asset class comes close over long horizons.</p>
+  <p>The catch is the ride. Equity <dfn class="term" tabindex="0" data-def="How much an asset's returns swing around their average; the standard deviation of returns.">volatility</dfn> runs around 15–20% a year, and the market suffers a <dfn class="term" tabindex="0" data-def="The decline from a peak to a subsequent trough in an asset's value.">drawdown</dfn> of 30–50%+ roughly once a decade: −86% peak-to-trough in 1929–32, about −50% in 1973–74, 2000–02, and 2008–09, and −34% in five weeks in March 2020. The ~7% real average is earned <em>through</em> those crashes, not around them. That's why time horizon is the single most important variable in equity investing: over one year, stocks are close to a coin flip; over 20–30 years, the historical odds of beating cash have been overwhelming. Money you need next year does not belong in stocks.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 400" role="img" aria-label="Illustrative long-run growth of one dollar in US stocks on a log scale, with major crashes labeled as temporary dips on a rising line.">
+      <text x="360" y="24" text-anchor="middle" font-size="15" font-weight="700" style="fill:var(--ink)">Growth of $1, real total return (illustrative, log scale)</text>
+      <line x1="60" y1="272" x2="690" y2="272" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="60" y1="214" x2="690" y2="214" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="60" y1="156" x2="690" y2="156" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="60" y1="98" x2="690" y2="98" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="60" y1="40" x2="690" y2="40" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="52" y="276" text-anchor="end" font-size="12.5" style="fill:var(--muted)">$1</text>
+      <text x="52" y="218" text-anchor="end" font-size="12.5" style="fill:var(--muted)">$10</text>
+      <text x="52" y="160" text-anchor="end" font-size="12.5" style="fill:var(--muted)">$100</text>
+      <text x="52" y="102" text-anchor="end" font-size="12.5" style="fill:var(--muted)">$1,000</text>
+      <text x="52" y="44" text-anchor="end" font-size="12.5" style="fill:var(--muted)">$10,000</text>
+      <line x1="60" y1="330" x2="690" y2="330" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="60" y="352" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">1926</text>
+      <text x="217" y="352" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">1950</text>
+      <text x="375" y="352" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">1975</text>
+      <text x="532" y="352" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">2000</text>
+      <text x="683" y="352" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">2025</text>
+      <path d="M 60 272 L 78.9 252 L 97.8 292 L 141 273 L 179.7 254.5 L 245 228 L 305.7 204 L 349.8 196.5 L 362.4 216.7 L 412.8 214 L 470 176 L 526.2 138.5 L 538.8 154 L 570.3 143 L 582.9 160 L 645.9 116.5 L 652.2 124 L 683.7 107" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>
+      <circle cx="97.8" cy="292" r="4" style="fill:var(--down)"/>
+      <text x="104" y="308" font-size="12.5" style="fill:var(--muted)">1929–32: −86%</text>
+      <circle cx="362.4" cy="216.7" r="4" style="fill:var(--down)"/>
+      <text x="368" y="238" font-size="12.5" style="fill:var(--muted)">1973–74: ~−50%</text>
+      <circle cx="538.8" cy="154" r="4" style="fill:var(--down)"/>
+      <text x="452" y="129" font-size="12.5" style="fill:var(--muted)">dot-com bust</text>
+      <circle cx="582.9" cy="160" r="4" style="fill:var(--down)"/>
+      <text x="571" y="182" font-size="12.5" style="fill:var(--muted)">2008–09: ~−50%</text>
+      <circle cx="652.2" cy="124" r="4" style="fill:var(--down)"/>
+      <text x="596" y="102" font-size="12.5" style="fill:var(--muted)">2020: −34%</text>
+    </svg>
+    <figcaption><strong>Figure 7.2</strong> — On a log scale, a century of ~7% real returns is a fairly straight line — but every one of those dips felt like the end of the world in real time. Shapes and dates are illustrative, not exact data.</figcaption>
+  </figure>
+  <div class="callout co-warn"><p class="co-label">Common pitfall</p><p>Past return is not a promise. The ~7% real figure is a century-long US average that includes surviving two world wars and winning the economic lottery; Japan's market spent three decades underwater after 1989. History tells you what equities <em>can</em> do and what they <em>charge</em> in volatility — it does not guarantee your particular 20 years will match the average.</p></div>
+
+  <h3 id="s07-indices">Indices and index funds: buying the haystack</h3>
+  <p>A stock <dfn class="term" tabindex="0" data-def="A rule-based basket of stocks whose combined value tracks a slice of the market.">index</dfn> is a rule-based basket of stocks used to measure "the market." The ones you'll hear daily:</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Index</th><th>What's in it</th><th>Weighting</th><th class="td-num">Holdings</th></tr></thead>
+    <tbody>
+      <tr><td>S&amp;P 500</td><td>Largest US companies; the default "US market"</td><td>Market cap</td><td class="td-num">~500</td></tr>
+      <tr><td>Nasdaq-100</td><td>Largest non-financial Nasdaq listings; tech-heavy</td><td>Market cap (modified)</td><td class="td-num">100</td></tr>
+      <tr><td>Dow Jones Industrial Average</td><td>30 blue-chip names picked by committee</td><td><strong>Price</strong> (a historical oddity)</td><td class="td-num">30</td></tr>
+      <tr><td>Russell 2000</td><td>US small-caps</td><td>Market cap</td><td class="td-num">~2,000</td></tr>
+      <tr><td>MSCI World / ACWI</td><td>Developed (and, for ACWI, emerging) markets globally</td><td>Market cap</td><td class="td-num">1,400+</td></tr>
+    </tbody>
+  </table></div>
+  <p>Almost every serious index is <dfn class="term" tabindex="0" data-def="An index where each stock's weight equals its market cap divided by the total market cap of all members.">cap-weighted</dfn>: each company's weight is its market cap divided by the sum of all members' caps. This is just a weighted average with weights w<sub>i</sub> = cap<sub>i</sub> ÷ Σcap, and it has a beautiful property — the index holds each company in proportion to its actual size, and it rebalances itself for free as prices move. The Dow, by contrast, is <dfn class="term" tabindex="0" data-def="An index where weights are proportional to share prices — an arbitrary quantity — rather than company size.">price-weighted</dfn>: it effectively holds one share of each member, so a company's influence depends on its per-share price, which we just established is meaningless. It survives on brand recognition, not merit.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 360" role="img" aria-label="Comparison of cap weighting and price weighting for three example companies, showing that price weighting lets the smallest company dominate.">
+      <text x="188" y="26" text-anchor="middle" font-size="15" font-weight="700" style="fill:var(--ink)">Cap-weighted (S&amp;P style)</text>
+      <text x="188" y="46" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">weight = market cap ÷ total cap</text>
+      <text x="532" y="26" text-anchor="middle" font-size="15" font-weight="700" style="fill:var(--ink)">Price-weighted (Dow style)</text>
+      <text x="532" y="46" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">weight = share price ÷ sum of prices</text>
+      <text x="100" y="86" text-anchor="end" font-size="13.5" style="fill:var(--ink)">Alpha Corp</text>
+      <text x="100" y="103" text-anchor="end" font-size="12" style="fill:var(--muted)">$600B · $50/sh</text>
+      <text x="100" y="146" text-anchor="end" font-size="13.5" style="fill:var(--ink)">Beta Inc</text>
+      <text x="100" y="163" text-anchor="end" font-size="12" style="fill:var(--muted)">$300B · $100/sh</text>
+      <text x="100" y="206" text-anchor="end" font-size="13.5" style="fill:var(--ink)">Gamma Ltd</text>
+      <text x="100" y="223" text-anchor="end" font-size="12" style="fill:var(--muted)">$100B · $500/sh</text>
+      <rect x="110" y="72" width="216" height="34" rx="4" style="fill:var(--c1)"/>
+      <rect x="110" y="132" width="108" height="34" rx="4" style="fill:var(--c2)"/>
+      <rect x="110" y="192" width="36" height="34" rx="4" style="fill:var(--c3)"/>
+      <text x="332" y="94" font-size="13" font-weight="600" style="fill:var(--ink)">60%</text>
+      <text x="224" y="154" font-size="13" font-weight="600" style="fill:var(--ink)">30%</text>
+      <text x="152" y="214" font-size="13" font-weight="600" style="fill:var(--ink)">10%</text>
+      <rect x="400" y="72" width="28" height="34" rx="4" style="fill:var(--c1)"/>
+      <rect x="400" y="132" width="55" height="34" rx="4" style="fill:var(--c2)"/>
+      <rect x="400" y="192" width="277" height="34" rx="4" style="fill:var(--c3)"/>
+      <text x="434" y="94" font-size="13" font-weight="600" style="fill:var(--ink)">7.7%</text>
+      <text x="461" y="154" font-size="13" font-weight="600" style="fill:var(--ink)">15.4%</text>
+      <text x="540" y="214" font-size="13" font-weight="600" style="fill:var(--ink)">76.9%</text>
+      <rect x="80" y="258" width="560" height="70" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="360" y="285" text-anchor="middle" font-size="13.5" style="fill:var(--ink)">Gamma is the smallest company but has the highest share price —</text>
+      <text x="360" y="306" text-anchor="middle" font-size="13.5" style="fill:var(--ink)">so it dominates the price-weighted index. Price per share is arbitrary.</text>
+    </svg>
+    <figcaption><strong>Figure 7.3</strong> — Same three companies, two weighting schemes. Cap weighting reflects economic size; price weighting rewards whoever cut their pizza into the fewest slices.</figcaption>
+  </figure>
+  <p>You can't buy an index directly — it's a formula, not a product. The practical vehicles are <dfn class="term" tabindex="0" data-def="A mutual fund or ETF that mechanically holds all the stocks in an index at index weights, minimizing fees.">index funds</dfn> and <dfn class="term" tabindex="0" data-def="Exchange-traded fund: a fund whose shares trade on an exchange all day like a stock.">ETFs</dfn> (exchange-traded funds), which hold the index's stocks at the index's weights and charge a tiny <dfn class="term" tabindex="0" data-def="A fund's annual fee as a percentage of assets; 0.03% means $3 per year per $10,000 invested.">expense ratio</dfn> — as low as 0.03% per year, versus ~1% for typical actively managed funds. That fee gap, compounded over 30 years, eats roughly a quarter of your final wealth, which is why cheap index funds have absorbed trillions of dollars and why <a href="#s17">Section 17 (Market Efficiency)</a> will explain how hard it is for active managers to earn their fees back. One ETF share can make you a part-owner of 500 (or 8,000) businesses at once — instant <dfn class="term" tabindex="0" data-def="Spreading money across many assets so no single failure sinks the portfolio.">diversification</dfn>, formalized in <a href="#s15">Section 15 (Portfolio Theory)</a>.</p>
+
+  <h3 id="s07-valuation">Valuation shorthand: EPS, P/E, and earnings yield</h3>
+  <p>Is a stock cheap or expensive? Not by its price — by its price <em>relative to what you get</em>. The workhorse metrics: <dfn class="term" tabindex="0" data-def="Earnings per share: a company's net profit divided by its share count.">EPS</dfn> (earnings per share) is net profit ÷ shares outstanding, and the <dfn class="term" tabindex="0" data-def="Price-to-earnings ratio: share price divided by earnings per share; how many dollars you pay per dollar of annual profit.">P/E ratio</dfn> is what you pay per dollar of annual profit:</p>
+  <div class="formula">
+    <div class="formula-main">P/E = <span class="frac"><span>price per share</span><span>EPS</span></span>&nbsp;&nbsp;·&nbsp;&nbsp;earnings yield = <span class="frac"><span>EPS</span><span>price</span></span> = <span class="frac"><span>1</span><span>P/E</span></span></div>
+    <div class="formula-legend">A stock at $184.32 with EPS of $7.49 trades at P/E ≈ 24.6, an earnings yield of ≈ 4.1%</div>
+  </div>
+  <p>The <dfn class="term" tabindex="0" data-def="EPS divided by price — the inverse of P/E; earnings as a yield, comparable to a bond yield.">earnings yield</dfn> (just 1 ÷ P/E) puts stocks in the same units as bonds: a P/E of 25 means each dollar invested currently produces 4 cents of annual profit. That makes cross-asset comparison natural — is 4.1% of growing corporate earnings better than 4.5% of fixed bond coupons? That question is half of finance.</p>
+  <p>A high P/E is not "overpriced" and a low P/E is not "a bargain" — a P/E is a <em>claim about the future</em>. Paying 45× current earnings only makes sense if you believe earnings will grow fast; paying 11× says you expect stagnation. This is the classic <dfn class="term" tabindex="0" data-def="Stocks priced richly relative to current earnings because investors expect rapid earnings growth.">growth</dfn> versus <dfn class="term" tabindex="0" data-def="Stocks priced cheaply relative to current earnings, assets, or dividends — often mature or out of favor.">value</dfn> framing: growth investors pay up for tomorrow; value investors demand a discount today. Neither is inherently right — the question is always whether the price already reflects the future you expect.</p>
+
+  <div class="widget" id="s07-pe">
+    <div class="widget-head">
+      <h4>P/E explorer</h4>
+      <p>Drag price and earnings for a fast grower and a steady utility — see how the same $1 of profit gets very different price tags.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Zippy Cloud — price <output class="ctl-val">$180</output><input type="range" id="s07-pe-pa" min="20" max="300" step="5" value="180"></label>
+        <label class="ctl">Zippy Cloud — EPS <output class="ctl-val">$4.00</output><input type="range" id="s07-pe-ea" min="0.5" max="15" step="0.25" value="4"></label>
+      </div>
+      <div class="ctl-row">
+        <label class="ctl">Steady Utility — price <output class="ctl-val">$60</output><input type="range" id="s07-pe-pb" min="20" max="300" step="5" value="60"></label>
+        <label class="ctl">Steady Utility — EPS <output class="ctl-val">$4.50</output><input type="range" id="s07-pe-eb" min="0.5" max="15" step="0.25" value="4.5"></label>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">Zippy P/E</span><span class="stat-value" id="s07-pe-outa">—</span></div>
+        <div class="stat"><span class="stat-label">Zippy earnings yield</span><span class="stat-value" id="s07-pe-ya">—</span></div>
+        <div class="stat"><span class="stat-label">Utility P/E</span><span class="stat-value" id="s07-pe-outb">—</span></div>
+        <div class="stat"><span class="stat-label">Utility earnings yield</span><span class="stat-value" id="s07-pe-yb">—</span></div>
+      </div>
+      <p id="s07-pe-note" style="color:var(--ink-2)"></p>
+    </div>
+  </div>
+  <script>
+(function () {
+  var root = document.getElementById('s07-pe');
+  if (!root) return;
+  var pa = root.querySelector('#s07-pe-pa'), ea = root.querySelector('#s07-pe-ea');
+  var pb = root.querySelector('#s07-pe-pb'), eb = root.querySelector('#s07-pe-eb');
+  var vals = root.querySelectorAll('.ctl-val');
+  var outA = root.querySelector('#s07-pe-outa'), yA = root.querySelector('#s07-pe-ya');
+  var outB = root.querySelector('#s07-pe-outb'), yB = root.querySelector('#s07-pe-yb');
+  var note = root.querySelector('#s07-pe-note');
+  function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
+  function upd() {
+    var Pa = clamp(parseFloat(pa.value) || 180, 20, 300);
+    var Ea = clamp(parseFloat(ea.value) || 4, 0.5, 15);
+    var Pb = clamp(parseFloat(pb.value) || 60, 20, 300);
+    var Eb = clamp(parseFloat(eb.value) || 4.5, 0.5, 15);
+    vals[0].textContent = '$' + Pa.toFixed(0);
+    vals[1].textContent = '$' + Ea.toFixed(2);
+    vals[2].textContent = '$' + Pb.toFixed(0);
+    vals[3].textContent = '$' + Eb.toFixed(2);
+    var peA = Pa / Ea, peB = Pb / Eb;
+    outA.textContent = peA.toFixed(1) + '×';
+    outB.textContent = peB.toFixed(1) + '×';
+    yA.textContent = (100 / peA).toFixed(1) + '%';
+    yB.textContent = (100 / peB).toFixed(1) + '%';
+    var hi = peA >= peB ? 'Zippy Cloud' : 'Steady Utility';
+    var ratio = (Math.max(peA, peB) / Math.min(peA, peB));
+    if (ratio < 1.15) {
+      note.textContent = 'The market is pricing a dollar of current earnings almost identically for both firms — it expects similar futures from them.';
+    } else {
+      note.textContent = 'The market pays ' + ratio.toFixed(1) + '× more per dollar of ' + hi + "'s current earnings. That premium is not generosity — it is an implicit bet that " + hi + "'s earnings will grow much faster. If that growth never shows up, the P/E premium becomes the loss.";
+    }
+  }
+  pa.addEventListener('input', upd);
+  ea.addEventListener('input', upd);
+  pb.addEventListener('input', upd);
+  eb.addEventListener('input', upd);
+  upd();
+})();
+  </script>
+
+  <p>P/E comes with sharp edges. If earnings are negative, P/E is meaningless (a company losing money has no P/E, not a "low" one). If earnings are <dfn class="term" tabindex="0" data-def="Rising and falling with the business cycle — high in booms, depressed in recessions.">cyclical</dfn>, P/E inverts your intuition: a steel maker at the top of a boom shows huge earnings and a deceptively low P/E right before profits collapse, and a sky-high P/E at the bottom of a recession may mark the cheapest moment to buy. One-off items (a lawsuit settlement, an asset sale) can distort a single year's E. This is exactly why full valuation — discounted cash flows, comparables, and adjustments — gets its own treatment in <a href="#s13">Section 13 (Valuation)</a>.</p>
+
+  <h3 id="s07-actions">Corporate actions: dividends, buybacks, splits, and going public</h3>
+  <p>Companies return cash to shareholders two ways. Dividends you've met. A <dfn class="term" tabindex="0" data-def="A company using its cash to repurchase and retire its own shares, shrinking the share count.">buyback</dfn> (share repurchase) is the mirror image of dilution: the company buys its own shares on the market and retires them, so every remaining share owns a bigger slice. Suppose a firm earns $1B on 500M shares (EPS $2.00) and buys back 25M shares: the same $1B is now spread over 475M shares, so EPS rises to $2.11 — a 5.3% bump with zero change in the underlying business. In a frictionless world buybacks and dividends are economically equivalent ways to hand cash back; in practice buybacks are more tax-efficient in the US and more flexible (cutting a dividend is a scandal, pausing a buyback is a footnote), which is why buybacks now exceed dividends among large US firms.</p>
+  <p>A <dfn class="term" tabindex="0" data-def="Dividing each existing share into several new ones — more slices, same pizza; total value unchanged.">stock split</dfn> changes nothing real. A 4-for-1 split turns one $500 share into four $125 shares; your stake, the market cap, and the P/E are all identical. Splits exist mainly for optics and round-lot convenience. This buries the myth for good: a $500 stock is not "more expensive" than a $50 one, and a split does not make a company "cheaper" — although markets sometimes pop on split announcements anyway, a small irrationality we'll file under <a href="#s17">Section 17 (Behavioral Finance)</a>.</p>
+  <p>How do companies get onto the market in the first place? The classic route is the <dfn class="term" tabindex="0" data-def="Initial public offering: a private company sells newly created shares to public investors for the first time.">IPO</dfn> (initial public offering): investment banks (<a href="#s06">Section 6</a>) value the company, drum up institutional buyers, and sell new shares to the public, collecting fees of ~4–7% — and IPOs are famously often "popped" on day one, meaning the sellers left money on the table.</p>
+  <p>A <dfn class="term" tabindex="0" data-def="Going public by simply listing existing shares for trading, without banks underwriting a new share sale.">direct listing</dfn> skips the banks' underwriting machine: existing shares simply start trading on the exchange (Spotify in 2018, Coinbase in 2021), which raises no new cash but avoids underpricing and most fees.</p>
+  <p>A <dfn class="term" tabindex="0" data-def="Special purpose acquisition company: a listed shell of cash that merges with a private firm to take it public.">SPAC</dfn> (special purpose acquisition company) is a publicly listed shell full of cash that hunts for a private company to merge with, taking it public through the back door. SPACs boomed in 2020–21 with lighter disclosure than IPOs, and the average post-merger SPAC investor lost badly — a useful reminder that innovations in market plumbing often redistribute money toward whoever designed the plumbing.</p>
+
+  <h3 id="s07-screen">Reading a stock screen like an analyst</h3>
+  <p>Open any quote page and you'll face a wall of numbers. Here's the decoder ring. <dfn class="term" tabindex="0" data-def="Open, high, low, close: the four prices summarizing one trading period, e.g. a day.">OHLC</dfn> is the day's open, high, low, and close — the atomic unit of price data (and, as a time series, the raw material for everything in <a href="#s18">Section 18</a>). <dfn class="term" tabindex="0" data-def="The number of shares that changed hands in a period; a measure of trading activity.">Volume</dfn> is how many shares traded; a price move on heavy volume carries more conviction than the same move on a trickle. The <dfn class="term" tabindex="0" data-def="The lowest and highest prices at which a stock has traded over the past year.">52-week range</dfn> instantly locates today's price in its recent history.</p>
+  <p><dfn class="term" tabindex="0" data-def="A measure of how much a stock moves relative to the overall market; beta 1.2 means about 20% more than the market.">Beta</dfn> measures how the stock moves with the overall market: beta 1.2 means it tends to move 1.2% for every 1% market move — it's literally the slope coefficient from regressing the stock's returns on the market's, a calculation you could run in three lines of Python (and will, in <a href="#s15">Section 15</a>). <dfn class="term" tabindex="0" data-def="Shares actually available for public trading, excluding locked-up insider and strategic holdings.">Float</dfn> is the share count actually available to trade after excluding insiders' locked-up holdings; a small float plus heavy demand is the recipe for violent price moves (see: meme stocks, 2021).</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 420" role="img" aria-label="Anatomy of a stock quote panel showing price, change, OHLC, volume, 52-week range, market cap, P/E, EPS, dividend yield, beta and float with annotations.">
+      <rect x="120" y="34" width="480" height="352" rx="10" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="148" y="72" font-size="16" font-weight="700" style="fill:var(--ink)">ACME Corp (ACME)</text>
+      <text x="148" y="112" font-size="26" font-weight="700" style="fill:var(--ink)">$184.32</text>
+      <text x="268" y="112" font-size="15" font-weight="600" style="fill:var(--up)">+$2.15 (+1.18%)</text>
+      <line x1="148" y1="132" x2="572" y2="132" style="stroke:var(--border)" stroke-width="1"/>
+      <text x="148" y="162" font-size="13.5" style="fill:var(--muted)">Open</text><text x="360" y="162" text-anchor="end" font-size="13.5" style="fill:var(--ink)">$182.40</text>
+      <text x="148" y="188" font-size="13.5" style="fill:var(--muted)">High / Low</text><text x="360" y="188" text-anchor="end" font-size="13.5" style="fill:var(--ink)">$185.10 / $181.95</text>
+      <text x="148" y="214" font-size="13.5" style="fill:var(--muted)">Volume</text><text x="360" y="214" text-anchor="end" font-size="13.5" style="fill:var(--ink)">34.2M</text>
+      <text x="148" y="240" font-size="13.5" style="fill:var(--muted)">52-wk range</text><text x="360" y="240" text-anchor="end" font-size="13.5" style="fill:var(--ink)">$128.14 – $191.05</text>
+      <text x="148" y="266" font-size="13.5" style="fill:var(--muted)">Market cap</text><text x="360" y="266" text-anchor="end" font-size="13.5" style="fill:var(--ink)">$412B</text>
+      <text x="392" y="162" font-size="13.5" style="fill:var(--muted)">P/E (ttm)</text><text x="572" y="162" text-anchor="end" font-size="13.5" style="fill:var(--ink)">24.6</text>
+      <text x="392" y="188" font-size="13.5" style="fill:var(--muted)">EPS (ttm)</text><text x="572" y="188" text-anchor="end" font-size="13.5" style="fill:var(--ink)">$7.49</text>
+      <text x="392" y="214" font-size="13.5" style="fill:var(--muted)">Dividend yield</text><text x="572" y="214" text-anchor="end" font-size="13.5" style="fill:var(--ink)">1.2%</text>
+      <text x="392" y="240" font-size="13.5" style="fill:var(--muted)">Beta (5y)</text><text x="572" y="240" text-anchor="end" font-size="13.5" style="fill:var(--ink)">1.15</text>
+      <text x="392" y="266" font-size="13.5" style="fill:var(--muted)">Float</text><text x="572" y="266" text-anchor="end" font-size="13.5" style="fill:var(--ink)">2.10B sh</text>
+      <line x1="148" y1="286" x2="572" y2="286" style="stroke:var(--border)" stroke-width="1"/>
+      <text x="148" y="315" font-size="13" style="fill:var(--muted)">Sanity checks an analyst runs in 5 seconds:</text>
+      <text x="148" y="338" font-size="13" style="fill:var(--ink)">· $184.32 ÷ $7.49 = 24.6 ✓ (price, EPS and P/E agree)</text>
+      <text x="148" y="359" font-size="13" style="fill:var(--ink)">· price is near the top of its 52-week range</text>
+      <text x="148" y="380" font-size="13" style="fill:var(--ink)">· beta 1.15 → a bit livelier than the market</text>
+    </svg>
+    <figcaption><strong>Figure 7.4</strong> — Anatomy of a stock quote. "ttm" means trailing twelve months. Note the numbers are internally consistent — real screens should pass the same checks.</figcaption>
+  </figure>
+  <div class="callout co-you"><p class="co-label">Your edge</p><p>Every field on that screen is a column in a dataset. OHLCV time series are freely downloadable, beta is a linear regression, cap weighting is a normalized vector, and total return is a cumulative product. When we hit <a href="#s18">Section 18 (Quant Finance)</a>, you'll compute all of this from raw data — most finance professionals can read the screen; far fewer can rebuild it.</p></div>
+
+  <details class="deep"><summary>Deep dive: why the share count on a screen can lie to you</summary>
+    <p>"Shares outstanding" comes in flavors. <em>Basic</em> shares count what exists today; <em>diluted</em> shares add everything that could become shares — employee options, restricted stock units, convertible bonds. A company with 100M basic shares and 12M in-the-money options is really a 112M-share company for valuation purposes, and careful analysts always divide by the diluted count. The gap between basic and diluted EPS on an income statement (<a href="#s11">Section 11</a>) is a quick read on how much of the company is being quietly handed to employees each year.</p>
+    <p>Float can diverge wildly from shares outstanding. A newly listed company might have 90% of its shares locked up by insiders for six months post-IPO; when the lockup expires, supply floods the market. Checking the float and the lockup calendar is standard diligence before touching a recent IPO.</p>
+  </details>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. Stock A trades at $500 with 20 million shares outstanding; Stock B trades at $50 with 4 billion shares. Which company is bigger?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">A — its share price is 10× higher</button>
+        <button class="quiz-opt">They're the same size</button>
+        <button class="quiz-opt" data-correct>B — its market cap is $200B vs A's $10B</button>
+      </div>
+      <p class="quiz-explain">Size is market cap = price × shares. B: $50 × 4B = $200B. A: $500 × 20M = $10B. Price per share alone tells you nothing — it depends on an arbitrary share count.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. You invest $10,000 at a 5% annual price return with a 3% dividend yield, reinvesting dividends, for 30 years. Your wealth compounds at approximately…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">5%, since dividends aren't price gains</button>
+        <button class="quiz-opt" data-correct>8.15%, because 1.05 × 1.03 = 1.0815</button>
+        <button class="quiz-opt">8.00%, since 5 + 3 = 8 exactly</button>
+        <button class="quiz-opt">15%, since the effects multiply</button>
+      </div>
+      <p class="quiz-explain">Reinvested returns compound multiplicatively: (1.05)(1.03) − 1 = 8.15%. The extra 0.15% over the naive 8% seems tiny but adds up — the exact 30-year result is ~$104,900 versus $43,219 from price alone.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. In a price-weighted index like the Dow, which company has the most influence?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">The one with the largest market cap</button>
+        <button class="quiz-opt">The one with the most shares outstanding</button>
+        <button class="quiz-opt" data-correct>The one with the highest price per share, regardless of size</button>
+        <button class="quiz-opt">All 30 members count equally</button>
+      </div>
+      <p class="quiz-explain">Price weighting is effectively holding one share of each member, so influence scales with per-share price — an arbitrary number. A $500 small company outweighs a $50 giant, which is why serious indices are cap-weighted.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. A steel producer reports record profits at the peak of a construction boom and trades at a P/E of 6. The most careful interpretation is:</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">It's a screaming bargain — 6 is far below the market's ~20</button>
+        <button class="quiz-opt" data-correct>The E may be at a cyclical peak, so the "cheap" P/E could be a trap</button>
+        <button class="quiz-opt">The P/E must be a data error</button>
+      </div>
+      <p class="quiz-explain">Cyclical companies show their lowest P/Es when earnings peak, right before profits fall. A low P/E on boom-time earnings can be more dangerous than a high P/E on trough earnings.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. A company does a 4-for-1 stock split. What happens to the value of your holding?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">It quadruples — you have 4× the shares</button>
+        <button class="quiz-opt">It falls 75% — each share is worth less</button>
+        <button class="quiz-opt" data-correct>Nothing — 4× the shares at ¼ the price is the same pizza in more slices</button>
+      </div>
+      <p class="quiz-explain">A split changes the unit of account, not the business. Market cap, your ownership percentage, and the P/E are all unchanged. Contrast with a buyback, which does change per-share economics by shrinking the share count.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>A share is fractional ownership: a residual claim on profits and assets, with losses capped by limited liability — last in line, but with all the upside.</li>
+      <li>Company size is market cap (price × shares), never price per share; splits and share counts are just slicing choices.</li>
+      <li>Total return = price appreciation + dividends. Reinvested dividends compound your share count and can account for over half of long-run wealth.</li>
+      <li>Equities have paid roughly 7% real per year over the last US century — but through 30–50% drawdowns roughly once a decade. The premium is payment for surviving the ride, and past averages are not promises.</li>
+      <li>Serious indices (S&amp;P 500, Russell 2000, MSCI World) are cap-weighted; the price-weighted Dow is a legacy oddity. Index funds and ETFs are the cheap, practical way to own the whole basket.</li>
+      <li>P/E = price per dollar of earnings; its inverse, the earnings yield, makes stocks comparable to bonds. A high P/E is a bet on growth — and P/E breaks on negative or cyclical earnings.</li>
+      <li>Buybacks and dividends both return cash; buybacks shrink the share count and lift EPS. Dilution does the opposite. IPOs, direct listings, and SPACs are just three doors into the public market.</li>
+      <li>On a stock screen, check internal consistency: price ÷ EPS should equal the P/E, beta is a regression slope, and float — not shares outstanding — is what actually trades.</li>
+    </ul>
+  </div>
+</section>

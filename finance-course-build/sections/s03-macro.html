@@ -1,0 +1,513 @@
+<section class="lesson" id="s03" data-num="03" data-title="Macroeconomics: The Big Picture">
+  <p class="eyebrow">Part I · Economic Foundations</p>
+  <h2>3. Macroeconomics: The Big Picture</h2>
+  <p class="lede">Microeconomics zoomed in on single markets; macroeconomics zooms out to the whole machine — total output, the price level, jobs, and the boom-bust rhythm underneath them. By the end of this section you'll be able to read a GDP release, a CPI print, or a jobs report the way an analyst does: knowing exactly what each number measures, and where it can mislead you.</p>
+
+  <h3 id="s03-gdp">GDP: the economy's top line</h3>
+  <p><dfn class="term" tabindex="0" data-def="The study of the economy as a whole: total output, inflation, unemployment, and growth, rather than individual markets.">Macroeconomics</dfn> asks three big questions: how much are we producing, what do things cost, and who has a job? Where <a href="#s02">Section 2 (Microeconomics)</a> studied one market's supply and demand, macro adds everything up. The master number is <dfn class="term" tabindex="0" data-def="Gross domestic product: the market value of all final goods and services produced inside a country in a period, usually a quarter or year.">GDP</dfn> — the market value of everything a country produces in a quarter or a year.</p>
+  <p>Two words in that definition do heavy lifting. <em>Final</em> means we count the loaf of bread but not the flour that went into it — otherwise we'd double-count the wheat, the flour, and the bread. <dfn class="term" tabindex="0" data-def="Goods and services bought by their end user, as opposed to intermediate inputs used to make something else.">Final goods</dfn> are the end products. And <em>inside a country</em> means geography, not nationality: a German-owned BMW plant in South Carolina counts in US GDP.</p>
+  <p>Statisticians measure GDP by adding up who spends the money — the expenditure approach:</p>
+  <div class="formula">
+    <div class="formula-main">GDP = C + I + G + NX</div>
+    <div class="formula-legend">C = consumption · I = investment · G = government purchases · NX = net exports (exports − imports)</div>
+  </div>
+  <p>For the US (roughly $29 trillion in 2024) the proportions are surprisingly stable. <dfn class="term" tabindex="0" data-def="Household spending on goods and services: rent, groceries, healthcare, haircuts, streaming subscriptions.">Consumption</dfn> is about 68% — the American economy is mostly households buying things. <dfn class="term" tabindex="0" data-def="In GDP accounting: spending on new productive capacity — factories, equipment, software, housing, inventories. NOT buying stocks or bonds.">Investment</dfn> (~18%) means new factories, equipment, software, and homes — <em>not</em> buying stocks; in GDP-speak, trading existing assets creates nothing new. <dfn class="term" tabindex="0" data-def="Government spending on actual goods and services (roads, teachers, aircraft carriers). Excludes transfers like Social Security, which just move money.">Government purchases</dfn> (~17%) cover roads, teachers, and defense — but not Social Security checks, which merely transfer money to households (it gets counted when they spend it, in C). <dfn class="term" tabindex="0" data-def="Exports minus imports. Negative when a country imports more than it exports.">Net exports</dfn> run about −3% for the US: a persistent <dfn class="term" tabindex="0" data-def="When a country imports more than it exports, so net exports are negative.">trade deficit</dfn>, which we'll unpack in <a href="#s05">Section 5 (Fiscal Policy, Debt &amp; Trade)</a>.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 300" role="img" aria-label="Horizontal stacked bar showing US GDP by expenditure component: consumption 68 percent, investment 18 percent, government 17 percent, minus net exports of 3 percent, netting to 100 percent of roughly 29 trillion dollars.">
+      <text x="243" y="82" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Consumption · 68%</text>
+      <text x="501" y="82" text-anchor="middle" font-size="13" style="fill:var(--ink)">Investment · 18%</text>
+      <text x="606" y="62" text-anchor="middle" font-size="13" style="fill:var(--ink)">Gov't · 17%</text>
+      <rect x="40" y="90" width="406" height="52" rx="3" style="fill:var(--c1)"></rect>
+      <rect x="448" y="90" width="106" height="52" rx="3" style="fill:var(--c2)"></rect>
+      <rect x="556" y="90" width="100" height="52" rx="3" style="fill:var(--c3)"></rect>
+      <text x="243" y="162" text-anchor="middle" font-size="13" style="fill:var(--muted)">≈ $19.8T</text>
+      <text x="501" y="162" text-anchor="middle" font-size="13" style="fill:var(--muted)">≈ $5.3T</text>
+      <text x="606" y="162" text-anchor="middle" font-size="13" style="fill:var(--muted)">≈ $5.0T</text>
+      <line x1="640" y1="78" x2="640" y2="230" stroke-dasharray="5 4" style="stroke:var(--axis)"></line>
+      <rect x="640" y="185" width="18" height="26" rx="3" style="fill:var(--down)" opacity="0.85"></rect>
+      <text x="632" y="203" text-anchor="end" font-size="13" style="fill:var(--muted)">Net exports −3% (−$0.9T)</text>
+      <text x="640" y="250" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">GDP = 100% ≈ $29T</text>
+      <text x="360" y="282" text-anchor="middle" font-size="13" style="fill:var(--muted)">C: rent, groceries, healthcare · I: factories, homes, software · G: roads, teachers, defense</text>
+    </svg>
+    <figcaption><strong>Figure 3.1</strong> — The US economy is two-thirds household spending. C + I + G add up to 103% of GDP; subtracting the 3% trade deficit nets out to 100%.</figcaption>
+  </figure>
+  <p>One trap will follow you everywhere in macro data: prices change. If GDP rises 6% but everything just got 6% more expensive, nothing real happened. <dfn class="term" tabindex="0" data-def="GDP measured at current prices, with no adjustment for inflation.">Nominal GDP</dfn> uses current prices; <dfn class="term" tabindex="0" data-def="GDP adjusted for inflation, so changes reflect actual quantities produced rather than price changes.">real GDP</dfn> strips inflation out using a price index called the <dfn class="term" tabindex="0" data-def="A price index covering everything in GDP; dividing nominal by real GDP gives the deflator.">GDP deflator</dfn>. Analysts almost always mean <em>real</em> growth when they say "the economy grew."</p>
+  <div class="callout co-ex"><p class="co-label">Worked example</p><p>Nominal GDP rises from $25.0T to $26.5T: +6.0%. The deflator says prices rose 4.0%. Real growth = 1.06 ÷ 1.04 − 1 ≈ <strong>1.9%</strong> — close to the quick shortcut of 6% − 4% = 2%. A headline that looked like a boom was actually a sluggish year plus inflation.</p></div>
+  <p>Size also isn't standard of living. China's GDP (~$18T) dwarfs Switzerland's (~$0.9T), but divide by population and Switzerland produces about $100,000 per person versus China's ~$13,000. <dfn class="term" tabindex="0" data-def="GDP divided by population — a rough proxy for average material living standards.">GDP per capita</dfn> is the number to watch for living standards; total GDP is the number to watch for geopolitical and market weight.</p>
+  <div class="callout co-analogy"><p class="co-label">Analogy</p><p>GDP is a speedometer, not a health checkup. It tells you how fast the machine is running — nothing about who's in the car or what's happening to the engine. It ignores unpaid work (a parent's childcare counts for zero; the same care purchased from a daycare counts fully), leisure, environmental damage, the informal cash economy, and distribution — GDP per capita can rise while the median household stagnates. Wikipedia adds enormous value and roughly $0 to GDP. Useful gauge; incomplete one.</p></div>
+
+  <h3 id="s03-growth">Growth: why 1% is a big deal</h3>
+  <p>Growth rates look boring — 1.5% versus 3% barely moves a chart for a year or two. But you already know from <a href="#s01">Section 1</a> what happens when a rate compounds: the gap goes from rounding error to canyon. Growth is the FV = PV × (1 + r)<sup>n</sup> machine applied to an entire country.</p>
+  <p>Run the numbers. Two countries both start at $10,000 of GDP per person. Country A grows 1.5% a year, Country B grows 3%. After 60 years — one working lifetime — A reaches about $24,400 and B about $58,900. Same starting point, and B's citizens end up 2.4 times richer, from a difference you'd barely notice in any single year. The Rule of 72 from Section 1 says it directly: at 1.5%, living standards double every ~48 years; at 3%, every ~24.</p>
+  <div class="callout co-real"><p class="co-label">Real world: Korea vs. Ghana</p><p>In 1960, South Korea and Ghana had roughly similar income per person — both poor, both recently emerged from colonization or war. Korea then compounded at some of the fastest rates ever recorded for three decades. Today Korean income per person is roughly seven times Ghana's. No single year did that; the exponent did.</p></div>
+  <p>So what sets the growth rate? In the short run, lots of things — we'll get to cycles below. But in the long run the answer is almost embarrassingly simple: <dfn class="term" tabindex="0" data-def="Output produced per hour of work. The main long-run driver of living standards.">productivity</dfn> — output per hour worked. A country gets richer per person only if each hour of work produces more stuff. As economist Paul Krugman put it, "productivity isn't everything, but in the long run it is almost everything."</p>
+  <p>Productivity grows through better machines and infrastructure (capital), better recipes (technology — from crop rotation to spreadsheets to LLMs), better-trained people (human capital), and institutions that make investing worthwhile — courts, property rights, competition. This is why economists get worked up about policies with "small" effects on growth: a policy that permanently adds 0.2 percentage points to productivity growth is worth more, compounded over 50 years, than almost any one-off program you could name.</p>
+
+  <h3 id="s03-inflation">Inflation: how the CPI is built, and why 2% is the target</h3>
+  <p><dfn class="term" tabindex="0" data-def="A sustained rise in the general price level — equivalently, a fall in the purchasing power of money.">Inflation</dfn> is a sustained rise in the overall price level — which is the same thing as a fall in what each dollar buys. It's measured as the rate of change of a price index, and the most famous index is the <dfn class="term" tabindex="0" data-def="Consumer Price Index: a weighted average of prices for a fixed basket of goods and services a typical urban household buys.">CPI</dfn> (Consumer Price Index).</p>
+  <p>The construction is beautifully simple in concept. The Bureau of Labor Statistics defines a <dfn class="term" tabindex="0" data-def="The fixed collection of goods and services whose prices a price index tracks — rent, food, gasoline, haircuts, and so on.">basket</dfn> of what a typical urban household buys, sends people out to collect roughly 80,000 prices every month, and averages the price changes using <dfn class="term" tabindex="0" data-def="The share of a typical household budget spent on each item, used to average price changes in an index.">weights</dfn> from surveys of actual household budgets. Shelter gets about a third of the weight; food about 13%; energy about 7%. Change in the weighted average = inflation.</p>
+  <div class="callout co-you"><p class="co-label">Your edge</p><p>CPI is literally a weighted average — a dot product of budget-share weights and price changes. Two consequences fall out of the math. First, <em>your</em> personal inflation rate differs from the headline whenever your budget weights differ (renters in hot cities live a higher inflation rate than the index). Second, big-weight items dominate: a 5% move in shelter moves the index more than a 20% move in gasoline.</p></div>
+  <div class="callout co-ex"><p class="co-label">Worked example: a mini-CPI</p><p>Say the basket is 35% rent, 15% food, 5% gasoline, 45% everything else. This year rent rises 5%, food 2%, gas 20%, everything else 1%. Inflation = 0.35×5 + 0.15×2 + 0.05×20 + 0.45×1 = 1.75 + 0.30 + 1.00 + 0.45 = <strong>3.5%</strong>. Note the 20% gas spike — the thing everyone sees on street signs — contributes only 1 point.</p></div>
+  <p>Because food and energy prices whipsaw with weather and geopolitics, analysts also watch <dfn class="term" tabindex="0" data-def="Inflation excluding volatile food and energy prices, used to see the underlying trend.">core inflation</dfn> (everything except food and energy) to see the underlying trend. Headline is what households feel; core is what forecasts better.</p>
+  <p>Where does inflation come from? Three classic stories, and real episodes usually mix them. <dfn class="term" tabindex="0" data-def="Inflation caused by total spending growing faster than the economy can produce — too much money chasing too few goods.">Demand-pull</dfn>: total spending outruns what the economy can produce — too much money chasing too few goods (think stimulus checks meeting a reopening economy in 2021). <dfn class="term" tabindex="0" data-def="Inflation caused by rising input costs — oil, wages, shipping — pushing up prices even without extra demand.">Cost-push</dfn>: input costs jump and producers pass them on — the 1973 oil embargo quadrupled crude prices and inflation followed. And the monetary story: if the money supply grows persistently faster than output, prices eventually follow — Milton Friedman's famous line that inflation is "always and everywhere a monetary phenomenon" is the extreme version, and it becomes exactly true in every hyperinflation.</p>
+  <p>So why do the Fed, the ECB, and most modern central banks target roughly 2% inflation rather than zero? Four reasons. Measured inflation overstates true inflation slightly (indexes struggle with quality improvements and substitution), so 2% measured is closer to 0–1% real. A buffer above zero keeps the economy away from <dfn class="term" tabindex="0" data-def="A sustained fall in the general price level — the opposite of inflation.">deflation</dfn>. Mild inflation greases labor markets: firms can cut real wages by freezing nominal pay, which is easier than cutting paychecks outright. And it leaves the central bank room to push real interest rates below zero in a crisis — more in <a href="#s04">Section 4 (Central Banks)</a>.</p>
+  <p>Deflation sounds pleasant — falling prices! — and is anything but. If prices fall steadily, waiting becomes profitable: why buy today what's cheaper next month? Spending stalls, so firms cut prices and jobs, so spending stalls further. Worse, debts are fixed in dollars, so falling prices and wages make every mortgage and business loan <em>heavier</em> in real terms. That self-reinforcing spiral is the deflation trap; Japan spent much of the 1990s and 2000s stuck in a mild version of it, which is why central banks fear 0% far more than 3%.</p>
+
+  <div class="widget" id="s03-inflmachine">
+    <div class="widget-head">
+      <h4>Inflation time machine</h4>
+      <p>Set an average inflation rate and watch what it quietly does to cash. Try the presets — especially the third one.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Amount today ($)
+          <input type="number" class="num-in" id="s03-im-amt" min="1" max="1000000" step="1" value="100">
+        </label>
+        <label class="ctl">Years <output class="ctl-val" id="s03-im-yrs-out">30 yrs</output>
+          <input type="range" id="s03-im-yrs" min="1" max="50" step="1" value="30">
+        </label>
+        <label class="ctl">Avg. inflation <output class="ctl-val" id="s03-im-rate-out">3%</output>
+          <input type="range" id="s03-im-rate" min="0" max="15" step="0.5" value="3">
+        </label>
+      </div>
+      <div class="btn-group">
+        <button class="btn" data-rate="2">2% target</button>
+        <button class="btn" data-rate="7">1970s US ~7%</button>
+        <button class="btn" data-rate="50">Argentina-style 50%</button>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">Your cash will buy what this buys today</span><span class="stat-value" id="s03-im-pp" style="color:var(--down)">$41.20</span></div>
+        <div class="stat"><span class="stat-label">Needed then to match your amount today</span><span class="stat-value" id="s03-im-need">$242.73</span></div>
+        <div class="stat"><span class="stat-label">Purchasing power halves every</span><span class="stat-value" id="s03-im-half-stat">23 yrs</span></div>
+      </div>
+      <svg viewBox="0 0 720 300" role="img" aria-label="Curve showing the declining purchasing power of a fixed amount of cash over time at the chosen inflation rate.">
+        <line x1="60" y1="25" x2="695" y2="25" stroke-width="1" style="stroke:var(--grid)"></line>
+        <line x1="60" y1="82.5" x2="695" y2="82.5" stroke-width="1" style="stroke:var(--grid)"></line>
+        <line x1="60" y1="140" x2="695" y2="140" stroke-width="1" style="stroke:var(--grid)"></line>
+        <line x1="60" y1="197.5" x2="695" y2="197.5" stroke-width="1" style="stroke:var(--grid)"></line>
+        <line x1="60" y1="25" x2="60" y2="255" style="stroke:var(--axis)"></line>
+        <line x1="60" y1="255" x2="695" y2="255" style="stroke:var(--axis)"></line>
+        <text id="s03-im-y100" x="52" y="29" text-anchor="end" font-size="12" style="fill:var(--muted)">$100</text>
+        <text id="s03-im-y75" x="52" y="86.5" text-anchor="end" font-size="12" style="fill:var(--muted)">$75</text>
+        <text id="s03-im-y50" x="52" y="144" text-anchor="end" font-size="12" style="fill:var(--muted)">$50</text>
+        <text id="s03-im-y25" x="52" y="201.5" text-anchor="end" font-size="12" style="fill:var(--muted)">$25</text>
+        <text x="52" y="259" text-anchor="end" font-size="12" style="fill:var(--muted)">$0</text>
+        <path id="s03-im-area" d="" style="fill:var(--c1)" opacity="0.1"></path>
+        <path id="s03-im-path" d="" fill="none" stroke-width="2.5" style="stroke:var(--c1)"></path>
+        <g id="s03-im-half" display="none">
+          <line id="s03-im-halfline" x1="0" y1="140" x2="0" y2="255" stroke-width="1" stroke-dasharray="4 4" style="stroke:var(--muted)"></line>
+          <circle id="s03-im-halfdot" cx="0" cy="140" r="3.5" style="fill:var(--c1)"></circle>
+          <text id="s03-im-halflbl" x="0" y="130" text-anchor="middle" font-size="12" style="fill:var(--muted)"></text>
+        </g>
+        <circle id="s03-im-dot" cx="695" cy="160" r="5" style="fill:var(--c1)"></circle>
+        <text id="s03-im-endlbl" x="685" y="150" text-anchor="end" font-size="14" font-weight="600" style="fill:var(--ink)"></text>
+        <g id="s03-im-xt"></g>
+        <text x="378" y="296" text-anchor="middle" font-size="13" style="fill:var(--muted)">years from today</text>
+      </svg>
+      <p id="s03-im-sentence" style="color:var(--muted)">At 3% average inflation, in 30 years your $100.00 buys what $41.20 buys today. To match it, you would need $242.73.</p>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s03-inflmachine');
+    if (!root) return;
+    var amtIn = root.querySelector('#s03-im-amt');
+    var yrsIn = root.querySelector('#s03-im-yrs');
+    var yrsOut = root.querySelector('#s03-im-yrs-out');
+    var rateIn = root.querySelector('#s03-im-rate');
+    var rateOut = root.querySelector('#s03-im-rate-out');
+    var btns = root.querySelectorAll('button[data-rate]');
+    var ppEl = root.querySelector('#s03-im-pp');
+    var needEl = root.querySelector('#s03-im-need');
+    var halfEl = root.querySelector('#s03-im-half-stat');
+    var sentEl = root.querySelector('#s03-im-sentence');
+    var path = root.querySelector('#s03-im-path');
+    var area = root.querySelector('#s03-im-area');
+    var dot = root.querySelector('#s03-im-dot');
+    var endLbl = root.querySelector('#s03-im-endlbl');
+    var xtG = root.querySelector('#s03-im-xt');
+    var halfG = root.querySelector('#s03-im-half');
+    var halfLine = root.querySelector('#s03-im-halfline');
+    var halfDot = root.querySelector('#s03-im-halfdot');
+    var halfLbl = root.querySelector('#s03-im-halflbl');
+    var yLbls = {
+      1: root.querySelector('#s03-im-y100'),
+      0.75: root.querySelector('#s03-im-y75'),
+      0.5: root.querySelector('#s03-im-y50'),
+      0.25: root.querySelector('#s03-im-y25')
+    };
+    var SVGNS = 'http://www.w3.org/2000/svg';
+    var X0 = 60, X1 = 695, Y0 = 25, Y1 = 255;
+    var rate = 3;
+
+    function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, v)); }
+    function money(v) {
+      if (v < 0.01) return '< $0.01';
+      if (v < 1000) return '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return '$' + v.toLocaleString('en-US', { maximumFractionDigits: 0 });
+    }
+    function tickFmt(v) {
+      if (v >= 1e6) return '$' + (Math.round(v / 1e5) / 10) + 'M';
+      if (v >= 1e4) return '$' + Math.round(v / 1e3) + 'k';
+      if (v >= 1e3) return '$' + (Math.round(v / 100) / 10) + 'k';
+      return '$' + Math.round(v);
+    }
+    function rateTxt(r) { return (r % 1 === 0 ? r.toFixed(0) : r.toFixed(1)) + '%'; }
+    function hlTxt(h) { return (h >= 10 ? h.toFixed(0) : h.toFixed(1)) + ' yrs'; }
+
+    function update() {
+      var amount = parseFloat(amtIn.value);
+      if (!isFinite(amount)) amount = 100;
+      amount = clamp(amount, 1, 1000000);
+      var years = clamp(parseInt(yrsIn.value, 10) || 30, 1, 50);
+      var r = clamp(rate, 0, 200) / 100;
+      yrsOut.textContent = years + (years === 1 ? ' yr' : ' yrs');
+      rateOut.textContent = rateTxt(rate);
+
+      var factor = Math.pow(1 + r, years);
+      var pp = amount / factor;
+      var need = amount * factor;
+      var hl = r > 0 ? Math.log(2) / Math.log(1 + r) : Infinity;
+
+      ppEl.textContent = money(pp);
+      needEl.textContent = money(need);
+      ppEl.style.color = r > 0 ? 'var(--down)' : 'var(--ink)';
+      halfEl.textContent = isFinite(hl) ? hlTxt(hl) : 'never (0%)';
+      sentEl.textContent = 'At ' + rateTxt(rate) + ' average inflation, in ' + years +
+        (years === 1 ? ' year your ' : ' years your ') + money(amount) + ' buys what ' + money(pp) +
+        ' buys today. To match it, you would need ' + money(need) + '.';
+
+      yLbls[1].textContent = tickFmt(amount);
+      yLbls[0.75].textContent = tickFmt(0.75 * amount);
+      yLbls[0.5].textContent = tickFmt(0.5 * amount);
+      yLbls[0.25].textContent = tickFmt(0.25 * amount);
+
+      var N = 120, d = '', i, t, v, x, y;
+      for (i = 0; i <= N; i++) {
+        t = years * i / N;
+        v = amount / Math.pow(1 + r, t);
+        x = X0 + (X1 - X0) * t / years;
+        y = Y0 + (Y1 - Y0) * (1 - v / amount);
+        d += (i === 0 ? 'M' : ' L') + x.toFixed(1) + ' ' + y.toFixed(1);
+      }
+      path.setAttribute('d', d);
+      area.setAttribute('d', d + ' L' + X1 + ' ' + Y1 + ' L' + X0 + ' ' + Y1 + ' Z');
+
+      var ey = Y0 + (Y1 - Y0) * (1 - pp / amount);
+      dot.setAttribute('cx', X1);
+      dot.setAttribute('cy', ey.toFixed(1));
+      endLbl.setAttribute('y', (ey < 50 ? ey + 22 : ey - 12).toFixed(1));
+      endLbl.textContent = 'buys ' + money(pp);
+
+      while (xtG.firstChild) xtG.removeChild(xtG.firstChild);
+      var step = years <= 8 ? 1 : years <= 16 ? 2 : years <= 40 ? 5 : 10;
+      for (t = 0; t <= years; t += step) {
+        x = X0 + (X1 - X0) * t / years;
+        var tick = document.createElementNS(SVGNS, 'line');
+        tick.setAttribute('x1', x); tick.setAttribute('x2', x);
+        tick.setAttribute('y1', Y1); tick.setAttribute('y2', Y1 + 5);
+        tick.setAttribute('style', 'stroke:var(--axis)');
+        xtG.appendChild(tick);
+        var lab = document.createElementNS(SVGNS, 'text');
+        lab.setAttribute('x', x); lab.setAttribute('y', Y1 + 20);
+        lab.setAttribute('text-anchor', 'middle');
+        lab.setAttribute('font-size', '12');
+        lab.setAttribute('style', 'fill:var(--muted)');
+        lab.textContent = t;
+        xtG.appendChild(lab);
+      }
+
+      if (isFinite(hl) && hl <= years * 0.85) {
+        halfG.removeAttribute('display');
+        var hx = X0 + (X1 - X0) * hl / years;
+        halfLine.setAttribute('x1', hx.toFixed(1)); halfLine.setAttribute('x2', hx.toFixed(1));
+        halfDot.setAttribute('cx', hx.toFixed(1));
+        halfLbl.setAttribute('x', hx.toFixed(1));
+        halfLbl.setAttribute('text-anchor', hx > 560 ? 'end' : (hx < 130 ? 'start' : 'middle'));
+        halfLbl.textContent = 'halves in ~' + hlTxt(hl);
+      } else {
+        halfG.setAttribute('display', 'none');
+      }
+    }
+
+    function setActive(btn) {
+      for (var j = 0; j < btns.length; j++) btns[j].classList.remove('is-active');
+      if (btn) btn.classList.add('is-active');
+    }
+    for (var k = 0; k < btns.length; k++) {
+      btns[k].addEventListener('click', function () {
+        rate = parseFloat(this.getAttribute('data-rate'));
+        rateIn.value = Math.min(rate, 15);
+        setActive(this);
+        update();
+      });
+    }
+    rateIn.addEventListener('input', function () {
+      rate = clamp(parseFloat(rateIn.value) || 0, 0, 15);
+      setActive(null);
+      update();
+    });
+    yrsIn.addEventListener('input', update);
+    amtIn.addEventListener('input', update);
+    update();
+  })();
+  </script>
+
+  <p>Play with the presets and you'll feel the compounding viscerally: at the 2% target, $100 still buys $55 worth of today's goods after 30 years — a slow, planned-for leak. At the 7% America actually averaged across the 1970s, $100 shrinks to about $13 of buying power over 30 years. That's why "cash is safe" is only true in the short run — a theme we'll return to in <a href="#s07">Section 7 (Equities)</a> and <a href="#s08">Section 8 (Fixed Income)</a>.</p>
+  <p>And then there's <dfn class="term" tabindex="0" data-def="Extremely rapid inflation, conventionally over 50% per month, which destroys a currency's usefulness.">hyperinflation</dfn> — conventionally, inflation above 50% <em>per month</em>. In Weimar Germany in 1923, prices doubled roughly every three to four days at the peak; workers were paid twice daily and sprinted to spend wages before evening, and banknotes were cheaper than firewood. Zimbabwe in November 2008 hit an estimated 79 billion percent per month — prices doubling roughly every day — until the country simply abandoned its own currency. The mechanism is always the same: a government that can't tax or borrow prints money to pay its bills, everyone races to swap cash for anything real, and money stops doing its job (recall the three functions of money from <a href="#s01">Section 1</a> — hyperinflation kills all three). The "Argentina-style 50%" preset above is annual, not monthly — and even that halves your purchasing power every 1.7 years.</p>
+
+  <h3 id="s03-unemployment">Unemployment: one number, many stories</h3>
+  <p>The <dfn class="term" tabindex="0" data-def="The share of the labor force that is jobless and actively looking for work in the past four weeks.">unemployment rate</dfn> is the share of the <dfn class="term" tabindex="0" data-def="Everyone who is either employed or jobless but actively seeking work. Excludes students, retirees, and those not looking.">labor force</dfn> — not the population — that is jobless <em>and actively looking</em>. Both italicized conditions hide bodies. Retirees, full-time students, stay-at-home parents, and people who've given up searching aren't unemployed; they're simply not in the labor force at all.</p>
+  <p>Concrete version: imagine 100 working-age adults. 60 have jobs, 4 are searching, 36 are out of the labor force. The labor force is 64, so unemployment is 4 ÷ 64 = <strong>6.25%</strong>. Now suppose 2 of the searchers get demoralized and stop looking. Nobody found a job — but the labor force shrinks to 62, unemployed drops to 2, and the rate "improves" to 2 ÷ 62 = <strong>3.2%</strong>. The headline halved while the economy got slightly worse.</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall</p><p>Never read the unemployment rate alone. Always check the <dfn class="term" tabindex="0" data-def="The share of the working-age population that is either employed or actively looking for work.">labor-force participation rate</dfn> next to it — if unemployment fell but participation fell too, <dfn class="term" tabindex="0" data-def="People who want a job but stopped searching because they believe none is available; they are not counted as unemployed.">discouraged workers</dfn> may be doing the "improving." Broader measures like U-6 (which adds discouraged workers and part-timers who want full-time work) often tell a darker story than the headline U-3 rate.</p></div>
+  <p>Economists also sort unemployment by cause, because each type calls for a different fix. <dfn class="term" tabindex="0" data-def="Short-term unemployment from normal job switching and search — people between jobs by choice or timing.">Frictional</dfn> unemployment is people between jobs — a data scientist who quit Friday and starts interviews Monday. <dfn class="term" tabindex="0" data-def="Unemployment from a mismatch between workers' skills or location and the jobs available — the jobs exist, but not for them.">Structural</dfn> unemployment is a skills or geography mismatch — coal miners in a region where the new jobs are in data centers. <dfn class="term" tabindex="0" data-def="Unemployment caused by recessions — too little demand in the whole economy, so layoffs outpace hiring.">Cyclical</dfn> unemployment is the recession kind: demand collapses everywhere at once and layoffs sweep across industries.</p>
+  <p>This is why zero unemployment is neither achievable nor desirable. A healthy, dynamic economy always has churn — people quitting bad matches to search for better ones is how workers and jobs find each other, like retries in a matching algorithm. The rate consistent with "everyone who wants a job at prevailing wages can find one reasonably fast" is called the <dfn class="term" tabindex="0" data-def="The unemployment rate from normal frictional and structural churn alone, with no recession — roughly 4 to 5 percent in the US.">natural rate</dfn>, roughly 4–5% in the US. Below it, employers bid up wages and inflation pressure builds; above it, cyclical slack is wasting human potential. The Fed is legally tasked with balancing both sides — its "dual mandate," coming in <a href="#s04">Section 4</a>.</p>
+
+  <h3 id="s03-cycles">Business cycles: the economy's heartbeat</h3>
+  <p>Zoom out on any real GDP chart and you see a rising trend with a wobble around it. The wobble is the <dfn class="term" tabindex="0" data-def="The recurring, irregular pattern of expansion and contraction in economic activity around its long-run trend.">business cycle</dfn>: an <em>expansion</em> climbs to a <em>peak</em>, activity contracts through a <dfn class="term" tabindex="0" data-def="A significant, widespread decline in economic activity lasting more than a few months. Informal shorthand: two consecutive quarters of falling real GDP.">recession</dfn> to a <em>trough</em>, then recovery begins the next expansion. The cycle is recurring but not periodic — expansions have lasted anywhere from one year to over a decade (post-1945 US expansions average about five years; recessions about ten months). Anyone selling you a fixed-length "cycle clock" is selling astrology.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 380" role="img" aria-label="A wavy real GDP line around a rising dashed trend, with the peak, a shaded recession, and the trough labeled, plus numbered markers showing where leading, coincident, and lagging indicators turn.">
+      <line x1="50" y1="40" x2="50" y2="290" style="stroke:var(--axis)"></line>
+      <line x1="50" y1="290" x2="690" y2="290" style="stroke:var(--axis)"></line>
+      <text x="56" y="34" font-size="13" style="fill:var(--muted)">Real GDP</text>
+      <text x="688" y="284" text-anchor="end" font-size="13" style="fill:var(--muted)">Time</text>
+      <rect x="285" y="40" width="140" height="250" style="fill:var(--down)" opacity="0.09"></rect>
+      <line x1="60" y1="250" x2="670" y2="120" stroke-dasharray="6 5" style="stroke:var(--muted)"></line>
+      <path d="M60 258 C130 235, 190 160, 265 130 C285 122, 310 127, 355 185 C375 211, 395 242, 425 248 C460 255, 480 230, 520 195 C560 160, 610 120, 668 100" fill="none" stroke-width="2.5" style="stroke:var(--c1)"></path>
+      <circle cx="285" cy="126" r="4" style="fill:var(--ink)"></circle>
+      <circle cx="425" cy="248" r="4" style="fill:var(--ink)"></circle>
+      <text x="150" y="120" text-anchor="middle" font-size="14" style="fill:var(--muted)">Expansion</text>
+      <text x="285" y="106" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Peak</text>
+      <text x="357" y="62" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Recession</text>
+      <text x="425" y="272" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Trough</text>
+      <text x="545" y="130" text-anchor="middle" font-size="14" style="fill:var(--muted)">Recovery</text>
+      <text x="75" y="278" font-size="12" style="fill:var(--muted)">dashed = long-run trend (potential GDP)</text>
+      <circle cx="225" cy="146" r="9" style="fill:var(--surface);stroke:var(--accent)" stroke-width="1.5"></circle>
+      <text x="225" y="150" text-anchor="middle" font-size="12" font-weight="600" style="fill:var(--ink)">1</text>
+      <circle cx="310" cy="130" r="9" style="fill:var(--surface);stroke:var(--accent)" stroke-width="1.5"></circle>
+      <text x="310" y="134" text-anchor="middle" font-size="12" font-weight="600" style="fill:var(--ink)">2</text>
+      <circle cx="470" cy="240" r="9" style="fill:var(--surface);stroke:var(--accent)" stroke-width="1.5"></circle>
+      <text x="470" y="244" text-anchor="middle" font-size="12" font-weight="600" style="fill:var(--ink)">3</text>
+      <circle cx="58" cy="314" r="9" style="fill:var(--surface);stroke:var(--accent)" stroke-width="1.5"></circle>
+      <text x="58" y="318" text-anchor="middle" font-size="12" font-weight="600" style="fill:var(--ink)">1</text>
+      <text x="74" y="318" font-size="13" style="fill:var(--muted)">Leading — turn before the peak: yield curve, building permits, new orders, jobless claims</text>
+      <circle cx="58" cy="336" r="9" style="fill:var(--surface);stroke:var(--accent)" stroke-width="1.5"></circle>
+      <text x="58" y="340" text-anchor="middle" font-size="12" font-weight="600" style="fill:var(--ink)">2</text>
+      <text x="74" y="340" font-size="13" style="fill:var(--muted)">Coincident — turn with the economy: payrolls, industrial production, real income</text>
+      <circle cx="58" cy="358" r="9" style="fill:var(--surface);stroke:var(--accent)" stroke-width="1.5"></circle>
+      <text x="58" y="362" text-anchor="middle" font-size="12" font-weight="600" style="fill:var(--ink)">3</text>
+      <text x="74" y="362" font-size="13" style="fill:var(--muted)">Lagging — turn after: unemployment rate, CPI inflation (they confirm, not predict)</text>
+    </svg>
+    <figcaption><strong>Figure 3.2</strong> — The business cycle isn't a clock, but indicators fire in a reliable order: leading indicators bend before the peak, coincident ones define it, lagging ones confirm it after the fact.</figcaption>
+  </figure>
+  <p>Who decides when a recession officially happened? In the US it's the NBER (National Bureau of Economic Research), a committee of economists who date peaks and troughs using a dashboard of monthly data — payrolls, real income, industrial production, real spending — not the folk rule of "two negative GDP quarters." The catch: they rule only when the evidence is unambiguous, which means <em>after the fact</em>. The 2020 recession's end (April 2020) wasn't declared until July 2021 — fifteen months later. By the time a recession is official, markets have long since moved on.</p>
+  <p>That's why analysts obsess over indicator <em>timing</em>. <dfn class="term" tabindex="0" data-def="Data series that tend to turn before the overall economy does — useful for forecasting.">Leading indicators</dfn> (building permits, new factory orders, stock prices, jobless claims, the yield curve) tend to turn months before the economy. <dfn class="term" tabindex="0" data-def="Data series that move together with the overall economy, defining where it is right now.">Coincident indicators</dfn> (payrolls, industrial production) tell you where you are. <dfn class="term" tabindex="0" data-def="Data series that turn only after the economy has already turned — they confirm rather than predict.">Lagging indicators</dfn> (the unemployment rate, CPI inflation) confirm what already happened — unemployment often keeps <em>rising</em> well after recovery begins, because firms rehire cautiously.</p>
+  <p>The most famous leading indicator deserves its own sentence. The <dfn class="term" tabindex="0" data-def="The line of interest rates on government bonds across maturities, from 3 months to 30 years.">yield curve</dfn> plots government bond interest rates by maturity; normally long rates exceed short rates. When the curve <dfn class="term" tabindex="0" data-def="When short-term interest rates rise above long-term rates — historically a strong recession warning.">inverts</dfn> — short rates above long — bond investors are collectively betting the Fed will be cutting rates in the future, which usually means they expect a downturn. An inverted curve has preceded every US recession of the past six decades, typically by 6–24 months, with only one clear false alarm in the mid-1960s (and a long, hotly debated inversion in 2022–24 that was not followed by a recession on schedule). Why it works, and why it might stop working, is a <a href="#s08">Section 8 (Fixed Income)</a> story.</p>
+
+  <h3 id="s03-adas">AD–AS: one mental model for every shock</h3>
+  <p>You now have the dashboard: output, prices, jobs. What you need is a way to reason about how a shock — an oil spike, a stimulus bill, a pandemic — moves the needles. The workhorse model is aggregate demand and aggregate supply, and it's a deliberate echo of the supply-and-demand cross from <a href="#s02">Section 2</a>, with the whole economy on the axes: total real output on the x-axis, the overall price level on the y-axis.</p>
+  <p><dfn class="term" tabindex="0" data-def="Total spending on domestic output at each price level — the economy-wide demand curve, combining C, I, G, and NX.">Aggregate demand</dfn> (AD) is total spending — C + I + G + NX again, now drawn as a curve. It slopes down: a lower price level stretches money and wealth further and tends to come with lower interest rates, both of which coax out more spending. <dfn class="term" tabindex="0" data-def="Total output producers supply at each price level. Slopes up in the short run because wages and many prices adjust slowly.">Aggregate supply</dfn> (AS) slopes up in the short run for a very human reason: wages and many prices are sticky — renegotiated slowly — so when selling prices rise before costs catch up, producing more is temporarily profitable. In the long run wages catch up and output settles at the economy's potential, set by the productivity fundamentals from earlier.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="Two aggregate demand and aggregate supply panels: a rightward AD shift raises both output and prices; a leftward AS shift raises prices while output falls.">
+      <defs>
+        <marker id="s03-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0 0 L10 5 L0 10 Z" style="fill:var(--axis)"></path>
+        </marker>
+      </defs>
+      <text x="195" y="36" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Demand shock: stimulus (AD shifts right)</text>
+      <line x1="60" y1="50" x2="60" y2="280" style="stroke:var(--axis)"></line>
+      <line x1="60" y1="280" x2="330" y2="280" style="stroke:var(--axis)"></line>
+      <text x="48" y="60" font-size="13" style="fill:var(--muted)">P</text>
+      <text x="330" y="300" text-anchor="end" font-size="12" style="fill:var(--muted)">Real output Y</text>
+      <line x1="60" y1="175" x2="190" y2="175" stroke-dasharray="3 4" style="stroke:var(--grid)"></line>
+      <line x1="190" y1="175" x2="190" y2="280" stroke-dasharray="3 4" style="stroke:var(--grid)"></line>
+      <line x1="60" y1="157" x2="217" y2="157" stroke-dasharray="3 4" style="stroke:var(--grid)"></line>
+      <line x1="217" y1="157" x2="217" y2="280" stroke-dasharray="3 4" style="stroke:var(--grid)"></line>
+      <line x1="80" y1="90" x2="300" y2="260" stroke-width="2.5" style="stroke:var(--c1)"></line>
+      <line x1="130" y1="90" x2="330" y2="245" stroke-width="2.5" stroke-dasharray="7 5" style="stroke:var(--c1)"></line>
+      <line x1="80" y1="250" x2="300" y2="100" stroke-width="2.5" style="stroke:var(--c2)"></line>
+      <line x1="150" y1="140" x2="190" y2="140" marker-end="url(#s03-arr)" style="stroke:var(--axis)"></line>
+      <circle cx="190" cy="175" r="4.5" style="fill:var(--ink)"></circle>
+      <circle cx="217" cy="157" r="4.5" style="fill:var(--accent)"></circle>
+      <text x="295" y="276" text-anchor="middle" font-size="13" style="fill:var(--muted)">AD₁</text>
+      <text x="334" y="243" font-size="13" style="fill:var(--muted)">AD₂</text>
+      <text x="303" y="96" font-size="13" style="fill:var(--muted)">AS</text>
+      <text x="54" y="179" text-anchor="end" font-size="12" style="fill:var(--muted)">P₁</text>
+      <text x="54" y="161" text-anchor="end" font-size="12" style="fill:var(--muted)">P₂</text>
+      <text x="188" y="296" text-anchor="middle" font-size="12" style="fill:var(--muted)">Y₁</text>
+      <text x="219" y="296" text-anchor="middle" font-size="12" style="fill:var(--muted)">Y₂</text>
+      <text x="195" y="322" text-anchor="middle" font-size="13" style="fill:var(--muted)">Output up, prices up — a boom with inflation pressure</text>
+
+      <text x="565" y="36" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Supply shock: oil spike (AS shifts left)</text>
+      <line x1="430" y1="50" x2="430" y2="280" style="stroke:var(--axis)"></line>
+      <line x1="430" y1="280" x2="700" y2="280" style="stroke:var(--axis)"></line>
+      <text x="418" y="60" font-size="13" style="fill:var(--muted)">P</text>
+      <text x="700" y="300" text-anchor="end" font-size="12" style="fill:var(--muted)">Real output Y</text>
+      <line x1="430" y1="175" x2="560" y2="175" stroke-dasharray="3 4" style="stroke:var(--grid)"></line>
+      <line x1="560" y1="175" x2="560" y2="280" stroke-dasharray="3 4" style="stroke:var(--grid)"></line>
+      <line x1="430" y1="160" x2="541" y2="160" stroke-dasharray="3 4" style="stroke:var(--grid)"></line>
+      <line x1="541" y1="160" x2="541" y2="280" stroke-dasharray="3 4" style="stroke:var(--grid)"></line>
+      <line x1="450" y1="90" x2="670" y2="260" stroke-width="2.5" style="stroke:var(--c1)"></line>
+      <line x1="450" y1="250" x2="670" y2="100" stroke-width="2.5" style="stroke:var(--c2)"></line>
+      <line x1="430" y1="236" x2="640" y2="93" stroke-width="2.5" stroke-dasharray="7 5" style="stroke:var(--c2)"></line>
+      <line x1="590" y1="150" x2="563" y2="150" marker-end="url(#s03-arr)" style="stroke:var(--axis)"></line>
+      <circle cx="560" cy="175" r="4.5" style="fill:var(--ink)"></circle>
+      <circle cx="541" cy="160" r="4.5" style="fill:var(--accent)"></circle>
+      <text x="674" y="266" font-size="13" style="fill:var(--muted)">AD</text>
+      <text x="674" y="96" font-size="13" style="fill:var(--muted)">AS₁</text>
+      <text x="636" y="84" font-size="13" style="fill:var(--muted)">AS₂</text>
+      <text x="424" y="179" text-anchor="end" font-size="12" style="fill:var(--muted)">P₁</text>
+      <text x="424" y="164" text-anchor="end" font-size="12" style="fill:var(--muted)">P₂</text>
+      <text x="563" y="296" text-anchor="middle" font-size="12" style="fill:var(--muted)">Y₁</text>
+      <text x="538" y="296" text-anchor="middle" font-size="12" style="fill:var(--muted)">Y₂</text>
+      <text x="565" y="322" text-anchor="middle" font-size="13" style="fill:var(--muted)">Output down, prices up — stagflation</text>
+    </svg>
+    <figcaption><strong>Figure 3.3</strong> — The diagnostic power of AD–AS: demand shocks push output and prices in the <em>same</em> direction; supply shocks push them in <em>opposite</em> directions. Watching which way the pair moves tells you which shock hit.</figcaption>
+  </figure>
+  <p>Now every macro headline becomes a two-step question: which curve moved, and which way?</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Shock</th><th>Curve</th><th>Output</th><th>Prices</th></tr></thead>
+    <tbody>
+      <tr><td>Stimulus checks, tax cuts, rate cuts</td><td>AD shifts right</td><td class="td-num">↑</td><td class="td-num">↑</td></tr>
+      <tr><td>Oil spike, supply-chain breakdown, war</td><td>AS shifts left</td><td class="td-num">↓</td><td class="td-num">↑</td></tr>
+      <tr><td>Financial crisis, confidence collapse</td><td>AD shifts left</td><td class="td-num">↓</td><td class="td-num">↓</td></tr>
+      <tr><td>Pandemic lockdown</td><td>Both shift left at once</td><td class="td-num">↓↓</td><td class="td-num">mixed</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout co-real"><p class="co-label">Real world: 2020–2022 in one framework</p><p>The pandemic hit both curves: AS left (factories and services shut) and AD left (spending froze) — output cratered while prices barely moved at first. Then 2021 reversed the demand side violently: trillions in stimulus plus reopening shifted AD hard right while AS was still crippled by supply chains and, in 2022, an energy shock. Demand up plus supply down is the textbook recipe for the inflation surge to ~9% — and the model also explains why it faded as supply chains healed and the Fed leaned on demand.</p></div>
+  <p>The supply-shock case is the nasty one, and it earned its own word in the 1970s: <dfn class="term" tabindex="0" data-def="The miserable combination of stagnant output and high unemployment together with high inflation.">stagflation</dfn> — stagnation plus inflation. It broke the era's favorite empirical relationship, the <dfn class="term" tabindex="0" data-def="The observed inverse relationship between unemployment and inflation — which proved unstable when expectations and supply shocks shifted.">Phillips curve</dfn>: through the 1960s, US data traced a tidy trade-off (low unemployment came with higher inflation, and vice versa), and policymakers treated it like a menu. Then the 1973 oil shock shifted AS left and the dots jumped off the curve — high inflation <em>and</em> high unemployment at once, which the "menu" said was impossible.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="Scatter plot of US unemployment versus inflation: 1960s points trace a downward-sloping curve, while 1970s points sit far above and to the right of it, showing the Phillips curve breakdown.">
+      <line x1="70" y1="40" x2="70" y2="290" style="stroke:var(--axis)"></line>
+      <line x1="70" y1="290" x2="670" y2="290" style="stroke:var(--axis)"></line>
+      <line x1="70" y1="200.7" x2="670" y2="200.7" stroke-width="1" style="stroke:var(--grid)"></line>
+      <line x1="70" y1="111.4" x2="670" y2="111.4" stroke-width="1" style="stroke:var(--grid)"></line>
+      <text x="62" y="294" text-anchor="end" font-size="12" style="fill:var(--muted)">0%</text>
+      <text x="62" y="205" text-anchor="end" font-size="12" style="fill:var(--muted)">5%</text>
+      <text x="62" y="115" text-anchor="end" font-size="12" style="fill:var(--muted)">10%</text>
+      <text x="70" y="310" text-anchor="middle" font-size="12" style="fill:var(--muted)">3%</text>
+      <text x="270" y="310" text-anchor="middle" font-size="12" style="fill:var(--muted)">5%</text>
+      <text x="470" y="310" text-anchor="middle" font-size="12" style="fill:var(--muted)">7%</text>
+      <text x="670" y="310" text-anchor="middle" font-size="12" style="fill:var(--muted)">9%</text>
+      <text x="370" y="332" text-anchor="middle" font-size="13" style="fill:var(--muted)">Unemployment rate</text>
+      <text x="76" y="30" font-size="13" style="fill:var(--muted)">Inflation (CPI, year over year)</text>
+      <path d="M118 180 C135 235, 190 258, 300 268 C380 273, 420 274, 470 276" fill="none" stroke-width="2" stroke-dasharray="6 5" style="stroke:var(--c1)"></path>
+      <circle cx="440" cy="272" r="5" style="fill:var(--c1)"></circle>
+      <circle cx="320" cy="269" r="5" style="fill:var(--c1)"></circle>
+      <circle cx="340" cy="267" r="5" style="fill:var(--c1)"></circle>
+      <circle cx="290" cy="267" r="5" style="fill:var(--c1)"></circle>
+      <circle cx="220" cy="261" r="5" style="fill:var(--c1)"></circle>
+      <circle cx="150" cy="236" r="5" style="fill:var(--c1)"></circle>
+      <circle cx="160" cy="240" r="5" style="fill:var(--c1)"></circle>
+      <circle cx="130" cy="215" r="5" style="fill:var(--c1)"></circle>
+      <circle cx="120" cy="194" r="5" style="fill:var(--c1)"></circle>
+      <circle cx="418" cy="232" r="5" style="fill:var(--c1)"></circle>
+      <text x="430" y="236" font-size="13" style="fill:var(--muted)">1960s: a tidy trade-off</text>
+      <circle cx="260" cy="188" r="5" style="fill:var(--c2)"></circle>
+      <circle cx="360" cy="211" r="5" style="fill:var(--c2)"></circle>
+      <circle cx="260" cy="179" r="5" style="fill:var(--c2)"></circle>
+      <circle cx="330" cy="94" r="5" style="fill:var(--c2)"></circle>
+      <circle cx="620" cy="128" r="5" style="fill:var(--c2)"></circle>
+      <circle cx="540" cy="186" r="5" style="fill:var(--c2)"></circle>
+      <circle cx="380" cy="154" r="5" style="fill:var(--c2)"></circle>
+      <circle cx="350" cy="88" r="5" style="fill:var(--c2)"></circle>
+      <circle cx="480" cy="49" r="5" style="fill:var(--c2)"></circle>
+      <circle cx="78" cy="66" r="5" style="fill:var(--c2)"></circle>
+      <text x="90" y="70" font-size="13" style="fill:var(--muted)">1970s: high inflation AND high unemployment — stagflation</text>
+    </svg>
+    <figcaption><strong>Figure 3.4</strong> — In the 1960s, inflation and unemployment looked like a dial you could set. The 1970s supply shocks (and unanchored expectations) scattered the points and humbled a generation of policymakers.</figcaption>
+  </figure>
+  <details class="deep"><summary>Deep dive: why the Phillips curve broke — expectations</summary>
+    <p>Milton Friedman and Edmund Phelps predicted the breakdown <em>before</em> it happened, in 1968. Their argument: the trade-off only works while workers are fooled. Run the economy hot and inflation rises; workers eventually notice, demand raises to match, firms' cost advantage evaporates, and unemployment drifts back to its natural rate — but now with permanently higher inflation baked in. Formally, the expectations-augmented version is:</p>
+    <div class="formula">
+      <div class="formula-main">π = π<sup>e</sup> − b × (u − u*) + supply shocks</div>
+      <div class="formula-legend">π = inflation · π<sup>e</sup> = expected inflation · u = unemployment · u* = natural rate · b &gt; 0</div>
+    </div>
+    <p>The policy punchline: the curve is only a usable trade-off when expectations (π<sup>e</sup>) stay anchored. That is why modern central banks talk obsessively about "anchored expectations" and why they react so aggressively when surveys and market-implied inflation forecasts start drifting — once π<sup>e</sup> moves, you're fighting the 1970s again. The bond-market gauges of π<sup>e</sup> live in <a href="#s08">Section 8</a>.</p>
+  </details>
+
+  <h3 id="s03-releases">Reading macro data like an analyst</h3>
+  <p>Here's the part textbooks skip. In markets, macro data isn't trivia — it's a scheduled stream of events that reprice trillions of dollars within seconds of release. The key mechanic: prices already reflect the <dfn class="term" tabindex="0" data-def="The average forecast of surveyed economists for an upcoming data release — the number already priced into markets.">consensus estimate</dfn> before the number drops. So markets don't move on whether the data is good; they move on whether it beats or misses expectations. A "bad" jobs number that's less bad than forecast can spark a rally. (Why prices embed expectations is the subject of <a href="#s17">Section 17 (Market Efficiency)</a>.)</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Release</th><th>Cadence</th><th>Why markets care</th></tr></thead>
+    <tbody>
+      <tr><td>CPI</td><td>Monthly, 8:30 a.m. ET</td><td>Sets expectations for Fed rate moves; bonds, stocks, and FX reprice within seconds of a surprise.</td></tr>
+      <tr><td>Jobs report (payrolls + unemployment + wages)</td><td>First Friday, monthly</td><td>The single most-watched release; <dfn class="term" tabindex="0" data-def="Nonfarm payrolls: the monthly count of net jobs added in the US, excluding farm work — the headline of the jobs report.">nonfarm payrolls</dfn> is the headline number of the month.</td></tr>
+      <tr><td>PCE price index</td><td>Monthly</td><td>The Fed's <em>preferred</em> inflation gauge — less famous than CPI, more important to policymakers.</td></tr>
+      <tr><td>GDP (advance estimate)</td><td>Quarterly, revised twice</td><td>Backward-looking, so usually less explosive — unless it surprises on growth direction.</td></tr>
+      <tr><td>FOMC rate decision</td><td>8 meetings/year</td><td>The policy response itself — the star of <a href="#s04">Section 4</a>.</td></tr>
+      <tr><td>ISM manufacturing PMI</td><td>1st business day, monthly</td><td>Survey-based and early — one of the first reads on each month's cycle momentum.</td></tr>
+      <tr><td>Initial jobless claims</td><td>Weekly, Thursday</td><td>The most timely labor signal; noisy, so watch the 4-week average.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Two analyst habits to steal. First, always ask "versus what?" — a payrolls print of +180,000 means nothing until you know consensus was +200,000 (a miss) or +150,000 (a beat). Second, know the regime: in a "good news is bad news" market, a strong jobs report can sink stocks because it implies the Fed keeps rates high. The same number, opposite reaction, depending on what investors fear more — recession or inflation.</p>
+  <div class="callout co-you"><p class="co-label">Your edge</p><p>If you build models on macro data, respect two data-engineering realities. Releases get <em>revised</em> — payrolls are routinely restated by tens of thousands of jobs over the following two months — so backtesting on today's cleaned-up series quietly leaks the future. Serious quant shops use point-in-time ("vintage") datasets that store what was known on each date. And engineer features from <em>surprises</em> (actual minus consensus), not levels: the level was already priced.</p></div>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. Nominal GDP grew 6% last year while the GDP deflator rose 4%. Real growth was roughly…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">10%</button>
+        <button class="quiz-opt" data-correct>2%</button>
+        <button class="quiz-opt">6%</button>
+        <button class="quiz-opt">−2%</button>
+      </div>
+      <p class="quiz-explain">Real growth ≈ nominal growth minus inflation: exactly 1.06 ÷ 1.04 − 1 ≈ 1.9%, or 2% with the quick subtraction shortcut. Always strip out prices before calling something "growth."</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. Why do most central banks target about 2% inflation rather than 0%?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Because 2% maximizes government revenue from printing money</button>
+        <button class="quiz-opt">Because wages naturally grow at exactly 2%</button>
+        <button class="quiz-opt" data-correct>A buffer above zero avoids the deflation trap, offsets measurement bias, and leaves room to cut real rates in a crisis</button>
+        <button class="quiz-opt">Because inflation below 2% is impossible to measure</button>
+      </div>
+      <p class="quiz-explain">Zero leaves no safety margin: a small shock tips you into deflation, where falling prices raise real debt burdens and reward waiting instead of spending. A 2% cushion also absorbs the slight upward bias in measured inflation and greases nominal wage adjustment.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. The unemployment rate falls from 6.3% to 5.8%. Which scenario is consistent with a weaker economy?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-correct>Discouraged job-seekers stopped looking and dropped out of the labor force</button>
+        <button class="quiz-opt">More job-seekers found work</button>
+        <button class="quiz-opt">Employment grew faster than the labor force</button>
+        <button class="quiz-opt">Wage growth accelerated as firms competed for workers</button>
+      </div>
+      <p class="quiz-explain">The rate only counts people actively looking. If searchers give up, they exit the labor force and the rate falls even though nobody found a job — which is why analysts read the participation rate alongside the headline number.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. An inverted yield curve is best described as a ___ indicator.</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">lagging</button>
+        <button class="quiz-opt">coincident</button>
+        <button class="quiz-opt">meaningless</button>
+        <button class="quiz-opt" data-correct>leading</button>
+      </div>
+      <p class="quiz-explain">Inversion has preceded every US recession of the past six decades, typically by 6–24 months — the definition of a leading indicator. Lagging indicators like the unemployment rate only confirm turns after the fact.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. An oil price spike hits the economy. In the AD–AS framework, this…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">shifts AD right: output and prices both rise</button>
+        <button class="quiz-opt" data-correct>shifts short-run AS left: prices rise while output falls — stagflation</button>
+        <button class="quiz-opt">shifts AS right: prices fall and output rises</button>
+        <button class="quiz-opt">changes prices only; supply shocks never affect output</button>
+      </div>
+      <p class="quiz-explain">Oil is an input cost, so it moves the supply curve — leftward, since production gets more expensive at every price level. That pushes output and prices in opposite directions, the signature of a supply shock and of the 1970s.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>GDP = C + I + G + NX measures production, with US consumption ~68% of the total. Use <em>real</em> (inflation-adjusted) and <em>per-capita</em> versions for growth and living standards — and remember GDP ignores unpaid work, the environment, and distribution.</li>
+      <li>Growth compounds: 1.5% vs 3% per year turns identical countries into a 2.4× income gap within one lifetime. Long-run growth per person comes almost entirely from productivity.</li>
+      <li>Inflation is a weighted average of basket price changes (CPI). Central banks target ~2% as a buffer against the self-reinforcing deflation trap. Compounding cuts hard: at the 1970s' ~7%, $100 keeps only ~$13 of purchasing power over 30 years.</li>
+      <li>Hyperinflation (&gt;50% per month) is always a fiscal-printing story — Weimar 1923 and Zimbabwe 2008 destroyed their currencies within months.</li>
+      <li>The unemployment rate counts only active job-seekers: read it with labor-force participation, and remember some (frictional) unemployment is healthy churn.</li>
+      <li>Business cycles are recurring but not periodic. Leading indicators (yield curve, permits, claims) turn before the peak; lagging ones (unemployment, CPI) only confirm. NBER dates recessions long after the fact.</li>
+      <li>AD–AS is the diagnostic: demand shocks move output and prices together; supply shocks split them apart (stagflation). It explains 2020–22 in one picture.</li>
+      <li>Markets price the consensus in advance — data moves markets only by surprising, and revisions mean serious analysis needs point-in-time data.</li>
+    </ul>
+  </div>
+</section>

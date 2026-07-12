@@ -1,0 +1,457 @@
+<section class="lesson" id="s12" data-num="12" data-title="Ratio Analysis: Reading a Company Like a Pro">
+  <p class="eyebrow">Part III · Corporate Finance &amp; Accounting</p>
+  <h2>12. Ratio Analysis: Reading a Company Like a Pro</h2>
+  <p class="lede">In <a href="#s11">Section 11</a> you learned to read the three financial statements — the raw tables. Ratios are the queries you run against those tables, and by the end of this section you'll be able to size up a company's profitability, safety, efficiency, and price tag in about ten minutes.</p>
+
+  <h3 id="s12-why">Why ratios: the great normalizer</h3>
+  <p>Raw financial numbers are almost meaningless on their own. "This company earned $1.25 billion last year" — is that good? For a startup, spectacular. For Walmart, a catastrophe. The number only becomes information when you divide it by something: profit <em>per dollar of sales</em>, profit <em>per dollar of assets</em>, debt <em>per dollar of earnings</em>. Division strips out size, and once size is gone you can compare a corner grocer to a global chain, or this year's company to the same company a decade ago.</p>
+  <p>Two golden rules govern every ratio you will ever compute. <strong>Rule one: always compare against peers.</strong> A 2.5% net margin is dreadful for a software firm and perfectly healthy for a supermarket — every industry has its own gravity. <strong>Rule two: always compare against history.</strong> A company whose margin slid from 8% to 5% over three years is telling you a story that a single snapshot never could. A ratio in isolation, with no peer and no trend, is close to worthless.</p>
+  <p>And one rule about what ratios are <em>for</em>: they generate questions, not answers. If inventory turnover suddenly halves, the ratio doesn't tell you why — maybe demand collapsed, maybe management is deliberately stocking up before a price increase, maybe a new warehouse just opened. The ratio's job is to point your flashlight at the right paragraph of the 10-K. Analysts who treat ratios as verdicts get burned; analysts who treat them as anomaly detectors get promoted.</p>
+  <div class="callout co-you"><p class="co-label">Your edge: this is feature engineering</p><p>You already do this for a living. Raw statements are the source tables; ratios are derived features — normalized, scale-invariant, comparable across entities and time, exactly like converting raw counts to per-capita rates or click totals to click-through rates before feeding a model. Quant equity funds literally use these ratios as model inputs (<a href="#s18">Section 18</a>). The whole section is one big <code>feature_pipeline.py</code> for companies.</p></div>
+  <p>Throughout this section we'll follow two deliberately opposite companies: <strong>SteadyMart</strong>, a grocery chain ($50 billion of revenue, thin margins, warehouses full of inventory), and <strong>CloudNine</strong>, a SaaS firm ($2 billion of revenue, fat margins, no inventory at all). Same ratios, wildly different profiles — and that contrast is the fastest way to build intuition.</p>
+
+  <h3 id="s12-profit">Profitability: margins, ROA, ROE, ROIC</h3>
+  <p>Profitability ratios come in two families: profit <em>per dollar of revenue</em> (margins) and profit <em>per dollar of capital</em> (returns). The margins form a ladder down the income statement from <a href="#s11">Section 11</a>:</p>
+  <ul>
+    <li><dfn class="term" tabindex="0" data-def="Gross profit (revenue minus direct production costs) as a percentage of revenue.">Gross margin</dfn> = (Revenue − COGS) ÷ Revenue. What's left after the direct cost of the product itself. SteadyMart: (50,000 − 37,500) ÷ 50,000 = <strong>25%</strong>. CloudNine: (2,000 − 400) ÷ 2,000 = <strong>80%</strong> — serving one more customer costs a SaaS firm almost nothing.</li>
+    <li><dfn class="term" tabindex="0" data-def="Operating income as a share of revenue — profit after all day-to-day costs, before interest and tax.">Operating margin</dfn> = Operating income ÷ Revenue. After SG&amp;A, R&amp;D, depreciation. SteadyMart: 2,000 ÷ 50,000 = <strong>4%</strong>. CloudNine: 400 ÷ 2,000 = <strong>20%</strong>.</li>
+    <li><dfn class="term" tabindex="0" data-def="Net income as a share of revenue — the cents of final profit per dollar of sales.">Net margin</dfn> = Net income ÷ Revenue. The bottom line. SteadyMart: 1,250 ÷ 50,000 = <strong>2.5%</strong>. CloudNine: 300 ÷ 2,000 = <strong>15%</strong>.</li>
+  </ul>
+  <p>Now the returns family. <dfn class="term" tabindex="0" data-def="Return on assets: net income divided by total assets — profit per dollar of resources the company controls.">ROA</dfn> (net income ÷ total assets) asks how much profit each dollar of <em>stuff</em> produces: SteadyMart 1,250 ÷ 20,000 = 6.25%; CloudNine 300 ÷ 3,000 = 10%. <dfn class="term" tabindex="0" data-def="Return on equity: net income divided by shareholders equity — profit per dollar of the owners money.">ROE</dfn> (net income ÷ equity) asks how much each dollar of the <em>owners'</em> money earns: SteadyMart 1,250 ÷ 8,000 = 15.6%; CloudNine 300 ÷ 2,400 = 12.5%. Notice something strange: CloudNine crushes SteadyMart on every margin, yet SteadyMart's ROE is <em>higher</em>. Hold that thought — the DuPont decomposition below explains it.</p>
+  <p>The most important return of all is <dfn class="term" tabindex="0" data-def="Return on invested capital — after-tax operating profit per dollar of debt plus equity actually deployed in operations.">ROIC</dfn>, because it ignores financing tricks and measures the business engine itself:</p>
+  <div class="formula">
+    <div class="formula-main">ROIC = NOPAT ÷ Invested capital = EBIT × (1 − t) ÷ (Equity + Debt − Cash)</div>
+    <div class="formula-legend">NOPAT = <dfn class="term" tabindex="0" data-def="Net operating profit after tax — EBIT with taxes removed, ignoring financing effects.">net operating profit after tax</dfn> · t = tax rate · <dfn class="term" tabindex="0" data-def="Equity plus debt minus excess cash — the money actually deployed in the business.">invested capital</dfn> = all funding actually at work</div>
+  </div>
+  <p>SteadyMart: NOPAT = 2,000 × (1 − 0.23) ≈ 1,540; invested capital = 8,000 + 7,500 − 1,000 = 14,500; ROIC ≈ <strong>10.6%</strong>. CloudNine: NOPAT ≈ 308; invested capital = 2,400 + 200 − 1,200 = 1,400; ROIC ≈ <strong>22%</strong>. Here CloudNine's quality shows: it needs barely any capital to run.</p>
+  <div class="callout co-key"><p class="co-label">Key idea: ROIC vs the cost of capital is THE test</p><p>Every dollar a company invests has a price — the <dfn class="term" tabindex="0" data-def="The blended return that lenders and shareholders require for funding the company; often called WACC.">cost of capital</dfn>, the return its lenders and shareholders demand (formalized as WACC in <a href="#s14">Section 14</a>). A company creates value only when ROIC exceeds that hurdle. ROIC of 10.6% against an 8% cost of capital creates value; ROIC of 7% against 9% <em>destroys</em> value, and growing faster just destroys it faster. This single comparison is the spine of valuation in <a href="#s13">Section 13</a>.</p></div>
+  <figure class="fig">
+    <svg viewBox="0 0 720 330" role="img" aria-label="Horizontal bar chart of illustrative net margins by industry, from about 2 percent for grocery retail up to about 25 percent for enterprise software">
+      <line x1="190" y1="28" x2="190" y2="292" style="stroke:var(--axis)" stroke-width="1.5"></line>
+      <line x1="346.7" y1="28" x2="346.7" y2="292" style="stroke:var(--grid)" stroke-width="1"></line>
+      <line x1="503.3" y1="28" x2="503.3" y2="292" style="stroke:var(--grid)" stroke-width="1"></line>
+      <line x1="660" y1="28" x2="660" y2="292" style="stroke:var(--grid)" stroke-width="1"></line>
+      <text x="190" y="312" text-anchor="middle" font-size="13" style="fill:var(--muted)">0%</text>
+      <text x="346.7" y="312" text-anchor="middle" font-size="13" style="fill:var(--muted)">10%</text>
+      <text x="503.3" y="312" text-anchor="middle" font-size="13" style="fill:var(--muted)">20%</text>
+      <text x="660" y="312" text-anchor="middle" font-size="13" style="fill:var(--muted)">30%</text>
+      <text x="180" y="57" text-anchor="end" font-size="13.5" style="fill:var(--ink)">Grocery retail</text>
+      <rect x="190" y="42" width="31.3" height="24" rx="4" style="fill:var(--c1)"></rect>
+      <text x="229" y="59" font-size="13" style="fill:var(--ink)">~2%</text>
+      <text x="180" y="99" text-anchor="end" font-size="13.5" style="fill:var(--ink)">Airlines</text>
+      <rect x="190" y="84" width="62.7" height="24" rx="4" style="fill:var(--c1)"></rect>
+      <text x="261" y="101" font-size="13" style="fill:var(--ink)">~4%</text>
+      <text x="180" y="141" text-anchor="end" font-size="13.5" style="fill:var(--ink)">Auto makers</text>
+      <rect x="190" y="126" width="94" height="24" rx="4" style="fill:var(--c1)"></rect>
+      <text x="292" y="143" font-size="13" style="fill:var(--ink)">~6%</text>
+      <text x="180" y="183" text-anchor="end" font-size="13.5" style="fill:var(--ink)">Apparel retail</text>
+      <rect x="190" y="168" width="125.3" height="24" rx="4" style="fill:var(--c1)"></rect>
+      <text x="323" y="185" font-size="13" style="fill:var(--ink)">~8%</text>
+      <text x="180" y="225" text-anchor="end" font-size="13.5" style="fill:var(--ink)">Big pharma</text>
+      <rect x="190" y="210" width="266.3" height="24" rx="4" style="fill:var(--c1)"></rect>
+      <text x="464" y="227" font-size="13" style="fill:var(--ink)">~17%</text>
+      <text x="180" y="267" text-anchor="end" font-size="13.5" style="fill:var(--ink)">Enterprise software</text>
+      <rect x="190" y="252" width="391.7" height="24" rx="4" style="fill:var(--c2)"></rect>
+      <text x="590" y="269" font-size="13" style="fill:var(--ink)">~25%</text>
+    </svg>
+    <figcaption><strong>Figure 12.1</strong> — Illustrative net margins by industry. The same dollar of revenue yields wildly different profit, which is why golden rule one exists: never compare a margin across industry lines.</figcaption>
+  </figure>
+
+  <h3 id="s12-dupont">DuPont: taking ROE apart like an engineer</h3>
+  <p>ROE is the headline number shareholders watch, but it hides <em>how</em> the return was earned. In the 1910s an analyst at DuPont noticed you can factor it into three ratios that each tell a separate story — multiply revenue/revenue and assets/assets into the definition and the algebra telescopes:</p>
+  <div class="formula">
+    <div class="formula-main">ROE = <span class="frac"><span>Net income</span><span>Revenue</span></span> × <span class="frac"><span>Revenue</span><span>Assets</span></span> × <span class="frac"><span>Assets</span><span>Equity</span></span> = Margin × Turnover × Leverage</div>
+    <div class="formula-legend">margin = pricing power · <dfn class="term" tabindex="0" data-def="Revenue divided by total assets — how many dollars of sales each dollar of assets generates per year.">asset turnover</dfn> = asset efficiency · <dfn class="term" tabindex="0" data-def="Assets divided by equity, also called the equity multiplier — how much the balance sheet is amplified by borrowing.">leverage</dfn> = balance-sheet amplification</div>
+  </div>
+  <p>The classic contrast is a supermarket versus a luxury brand. A supermarket earns roughly 2% net margin but flips its asset base 3× a year and runs 3× leverage: 2% × 3.0 × 3.0 = <strong>18% ROE</strong>. A luxury handbag maker earns a 30% margin but turns its assets only 0.5× a year with modest 1.2× leverage: 30% × 0.5 × 1.2 = <strong>18% ROE</strong>. Identical destination, opposite routes — one is a volume machine, the other a pricing machine.</p>
+  <p>Our two companies replay the same story. SteadyMart: 2.5% × 2.50 × 2.50 = <strong>15.6%</strong>. CloudNine: 15% × 0.67 × 1.25 = <strong>12.5%</strong>. That's why the "worse" business had the higher ROE: it compensates for razor-thin margins with relentless turnover and a leveraged balance sheet. The decomposition also flags risk — an ROE built on the leverage lever can be inflated at will by borrowing, and it evaporates just as fast in a downturn. Two firms with the same ROE are <em>not</em> the same investment.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 320" role="img" aria-label="DuPont tree diagram splitting ROE into net margin, asset turnover, and leverage, with SteadyMart and CloudNine values under each branch">
+      <rect x="250" y="14" width="220" height="52" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)"></rect>
+      <text x="360" y="37" text-anchor="middle" font-size="16" font-weight="700" style="fill:var(--ink)">ROE</text>
+      <text x="360" y="56" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">Net income ÷ Equity</text>
+      <path d="M360 66 L360 88 M130 88 L590 88 M130 88 L130 110 M360 88 L360 110 M590 88 L590 110" fill="none" style="stroke:var(--axis)" stroke-width="1.5"></path>
+      <rect x="30" y="110" width="200" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <text x="130" y="135" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Net margin</text>
+      <text x="130" y="155" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">Net income ÷ Revenue</text>
+      <text x="245" y="146" text-anchor="middle" font-size="17" style="fill:var(--ink-2)">×</text>
+      <rect x="260" y="110" width="200" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <text x="360" y="135" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Asset turnover</text>
+      <text x="360" y="155" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">Revenue ÷ Assets</text>
+      <text x="475" y="146" text-anchor="middle" font-size="17" style="fill:var(--ink-2)">×</text>
+      <rect x="490" y="110" width="200" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <text x="590" y="135" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Leverage</text>
+      <text x="590" y="155" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">Assets ÷ Equity</text>
+      <text x="130" y="198" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--c1)">2.5%</text>
+      <text x="360" y="198" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--c1)">2.50×</text>
+      <text x="590" y="198" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--c1)">2.50×</text>
+      <text x="130" y="222" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--c2)">15.0%</text>
+      <text x="360" y="222" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--c2)">0.67×</text>
+      <text x="590" y="222" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--c2)">1.25×</text>
+      <text x="360" y="262" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--c1)">SteadyMart: 2.5% × 2.50 × 2.50 = 15.6% ROE — the volume-and-leverage route</text>
+      <text x="360" y="290" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--c2)">CloudNine: 15.0% × 0.67 × 1.25 = 12.5% ROE — the pure-margin route</text>
+    </svg>
+    <figcaption><strong>Figure 12.2</strong> — The DuPont tree. Two companies reach similar ROE through completely different levers; the decomposition tells you which lever is doing the work — and leverage is the lever that bites back.</figcaption>
+  </figure>
+
+  <h3 id="s12-liquidity">Liquidity and solvency: can it pay its bills, and can it survive?</h3>
+  <p><dfn class="term" tabindex="0" data-def="Ability to meet short-term obligations with assets that convert quickly to cash.">Liquidity</dfn> asks whether the company can cover the next twelve months of bills; <dfn class="term" tabindex="0" data-def="Ability to survive long term — whether earnings and assets can support the total debt load.">solvency</dfn> asks whether the whole capital structure is sustainable. Lenders — the people you met in <a href="#s08">Section 8 (Fixed Income)</a> — live and die by these ratios, and they hard-code them into loan contracts as <dfn class="term" tabindex="0" data-def="A promise in a loan contract, often a ratio threshold the borrower must maintain or the loan becomes immediately due.">covenants</dfn>.</p>
+  <p>The short-term pair: the <dfn class="term" tabindex="0" data-def="Current assets divided by current liabilities — can near-term assets cover the next years bills?">current ratio</dfn> (current assets ÷ current liabilities) and the stricter <dfn class="term" tabindex="0" data-def="Cash plus receivables, divided by current liabilities — a liquidity test that ignores inventory.">quick ratio</dfn>, which throws out inventory because you can't always sell it quickly at full price. SteadyMart: current = 4,700 ÷ 4,500 = 1.04, quick = (1,000 + 700) ÷ 4,500 = 0.38. CloudNine: both = 1,600 ÷ 400 = 4.0. On paper SteadyMart looks scary — but a grocer converts inventory to cash daily, so a low ratio is normal for the industry. Golden rule one again: thresholds are industry-relative. The gap between the two ratios is essentially <dfn class="term" tabindex="0" data-def="Current assets minus current liabilities — the buffer that funds day-to-day operations.">working capital</dfn> tied up in inventory.</p>
+  <p>The long-term set, in the order a credit analyst checks them:</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Ratio</th><th>Formula</th><th>Rule-of-thumb thresholds lenders use</th><th class="td-num">SteadyMart</th><th class="td-num">CloudNine</th></tr></thead>
+    <tbody>
+      <tr><td>Debt / equity</td><td>Total debt ÷ equity</td><td>&lt; 1.0 conservative; &gt; 2.0 aggressive (varies by industry)</td><td class="td-num">0.94</td><td class="td-num">0.08</td></tr>
+      <tr><td>Net debt / EBITDA</td><td>(<dfn class="term" tabindex="0" data-def="Total debt minus cash — what the company would owe if it used its cash to pay debt down today.">Net debt</dfn>) ÷ <dfn class="term" tabindex="0" data-def="Earnings before interest, taxes, depreciation and amortization — a rough proxy for operating cash generation.">EBITDA</dfn></td><td>&lt; 2× conservative; 2–3× typical investment grade; &gt; 4–5× leveraged / high-yield territory</td><td class="td-num">2.3×</td><td class="td-num">net cash</td></tr>
+      <tr><td>Interest coverage</td><td>EBIT ÷ interest expense</td><td>&gt; 4–5× comfortable; 2–3× on watch; &lt; 1.5× distress</td><td class="td-num">5.3×</td><td class="td-num">40×</td></tr>
+    </tbody>
+  </table></div>
+  <p>Work one through: SteadyMart's net debt is 7,500 − 1,000 = 6,500, and EBITDA is 2,000 + 800 = 2,800, so net debt ÷ EBITDA ≈ 2.3× — roughly "it would take 2.3 years of gross operating earnings to repay all debt." That sits comfortably in investment-grade territory. <dfn class="term" tabindex="0" data-def="EBIT divided by interest expense — how many times over operating profit covers the interest bill.">Interest coverage</dfn> of 2,000 ÷ 375 = 5.3× means operating profit could shrink by four-fifths before interest becomes unpayable. CloudNine holds more cash than debt (net debt = 200 − 1,200 = −1,000): a lender's dream, though shareholders may ask why all that idle cash isn't earning its cost of capital.</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall: liquidity ≠ solvency</p><p>A company can be liquid but insolvent (plenty of cash today, hopeless debt load long-term) or solvent but illiquid (valuable assets, no cash this quarter — the classic bank-run shape from <a href="#s06">Section 6</a>). Firms almost always die of illiquidity first: the cash runs out before the balance sheet formally fails. Check both, always.</p></div>
+
+  <h3 id="s12-efficiency">Efficiency and the cash conversion cycle</h3>
+  <p>Efficiency ratios measure how fast a company spins its working capital. Three clocks matter. <dfn class="term" tabindex="0" data-def="COGS divided by average inventory — how many times a year the shelf is fully sold and restocked.">Inventory turnover</dfn> (COGS ÷ inventory) counts how many times a year the shelves are cleared: SteadyMart does 37,500 ÷ 3,000 = 12.5 turns, i.e. goods sit for <dfn class="term" tabindex="0" data-def="Days inventory outstanding: 365 divided by inventory turnover — average days goods sit before being sold.">DIO</dfn> = 365 ÷ 12.5 ≈ 29 days. <dfn class="term" tabindex="0" data-def="Days sales outstanding — the average number of days customers take to pay their invoices.">DSO</dfn> (receivables ÷ revenue × 365) counts how long customers take to pay: SteadyMart's shoppers pay at the register, so DSO ≈ 5 days; CloudNine invoices enterprises on slow terms, so DSO = 400 ÷ 2,000 × 365 = 73 days. <dfn class="term" tabindex="0" data-def="Days payables outstanding — the average number of days the company takes to pay its own suppliers.">DPO</dfn> (payables ÷ COGS × 365) counts how long the company takes to pay its <em>own</em> suppliers: SteadyMart stretches to about 39 days.</p>
+  <p>Chain the clocks together and you get the single most underrated ratio in finance, the <dfn class="term" tabindex="0" data-def="DIO + DSO minus DPO — the number of days between paying suppliers and collecting cash from customers.">cash conversion cycle</dfn>:</p>
+  <div class="formula">
+    <div class="formula-main">CCC = DIO + DSO − DPO</div>
+    <div class="formula-legend">days your cash is trapped = days goods sit + days customers owe you − days you owe suppliers</div>
+  </div>
+  <p>SteadyMart: 29.2 + 5.1 − 38.9 = <strong>−4.6 days</strong>. Read that timeline carefully: it buys groceries on day 0, sells them around day 29, collects by day 34 — and doesn't pay its supplier until day 39. Customers' cash arrives <em>before</em> the supplier's bill leaves. CloudNine, despite its beautiful margins, runs 0 + 73 − 54.8 ≈ <strong>+18 days</strong>: every dollar of new sales temporarily <em>consumes</em> cash while invoices age.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 270" role="img" aria-label="Timeline of SteadyMart's cash conversion cycle: inventory sits 29 days, customers pay by day 34, suppliers are paid on day 39, so cash arrives five days before it leaves">
+      <text x="60" y="58" font-size="13" style="fill:var(--ink)">Inventory on the shelf — DIO 29.2 d</text>
+      <rect x="60" y="64" width="389" height="16" rx="4" style="fill:var(--c1)"></rect>
+      <text x="449" y="94" font-size="13" style="fill:var(--ink)">Customer pays — DSO 5.1 d</text>
+      <rect x="449" y="100" width="68" height="16" rx="4" style="fill:var(--c3)"></rect>
+      <circle cx="517" cy="108" r="5" style="fill:var(--accent)"></circle>
+      <text x="527" y="113" font-size="13" font-weight="600" style="fill:var(--accent)">cash IN · day 34</text>
+      <text x="60" y="134" font-size="13" style="fill:var(--ink)">Supplier credit — DPO 38.9 d</text>
+      <rect x="60" y="140" width="519" height="16" rx="4" style="fill:var(--c2)"></rect>
+      <circle cx="579" cy="148" r="5" style="fill:var(--down)"></circle>
+      <text x="589" y="153" font-size="13" font-weight="600" style="fill:var(--down)">cash OUT · day 39</text>
+      <line x1="60" y1="182" x2="660" y2="182" style="stroke:var(--axis)" stroke-width="1.5"></line>
+      <line x1="60" y1="182" x2="60" y2="188" style="stroke:var(--axis)" stroke-width="1.5"></line>
+      <line x1="193" y1="182" x2="193" y2="188" style="stroke:var(--axis)" stroke-width="1.5"></line>
+      <line x1="327" y1="182" x2="327" y2="188" style="stroke:var(--axis)" stroke-width="1.5"></line>
+      <line x1="460" y1="182" x2="460" y2="188" style="stroke:var(--axis)" stroke-width="1.5"></line>
+      <line x1="593" y1="182" x2="593" y2="188" style="stroke:var(--axis)" stroke-width="1.5"></line>
+      <text x="60" y="204" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">day 0</text>
+      <text x="193" y="204" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">10</text>
+      <text x="327" y="204" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">20</text>
+      <text x="460" y="204" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">30</text>
+      <text x="593" y="204" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">40</text>
+      <path d="M517 214 L517 226 L579 226 L579 214" fill="none" style="stroke:var(--accent)" stroke-width="1.5"></path>
+      <text x="360" y="252" text-anchor="middle" font-size="13.5" font-weight="600" style="fill:var(--accent)">Cash arrives 5 days before it leaves: CCC = 29.2 + 5.1 − 38.9 = −4.6 days</text>
+    </svg>
+    <figcaption><strong>Figure 12.3</strong> — SteadyMart's cash conversion cycle. Because supplier payment (day 39) comes after customer collection (day 34), suppliers are effectively financing the stores.</figcaption>
+  </figure>
+  <div class="callout co-real"><p class="co-label">Real world: Amazon's negative-CCC superpower</p><p>For most of its history Amazon has run a CCC around <em>minus</em> 20 to 30 days: customers pay by card instantly, inventory turns fast, and suppliers wait two to three months. Every incremental sale therefore <em>generates</em> float — an interest-free loan from suppliers that grows automatically with revenue. That float helped fund Amazon's expansion for decades with less need for outside capital. A negative CCC means growth feeds cash instead of eating it, which is why analysts treat it as a structural superpower.</p></div>
+
+  <h3 id="s12-market">Market ratios: what the price tag says</h3>
+  <p>Everything so far used only the statements. Market ratios add one outside ingredient — the stock price from <a href="#s07">Section 7</a> — and ask: what are investors paying for all this? SteadyMart trades at a market cap of 20,000; CloudNine at 9,000.</p>
+  <ul>
+    <li><dfn class="term" tabindex="0" data-def="Price-to-earnings: market cap divided by net income (or price per share over EPS) — dollars paid per dollar of annual profit.">P/E</dfn> = price ÷ earnings. SteadyMart: 20,000 ÷ 1,250 = <strong>16×</strong>. CloudNine: 9,000 ÷ 300 = <strong>30×</strong>. The market pays almost twice as much per dollar of CloudNine's profit — it's pricing in growth and that 22% ROIC. Best for stable, profitable firms; meaningless when earnings are negative or temporarily depressed.</li>
+    <li>P/B = price ÷ <dfn class="term" tabindex="0" data-def="The equity value recorded on the balance sheet — assets minus liabilities, also called shareholders equity.">book value</dfn>. SteadyMart 2.5×, CloudNine 3.75×. Most useful for banks and insurers, whose assets are financial and marked close to reality; least useful for firms whose real assets (brands, code) never hit the balance sheet.</li>
+    <li>EV/EBITDA = <dfn class="term" tabindex="0" data-def="Enterprise value: market cap plus net debt — the price of the whole business, both the owners and the lenders claims.">enterprise value</dfn> ÷ EBITDA. EV adds net debt to market cap, so the ratio is capital-structure-neutral — ideal for comparing firms with different debt loads, and the workhorse of buyout analysis. SteadyMart: (20,000 + 6,500) ÷ 2,800 ≈ 9.5×. CloudNine: (9,000 − 1,000) ÷ 460 ≈ 17.4×.</li>
+    <li><dfn class="term" tabindex="0" data-def="Free cash flow divided by market cap — the cash return per dollar of stock price; the inverse of price-to-FCF.">FCF yield</dfn> = free cash flow ÷ market cap. SteadyMart: 1,150 ÷ 20,000 = 5.75%; CloudNine: 350 ÷ 9,000 ≈ 3.9%. The hardest multiple to fake, because it's built on cash (remember <a href="#s11">Section 11</a>: cash is the ground truth).</li>
+    <li><dfn class="term" tabindex="0" data-def="Annual dividends divided by the share price — the cash income component of a stocks return.">Dividend yield</dfn> = dividends ÷ price. SteadyMart pays 500, so 2.5%; CloudNine pays nothing, reinvesting everything at its 22% ROIC — which, given the ROIC-vs-cost-of-capital test, is exactly what it should do.</li>
+  </ul>
+  <p>A crucial reframe before <a href="#s13">Section 13</a>: a multiple is not a valuation, it's shorthand for one. "30× earnings" is only cheap or expensive relative to the growth, ROIC, and risk behind it. Valuation is the discipline of checking whether the multiple is justified; ratios just tell you which multiples deserve the interrogation.</p>
+
+  <div class="widget" id="s12-ratiolab">
+    <div class="widget-head">
+      <h4>Two-company ratio lab: SteadyMart vs CloudNine</h4>
+      <p>Same two companies, five lenses. Click through the ratio families and watch the DuPont view explain how a 2.5%-margin grocer out-ROEs an 80%-gross-margin SaaS firm. All figures in $ millions.</p>
+    </div>
+    <div class="widget-body">
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Mini-financials ($M)</th><th class="td-num">SteadyMart (grocery)</th><th class="td-num">CloudNine (SaaS)</th></tr></thead>
+        <tbody>
+          <tr><td>Revenue</td><td class="td-num">50,000</td><td class="td-num">2,000</td></tr>
+          <tr><td>COGS</td><td class="td-num">37,500</td><td class="td-num">400</td></tr>
+          <tr><td>Operating income (EBIT)</td><td class="td-num">2,000</td><td class="td-num">400</td></tr>
+          <tr><td>EBITDA</td><td class="td-num">2,800</td><td class="td-num">460</td></tr>
+          <tr><td>Interest expense</td><td class="td-num">375</td><td class="td-num">10</td></tr>
+          <tr><td>Net income</td><td class="td-num">1,250</td><td class="td-num">300</td></tr>
+          <tr><td>Cash</td><td class="td-num">1,000</td><td class="td-num">1,200</td></tr>
+          <tr><td>Receivables</td><td class="td-num">700</td><td class="td-num">400</td></tr>
+          <tr><td>Inventory</td><td class="td-num">3,000</td><td class="td-num">0</td></tr>
+          <tr><td>Total assets</td><td class="td-num">20,000</td><td class="td-num">3,000</td></tr>
+          <tr><td>Current assets / current liabilities</td><td class="td-num">4,700 / 4,500</td><td class="td-num">1,600 / 400</td></tr>
+          <tr><td>Accounts payable (within CL)</td><td class="td-num">4,000</td><td class="td-num">60</td></tr>
+          <tr><td>Total debt</td><td class="td-num">7,500</td><td class="td-num">200</td></tr>
+          <tr><td>Shareholders' equity</td><td class="td-num">8,000</td><td class="td-num">2,400</td></tr>
+          <tr><td>Market cap</td><td class="td-num">20,000</td><td class="td-num">9,000</td></tr>
+          <tr><td>Free cash flow / dividends</td><td class="td-num">1,150 / 500</td><td class="td-num">350 / 0</td></tr>
+        </tbody>
+      </table></div>
+      <div class="btn-group">
+        <button class="btn is-active" data-view="0">Profitability</button>
+        <button class="btn" data-view="1">DuPont</button>
+        <button class="btn" data-view="2">Liquidity &amp; solvency</button>
+        <button class="btn" data-view="3">Efficiency</button>
+        <button class="btn" data-view="4">Market</button>
+      </div>
+      <svg id="s12-lab-svg" viewBox="0 0 720 552" role="img" aria-label="Side-by-side horizontal bars comparing SteadyMart and CloudNine on the selected ratio family"></svg>
+      <p id="s12-lab-note" style="color:var(--ink-2)"></p>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s12-ratiolab');
+    if (!root) return;
+    var svg = root.querySelector('#s12-lab-svg');
+    var noteEl = root.querySelector('#s12-lab-note');
+    var btns = root.querySelectorAll('.btn-group .btn');
+
+    var F = {
+      a: { rev: 50000, cogs: 37500, ebit: 2000, da: 800, intr: 375, tax: 375, ni: 1250,
+           cash: 1000, ar: 700, inv: 3000, assets: 20000, ca: 4700, cl: 4500, ap: 4000,
+           debt: 7500, eq: 8000, mcap: 20000, fcf: 1150, div: 500 },
+      b: { rev: 2000, cogs: 400, ebit: 400, da: 60, intr: 10, tax: 90, ni: 300,
+           cash: 1200, ar: 400, inv: 0, assets: 3000, ca: 1600, cl: 400, ap: 60,
+           debt: 200, eq: 2400, mcap: 9000, fcf: 350, div: 0 }
+    };
+    function ebitda(c) { return c.ebit + c.da; }
+    function roic(c) {
+      var pretax = c.ebit - c.intr;
+      var rate = pretax > 0 ? c.tax / pretax : 0;
+      var invCap = c.eq + c.debt - c.cash;
+      return invCap > 0 ? c.ebit * (1 - rate) / invCap * 100 : 0;
+    }
+    function neg(s) { return s.replace('-', '−'); }
+    function pct(v) { return neg(v.toFixed(1)) + '%'; }
+    function x1f(v) { return neg(v.toFixed(1)) + '×'; }
+    function x2f(v) { return neg(v.toFixed(2)) + '×'; }
+    function dys(v) { return neg(v.toFixed(1)) + ' days'; }
+    function ndFmt(v) { return v < 0 ? x2f(v) + ' (net cash)' : x2f(v); }
+
+    var A = F.a, B = F.b;
+    var dioA = 365 * A.inv / A.cogs, dsoA = 365 * A.ar / A.rev, dpoA = 365 * A.ap / A.cogs;
+    var dsoB = 365 * B.ar / B.rev, dpoB = 365 * B.ap / B.cogs;
+
+    var VIEWS = [
+      { rows: [
+          { n: 'Gross margin', a: (A.rev - A.cogs) / A.rev * 100, b: (B.rev - B.cogs) / B.rev * 100, f: pct },
+          { n: 'Operating margin', a: A.ebit / A.rev * 100, b: B.ebit / B.rev * 100, f: pct },
+          { n: 'Net margin', a: A.ni / A.rev * 100, b: B.ni / B.rev * 100, f: pct },
+          { n: 'ROA', a: A.ni / A.assets * 100, b: B.ni / B.assets * 100, f: pct },
+          { n: 'ROE', a: A.ni / A.eq * 100, b: B.ni / B.eq * 100, f: pct },
+          { n: 'ROIC', a: roic(A), b: roic(B), f: pct }
+        ],
+        note: 'CloudNine wins every margin and earns 22% on invested capital, yet SteadyMart squeezes out the higher ROE. Profit per dollar of sales is not profit per dollar of equity — switch to the DuPont view to see why.' },
+      { rows: [
+          { n: 'Net margin', a: A.ni / A.rev * 100, b: B.ni / B.rev * 100, f: pct },
+          { n: '× Asset turnover', a: A.rev / A.assets, b: B.rev / B.assets, f: x2f },
+          { n: '× Leverage (assets/equity)', a: A.assets / A.eq, b: B.assets / B.eq, f: x2f },
+          { n: '= ROE', a: A.ni / A.eq * 100, b: B.ni / B.eq * 100, f: pct }
+        ],
+        note: 'Nearly the same ROE, built from opposite levers: SteadyMart multiplies a razor-thin 2.5% margin by 2.5× turnover and 2.5× leverage; CloudNine gets there almost entirely on margin. Same output, very different risk.' },
+      { rows: [
+          { n: 'Current ratio', a: A.ca / A.cl, b: B.ca / B.cl, f: x2f },
+          { n: 'Quick ratio', a: (A.cash + A.ar) / A.cl, b: (B.cash + B.ar) / B.cl, f: x2f },
+          { n: 'Debt / equity', a: A.debt / A.eq, b: B.debt / B.eq, f: x2f },
+          { n: 'Net debt / EBITDA', a: (A.debt - A.cash) / ebitda(A), b: (B.debt - B.cash) / ebitda(B), f: ndFmt },
+          { n: 'Interest coverage', a: A.ebit / A.intr, b: B.ebit / B.intr, f: x1f }
+        ],
+        note: 'SteadyMart runs lean and levered — normal for a grocer whose inventory turns into cash daily. CloudNine holds more cash than debt and covers interest 40 times over: a lender would sleep very well.' },
+      { rows: [
+          { n: 'Inventory turnover', a: A.cogs / A.inv, b: null, f: x1f, naB: 'n/a — no inventory' },
+          { n: 'Days sales outstanding', a: dsoA, b: dsoB, f: dys },
+          { n: 'Days payables outstanding', a: dpoA, b: dpoB, f: dys },
+          { n: 'Cash conversion cycle', a: dioA + dsoA - dpoA, b: 0 + dsoB - dpoB, f: dys }
+        ],
+        note: 'SteadyMart collects from shoppers around day 34 but pays suppliers at day 39 — a negative cash cycle, so growth generates float. CloudNine waits 73 days on enterprise invoices, so growth temporarily consumes cash.' },
+      { rows: [
+          { n: 'P/E', a: A.mcap / A.ni, b: B.mcap / B.ni, f: x1f },
+          { n: 'P/B', a: A.mcap / A.eq, b: B.mcap / B.eq, f: x2f },
+          { n: 'EV / EBITDA', a: (A.mcap + A.debt - A.cash) / ebitda(A), b: (B.mcap + B.debt - B.cash) / ebitda(B), f: x1f },
+          { n: 'FCF yield', a: A.fcf / A.mcap * 100, b: B.fcf / B.mcap * 100, f: pct },
+          { n: 'Dividend yield', a: A.div / A.mcap * 100, b: B.div / B.mcap * 100, f: pct }
+        ],
+        note: 'Investors pay 30× CloudNine’s earnings vs 16× SteadyMart’s — the market is pricing faster growth and that 22% ROIC. Whether that premium is justified is exactly the question Section 13 answers.' }
+    ];
+
+    function bar(v, baseX, scale, y, colorVar, fmt, naText) {
+      if (v === null || v === undefined) {
+        return '<text x="' + (baseX + 8) + '" y="' + (y + 13) + '" font-size="13" style="fill:var(--muted)">' + naText + '</text>';
+      }
+      var w = Math.abs(v) * scale;
+      var x = v >= 0 ? baseX : baseX - w;
+      var s = '<rect x="' + x.toFixed(1) + '" y="' + y + '" width="' + w.toFixed(1) + '" height="17" rx="3" style="fill:var(--' + colorVar + ')"></rect>';
+      if (v >= 0) {
+        s += '<text x="' + (baseX + w + 8).toFixed(1) + '" y="' + (y + 13) + '" font-size="13" style="fill:var(--ink)">' + fmt(v) + '</text>';
+      } else {
+        s += '<text x="' + (x - 8).toFixed(1) + '" y="' + (y + 13) + '" text-anchor="end" font-size="13" style="fill:var(--ink)">' + fmt(v) + '</text>';
+      }
+      return s;
+    }
+
+    function render(idx) {
+      var view = VIEWS[idx];
+      var rows = view.rows;
+      var top = 40, rowH = 84;
+      var h = top + rows.length * rowH + 8;
+      svg.setAttribute('viewBox', '0 0 720 ' + h);
+      var s = '';
+      s += '<rect x="175" y="10" width="14" height="14" rx="3" style="fill:var(--c1)"></rect>';
+      s += '<text x="196" y="22" font-size="13" style="fill:var(--ink-2)">SteadyMart (grocery)</text>';
+      s += '<rect x="390" y="10" width="14" height="14" rx="3" style="fill:var(--c2)"></rect>';
+      s += '<text x="411" y="22" font-size="13" style="fill:var(--ink-2)">CloudNine (SaaS)</text>';
+      rows.forEach(function (r, i) {
+        var y0 = top + i * rowH;
+        if (i > 0) {
+          s += '<line x1="8" y1="' + y0 + '" x2="712" y2="' + y0 + '" style="stroke:var(--grid)" stroke-width="1"></line>';
+        }
+        s += '<text x="8" y="' + (y0 + 19) + '" font-size="13.5" font-weight="600" style="fill:var(--ink)">' + r.n + '</text>';
+        var vals = [];
+        if (r.a !== null && r.a !== undefined) vals.push(r.a);
+        if (r.b !== null && r.b !== undefined) vals.push(r.b);
+        if (!vals.length) vals = [1];
+        var minV = Math.min(0, Math.min.apply(null, vals));
+        var maxV = Math.max(0, Math.max.apply(null, vals));
+        var span = maxV - minV;
+        if (span <= 0) span = 1;
+        var scale = 445 / span;
+        var baseX = 175 + (0 - minV) * scale;
+        s += '<line x1="' + baseX.toFixed(1) + '" y1="' + (y0 + 26) + '" x2="' + baseX.toFixed(1) + '" y2="' + (y0 + 74) + '" style="stroke:var(--axis)" stroke-width="1"></line>';
+        s += bar(r.a, baseX, scale, y0 + 30, 'c1', r.f, r.naA || 'n/a');
+        s += bar(r.b, baseX, scale, y0 + 52, 'c2', r.f, r.naB || 'n/a');
+      });
+      svg.innerHTML = s;
+      noteEl.textContent = view.note;
+    }
+
+    Array.prototype.forEach.call(btns, function (btn) {
+      btn.addEventListener('click', function () {
+        Array.prototype.forEach.call(btns, function (b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+        var idx = parseInt(btn.getAttribute('data-view'), 10);
+        if (isNaN(idx) || idx < 0 || idx >= VIEWS.length) idx = 0;
+        render(idx);
+      });
+    });
+    render(0);
+  })();
+  </script>
+
+  <h3 id="s12-quality">Earnings quality and red flags: a forensic mini-checklist</h3>
+  <p>Every ratio above trusts the reported numbers. But <a href="#s11">Section 11</a> taught you that accounting runs on <dfn class="term" tabindex="0" data-def="Revenue or expense recorded when earned or incurred, not when the cash actually moves.">accruals</dfn> — management judgment calls about when revenue is earned and costs are incurred. <dfn class="term" tabindex="0" data-def="How closely reported profits track real, repeatable cash generation rather than accounting choices.">Earnings quality</dfn> is the question of how much judgment is propping up the bottom line, and a short forensic checklist catches most of the classic games:</p>
+  <ul>
+    <li><strong>Net income growing while operating cash flow shrinks.</strong> Profits are an opinion; cash is a fact. When the two diverge for several quarters, the "profit" is increasingly made of accruals — book revenue that hasn't been collected, or costs that haven't been recognized. This single check would have flagged Enron years early.</li>
+    <li><strong>Receivables growing faster than revenue.</strong> If sales rise 10% but receivables rise 30%, the company is either extending desperate credit terms or <dfn class="term" tabindex="0" data-def="Shoving product onto distributors at period end so revenue can be booked early — borrowing sales from next quarter.">channel stuffing</dfn> — borrowing next quarter's sales to make this quarter's number. Watch DSO trend upward.</li>
+    <li><strong>Serial "one-time" charges.</strong> A restructuring charge every single year is not one-time; it's a recurring cost that management wants you to exclude. Compare "adjusted" earnings to plain GAAP earnings — a persistently widening gap is a tell.</li>
+    <li><strong>Aggressive capitalization.</strong> When a company chooses to <dfn class="term" tabindex="0" data-def="To record a cost as a long-lived asset expensed over years, instead of as an immediate expense.">capitalize</dfn> everyday costs, expenses vanish from the income statement into the balance sheet, inflating today's profit. WorldCom capitalized $3.8 billion of routine network fees this way — for a while, it worked.</li>
+    <li><strong>Inventory outrunning sales.</strong> Stock piling up faster than revenue usually precedes markdowns and margin pain — the turnover ratio sniffs it out before management admits it.</li>
+  </ul>
+  <p>Notice that every flag is itself a ratio or a comparison of growth rates — CFO ÷ net income, ΔAR ÷ Δrevenue, adjusted ÷ GAAP earnings. Forensic accounting is ratio analysis with a suspicious mind. None of these flags proves fraud; each one earns the company a spot on your "read the footnotes" list.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 350" role="img" aria-label="A checklist of six earnings-quality red flags arranged as warning cards">
+      <rect x="16" y="14" width="336" height="96" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <circle cx="38" cy="40" r="9" opacity="0.18" style="fill:var(--down)"></circle>
+      <text x="38" y="45" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--down)">!</text>
+      <text x="56" y="45" font-size="13.5" font-weight="600" style="fill:var(--ink)">Profits up, cash down</text>
+      <text x="56" y="68" font-size="12.5" style="fill:var(--muted)">Net income rises while operating cash flow</text>
+      <text x="56" y="86" font-size="12.5" style="fill:var(--muted)">falls: earnings may be accruals, not cash.</text>
+      <rect x="368" y="14" width="336" height="96" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <circle cx="390" cy="40" r="9" opacity="0.18" style="fill:var(--down)"></circle>
+      <text x="390" y="45" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--down)">!</text>
+      <text x="408" y="45" font-size="13.5" font-weight="600" style="fill:var(--ink)">Receivables outrun revenue</text>
+      <text x="408" y="68" font-size="12.5" style="fill:var(--muted)">AR up 30% on sales up 10% hints at channel</text>
+      <text x="408" y="86" font-size="12.5" style="fill:var(--muted)">stuffing or desperate credit terms.</text>
+      <rect x="16" y="126" width="336" height="96" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <circle cx="38" cy="152" r="9" opacity="0.18" style="fill:var(--down)"></circle>
+      <text x="38" y="157" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--down)">!</text>
+      <text x="56" y="157" font-size="13.5" font-weight="600" style="fill:var(--ink)">Serial one-time charges</text>
+      <text x="56" y="180" font-size="12.5" style="fill:var(--muted)">A restructuring charge every year is not</text>
+      <text x="56" y="198" font-size="12.5" style="fill:var(--muted)">one-time; it is a recurring cost in disguise.</text>
+      <rect x="368" y="126" width="336" height="96" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <circle cx="390" cy="152" r="9" opacity="0.18" style="fill:var(--down)"></circle>
+      <text x="390" y="157" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--down)">!</text>
+      <text x="408" y="157" font-size="13.5" font-weight="600" style="fill:var(--ink)">Aggressive capitalization</text>
+      <text x="408" y="180" font-size="12.5" style="fill:var(--muted)">Everyday costs parked on the balance sheet</text>
+      <text x="408" y="198" font-size="12.5" style="fill:var(--muted)">inflate profit today (see WorldCom).</text>
+      <rect x="16" y="238" width="336" height="96" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <circle cx="38" cy="264" r="9" opacity="0.18" style="fill:var(--down)"></circle>
+      <text x="38" y="269" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--down)">!</text>
+      <text x="56" y="269" font-size="13.5" font-weight="600" style="fill:var(--ink)">Inventory piling up</text>
+      <text x="56" y="292" font-size="12.5" style="fill:var(--muted)">Inventory growing faster than sales often</text>
+      <text x="56" y="310" font-size="12.5" style="fill:var(--muted)">precedes markdowns and margin pain.</text>
+      <rect x="368" y="238" width="336" height="96" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <circle cx="390" cy="264" r="9" opacity="0.18" style="fill:var(--down)"></circle>
+      <text x="390" y="269" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--down)">!</text>
+      <text x="408" y="269" font-size="13.5" font-weight="600" style="fill:var(--ink)">Governance smoke</text>
+      <text x="408" y="292" font-size="12.5" style="fill:var(--muted)">Auditor changes, delayed filings, sudden</text>
+      <text x="408" y="310" font-size="12.5" style="fill:var(--muted)">CFO exits: the scorekeepers are leaving.</text>
+    </svg>
+    <figcaption><strong>Figure 12.4</strong> — The forensic mini-checklist. Each flag is a divergence between two numbers that should move together; one flag means read the footnotes, several mean walk away.</figcaption>
+  </figure>
+
+  <details class="deep"><summary>Deep dive: when ratios break</summary>
+    <p>Every ratio has failure modes, and knowing them separates users from tourists. <strong>Negative equity:</strong> a company that has bought back more stock than it ever earned (Home Depot and Starbucks have both been here) can have <em>negative</em> book equity, making ROE and debt/equity mathematically meaningless — the denominators flip sign. Use ROIC and net debt/EBITDA instead. <strong>Negative earnings:</strong> P/E is undefined for loss-makers; analysts fall back on EV/Sales or forward earnings estimates, each with its own hazards. <strong>EBITDA skepticism:</strong> EBITDA ignores capital expenditure entirely, which is why Warren Buffett quips that managements touting EBITDA are hoping you'll forget that depreciation is a real cost — a telecom that must replace its network every seven years cannot pay creditors with EBITDA. <strong>Point-in-time denominators:</strong> balance-sheet items are snapshots, so a retailer's year-end inventory (measured after the holiday sell-down) understates its true average; careful analysts use averages of beginning and ending balances. The pattern: whenever a ratio looks absurd, check whether a denominator is small, negative, or unrepresentative before drawing any conclusion.</p>
+  </details>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. Firm A has 10% net margin, 1.5× asset turnover, 1.0× leverage. Firm B has 2% margin, 2.5× turnover, 3.0× leverage. Both show 15% ROE. Which statement is most accurate?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">They are equivalent investments, since ROE is identical</button>
+        <button class="quiz-opt" data-correct>Firm B's ROE leans heavily on leverage, so the same return carries more balance-sheet risk</button>
+        <button class="quiz-opt">Firm B is more profitable because its turnover is higher</button>
+      </div>
+      <p class="quiz-explain">DuPont shows the levers: A earns its 15% with no leverage at all, while B multiplies a thin margin by 3× borrowed money (2% × 2.5 × 3.0 = 15%). B's ROE would collapse fastest in a downturn, when leverage cuts both ways.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. A company earns 7% ROIC while its cost of capital is 9%, and it's reinvesting heavily to grow revenue 20% a year. What is it doing to shareholder value?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Creating value — any positive ROIC is profitable growth</button>
+        <button class="quiz-opt">Neutral — growth and returns offset each other</button>
+        <button class="quiz-opt" data-correct>Destroying value — and the fast growth makes the destruction faster</button>
+      </div>
+      <p class="quiz-explain">Value is created only when ROIC exceeds the cost of capital. Earning 7% on money that costs 9% loses 2 cents per dollar invested, so pouring more capital in at that spread just scales up the loss.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. A retailer has a cash conversion cycle of −8 days. What does that mean?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">It pays suppliers 8 days before receiving goods, which drains cash</button>
+        <button class="quiz-opt">Its inventory is obsolete and being written down</button>
+        <button class="quiz-opt" data-correct>It collects cash from customers about 8 days before it pays suppliers, so suppliers effectively finance its operations</button>
+        <button class="quiz-opt">It is insolvent, since a cycle cannot be negative</button>
+      </div>
+      <p class="quiz-explain">Negative CCC means DPO exceeds DIO + DSO: money comes in before it goes out. Growth then generates interest-free float rather than consuming cash — the Amazon-style superpower.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. Net income has grown 15% a year for three years, but operating cash flow has fallen each year and DSO keeps climbing. The most likely explanation?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-correct>Earnings are increasingly built on accruals — booked revenue that isn't being collected — a classic quality red flag</button>
+        <button class="quiz-opt">The company is simply paying down debt faster</button>
+        <button class="quiz-opt">Depreciation is rising, which lowers cash flow but not net income</button>
+      </div>
+      <p class="quiz-explain">Rising DSO plus profits diverging from cash means revenue is being recognized well ahead of collection — possibly channel stuffing. (Note the third option has it backwards: depreciation lowers net income, not operating cash flow.)</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. You want to compare two similar manufacturers, one debt-free and one financed 60% with debt. Which multiple compares their operating businesses most cleanly?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">P/E, because earnings are the bottom line</button>
+        <button class="quiz-opt" data-correct>EV/EBITDA, because enterprise value includes debt and EBITDA sits above interest expense</button>
+        <button class="quiz-opt">Dividend yield, because it measures cash returned</button>
+        <button class="quiz-opt">P/B, because assets are what factories are made of</button>
+      </div>
+      <p class="quiz-explain">P/E is distorted by capital structure — the levered firm's earnings are reduced by interest while its equity is smaller. EV/EBITDA prices the whole business (equity plus net debt) against profit measured before financing costs, making the two comparable.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>Ratios normalize away size — they are engineered features derived from raw statements. Always compare against peers and against the company's own history, and treat every ratio as a question generator, not a verdict.</li>
+      <li>Margins (gross → operating → net) measure profit per dollar of sales; ROA, ROE, and ROIC measure profit per dollar of capital. ROIC versus the cost of capital is the single test of whether a company creates value.</li>
+      <li>DuPont factors ROE into margin × turnover × leverage: a 2%-margin supermarket and a 30%-margin luxury house can post identical ROE through opposite levers — and ROE built on leverage is the fragile kind.</li>
+      <li>Lenders live on liquidity and solvency ratios: quick ratio near 1, net debt/EBITDA under ~3×, and interest coverage above ~4–5× are the classic comfort zones, all industry-dependent.</li>
+      <li>The cash conversion cycle (DIO + DSO − DPO) counts the days cash is trapped in operations; a negative CCC means suppliers finance the business and growth generates float instead of consuming cash.</li>
+      <li>Market multiples are shorthand valuations: P/E for stable earners, P/B for banks, EV/EBITDA across capital structures, FCF yield when you want the number hardest to fake.</li>
+      <li>Earnings quality checks are ratios too: cash flow diverging from net income, receivables outrunning revenue, serial one-time charges, and aggressive capitalization are the four flags that catch most accounting games.</li>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,364 @@
+<section class="lesson" id="s17" data-num="17" data-title="Market Efficiency, Behavioral Finance and Crises">
+  <p class="eyebrow">Part IV · Investing &amp; Risk</p>
+  <h2>17. Market Efficiency, Behavioral Finance and Crises</h2>
+  <p class="lede">Are markets a coldly rational pricing machine, or a crowd of anxious primates with spreadsheets? The honest answer is "both, at different times," and this section teaches you to tell which regime you're in — so you can respect the efficiency that makes beating the market hard, catalog the biases that make it possible, and read a crisis like the 2008 crash as the predictable end of a story you've now seen the shape of.</p>
+
+  <h3 id="s17-emh">What efficiency really claims (and what it doesn't)</h3>
+  <p>Start with the idea that organizes the whole field. The <dfn class="term" tabindex="0" data-def="The theory that asset prices already reflect available information, so it is hard to earn above-market returns without taking more risk.">efficient market hypothesis</dfn> (EMH), formalized by Eugene Fama in 1970, says that market prices already reflect the information available about an asset. The intuition is a competition argument, not a faith statement: if a $100 stock were obviously worth $130, thousands of profit-hungry traders would buy it until the gap closed. The very act of exploiting a mispricing destroys it. So by the time <em>you</em> notice a free lunch, someone with faster data has already eaten it.</p>
+  <p>Fama split the claim into three strengths, nested like Russian dolls. The <dfn class="term" tabindex="0" data-def="The claim that prices already reflect all past price and volume data, so chart-reading cannot beat the market.">weak form</dfn> says prices reflect all <em>past prices and volume</em> — so <dfn class="term" tabindex="0" data-def="Forecasting prices from charts of past prices and trading volume.">technical analysis</dfn>, reading charts for patterns, can't systematically win, because prices follow something close to a <dfn class="term" tabindex="0" data-def="A process whose next step is unpredictable from past steps; price changes are essentially unforecastable noise.">random walk</dfn>. The <dfn class="term" tabindex="0" data-def="The claim that prices reflect all public information, so analyzing public news and filings cannot beat the market.">semi-strong form</dfn> says prices reflect all <em>public</em> information — news, filings, earnings — so <dfn class="term" tabindex="0" data-def="Estimating an asset's fair value from public data like earnings, cash flows, and the balance sheet.">fundamental analysis</dfn> of public data can't reliably win either. The <dfn class="term" tabindex="0" data-def="The claim that prices reflect all information, even private or insider knowledge.">strong form</dfn> says prices reflect <em>everything</em>, even private information — which is plainly false, since <dfn class="term" tabindex="0" data-def="Trading on material non-public information; illegal in most markets precisely because it is profitable.">insider trading</dfn> is illegal precisely because it's profitable.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 380" role="img" aria-label="Three nested rectangles showing the efficient market hypothesis forms: an outer strong form containing all information, a middle semi-strong form for public information, and an inner weak form for past prices, each labeled with the strategy it defeats">
+      <rect x="40" y="40" width="640" height="310" rx="10" fill="none" style="stroke:var(--border)" stroke-width="1.5"/>
+      <rect x="95" y="105" width="530" height="210" rx="9" fill="none" style="stroke:var(--border)" stroke-width="1.5"/>
+      <rect x="160" y="170" width="400" height="110" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+      <text x="360" y="66" text-anchor="middle" font-size="15" font-weight="700" style="fill:var(--ink)">Strong form</text>
+      <text x="360" y="86" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">all information, even private / insider — kills the insider's edge</text>
+      <text x="360" y="130" text-anchor="middle" font-size="15" font-weight="700" style="fill:var(--ink)">Semi-strong form</text>
+      <text x="360" y="150" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">all public info — kills fundamental analysis</text>
+      <text x="360" y="207" text-anchor="middle" font-size="15" font-weight="700" style="fill:var(--ink)">Weak form</text>
+      <text x="360" y="227" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">past prices &amp; volume</text>
+      <text x="360" y="247" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">→ kills technical analysis</text>
+      <text x="360" y="335" text-anchor="middle" font-size="12" style="fill:var(--muted)">each larger doll is a stronger, harder-to-believe claim</text>
+    </svg>
+    <figcaption><strong>Figure 17.1</strong> — The three forms nest: strong implies semi-strong implies weak. Evidence broadly supports weak and semi-strong efficiency for liquid markets; strong-form efficiency is false, which is why insider trading is a crime.</figcaption>
+  </figure>
+  <p>Now the part everyone gets wrong. Efficiency does <strong>not</strong> claim prices are always <em>right</em>. It claims prices are always <em>unpredictable given what's known</em> — a very different thing. An efficient price is the market's best unbiased guess, and unbiased guesses are wrong all the time; they just aren't wrong in a direction you could have bet on beforehand. The 2008 prices were "efficient" in the sense that no one had a costless, obvious way to profit, and catastrophically wrong in the sense that they embodied a collective delusion about housing. Efficiency is about the absence of easy money, not the presence of wisdom.</p>
+  <p>There's also a beautiful logical crack at the center of strict EMH, pointed out by Sanford Grossman and Joseph Stiglitz in 1980. If prices already reflected all information for free, no one would bother paying for research — why spend money to learn what the price already tells you? But if nobody does research, prices <em>can't</em> reflect information, because information only enters prices when someone trades on it. So perfectly efficient markets are self-defeating.</p>
+  <div class="callout co-key"><p class="co-label">Key idea: someone has to be paid to do the homework</p><p>The <dfn class="term" tabindex="0" data-def="The argument that fully efficient markets are impossible, because if prices reflected all information for free, no one would be paid to gather it.">Grossman-Stiglitz paradox</dfn> resolves the puzzle: real markets are <em>efficiently inefficient</em>. They stay mispriced by just enough to pay the analysts, quants, and arbitrageurs whose trading keeps them mostly efficient. Efficiency isn't a switch; it's an equilibrium where the reward for finding mispricings exactly covers the cost of finding them. The homework has to pay, or it doesn't get done.</p></div>
+
+  <h3 id="s17-evidence">The evidence, both ways</h3>
+  <p>Here is the strongest fact in favor of efficiency, and it should unsettle any aspiring stock-picker. Over long horizons, the large majority of professional <dfn class="term" tabindex="0" data-def="Investment management that tries to beat the market by selecting securities or timing trades.">active managers</dfn> — highly paid people whose entire job is beating the market — fail to beat a cheap <dfn class="term" tabindex="0" data-def="A fund that simply holds every stock in an index like the S&amp;P 500, aiming to match the market at rock-bottom cost.">index fund</dfn> that just buys everything. Standard &amp; Poor's SPIVA scorecards find that over 20-year windows, roughly 90% of active US large-cap funds underperform the <a href="#s07">S&amp;P 500</a> after fees. This is exactly what EMH predicts: if you can't reliably pick winners, the winning move is to stop trying and own the whole haystack cheaply. It's also why <dfn class="term" tabindex="0" data-def="Return above what the market or a risk model would predict; the holy grail active managers hunt for.">alpha</dfn> — return above the market — is so hard to find and so envied.</p>
+  <p>And yet. The academic record is littered with <dfn class="term" tabindex="0" data-def="A persistent, documented pattern of returns that a strict efficient-market model says should not exist.">anomalies</dfn> — patterns that shouldn't exist if prices were a clean random walk, yet stubbornly do. Two are famous enough to name. <dfn class="term" tabindex="0" data-def="The tendency of assets that have outperformed over the past 3–12 months to keep outperforming in the near term.">Momentum</dfn>: Jegadeesh and Titman showed that buying the past 6–12 months' winners and shorting the losers earned roughly 1% per month for decades — the market's own inertia. <dfn class="term" tabindex="0" data-def="The tendency of a stock to keep drifting in the direction of an earnings surprise for weeks after the announcement.">Post-earnings-announcement drift</dfn> (PEAD): a company beats earnings, jumps on the day, and then <em>keeps</em> drifting upward for weeks, as if the market digests good news in slow motion. Both say prices don't incorporate information instantly and perfectly.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example: momentum, sized</p><p>Suppose the top-decile momentum portfolio returns +1% per month and the bottom decile −0.1%, and you go long the winners, short the losers. Your monthly spread is 1.1%. Compounded over 12 months that's (1.011)<sup>12</sup> − 1 ≈ 14.1% a year before costs — a genuinely large edge. The catch: momentum occasionally suffers violent crashes (it lost about 30% in a few months of 2009 as beaten-down stocks snapped back), so the excess return is partly compensation for that ugly tail. Free money it is not.</p></div>
+  <p>So which is it — efficient or not? The uncomfortable, correct answer is that you can rarely prove it either way, because of a subtlety Fama himself flagged. Any test of "did this strategy beat the market?" is really a test of <em>two</em> things at once: whether the market is inefficient, <em>and</em> whether the risk model you used to define "the market return" is correct. If momentum "beats the market," maybe the market is inefficient — or maybe momentum is just exposed to some risk factor your model forgot to charge for, and you were paid fairly for hidden danger. This is the <dfn class="term" tabindex="0" data-def="Any test of market efficiency is simultaneously a test of the asset-pricing model used to define normal returns, so a rejection could mean either is wrong.">joint-hypothesis problem</dfn>, and it means "the market is inefficient" and "our risk model is incomplete" are almost impossible to tell apart from returns data alone.</p>
+  <div class="callout co-you"><p class="co-label">Your edge: this is just an identifiability problem</p><p>If you've fit models, you know this ghost well. When two parameters only ever appear as a product or sum, the data can't separate them — the likelihood surface has a ridge, not a peak. The joint-hypothesis problem is exactly that: "inefficiency" and "missing risk factor" are non-identified from returns alone. The way forward is the same as in your world — bring in <em>independent</em> evidence (natural experiments, transaction-level data, the behavioral mechanism itself) rather than trying to torture returns into confessing.</p></div>
+
+  <h3 id="s17-biases">The bias catalog and prospect theory</h3>
+  <p>If prices sometimes misbehave, the reason lives in the traders' heads. <dfn class="term" tabindex="0" data-def="The study of how real, psychologically normal humans make financial decisions, and how their systematic errors move prices.">Behavioral finance</dfn> is the systematic study of those heads. The point is not that people are stupid — it's that we are all wrong in the <em>same predictable directions</em>, and correlated errors don't cancel out in a market the way random ones would; they push prices. Here is the working catalog every analyst should carry, each bias tagged with the market damage it does.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Bias</th><th>What it is</th><th>One market consequence</th></tr></thead>
+    <tbody>
+      <tr><td>Loss aversion</td><td>Losses hurt about twice as much as equal gains please</td><td>Investors freeze and hold losers too long; the disposition effect</td></tr>
+      <tr><td>Anchoring</td><td>Estimates cling to an irrelevant starting number</td><td>Prices stick near a purchase price or a round number "target"</td></tr>
+      <tr><td>Overconfidence</td><td>We overrate our own knowledge and precision</td><td>Excessive trading; the more people trade, the worse they do</td></tr>
+      <tr><td>Herding</td><td>Copying the crowd feels safe</td><td>Fuels bubbles on the way up and stampedes on the way down</td></tr>
+      <tr><td>Recency</td><td>The recent past feels like the whole future</td><td>Chasing last year's hot fund; buying high, selling low</td></tr>
+      <tr><td>Confirmation</td><td>We seek evidence that we're right, ignore the rest</td><td>Thesis blindness; ignoring red flags on a beloved stock</td></tr>
+      <tr><td>Disposition effect</td><td>Selling winners, holding losers, to feel smart</td><td>Realizes taxes early, fights momentum, caps gains</td></tr>
+    </tbody>
+  </table></div>
+  <p>Let me define the ones that will bite hardest. <dfn class="term" tabindex="0" data-def="The finding that a loss of a given size hurts roughly twice as much as an equal gain feels good.">Loss aversion</dfn> is the emotional asymmetry between losing and winning. <dfn class="term" tabindex="0" data-def="Relying too heavily on an initial number when making an estimate, even when the number is irrelevant.">Anchoring</dfn> is your estimate being dragged toward whatever number you saw first. <dfn class="term" tabindex="0" data-def="Overestimating the accuracy of your own knowledge and forecasts.">Overconfidence</dfn> makes people trade too much — Barber and Odean famously showed the households that traded most earned the lowest net returns. <dfn class="term" tabindex="0" data-def="Following the crowd's behavior rather than your own analysis.">Herding</dfn> turns individual mistakes into a synchronized wave. <dfn class="term" tabindex="0" data-def="Overweighting recent events when forecasting the future.">Recency bias</dfn> convinces you a three-year bull run is the permanent state of the world. <dfn class="term" tabindex="0" data-def="Seeking and favoring information that confirms what you already believe.">Confirmation bias</dfn> is your brain's spam filter, tuned to delete anything that contradicts your thesis. And the <dfn class="term" tabindex="0" data-def="The tendency to sell winning positions too early and hold losing positions too long.">disposition effect</dfn> is loss aversion applied to your own portfolio.</p>
+  <p>Most of these fall out of one elegant theory. Kahneman and Tversky's <dfn class="term" tabindex="0" data-def="A model of decision-making where people value gains and losses relative to a reference point, feel losses more than gains, and are risk-seeking to avoid losses.">prospect theory</dfn> (1979) replaced the textbook "maximize expected utility of wealth" with three findings about how humans actually choose. First, we evaluate outcomes as <em>gains and losses relative to a reference point</em> (usually today, or our purchase price), not as final wealth. Second, the value function is <em>steeper for losses than for gains</em> — that's loss aversion, quantified at roughly 2:1. Third, it's concave for gains (we're risk-averse when ahead: take the sure win) and convex for losses (risk-seeking when behind: gamble to get back to even). That last flip is the <dfn class="term" tabindex="0" data-def="People are risk-averse when facing gains but risk-seeking when facing losses; the value function flips shape at the reference point.">reflection effect</dfn>, and you'll feel it yourself in the lab below.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 380" role="img" aria-label="The prospect theory value function: an S-shaped curve through the origin, gently concave for gains on the right and steeply convex for losses on the left, showing that a loss is felt about 2.25 times as intensely as an equal gain">
+      <line x1="60" y1="200" x2="680" y2="200" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="360" y1="48" x2="360" y2="360" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <path d="M60,342.4 L90,329.8 L120,317.1 L150,304.1 L180,290.9 L210,277.4 L240,263.6 L270,249.4 L300,234.6 L330,218.8 L360,200 L390,191.7 L420,184.6 L450,178.1 L480,171.7 L510,165.6 L540,159.6 L570,153.7 L600,148 L630,142.3 L660,136.7" fill="none" style="stroke:var(--c1)" stroke-width="2.75"/>
+      <line x1="510" y1="200" x2="510" y2="165.6" style="stroke:var(--up)" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <line x1="360" y1="165.6" x2="510" y2="165.6" style="stroke:var(--up)" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <circle cx="510" cy="165.6" r="5" style="fill:var(--up)"/>
+      <line x1="210" y1="200" x2="210" y2="277.4" style="stroke:var(--down)" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <line x1="360" y1="277.4" x2="210" y2="277.4" style="stroke:var(--down)" stroke-width="1.2" stroke-dasharray="4 3"/>
+      <circle cx="210" cy="277.4" r="5" style="fill:var(--down)"/>
+      <text x="360" y="184" text-anchor="middle" font-size="12" style="fill:var(--muted)">reference point</text>
+      <text x="648" y="194" text-anchor="end" font-size="12.5" style="fill:var(--muted)">gains →</text>
+      <text x="72" y="194" font-size="12.5" style="fill:var(--muted)">← losses</text>
+      <text x="366" y="62" font-size="12.5" style="fill:var(--muted)">psychological value (+)</text>
+      <text x="366" y="352" font-size="12.5" style="fill:var(--muted)">pain (−)</text>
+      <text x="520" y="150" font-size="12.5" font-weight="600" style="fill:var(--ink)">a +$50 gain feels like this</text>
+      <text x="200" y="300" text-anchor="middle" font-size="12.5" font-weight="600" style="fill:var(--ink)">a −$50 loss hurts ~2.25× more</text>
+    </svg>
+    <figcaption><strong>Figure 17.2</strong> — The value function of prospect theory. The steep left arm is loss aversion; the concave-right, convex-left shape is the reflection effect. Everything from the disposition effect to panic selling is this curve wearing different costumes.</figcaption>
+  </figure>
+
+  <div class="widget" id="s17-biaslab">
+    <div class="widget-head">
+      <h4>Bias lab: run the experiments on yourself</h4>
+      <p>Three classic experiments, one tab each. Answer honestly <em>before</em> you hit reveal — the point is to catch your own brain in the act, then see the theory that predicted you.</p>
+    </div>
+    <div class="widget-body">
+      <div class="btn-group" id="s17-bl-tabs" role="group" aria-label="Choose experiment">
+        <button class="btn is-active" data-tab="anchor" type="button">1 · Anchoring</button>
+        <button class="btn" data-tab="loss" type="button">2 · Loss aversion</button>
+        <button class="btn" data-tab="disp" type="button">3 · Disposition</button>
+      </div>
+
+      <div class="bl-panel" data-panel="anchor">
+        <div class="ctl-row">
+          <div class="btn-group"><button class="btn" id="s17-a-spin" type="button">↻ Spin the wheel</button></div>
+          <div class="stat"><span class="stat-label">The wheel landed on</span><span class="stat-value" id="s17-a-wheel">37</span></div>
+        </div>
+        <p style="color:var(--muted)">That number is a <strong>random spin</strong>. It has nothing to do with the question. Now, off the top of your head:</p>
+        <p style="color:var(--ink)"><strong>How many countries are member states of the United Nations?</strong></p>
+        <div class="ctl-row">
+          <label class="ctl">Your estimate <output class="ctl-val" id="s17-a-est-out">120</output><input type="range" id="s17-a-est" min="0" max="300" step="1" value="120"></label>
+          <div class="btn-group"><button class="btn" id="s17-a-reveal" type="button">Reveal</button></div>
+        </div>
+        <div class="bl-reveal" id="s17-a-lesson" hidden></div>
+      </div>
+
+      <div class="bl-panel" data-panel="loss" hidden>
+        <p style="color:var(--ink)"><strong>Round 1 — a good day.</strong> Which do you take?</p>
+        <div class="btn-group" id="s17-l-g" role="group" aria-label="Gain choice">
+          <button class="btn" data-pick="sure" type="button">A sure <strong>+$900</strong></button>
+          <button class="btn" data-pick="gamble" type="button">90% chance of +$1,000 (else $0)</button>
+        </div>
+        <p style="color:var(--ink);margin-top:.8em"><strong>Round 2 — a bad day.</strong> You must choose one:</p>
+        <div class="btn-group" id="s17-l-l" role="group" aria-label="Loss choice">
+          <button class="btn" data-pick="sure" type="button">A sure <strong>−$900</strong></button>
+          <button class="btn" data-pick="gamble" type="button">90% chance of −$1,000 (else $0)</button>
+        </div>
+        <div class="ctl-row" style="margin-top:.8em"><div class="btn-group"><button class="btn" id="s17-l-reveal" type="button">Reveal the pattern</button></div></div>
+        <div class="bl-reveal" id="s17-l-lesson" hidden></div>
+      </div>
+
+      <div class="bl-panel" data-panel="disp" hidden>
+        <p style="color:var(--muted)">You bought two stocks a year ago, $10,000 into each. Today:</p>
+        <div class="stat-row">
+          <div class="stat"><span class="stat-label">TechCo — bought $100, now $140</span><span class="stat-value" style="color:var(--up)">+40% · $14,000</span></div>
+          <div class="stat"><span class="stat-label">RetailCo — bought $100, now $60</span><span class="stat-value" style="color:var(--down)">−40% · $6,000</span></div>
+        </div>
+        <p style="color:var(--ink)"><strong>You need to raise about $10k in cash and will sell exactly one position. Which do you sell?</strong></p>
+        <div class="btn-group" id="s17-d-pick" role="group" aria-label="Sell choice">
+          <button class="btn" data-pick="winner" type="button">Sell the winner (TechCo)</button>
+          <button class="btn" data-pick="loser" type="button">Sell the loser (RetailCo)</button>
+        </div>
+        <div class="ctl-row" style="margin-top:.8em"><div class="btn-group"><button class="btn" id="s17-d-reveal" type="button">Reveal</button></div></div>
+        <div class="bl-reveal" id="s17-d-lesson" hidden></div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s17-biaslab');
+    if (!root) return;
+    function $(id) { return root.querySelector('#' + id); }
+    // --- tab switching ---
+    var tabs = root.querySelectorAll('#s17-bl-tabs .btn');
+    var panels = root.querySelectorAll('.bl-panel');
+    for (var i = 0; i < tabs.length; i++) {
+      (function (btn) {
+        btn.addEventListener('click', function () {
+          for (var k = 0; k < tabs.length; k++) tabs[k].classList.remove('is-active');
+          btn.classList.add('is-active');
+          var want = btn.getAttribute('data-tab');
+          for (var p = 0; p < panels.length; p++) panels[p].hidden = (panels[p].getAttribute('data-panel') !== want);
+        });
+      })(tabs[i]);
+    }
+    // --- pick helper: single-select within a btn-group ---
+    function picker(groupId, onpick) {
+      var btns = root.querySelectorAll('#' + groupId + ' .btn');
+      for (var j = 0; j < btns.length; j++) {
+        (function (b) {
+          b.addEventListener('click', function () {
+            for (var m = 0; m < btns.length; m++) btns[m].classList.remove('is-active');
+            b.classList.add('is-active');
+            onpick(b.getAttribute('data-pick'));
+          });
+        })(btns[j]);
+      }
+    }
+    // === Tab 1: anchoring ===
+    var wheel = $('s17-a-wheel'), estEl = $('s17-a-est'), estOut = $('s17-a-est-out'), aLesson = $('s17-a-lesson');
+    var TRUTH = 193;
+    function spin() { var n = Math.floor(Math.random() * 100); wheel.textContent = n; aLesson.hidden = true; }
+    $('s17-a-spin').addEventListener('click', spin);
+    estEl.addEventListener('input', function () { estOut.textContent = estEl.value; });
+    $('s17-a-reveal').addEventListener('click', function () {
+      var anchor = parseInt(wheel.textContent, 10);
+      var est = parseInt(estEl.value, 10);
+      if (isNaN(est)) est = 0;
+      var gap = est - TRUTH;
+      var side = anchor < 50 ? 'a low anchor tends to drag estimates down' : 'a high anchor tends to drag estimates up';
+      aLesson.innerHTML =
+        '<p><strong>The true answer is 193.</strong> Your random anchor was <strong>' + anchor + '</strong>; your estimate was <strong>' + est + '</strong> (' + (gap === 0 ? 'spot on' : (gap > 0 ? gap + ' too high' : (-gap) + ' too low')) + ').</p>' +
+        '<p>In Tversky and Kahneman’s 1974 experiment, people spun a rigged wheel of fortune, then estimated the percentage of African countries in the UN. Those who spun a high number guessed far higher than those who spun a low one — even though everyone knew the wheel was random. The irrelevant number reset their starting point, and estimates never travelled far from it. Here, ' + side + '.</p>' +
+        '<p><strong>Why it matters:</strong> analysts anchor to a stock’s 52-week high, a purchase price, or the first "price target" they read. Negotiators anchor to the first number on the table. The defense is to generate your estimate <em>before</em> you look at any reference point — and to be suspicious of any number that arrived before your reasoning did.</p>';
+      aLesson.hidden = false;
+    });
+    // === Tab 2: loss aversion ===
+    var gPick = null, lPick = null, lLesson = $('s17-l-lesson');
+    picker('s17-l-g', function (v) { gPick = v; });
+    picker('s17-l-l', function (v) { lPick = v; });
+    $('s17-l-reveal').addEventListener('click', function () {
+      var textbook = (gPick === 'sure' && lPick === 'gamble');
+      var yourLine;
+      if (gPick === null || lPick === null) {
+        yourLine = 'Pick one option in each round first, then reveal.';
+        lLesson.innerHTML = '<p>' + yourLine + '</p>';
+        lLesson.hidden = false; return;
+      }
+      yourLine = 'You took <strong>' + (gPick === 'sure' ? 'the sure +$900' : 'the gamble') + '</strong> in the good round and <strong>' + (lPick === 'sure' ? 'the sure −$900' : 'the gamble') + '</strong> in the bad round.';
+      lLesson.innerHTML =
+        '<p><strong>Every option has the same expected value.</strong> The gamble is 0.9 × $1,000 = $900, identical to the sure $900; and 0.9 × (−$1,000) = −$900, identical to the sure loss. A purely rational agent would be indifferent. You almost certainly were not.</p>' +
+        '<p>' + yourLine + ' ' + (textbook ? 'That is the textbook <strong>reflection effect</strong>: risk-averse when winning (grab the sure gain), risk-seeking when losing (gamble to avoid a certain loss). You are Exhibit A for prospect theory.' : 'The classic pattern most people show is: take the sure gain, but gamble on the loss — chasing the chance to break even. Your mix is less common, but the pull is the same force.') + '</p>' +
+        '<p><strong>Map to the curve above:</strong> the value function is concave in gains (a sure win feels almost as good as a bigger risky one) and convex in losses (a sure loss feels unbearable, so you’d rather roll the dice). This single shape is why traders "let losers run" — selling would <em>confirm</em> the loss, so they gamble on a rebound, exactly as you may have just done.</p>';
+      lLesson.hidden = false;
+    });
+    // === Tab 3: disposition ===
+    var dPick = null, dLesson = $('s17-d-lesson');
+    picker('s17-d-pick', function (v) { dPick = v; });
+    $('s17-d-reveal').addEventListener('click', function () {
+      if (dPick === null) { dLesson.innerHTML = '<p>Choose which position to sell first.</p>'; dLesson.hidden = false; return; }
+      var soldWinner = (dPick === 'winner');
+      dLesson.innerHTML =
+        '<p>You chose to sell <strong>' + (soldWinner ? 'the winner (TechCo)' : 'the loser (RetailCo)') + '</strong>. ' + (soldWinner ? 'You are with the majority: study after study finds investors are far more likely to sell winners than losers — the <strong>disposition effect</strong>. Realizing a gain feels like being proven right; realizing a loss feels like admitting you were wrong.' : 'You went against the crowd. Most investors sell the winner, because realizing the gain feels good and realizing the loss feels like an admission of failure — the <strong>disposition effect</strong>.') + '</p>' +
+        '<p><strong>Why selling the winner is usually backwards — for two hard-nosed reasons:</strong></p>' +
+        '<p>1. <strong>Taxes.</strong> Selling the winner books a $4,000 taxable capital gain now; selling the loser books a $4,000 capital loss you can use to offset other gains and cut your tax bill. Purely on tax, the loser is the better thing to sell.</p>' +
+        '<p>2. <strong>Momentum.</strong> Empirically, recent winners tend to keep outperforming and recent losers keep underperforming over the next several months (<a href="#s17-evidence">the momentum anomaly</a>). Dumping the winner and clinging to the loser fights that current in both directions.</p>' +
+        '<p><em>This is a lesson about instinct, not advice:</em> if your <a href="#s13">valuation</a> work says TechCo is now overpriced and RetailCo is a bargain, sell the winner with a clear conscience. The point is to decide on the <em>future</em> of each business — not on which purchase happens to show a red or green number today.</p>';
+      dLesson.hidden = false;
+    });
+    spin();
+  })();
+  </script>
+
+  <h3 id="s17-bubbles">Anatomy of a bubble</h3>
+  <p>Zoom out from the individual to the crowd and the biases compound into a recognizable arc. A <dfn class="term" tabindex="0" data-def="A period when an asset's price rises far above any reasonable estimate of its fundamental value, driven by expectations of further price rises.">bubble</dfn> is what happens when herding, recency, and overconfidence feed on each other with cheap credit as fuel. The economists Charles Kindleberger and Hyman Minsky gave us the canonical five-stage template, and once you know it you'll see it everywhere.</p>
+  <p><strong>Displacement</strong> — some real innovation or shift (a new technology, a rate cut, a deregulation) creates genuine new profit opportunities. <strong>Boom</strong> — prices rise on real fundamentals, credit expands, more people pile in. <strong>Euphoria</strong> (the <dfn class="term" tabindex="0" data-def="The manic phase of a bubble when valuations detach from fundamentals and everyone expects prices to keep rising.">mania</dfn>) — valuation is abandoned; "this time is different" becomes the anthem; your barber gives stock tips. <strong>Profit-taking</strong> — the smart money, quietly, sells to the latecomers. <strong>Panic</strong> — some trigger cracks confidence, everyone rushes the exit at once, and prices collapse faster than they rose. Minsky's dark insight: stability itself breeds the crisis, because a long calm makes people take ever more <a href="#s16">leverage</a>, until the system is one bad day from a cascade.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 400" role="img" aria-label="A price curve rising slowly then parabolically to a sharp peak before crashing, divided into five labeled stages: displacement, boom, euphoria, profit-taking, and panic, with a dashed line showing fair value far below the peak">
+      <line x1="60" y1="340" x2="680" y2="340" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="60" y1="40" x2="60" y2="340" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="52" y="48" text-anchor="end" font-size="12" style="fill:var(--muted)">price</text>
+      <text x="668" y="356" text-anchor="end" font-size="12" style="fill:var(--muted)">time →</text>
+      <line x1="200" y1="52" x2="200" y2="340" style="stroke:var(--grid)" stroke-width="1" stroke-dasharray="3 4"/>
+      <line x1="330" y1="52" x2="330" y2="340" style="stroke:var(--grid)" stroke-width="1" stroke-dasharray="3 4"/>
+      <line x1="470" y1="52" x2="470" y2="340" style="stroke:var(--grid)" stroke-width="1" stroke-dasharray="3 4"/>
+      <line x1="540" y1="52" x2="540" y2="340" style="stroke:var(--grid)" stroke-width="1" stroke-dasharray="3 4"/>
+      <line x1="70" y1="318" x2="680" y2="252" style="stroke:var(--muted)" stroke-width="1.3" stroke-dasharray="5 4"/>
+      <text x="612" y="245" font-size="12" style="fill:var(--muted)">fair value</text>
+      <path d="M70,320 L120,313 L170,301 L220,286 L270,262 L320,232 L360,198 L400,150 L440,100 L470,66 L490,80 L505,72 L520,94 L545,142 L575,206 L610,255 L645,278 L680,286" fill="none" style="stroke:var(--c1)" stroke-width="2.75"/>
+      <text x="470" y="55" text-anchor="middle" font-size="12.5" font-weight="600" style="fill:var(--ink)">"this time is different"</text>
+      <text x="588" y="150" font-size="12" style="fill:var(--down)">panic: rush to exit</text>
+      <text x="130" y="372" text-anchor="middle" font-size="12" style="fill:var(--muted)">Displacement</text>
+      <text x="265" y="372" text-anchor="middle" font-size="12" style="fill:var(--muted)">Boom</text>
+      <text x="400" y="372" text-anchor="middle" font-size="12" style="fill:var(--muted)">Euphoria</text>
+      <text x="505" y="388" text-anchor="middle" font-size="12" style="fill:var(--muted)">Profit-taking</text>
+      <text x="610" y="372" text-anchor="middle" font-size="12" style="fill:var(--muted)">Panic / crash</text>
+    </svg>
+    <figcaption><strong>Figure 17.3</strong> — The Kindleberger–Minsky bubble. Note the asymmetry: the climb is a slow inflation of belief, the crash a fast evacuation. The gap between the curve and the dashed fair-value line is the bubble — invisible to those inside it.</figcaption>
+  </figure>
+  <p>Run three famous bubbles through the template. <strong>Tulips, 1637:</strong> <em>displacement</em> was a genuinely prized exotic flower plus a new tradable futures contract; <em>euphoria</em> saw a single Semper Augustus bulb swap for the price of an Amsterdam canal house; <em>panic</em> arrived one February morning when buyers simply didn't show up, and the market evaporated in weeks. <strong>Dot-com, 1995–2000:</strong> <em>displacement</em> was the real, world-changing internet; <em>euphoria</em> priced profitless companies on "eyeballs" and page views (Pets.com IPO'd and folded within a year); the Nasdaq peaked near 5,048 in March 2000 and fell about 78% by late 2002. <strong>Meme stocks, 2021:</strong> <em>displacement</em> was zero-commission trading apps, stimulus cash, and Reddit coordinating a crowd; <em>euphoria</em> ran <code>GME</code> from a few dollars to an intraday ~$483 on a short squeeze; <em>panic</em> followed within days. Different centuries, identical skeleton.</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall: "it's different this time"</p><p>Every mania sincerely believes its asset is exempt from the arc, because there really <em>is</em> a real innovation at its core — the internet was transformative, and that's exactly what made the dot-com bubble so persuasive. The tell is never the technology; it's the <em>financing</em>. When prices are rising because new buyers are borrowing to buy from earlier buyers, and the story has shifted from cash flows to "the price will keep going up," you are in the euphoria phase regardless of how good the underlying idea is.</p></div>
+
+  <h3 id="s17-2008">2008: the full case study</h3>
+  <p>The 2008 global financial crisis is where every thread of this book knots together — <a href="#s08">fixed income</a>, <a href="#s09">derivatives</a>, <a href="#s16">leverage and risk</a>, <a href="#s04">central banks</a>, and the bubble template above — so it repays careful reading. Follow the chain link by link.</p>
+  <p><strong>The securitization chain.</strong> It starts with a homebuyer, many of them <dfn class="term" tabindex="0" data-def="Mortgages made to borrowers with weak credit, at higher rates and higher default risk.">subprime</dfn> — weaker credit, little documentation. A bank makes the mortgage but doesn't hold it. Instead it uses <dfn class="term" tabindex="0" data-def="Bundling many loans into a tradable security whose payments come from the pooled loan repayments.">securitization</dfn>: thousands of mortgages are pooled into a <dfn class="term" tabindex="0" data-def="A mortgage-backed security: a bond whose cash flows come from a pool of home-loan payments.">mortgage-backed security</dfn> (MBS), whose monthly payments flow through to bondholders. Those MBS are then sliced into a <dfn class="term" tabindex="0" data-def="A collateralized debt obligation: a security built from tranches of other debt like MBS, split into risk layers.">collateralized debt obligation</dfn> (CDO) with <dfn class="term" tabindex="0" data-def="A layer of a structured security with a defined priority of payment; senior tranches are paid first and rated safest.">tranches</dfn> — a payment waterfall where senior tranches get paid first and, through the alchemy of diversification, earned AAA ratings even when built from risky loans. The fatal assumption baked into the ratings: US house prices don't fall everywhere at once. They had never done so in the postwar data.</p>
+  <p><strong>Leverage everywhere.</strong> Investment banks like Bear Stearns and Lehman Brothers held these securities at roughly 30-to-1 leverage — $30 of assets for every $1 of their own equity. At 30:1, a mere 3.3% fall in asset value wipes out <em>all</em> your equity (1 ÷ 30 = 3.3%). And crucially, they funded those long-term assets with ultra-short-term borrowing in the <dfn class="term" tabindex="0" data-def="The repurchase market: overnight borrowing secured by posting securities as collateral, rolled over daily.">repo market</dfn> — loans that had to be rolled over every single night against collateral, minus a <dfn class="term" tabindex="0" data-def="The discount lenders apply to collateral; a 5% haircut means $100 of bonds backs only $95 of loan.">haircut</dfn>.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example: why 30:1 is a death wish</p><p>You hold $100 of assets: $3.30 of your own equity and $96.70 borrowed. Assets fall just 3.3%, to $96.70 — exactly your debt. Equity is now zero; you are insolvent on a rounding error. This is why the "house prices never fall nationally" assumption wasn't a footnote — it was the entire capital structure. When Case-Shiller home prices fell about 27% from their 2006 peak, a 3.3% cushion was gone many times over.</p></div>
+  <p><strong>The run on repo.</strong> When subprime borrowers began defaulting, the "safe" AAA tranches turned out to be worth far less than par. Repo lenders, seeing collateral of uncertain value, did the rational thing: they raised haircuts and then refused to roll the loans at all. That's a <dfn class="term" tabindex="0" data-def="A modern bank run in the wholesale funding market: lenders simultaneously refuse to roll over short-term loans, starving a firm of cash.">run on repo</dfn> — a 21st-century bank run, except the "depositors" were other financial institutions and it happened in hours, not days. Bear Stearns died this way in March 2008; Lehman, denied a rescue, filed the largest bankruptcy in US history on September 15, 2008.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 400" role="img" aria-label="A two-part diagram: the top row shows the securitization build-up from homebuyers to mortgages to MBS to CDO to leveraged banks to repo funding; a large down arrow marks house prices falling; the bottom row shows the collapse cascade from worthless securities to insolvent banks to a repo run to contagion, ending in the policy response">
+      <defs><marker id="s17-arrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" style="fill:var(--axis)"/></marker><marker id="s17-arrowd" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" style="fill:var(--down)"/></marker></defs>
+      <text x="40" y="30" font-size="13" font-weight="700" style="fill:var(--ink)">The build-up (2003–06)</text>
+      <rect x="36" y="42" width="96" height="52" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="84" y="66" text-anchor="middle" font-size="12" style="fill:var(--ink)">Home-</text><text x="84" y="82" text-anchor="middle" font-size="12" style="fill:var(--ink)">buyers</text>
+      <rect x="146" y="42" width="96" height="52" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="194" y="73" text-anchor="middle" font-size="12" style="fill:var(--ink)">Mortgages</text>
+      <rect x="256" y="42" width="96" height="52" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="304" y="73" text-anchor="middle" font-size="12" style="fill:var(--ink)">MBS pool</text>
+      <rect x="366" y="42" width="96" height="52" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="414" y="66" text-anchor="middle" font-size="12" style="fill:var(--ink)">CDO</text><text x="414" y="82" text-anchor="middle" font-size="12" style="fill:var(--ink)">tranches</text>
+      <rect x="476" y="42" width="96" height="52" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="524" y="66" text-anchor="middle" font-size="12" style="fill:var(--ink)">Banks</text><text x="524" y="82" text-anchor="middle" font-size="12" style="fill:var(--muted)">30:1</text>
+      <rect x="586" y="42" width="96" height="52" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="634" y="66" text-anchor="middle" font-size="12" style="fill:var(--ink)">Repo</text><text x="634" y="82" text-anchor="middle" font-size="12" style="fill:var(--ink)">funding</text>
+      <line x1="132" y1="68" x2="144" y2="68" style="stroke:var(--axis)" stroke-width="1.4" marker-end="url(#s17-arrow)"/>
+      <line x1="242" y1="68" x2="254" y2="68" style="stroke:var(--axis)" stroke-width="1.4" marker-end="url(#s17-arrow)"/>
+      <line x1="352" y1="68" x2="364" y2="68" style="stroke:var(--axis)" stroke-width="1.4" marker-end="url(#s17-arrow)"/>
+      <line x1="462" y1="68" x2="474" y2="68" style="stroke:var(--axis)" stroke-width="1.4" marker-end="url(#s17-arrow)"/>
+      <line x1="572" y1="68" x2="584" y2="68" style="stroke:var(--axis)" stroke-width="1.4" marker-end="url(#s17-arrow)"/>
+      <line x1="360" y1="104" x2="360" y2="182" style="stroke:var(--down)" stroke-width="2.4" marker-end="url(#s17-arrowd)"/>
+      <text x="374" y="150" font-size="12.5" font-weight="600" style="fill:var(--down)">2007: house prices fall, borrowers default</text>
+      <text x="40" y="212" font-size="13" font-weight="700" style="fill:var(--ink)">The collapse (2007–08)</text>
+      <rect x="36" y="224" width="118" height="54" rx="8" style="fill:var(--surface-2);stroke:var(--down)"/><text x="95" y="248" text-anchor="middle" font-size="12" style="fill:var(--ink)">AAA tranches</text><text x="95" y="264" text-anchor="middle" font-size="12" style="fill:var(--ink)">worth cents</text>
+      <rect x="164" y="224" width="118" height="54" rx="8" style="fill:var(--surface-2);stroke:var(--down)"/><text x="223" y="248" text-anchor="middle" font-size="12" style="fill:var(--ink)">Banks</text><text x="223" y="264" text-anchor="middle" font-size="12" style="fill:var(--ink)">insolvent</text>
+      <rect x="292" y="224" width="118" height="54" rx="8" style="fill:var(--surface-2);stroke:var(--down)"/><text x="351" y="248" text-anchor="middle" font-size="12" style="fill:var(--ink)">Run on repo</text><text x="351" y="264" text-anchor="middle" font-size="12" style="fill:var(--ink)">funding freezes</text>
+      <rect x="420" y="224" width="118" height="54" rx="8" style="fill:var(--surface-2);stroke:var(--down)"/><text x="479" y="248" text-anchor="middle" font-size="12" style="fill:var(--ink)">Fire sales,</text><text x="479" y="264" text-anchor="middle" font-size="12" style="fill:var(--ink)">contagion</text>
+      <rect x="548" y="224" width="134" height="54" rx="8" style="fill:var(--surface-2);stroke:var(--down)"/><text x="615" y="248" text-anchor="middle" font-size="12" style="fill:var(--ink)">Credit, stocks,</text><text x="615" y="264" text-anchor="middle" font-size="12" style="fill:var(--ink)">jobs all fall</text>
+      <line x1="154" y1="251" x2="162" y2="251" style="stroke:var(--down)" stroke-width="1.4" marker-end="url(#s17-arrowd)"/>
+      <line x1="282" y1="251" x2="290" y2="251" style="stroke:var(--down)" stroke-width="1.4" marker-end="url(#s17-arrowd)"/>
+      <line x1="410" y1="251" x2="418" y2="251" style="stroke:var(--down)" stroke-width="1.4" marker-end="url(#s17-arrowd)"/>
+      <line x1="538" y1="251" x2="546" y2="251" style="stroke:var(--down)" stroke-width="1.4" marker-end="url(#s17-arrowd)"/>
+      <line x1="479" y1="280" x2="410" y2="316" style="stroke:var(--axis)" stroke-width="1.6" marker-end="url(#s17-arrow)"/>
+      <rect x="180" y="322" width="360" height="52" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)"/>
+      <text x="360" y="346" text-anchor="middle" font-size="12.5" font-weight="600" style="fill:var(--ink)">Policy response: Fed to ~0%, TARP $700bn,</text>
+      <text x="360" y="363" text-anchor="middle" font-size="12.5" font-weight="600" style="fill:var(--ink)">AIG rescue, quantitative easing, guarantees</text>
+    </svg>
+    <figcaption><strong>Figure 17.4</strong> — The 2008 crisis as one chain. The same securitization that spread risk in calm times became the wiring that spread panic once the house-price assumption failed. Complexity plus leverage plus short-term funding is a standing invitation to a run.</figcaption>
+  </figure>
+  <p><strong>Contagion.</strong> Because everyone owned the same securities and borrowed from everyone else, one firm's fire sale marked down every other firm's balance sheet, triggering the next round of margin calls — a doom loop economists call <dfn class="term" tabindex="0" data-def="The spread of financial distress from one institution or market to others through shared exposures and funding links.">contagion</dfn>. <dfn class="term" tabindex="0" data-def="The risk that the failure of one institution cascades into a failure of the whole financial system.">Systemic risk</dfn> became reality: the insurer AIG had sold <a href="#s09">credit-default protection</a> on these bonds and couldn't pay the claims, so its collapse threatened every bank it had insured. Money-market funds "broke the buck." Credit — the oxygen of the real economy from <a href="#s06">Section 6</a> — simply stopped flowing.</p>
+  <p><strong>The policy response.</strong> The <a href="#s04">Federal Reserve</a> slashed rates to near zero, became lender of last resort to markets it had never backstopped before, and launched <dfn class="term" tabindex="0" data-def="A central bank buying large quantities of bonds with newly created money to lower long-term rates and inject liquidity.">quantitative easing</dfn>. Congress passed TARP, a $700 billion program to inject capital into banks. The government rescued AIG for about $182 billion. It worked, in the narrow sense that the system survived — but it also created a lasting hangover of <dfn class="term" tabindex="0" data-def="When a party takes bigger risks because it won't bear the full cost of failure, e.g. banks expecting a bailout.">moral hazard</dfn>: if the biggest, most reckless institutions get rescued, what exactly deters the next round of 30:1 bets? That question drove the whole post-crisis regulatory apparatus you met in <a href="#s16">Section 16</a>.</p>
+
+  <h3 id="s17-defenses">Practical defenses (and how quants industrialize the rest)</h3>
+  <p>You cannot delete your biases — they're firmware, not software. But you can build an environment that catches them before they cost you money. The professional's toolkit is boring on purpose, because boring is what survives contact with a panicking brain.</p>
+  <p><strong>Rules and checklists.</strong> The single most effective defense is to make decisions in advance, in writing, when you're calm, then obey the rule when you're not. A rebalancing rule ("trim any position above 8% of the portfolio") forces you to sell winners and buy losers — the exact opposite of the disposition effect — without an emotional debate each time. Atul Gawande's checklist evidence from surgery applies directly: checklists don't make experts smarter, they stop smart people from skipping steps under stress.</p>
+  <p><strong>Base rates.</strong> Before you get seduced by the vivid specifics of <em>this</em> startup or <em>this</em> merger, ask what happens to the <em>reference class</em>: what fraction of companies like this one succeed? The <dfn class="term" tabindex="0" data-def="The underlying frequency of an outcome in the general population, ignored when people focus on specific vivid details.">base rate</dfn> is the anchor you actually <em>want</em> — the statistically honest starting point that confirmation bias and vivid stories conspire to make you ignore. Kahneman calls forecasting from the specifics while ignoring the base rate the single most common decision error.</p>
+  <p><strong>Pre-mortems.</strong> Instead of asking "what could go wrong?" (which invites optimism), run a <dfn class="term" tabindex="0" data-def="An exercise where a team imagines a decision has already failed and works backwards to explain why, surfacing risks in advance.">pre-mortem</dfn>: imagine it's a year from now and the investment has been a disaster — <em>now</em> write the story of how it happened. Prospective hindsight loosens overconfidence and confirmation bias, because you've given people explicit permission to voice the doubts they were suppressing.</p>
+  <div class="callout co-real"><p class="co-label">Real world: the doubling defense against loss aversion</p><p>Kahneman's own prescription for the disposition effect is brutally simple: judge every holding by whether you'd <em>buy it again today</em> at its current price. If you wouldn't, you're only holding it to avoid crystallizing a loss — which means the market price, not your purchase price, is telling you the truth. The purchase price is a fact about your history, not about the asset's future, and prospect theory is the reason your brain refuses to believe that.</p></div>
+  <p>Now for the punchline that carries you into the next section. If human biases create predictable mispricings, then the biases are a <em>data source</em>. This is precisely the business of <dfn class="term" tabindex="0" data-def="Quantitative analysts who use math, statistics, and code to model markets and build systematic trading strategies.">quants</dfn>: they industrialize the exploitation of everyone else's psychology. Momentum, PEAD, and other anomalies get coded into systematic strategies that trade thousands of names, unemotionally, at scale — harvesting the small, repeatable edge that a single anxious human can't. A quant fund is, in a real sense, a machine for not being human at the moment it matters most. That machine — the models, the data pipelines, the code — is exactly what <a href="#s18">Section 18 (Quant Finance &amp; Data Analytics)</a> is about, and it's where your CS and data background stops being a footnote and becomes the main event.</p>
+  <div class="callout co-you"><p class="co-label">Your edge: you already think in the right frame</p><p>Everything in this section is a data problem in disguise. Biases are systematic errors — bias in the statistical sense, a non-zero expected deviation. Bubbles are a positive-feedback system with a regime change. A run on repo is a cascade on a network graph. Efficiency is an equilibrium; the joint-hypothesis problem is non-identifiability. You don't need to unlearn your instincts to work in finance — you need to point them at markets and learn the vocabulary. This whole section was the vocabulary.</p></div>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. Semi-strong-form market efficiency implies which of the following?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Prices are always equal to the asset's true fair value</button>
+        <button class="quiz-opt" data-correct>You cannot reliably beat the market by analyzing publicly available information</button>
+        <button class="quiz-opt">Even insider information is already reflected in the price</button>
+        <button class="quiz-opt">Prices never change once information is released</button>
+      </div>
+      <p class="quiz-explain">Semi-strong efficiency says public information is already in the price, so public-data analysis can't systematically win. It does NOT claim prices are "right" (that's a misreading), and it does not cover private information — that's the strong form, which is false.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. The Grossman-Stiglitz paradox says that:</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Markets can never be efficient because people are irrational</button>
+        <button class="quiz-opt" data-correct>Perfectly efficient markets are impossible, because then no one would be paid to gather the information that makes prices efficient</button>
+        <button class="quiz-opt">Index funds always beat active managers</button>
+        <button class="quiz-opt">Insider trading should be legal</button>
+      </div>
+      <p class="quiz-explain">If prices reflected all information for free, no one would pay for research — but then prices couldn't reflect information. Real markets are "efficiently inefficient": mispriced just enough to pay the people whose trading keeps them mostly efficient.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. In prospect theory, why are people typically risk-seeking when facing a sure loss versus a gamble of equal expected value?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Because they always prefer more risk to less</button>
+        <button class="quiz-opt">Because the gamble has higher expected value</button>
+        <button class="quiz-opt" data-correct>Because the value function is convex in the loss region, so a chance to avoid the loss entirely is worth gambling for</button>
+        <button class="quiz-opt">Because losses are ignored entirely below a threshold</button>
+      </div>
+      <p class="quiz-explain">The value function is convex for losses, making a certain loss feel unbearable relative to a gamble that might erase it. Combined with concavity in gains (risk-averse when winning), this is the reflection effect — and the expected values are equal, so it's pure psychology.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. In the 2008 chain, a bank levered 30:1 becomes insolvent after roughly what fall in its asset values?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">30%</button>
+        <button class="quiz-opt" data-correct>About 3.3%</button>
+        <button class="quiz-opt">15%</button>
+        <button class="quiz-opt">50%</button>
+      </div>
+      <p class="quiz-explain">At 30:1, equity is 1 ÷ 30 = 3.3% of assets. A 3.3% decline in asset value wipes out the entire equity cushion. That razor-thin margin is why the "US house prices never fall nationally" assumption was load-bearing for the whole system.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. An investor needs cash and sells a stock that's up 40% while holding one that's down 40%, purely to "lock in a win." This is the disposition effect. Why is it often the wrong instinct?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Because winners always fall and losers always rise</button>
+        <button class="quiz-opt">Because you should never sell any stock</button>
+        <button class="quiz-opt" data-correct>Selling the winner triggers a taxable gain while the loser could harvest a tax loss, and momentum tends to favor recent winners over recent losers</button>
+        <button class="quiz-opt">Because taxes don't apply to stock sales</button>
+      </div>
+      <p class="quiz-explain">Selling winners realizes taxable gains and fights momentum (recent winners tend to keep outperforming); selling losers can harvest a deductible loss. The right decision rests on each company's future, not on which purchase happens to show green today.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>EMH comes in three nested forms (weak, semi-strong, strong) and claims prices are <em>unpredictable</em>, not <em>correct</em> — the absence of easy money, not the presence of wisdom.</li>
+      <li>The Grossman-Stiglitz paradox means markets are "efficiently inefficient": mispriced just enough to pay the researchers who keep them efficient.</li>
+      <li>The evidence cuts both ways — index funds beat ~90% of active managers over 20 years, yet momentum and post-earnings drift persist; the joint-hypothesis problem makes "inefficiency" and "wrong risk model" hard to tell apart.</li>
+      <li>Prospect theory explains the bias catalog: gains and losses are judged against a reference point, losses hurt ~2× as much, and we flip from risk-averse (gains) to risk-seeking (losses) — the reflection effect.</li>
+      <li>Bubbles follow the Kindleberger–Minsky arc — displacement, boom, euphoria, profit-taking, panic — with cheap credit as fuel; tulips, dot-com, and meme stocks share one skeleton.</li>
+      <li>2008 was securitization (mortgage → MBS → CDO) plus 30:1 leverage plus overnight repo funding: a 3.3% asset fall is fatal at that leverage, and a run on repo turned a housing correction into a systemic crisis.</li>
+      <li>Defenses are pre-committed rules, checklists, base rates, and pre-mortems; quants industrialize the exploitation of everyone else's biases — the bridge to <a href="#s18">Section 18</a>, where your data and code skills become the main event.</li>
+    </ul>
+  </div>
+</section>

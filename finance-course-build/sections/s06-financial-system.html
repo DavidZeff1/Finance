@@ -1,0 +1,564 @@
+<section class="lesson" id="s06" data-num="06" data-title="The Financial System: A Guided Tour">
+  <p class="eyebrow">Part II · Financial Markets &amp; Instruments</p>
+  <h2>6. The Financial System: A Guided Tour</h2>
+  <p class="lede">Before you study stocks, bonds, or derivatives, you need the map: who the players are, what each one does, and what actually happens in the seconds after you tap Buy. This section is your orientation tour — by the end you will be able to place any headline, job posting, or trade confirmation on the map, and you will have run your own orders through a live order book.</p>
+
+  <h3 id="s06-plumbing">The core job: routing money from savers to users</h3>
+  <p>Strip away the glass towers and the jargon, and the <dfn class="term" tabindex="0" data-def="The set of markets, institutions, and infrastructure that moves money between people who have it and people who need it.">financial system</dfn> does one job: it moves money from people who have more than they currently need (<em>savers</em>) to people who can put it to productive use (<em>users of capital</em> — firms building factories, governments building roads, households buying homes). In exchange, the users hand back a <dfn class="term" tabindex="0" data-def="A tradable claim on future cash flows, such as a stock or a bond.">security</dfn> or a promise: a share, a bond, a loan agreement — a claim on future cash.</p>
+  <p>There are exactly two routes the money can take. In <dfn class="term" tabindex="0" data-def="Savers buy securities straight from the user of capital via markets, with no bank in the middle.">direct finance</dfn>, you buy the claim yourself in a market: you purchase Apple shares or a Treasury bond, and your money flows (roughly) straight to the firm or government. In <dfn class="term" tabindex="0" data-def="Savers place money with an institution (like a bank) which then decides who to lend it to.">indirect finance</dfn>, you hand your money to an <dfn class="term" tabindex="0" data-def="An institution standing between savers and borrowers — banks, funds, insurers — that transforms and reroutes money.">intermediary</dfn> — a bank, a pension fund, an insurer — and <em>it</em> decides who gets funded. Your checking account is indirect finance: the bank pools your deposit with millions of others and lends the pool out as mortgages and business loans.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 300" role="img" aria-label="Map of the financial system: savers route money to users of capital either directly through financial markets or indirectly through intermediaries like banks and funds.">
+      <defs>
+        <marker id="s06-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" style="fill:var(--axis)"></path>
+        </marker>
+      </defs>
+      <text x="360" y="18" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--muted)">DIRECT FINANCE (through markets)</text>
+      <rect x="270" y="28" width="180" height="72" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)"></rect>
+      <text x="360" y="54" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">Financial markets</text>
+      <text x="360" y="73" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">stocks, bonds issued</text>
+      <text x="360" y="90" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">straight to investors</text>
+      <rect x="20" y="105" width="150" height="90" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <text x="95" y="138" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">Savers</text>
+      <text x="95" y="158" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">households, firms</text>
+      <text x="95" y="176" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">with spare cash</text>
+      <rect x="550" y="105" width="150" height="90" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <text x="625" y="138" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">Users of capital</text>
+      <text x="625" y="158" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">firms, governments,</text>
+      <text x="625" y="176" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">home buyers</text>
+      <rect x="270" y="200" width="180" height="72" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <text x="360" y="226" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">Intermediaries</text>
+      <text x="360" y="245" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">banks &amp; funds pool,</text>
+      <text x="360" y="262" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">transform, re-lend</text>
+      <path d="M170,135 C220,135 218,64 268,64" fill="none" style="stroke:var(--axis)" stroke-width="1.8" marker-end="url(#s06-arrow)"></path>
+      <path d="M450,64 C502,64 500,133 548,135" fill="none" style="stroke:var(--axis)" stroke-width="1.8" marker-end="url(#s06-arrow)"></path>
+      <path d="M170,165 C220,165 218,236 268,236" fill="none" style="stroke:var(--axis)" stroke-width="1.8" marker-end="url(#s06-arrow)"></path>
+      <path d="M450,236 C502,236 500,167 548,165" fill="none" style="stroke:var(--axis)" stroke-width="1.8" marker-end="url(#s06-arrow)"></path>
+      <text x="360" y="292" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--muted)">INDIRECT FINANCE (through an intermediary)</text>
+    </svg>
+    <figcaption><strong>Figure 6.1</strong> — Two routes for the same dollar: direct finance sends it through markets in exchange for a security; indirect finance sends it through a bank or fund, which repackages it before lending it on. Claims and returns flow back right-to-left.</figcaption>
+  </figure>
+
+  <p>Why do intermediaries exist at all, when a market could match savers and borrowers directly? Three reasons, all of which should ring a bell from <a href="#s02">Section 2 (Microeconomics)</a>:</p>
+  <p><strong>Information.</strong> Lending suffers from <dfn class="term" tabindex="0" data-def="One side of a deal knows more than the other — e.g. a borrower knows their own repayment odds better than the lender.">information asymmetry</dfn>: the borrower knows far more about their repayment odds than you do. A bank employs credit analysts, sees the borrower's cash flows, and screens thousands of applications — it amortizes the cost of due diligence over a huge loan book, the way one trained ML model serves millions of queries.</p>
+  <p><strong>Maturity transformation.</strong> Savers want their money back on demand; borrowers want it for 30 years. A bank performs <dfn class="term" tabindex="0" data-def="Borrowing short-term (deposits) and lending long-term (mortgages), bridging savers who want liquidity and borrowers who want time.">maturity transformation</dfn> — it borrows short (your deposit, withdrawable today) and lends long (a 30-year mortgage), betting that not everyone withdraws at once. This is enormously useful and inherently fragile: when everyone <em>does</em> withdraw at once, you get a bank run — the failure mode behind much of <a href="#s17">Section 17 (Crises)</a>.</p>
+  <p><strong>Diversification.</strong> With $1,000 you can fund a slice of one borrower; a fund with $10 billion holds thousands of loans or stocks, so one default barely dents it. Pooling gives small savers <dfn class="term" tabindex="0" data-def="Spreading money across many holdings so no single failure can sink the portfolio.">diversification</dfn> they could never build alone — the statistics of this are the heart of <a href="#s15">Section 15 (Portfolio Theory)</a>.</p>
+  <div class="callout co-analogy"><p class="co-label">Analogy</p><p>Think of the financial system as the internet's routing layer for money. Savers are clients, users of capital are servers, markets are peer-to-peer connections, and intermediaries are load balancers: they pool traffic, hide the messy topology, and add redundancy — at the cost of a fee and a new single point of failure.</p></div>
+
+  <h3 id="s06-cast">The cast, mapped</h3>
+  <p>Financial headlines assume you know who everyone is. Here is the full cast in one table — skim it now, then use it as a lookup while you read the rest of Part II. Every row is either a <em>channel</em> for money, a <em>service provider</em> to the channels, or <em>infrastructure</em> underneath them.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Player</th><th>What it does</th><th>How it makes money</th></tr></thead>
+    <tbody>
+      <tr><td><dfn class="term" tabindex="0" data-def="A bank that takes deposits and makes loans to households and businesses — the classic bank.">Commercial bank</dfn></td><td>Takes deposits, makes loans, runs payments (JPMorgan Chase's retail arm, Bank of America)</td><td>Interest spread: charge borrowers more than it pays depositors</td></tr>
+      <tr><td><dfn class="term" tabindex="0" data-def="A firm that helps companies raise capital, advises on mergers, and trades securities — it does not take retail deposits.">Investment bank</dfn></td><td>Helps firms issue stocks/bonds, advises on M&amp;A, trades (Goldman Sachs, Morgan Stanley)</td><td>Fees on deals and underwriting; trading revenue</td></tr>
+      <tr><td><dfn class="term" tabindex="0" data-def="A firm that invests other people's money in funds — mutual funds, index funds, ETFs.">Asset manager</dfn></td><td>Runs mutual funds, index funds, ETFs for the public (BlackRock, Vanguard, Fidelity)</td><td>Management fee: a % of assets per year</td></tr>
+      <tr><td><dfn class="term" tabindex="0" data-def="A lightly regulated private fund for wealthy investors that can short, use leverage, and trade anything.">Hedge fund</dfn></td><td>Flexible, often leveraged strategies for institutions and the wealthy (Citadel, Bridgewater)</td><td>Classically &ldquo;2 and 20&rdquo;: 2% of assets + 20% of profits</td></tr>
+      <tr><td><dfn class="term" tabindex="0" data-def="Funds that buy entire private companies (PE) or fund early-stage startups (VC), aiming to sell later at a profit.">Private equity / VC</dfn></td><td>PE buys whole companies to restructure; VC funds startups (Blackstone, KKR; Sequoia, a16z)</td><td>Fees plus a share of exit profits (&ldquo;carry&rdquo;)</td></tr>
+      <tr><td><dfn class="term" tabindex="0" data-def="A pool that invests workers' retirement contributions to pay them pensions decades later.">Pension fund</dfn></td><td>Invests retirement savings over decades (CalPERS)</td><td>Not-for-profit for members; managers earn fees</td></tr>
+      <tr><td><dfn class="term" tabindex="0" data-def="A company that collects premiums against future claims and invests the float in the meantime.">Insurer</dfn></td><td>Collects premiums, invests the pool (&ldquo;float&rdquo;), pays claims (Allianz, MetLife)</td><td>Underwriting margin + investment returns on the float</td></tr>
+      <tr><td><dfn class="term" tabindex="0" data-def="A state-owned investment fund, typically built from oil revenue or trade surpluses.">Sovereign wealth fund</dfn></td><td>Invests a nation's surplus (Norway's $1.7T oil fund, Singapore's GIC)</td><td>Returns accrue to the state</td></tr>
+      <tr><td><dfn class="term" tabindex="0" data-def="A regulated marketplace where buyers and sellers meet and prices are set — NYSE, Nasdaq, CME.">Exchange</dfn></td><td>Runs the marketplace and publishes prices (NYSE, Nasdaq, CME)</td><td>Trading fees, listing fees, and — increasingly — selling market data</td></tr>
+      <tr><td><dfn class="term" tabindex="0" data-def="A firm that executes trades on behalf of clients — your app is a broker front-end.">Broker</dfn></td><td>Routes customer orders to venues (Schwab, Interactive Brokers, Robinhood)</td><td>Commissions, interest on cash, payment for order flow</td></tr>
+      <tr><td><dfn class="term" tabindex="0" data-def="A trader who continuously quotes both a buy and a sell price, earning the gap between them.">Market maker</dfn></td><td>Quotes two-sided prices all day so you can always trade (Citadel Securities, Jane Street)</td><td>Earns the bid–ask spread, many thousands of times a day</td></tr>
+      <tr><td><dfn class="term" tabindex="0" data-def="A bank that safekeeps securities and cash for institutions and handles the record-keeping.">Custodian</dfn></td><td>Safekeeps assets, tracks ownership records (BNY, State Street)</td><td>Small fees on enormous asset piles</td></tr>
+      <tr><td><dfn class="term" tabindex="0" data-def="An agency that grades borrowers' creditworthiness — AAA down to D — for bond investors.">Rating agency</dfn></td><td>Grades bond issuers' default risk (Moody's, S&amp;P, Fitch) — see <a href="#s08">Section 8</a></td><td>Issuers pay to be rated (a conflict worth remembering)</td></tr>
+      <tr><td>Data vendor</td><td>Sells prices, news, analytics (Bloomberg, Refinitiv, FactSet)</td><td>Subscriptions — a Bloomberg Terminal runs ~$30k/year</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout co-real"><p class="co-label">Real world: scale</p><p>BlackRock alone manages over $11 trillion — more than the GDP of every country except the US and China. When you hear &ldquo;institutional investors,&rdquo; picture a handful of asset managers, pension funds, and sovereign funds that collectively own most of the stock market. Retail investors — individuals like you — are the minority of volume in most markets.</p></div>
+
+  <h3 id="s06-regulators">The referees: who regulates what</h3>
+  <p>In <a href="#s02">Section 2</a> you met market failures: information asymmetry, externalities, monopoly power. Financial regulation is the institutional response to exactly those failures. Securities rules force disclosure (fixing information asymmetry); bank capital rules limit <dfn class="term" tabindex="0" data-def="The risk that one institution's failure cascades through the whole system — a negative externality of finance.">systemic risk</dfn> (a negative externality — a bank's collapse hurts people who never banked there); antitrust and market-structure rules police concentrated venues. Each US regulator owns one slice:</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Regulator</th><th>Watches</th><th>Exists because…</th></tr></thead>
+    <tbody>
+      <tr><td>SEC</td><td>Securities markets: stocks, bonds, funds, disclosure</td><td>Investors can't verify claims themselves — so issuers must publish audited truth (see <a href="#s11">Section 11</a>)</td></tr>
+      <tr><td>Federal Reserve</td><td>Banks' safety, plus monetary policy (<a href="#s04">Section 4</a>)</td><td>Bank failures cascade; someone must be lender of last resort</td></tr>
+      <tr><td>FDIC</td><td>Insures bank deposits up to $250,000 per depositor, per bank</td><td>Deposit insurance stops bank runs before they start</td></tr>
+      <tr><td>FINRA</td><td>Brokers and their salespeople (industry-funded self-regulator)</td><td>Front-line policing of the people who touch retail money</td></tr>
+      <tr><td>CFTC</td><td>Derivatives and commodities futures (<a href="#s09">Section 9</a>)</td><td>Leverage in derivatives can blow holes in the real economy</td></tr>
+      <tr><td>FCA (UK) / ESMA (EU)</td><td>Rough overseas equivalents of the SEC + FINRA</td><td>Same failures, different jurisdictions</td></tr>
+    </tbody>
+  </table></div>
+  <p>Notice the pattern: no single regulator sees everything. A bank holding company might answer to the Fed for its balance sheet, the SEC for its brokerage arm, the CFTC for its swaps desk, and the FDIC for its deposits. This fragmentation is a recurring plot device in crisis post-mortems — risky activity migrates to whichever corner is watched least, a phenomenon called <dfn class="term" tabindex="0" data-def="Structuring activity to fall under the friendliest regulator's rules.">regulatory arbitrage</dfn>.</p>
+
+  <h3 id="s06-sides">Buy side vs sell side: the industry's two halves</h3>
+  <p>Practitioners split the industry into two camps, and the split shows up in every job posting you will ever read. The <dfn class="term" tabindex="0" data-def="Institutions that manage money and buy investment services: asset managers, hedge funds, pensions, PE/VC, insurers, SWFs.">buy side</dfn> <em>manages money</em>: asset managers, hedge funds, pension funds, PE/VC, insurers, sovereign funds. Its product is investment performance, and it earns fees on the assets it runs. The <dfn class="term" tabindex="0" data-def="Institutions that create, sell, and trade securities and services for the buy side: investment banks, brokers, market makers, research.">sell side</dfn> <em>sells services to the money</em>: investment banks, brokers, market makers, and research desks. Its products are execution, new securities, advice, and analysis, and it earns fees, commissions, and spreads.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="Buy side firms on the left manage money; sell side firms on the right provide execution, research, and new issues; fees flow right and services flow left.">
+      <text x="155" y="26" text-anchor="middle" font-size="16" font-weight="700" style="fill:var(--ink)">BUY SIDE — manages money</text>
+      <text x="565" y="26" text-anchor="middle" font-size="16" font-weight="700" style="fill:var(--ink)">SELL SIDE — serves the money</text>
+      <rect x="20" y="40" width="270" height="250" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <text x="40" y="70" font-size="13" font-weight="600" style="fill:var(--ink)">Asset managers</text>
+      <text x="40" y="86" font-size="13" style="fill:var(--muted)">index &amp; mutual funds, ETFs</text>
+      <text x="40" y="112" font-size="13" font-weight="600" style="fill:var(--ink)">Hedge funds</text>
+      <text x="40" y="128" font-size="13" style="fill:var(--muted)">flexible, leveraged strategies</text>
+      <text x="40" y="154" font-size="13" font-weight="600" style="fill:var(--ink)">Private equity &amp; VC</text>
+      <text x="40" y="170" font-size="13" style="fill:var(--muted)">buy companies, fund startups</text>
+      <text x="40" y="196" font-size="13" font-weight="600" style="fill:var(--ink)">Pension funds</text>
+      <text x="40" y="212" font-size="13" style="fill:var(--muted)">invest retirement savings</text>
+      <text x="40" y="238" font-size="13" font-weight="600" style="fill:var(--ink)">Insurers</text>
+      <text x="40" y="254" font-size="13" style="fill:var(--muted)">invest premium float</text>
+      <text x="40" y="280" font-size="13" font-weight="600" style="fill:var(--ink)">Sovereign wealth funds</text>
+      <rect x="430" y="40" width="270" height="250" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <text x="450" y="76" font-size="13" font-weight="600" style="fill:var(--ink)">Investment banking</text>
+      <text x="450" y="92" font-size="13" style="fill:var(--muted)">M&amp;A advice, underwriting</text>
+      <text x="450" y="122" font-size="13" font-weight="600" style="fill:var(--ink)">Sales &amp; trading</text>
+      <text x="450" y="138" font-size="13" style="fill:var(--muted)">quotes prices, executes orders</text>
+      <text x="450" y="168" font-size="13" font-weight="600" style="fill:var(--ink)">Research</text>
+      <text x="450" y="184" font-size="13" style="fill:var(--muted)">analyst reports on stocks, bonds</text>
+      <text x="450" y="214" font-size="13" font-weight="600" style="fill:var(--ink)">Market makers</text>
+      <text x="450" y="230" font-size="13" style="fill:var(--muted)">continuous two-sided quotes</text>
+      <text x="450" y="260" font-size="13" font-weight="600" style="fill:var(--ink)">Brokers</text>
+      <text x="450" y="276" font-size="13" style="fill:var(--muted)">route orders to venues</text>
+      <text x="360" y="132" text-anchor="middle" font-size="13" style="fill:var(--muted)">fees &amp; commissions</text>
+      <path d="M295,145 L425,145" fill="none" style="stroke:var(--axis)" stroke-width="1.8" marker-end="url(#s06-arrow)"></path>
+      <path d="M425,205 L295,205" fill="none" style="stroke:var(--axis)" stroke-width="1.8" marker-end="url(#s06-arrow)"></path>
+      <text x="360" y="226" text-anchor="middle" font-size="13" style="fill:var(--muted)">execution, research,</text>
+      <text x="360" y="242" text-anchor="middle" font-size="13" style="fill:var(--muted)">new issues</text>
+      <text x="360" y="320" text-anchor="middle" font-size="13" style="fill:var(--muted)">The buy side is the customer; the sell side is the store.</text>
+    </svg>
+    <figcaption><strong>Figure 6.2</strong> — The industry's two halves. Money managers (buy side) pay banks, brokers, and market makers (sell side) for execution, research, and access to new securities.</figcaption>
+  </figure>
+
+  <p>The economics differ sharply. Buy-side revenue scales with assets under management — a fund charging 0.5% on $50 billion earns $250 million a year whether markets are open or not. Sell-side revenue scales with <em>activity</em>: deals closed, trades executed, spreads captured. That is why sell-side hiring booms with deal cycles while big asset managers grind on steadily.</p>
+  <p>Career-wise: the sell side hires analysts into investment banking (building deal models, brutal hours), sales &amp; trading (pricing and executing), and research (writing on companies — the skills of <a href="#s12">Sections 12</a>–<a href="#s13">13</a>). The buy side hires portfolio managers, research analysts, and — in force since the 2010s — quantitative researchers and data scientists who build signals from data (<a href="#s18">Section 18</a>). Sell-side experience is a classic on-ramp to buy-side seats; <a href="#s20">Section 20 (Career Roadmap)</a> maps the paths in detail.</p>
+  <div class="callout co-you"><p class="co-label">Your edge</p><p>Data roles now live on <em>both</em> sides: market makers and hedge funds run some of the most demanding ML and low-latency engineering anywhere, while banks and asset managers hire heavily for risk analytics, surveillance, and client data. When you read a posting, first ask: buy side or sell side? That single bit tells you the business model, the pace, and how your work gets monetized.</p></div>
+
+  <h3 id="s06-primary">Primary vs secondary markets: issuance and trading</h3>
+  <p>Every security lives two lives. It is born in the <dfn class="term" tabindex="0" data-def="Where new securities are created and sold for the first time — the issuer receives the money.">primary market</dfn>, where the issuer sells it and receives the cash. It then spends decades in the <dfn class="term" tabindex="0" data-def="Where existing securities trade between investors — the issuer gets nothing from these trades.">secondary market</dfn>, changing hands between investors while the issuer gets nothing further. When Apple stock trades $10 billion in a day, Apple's bank account doesn't move a cent.</p>
+  <p>The flagship primary-market event is the <dfn class="term" tabindex="0" data-def="Initial public offering: a private company sells shares to the public for the first time and lists on an exchange.">IPO</dfn>. A private company hires investment banks to run <dfn class="term" tabindex="0" data-def="Banks buy the new securities from the issuer and resell them to investors, taking on the placement risk for a fee.">underwriting</dfn>: the banks value the company, write the <dfn class="term" tabindex="0" data-def="The legal disclosure document describing a new security's business, financials, and risks.">prospectus</dfn> (a legal disclosure document filed with the SEC — readable free at sec.gov/edgar), drum up demand from buy-side institutions in a roadshow, set the price, and buy the shares from the company to resell to investors. Bond issuance works the same way but faster and more routine — large firms tap the bond market the way you'd call an API, sometimes raising billions in an afternoon (<a href="#s08">Section 8</a>).</p>
+  <div class="callout co-ex"><p class="co-label">Worked example: IPO economics</p><p>A company sells 10 million new shares at $20: gross proceeds $200 million. The underwriters' fee (the <em>gross spread</em>) is a typical 7%, or $14 million, so the company nets $186 million. If the stock closes its first day at $26, that 30% &ldquo;pop&rdquo; means the company arguably left 10M × $6 = $60 million on the table — money captured by the investors who got IPO allocations instead of by the firm. Underpricing is one of the best-documented puzzles in finance.</p></div>
+  <p>Why does the secondary market matter so much if issuers get nothing from it? Because <dfn class="term" tabindex="0" data-def="How quickly and cheaply an asset can be converted to cash without moving its price.">liquidity</dfn> in the secondary market is what makes the primary market possible. You'll only buy a 30-year bond at issue if you know you can sell it Tuesday. Secondary prices also do the economy's homework: they continuously re-value every firm, which tells capital where to flow next — the price-signal machinery from <a href="#s02">Section 2</a> operating at millisecond resolution. How stocks and their exchanges work in detail is <a href="#s07">Section 7</a>.</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall</p><p>&ldquo;I bought shares, so I gave the company money.&rdquo; Only in the primary market. Buying <code>AAPL</code> on the secondary market sends your money to whoever sold you the shares — the company was paid once, at issuance, possibly decades ago.</p></div>
+
+  <h3 id="s06-microstructure">Market microstructure: inside the order book</h3>
+  <p>Now zoom all the way in, to the data structure at the center of every modern market: the <dfn class="term" tabindex="0" data-def="The live list of all outstanding buy and sell orders for a security, sorted by price.">order book</dfn>. It is literally two priority queues. On one side sit <dfn class="term" tabindex="0" data-def="Outstanding orders to buy, sorted from highest price down; the best bid is the most anyone will currently pay.">bids</dfn> — resting offers to buy, sorted highest-first. On the other sit <dfn class="term" tabindex="0" data-def="Outstanding orders to sell, sorted from lowest price up; the best ask is the least anyone will currently accept.">asks</dfn> — resting offers to sell, sorted lowest-first. The gap between the best bid and best ask is the <dfn class="term" tabindex="0" data-def="Best ask minus best bid — the cost of trading immediately, and the market maker's revenue.">bid–ask spread</dfn>, and the total size resting at each price level is the book's <dfn class="term" tabindex="0" data-def="How much size is resting at each price level — deep books absorb big orders with little price movement.">depth</dfn>.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="Anatomy of an order book: sell orders stacked above a spread band, buy orders below, with best bid, best ask, spread, and depth labeled.">
+      <text x="85" y="78" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--muted)">sellers queue</text>
+      <text x="85" y="94" text-anchor="middle" font-size="13" style="fill:var(--muted)">(asks)</text>
+      <text x="85" y="234" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--muted)">buyers queue</text>
+      <text x="85" y="250" text-anchor="middle" font-size="13" style="fill:var(--muted)">(bids)</text>
+      <rect x="240" y="21" width="175" height="18" rx="3" opacity="0.3" style="fill:var(--down)"></rect>
+      <text x="230" y="35" text-anchor="end" font-size="13" style="fill:var(--ink)">100.25</text>
+      <text x="421" y="35" font-size="13" style="fill:var(--muted)">700</text>
+      <rect x="240" y="47" width="125" height="18" rx="3" opacity="0.3" style="fill:var(--down)"></rect>
+      <text x="230" y="61" text-anchor="end" font-size="13" style="fill:var(--ink)">100.20</text>
+      <text x="371" y="61" font-size="13" style="fill:var(--muted)">500</text>
+      <rect x="240" y="73" width="75" height="18" rx="3" opacity="0.3" style="fill:var(--down)"></rect>
+      <text x="230" y="87" text-anchor="end" font-size="13" style="fill:var(--ink)">100.15</text>
+      <text x="321" y="87" font-size="13" style="fill:var(--muted)">300</text>
+      <rect x="240" y="99" width="100" height="18" rx="3" opacity="0.3" style="fill:var(--down)"></rect>
+      <text x="230" y="113" text-anchor="end" font-size="13" style="fill:var(--ink)">100.10</text>
+      <text x="346" y="113" font-size="13" style="fill:var(--muted)">400</text>
+      <rect x="240" y="125" width="50" height="18" rx="3" opacity="0.3" style="fill:var(--down)"></rect>
+      <text x="230" y="139" text-anchor="end" font-size="13" font-weight="700" style="fill:var(--ink)">100.05</text>
+      <text x="296" y="139" font-size="13" style="fill:var(--muted)">200</text>
+      <rect x="165" y="150" width="320" height="24" rx="4" style="fill:var(--accent-soft)"></rect>
+      <text x="325" y="167" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">$100.05 − $99.95 = $0.10 spread</text>
+      <rect x="240" y="177" width="75" height="18" rx="3" opacity="0.3" style="fill:var(--up)"></rect>
+      <text x="230" y="191" text-anchor="end" font-size="13" font-weight="700" style="fill:var(--ink)">99.95</text>
+      <text x="321" y="191" font-size="13" style="fill:var(--muted)">300</text>
+      <rect x="240" y="203" width="125" height="18" rx="3" opacity="0.3" style="fill:var(--up)"></rect>
+      <text x="230" y="217" text-anchor="end" font-size="13" style="fill:var(--ink)">99.90</text>
+      <text x="371" y="217" font-size="13" style="fill:var(--muted)">500</text>
+      <rect x="240" y="229" width="100" height="18" rx="3" opacity="0.3" style="fill:var(--up)"></rect>
+      <text x="230" y="243" text-anchor="end" font-size="13" style="fill:var(--ink)">99.85</text>
+      <text x="346" y="243" font-size="13" style="fill:var(--muted)">400</text>
+      <rect x="240" y="255" width="150" height="18" rx="3" opacity="0.3" style="fill:var(--up)"></rect>
+      <text x="230" y="269" text-anchor="end" font-size="13" style="fill:var(--ink)">99.80</text>
+      <text x="396" y="269" font-size="13" style="fill:var(--muted)">600</text>
+      <rect x="240" y="281" width="200" height="18" rx="3" opacity="0.3" style="fill:var(--up)"></rect>
+      <text x="230" y="295" text-anchor="end" font-size="13" style="fill:var(--ink)">99.75</text>
+      <text x="446" y="295" font-size="13" style="fill:var(--muted)">800</text>
+      <line x1="505" y1="134" x2="330" y2="134" style="stroke:var(--grid)" stroke-width="1"></line>
+      <text x="512" y="138" font-size="13" style="fill:var(--ink)">best ask — cheapest seller</text>
+      <line x1="505" y1="186" x2="330" y2="186" style="stroke:var(--grid)" stroke-width="1"></line>
+      <text x="512" y="190" font-size="13" style="fill:var(--ink)">best bid — highest buyer</text>
+      <line x1="505" y1="162" x2="490" y2="162" style="stroke:var(--grid)" stroke-width="1"></line>
+      <text x="512" y="166" font-size="13" style="fill:var(--muted)">the cost of immediacy</text>
+      <line x1="505" y1="30" x2="425" y2="30" style="stroke:var(--grid)" stroke-width="1"></line>
+      <text x="512" y="34" font-size="13" style="fill:var(--muted)">bar length = depth (shares</text>
+      <text x="512" y="50" font-size="13" style="fill:var(--muted)">resting at that price)</text>
+    </svg>
+    <figcaption><strong>Figure 6.3</strong> — Anatomy of an order book. Sellers stack above the spread, buyers below; nobody currently agrees to trade, which is exactly why both queues exist. A trade happens the instant someone crosses the gap.</figcaption>
+  </figure>
+
+  <p>You interact with the book through two order types. A <dfn class="term" tabindex="0" data-def="An order to trade immediately at the best available prices — guaranteed execution, unguaranteed price.">market order</dfn> says &ldquo;fill me now at whatever prices are available&rdquo; — it consumes resting orders starting from the best price. A <dfn class="term" tabindex="0" data-def="An order to trade only at a specified price or better; it rests in the book until matched or cancelled.">limit order</dfn> says &ldquo;fill me only at this price or better&rdquo; — if nobody's willing, it joins the queue and waits. Matching follows <dfn class="term" tabindex="0" data-def="Orders match best price first; at equal prices, whoever arrived first fills first.">price-time priority</dfn>: best price wins, and among equal prices, first-come-first-served — a stable sort you could implement in an afternoon, running at nanosecond scale.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example: walking the book</p><p>Using Figure 6.3's book, send a <strong>market buy for 1,000 shares</strong>. You lift 200 @ $100.05, then 400 @ $100.10, then 300 @ $100.15, then 100 @ $100.20. Average fill = (200×100.05 + 400×100.10 + 300×100.15 + 100×100.20) ÷ 1,000 = $100,115 ÷ 1,000 = <strong>$100.115</strong> — 6.5¢ per share worse than the best ask, a $65 cost known as <dfn class="term" tabindex="0" data-def="The gap between the price you expected (the quote) and the average price you actually got.">slippage</dfn>. Your own order moved the market: that's price impact, and it's why large investors slice big orders into thousands of small ones.</p></div>
+  <p>Who keeps the queues populated? Market makers. They post bids and asks simultaneously, hoping to buy at $99.95 and sell at $100.05 all day — earning the spread as compensation for the risk that prices lurch while they're holding inventory. Most are now <dfn class="term" tabindex="0" data-def="High-frequency trading: automated strategies that quote and trade in microseconds, competing on speed.">HFT</dfn> firms whose edge is speed: co-located servers, microwave links between cities, FPGA-parsed market data. The good: spreads on liquid US stocks fell from ~12 cents in the 1990s to ~1 cent today. The debated: whether the speed race spends real resources winning races that don't help anyone — <a href="#s17">Section 17</a> revisits this, including the 2010 Flash Crash.</p>
+  <div class="callout co-key"><p class="co-label">Key idea</p><p>The spread is the price of immediacy. Market orders pay it; limit orders earn it (in exchange for execution risk — the market may run away without filling you). Every execution strategy in existence is a tradeoff along this line.</p></div>
+
+  <div class="widget" id="s06-orderbook">
+    <div class="widget-head">
+      <h4>Order book simulator</h4>
+      <p>Send orders into a live book. Try the default (market buy, 600 shares) and check the average fill — then send a 2,000-share market order and watch it walk the book.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <div class="btn-group" data-role="side">
+          <button class="btn is-active" type="button" data-side="buy">Buy</button>
+          <button class="btn" type="button" data-side="sell">Sell</button>
+        </div>
+        <div class="btn-group" data-role="type">
+          <button class="btn is-active" type="button" data-type="market">Market</button>
+          <button class="btn" type="button" data-type="limit">Limit</button>
+        </div>
+      </div>
+      <div class="ctl-row">
+        <label class="ctl">Order size <output class="ctl-val">600 sh</output>
+          <input data-role="qty" type="range" min="100" max="2000" step="100" value="600">
+        </label>
+        <label class="ctl">Limit price <output class="ctl-val">$100.00</output>
+          <input data-role="px" class="num-in" type="number" min="95" max="105" step="0.05" value="100.00" disabled>
+        </label>
+      </div>
+      <div class="ctl-row">
+        <div class="btn-group">
+          <button class="btn" type="button" data-role="submit">Submit order</button>
+          <button class="btn" type="button" data-role="reset">Reset book</button>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">Last price</span><span class="stat-value" data-role="last">$100.00</span></div>
+        <div class="stat"><span class="stat-label">Bid–ask spread</span><span class="stat-value" data-role="spread">$0.10</span></div>
+        <div class="stat"><span class="stat-label">Avg fill price</span><span class="stat-value" data-role="avg">—</span></div>
+        <div class="stat"><span class="stat-label">Price impact</span><span class="stat-value" data-role="impact">—</span></div>
+      </div>
+      <svg data-role="book" viewBox="0 0 720 336" role="img" aria-label="Live order book ladder showing bid and ask levels with depth bars"></svg>
+      <p data-role="msg" style="color:var(--ink-2)">Book seeded: 5 bid levels, 5 ask levels around $100. Submit an order to begin.</p>
+      <div data-role="fills"></div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s06-orderbook');
+    if (!root) return;
+    var NS = 'http://www.w3.org/2000/svg';
+    var SEED_BIDS = [[99.95, 300], [99.90, 500], [99.85, 400], [99.80, 600], [99.75, 800]];
+    var SEED_ASKS = [[100.05, 200], [100.10, 400], [100.15, 300], [100.20, 500], [100.25, 700]];
+    var bids, asks, last;
+    var side = 'buy', type = 'market';
+
+    var qtyIn = root.querySelector('[data-role="qty"]');
+    var qtyOut = qtyIn.parentNode.querySelector('.ctl-val');
+    var pxIn = root.querySelector('[data-role="px"]');
+    var pxOut = pxIn.parentNode.querySelector('.ctl-val');
+    var svg = root.querySelector('[data-role="book"]');
+    var msgEl = root.querySelector('[data-role="msg"]');
+    var fillsEl = root.querySelector('[data-role="fills"]');
+    var lastEl = root.querySelector('[data-role="last"]');
+    var spreadEl = root.querySelector('[data-role="spread"]');
+    var avgEl = root.querySelector('[data-role="avg"]');
+    var impactEl = root.querySelector('[data-role="impact"]');
+
+    function clone(a) { return a.map(function (l) { return [l[0], l[1]]; }); }
+    function money(p, d) { return '$' + p.toFixed(d === undefined ? 2 : d); }
+    function num(n) { return n.toLocaleString('en-US', { maximumFractionDigits: 0 }); }
+
+    function el(name, attrs, style) {
+      var e = document.createElementNS(NS, name);
+      for (var k in attrs) { if (attrs.hasOwnProperty(k)) e.setAttribute(k, attrs[k]); }
+      if (style) e.setAttribute('style', style);
+      return e;
+    }
+    function txt(x, y, s, anchor, style, weight) {
+      var t = el('text', { x: x, y: y, 'font-size': '13', 'text-anchor': anchor || 'start' }, style);
+      if (weight) t.setAttribute('font-weight', weight);
+      t.textContent = s;
+      return t;
+    }
+
+    function renderBook() {
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      var showA = asks.slice(0, 6), showB = bids.slice(0, 6);
+      var maxSize = 1, i;
+      for (i = 0; i < showA.length; i++) maxSize = Math.max(maxSize, showA[i][1]);
+      for (i = 0; i < showB.length; i++) maxSize = Math.max(maxSize, showB[i][1]);
+      var midY = 168, rowH = 26, barX = 210, barMaxW = 380;
+      // asks: best ask nearest the spread band, worse asks stacked above
+      for (i = 0; i < showA.length; i++) {
+        var yA = midY - 32 - i * rowH;
+        var wA = Math.max(4, showA[i][1] / maxSize * barMaxW);
+        svg.appendChild(el('rect', { x: barX, y: yA - 9, width: wA, height: 18, rx: 3, opacity: '0.3' }, 'fill:var(--down)'));
+        svg.appendChild(txt(barX - 10, yA + 5, showA[i][0].toFixed(2), 'end', 'fill:var(--ink)', i === 0 ? '700' : null));
+        svg.appendChild(txt(barX + wA + 8, yA + 5, num(showA[i][1]), 'start', 'fill:var(--muted)'));
+      }
+      if (asks.length > 6) svg.appendChild(txt(barX - 10, midY - 32 - 6 * rowH + 5, '+' + (asks.length - 6) + ' more', 'end', 'fill:var(--muted)'));
+      if (!asks.length) svg.appendChild(txt(360, midY - 36, 'no asks left — sellers wiped out', 'middle', 'fill:var(--muted)'));
+      // spread band
+      svg.appendChild(el('line', { x1: 40, y1: midY, x2: 680, y2: midY, 'stroke-width': 1, 'stroke-dasharray': '4 4' }, 'stroke:var(--grid)'));
+      var spreadLabel = (bids.length && asks.length) ? 'spread ' + money(asks[0][0] - bids[0][0]) : 'spread —';
+      var lbl = txt(360, midY + 4, spreadLabel, 'middle', 'fill:var(--accent)', '600');
+      svg.appendChild(lbl);
+      // bids
+      for (i = 0; i < showB.length; i++) {
+        var yB = midY + 32 + i * rowH;
+        var wB = Math.max(4, showB[i][1] / maxSize * barMaxW);
+        svg.appendChild(el('rect', { x: barX, y: yB - 9, width: wB, height: 18, rx: 3, opacity: '0.3' }, 'fill:var(--up)'));
+        svg.appendChild(txt(barX - 10, yB + 5, showB[i][0].toFixed(2), 'end', 'fill:var(--ink)', i === 0 ? '700' : null));
+        svg.appendChild(txt(barX + wB + 8, yB + 5, num(showB[i][1]), 'start', 'fill:var(--muted)'));
+      }
+      if (bids.length > 6) svg.appendChild(txt(barX - 10, midY + 32 + 6 * rowH + 5, '+' + (bids.length - 6) + ' more', 'end', 'fill:var(--muted)'));
+      if (!bids.length) svg.appendChild(txt(360, midY + 40, 'no bids left — buyers wiped out', 'middle', 'fill:var(--muted)'));
+    }
+
+    function renderStats() {
+      lastEl.textContent = money(last);
+      spreadEl.textContent = (bids.length && asks.length) ? money(asks[0][0] - bids[0][0]) : '—';
+    }
+
+    function rest(arr, px, size, isBid) {
+      for (var i = 0; i < arr.length; i++) {
+        if (Math.abs(arr[i][0] - px) < 1e-9) { arr[i][1] += size; return; }
+        if (isBid ? arr[i][0] < px - 1e-9 : arr[i][0] > px + 1e-9) { arr.splice(i, 0, [px, size]); return; }
+      }
+      arr.push([px, size]);
+    }
+
+    function submit() {
+      var qty = Math.min(2000, Math.max(100, Math.round((parseInt(qtyIn.value, 10) || 600) / 100) * 100));
+      var lim = parseFloat(pxIn.value);
+      if (isNaN(lim)) lim = 100;
+      lim = Math.min(105, Math.max(95, Math.round(lim * 20) / 20));
+      pxIn.value = lim.toFixed(2);
+      pxOut.textContent = money(lim);
+
+      var book = (side === 'buy') ? asks : bids;
+      var preBest = book.length ? book[0][0] : null;
+      var fills = [], rem = qty;
+      while (rem > 0 && book.length) {
+        var lv = book[0];
+        if (type === 'limit') {
+          if (side === 'buy' && lv[0] > lim + 1e-9) break;
+          if (side === 'sell' && lv[0] < lim - 1e-9) break;
+        }
+        var take = Math.min(rem, lv[1]);
+        fills.push([lv[0], take]);
+        rem -= take;
+        lv[1] -= take;
+        if (lv[1] <= 0) book.shift();
+      }
+      if (rem > 0 && type === 'limit') {
+        rest(side === 'buy' ? bids : asks, lim, rem, side === 'buy');
+      }
+
+      var filled = 0, cost = 0, i;
+      for (i = 0; i < fills.length; i++) { filled += fills[i][1]; cost += fills[i][0] * fills[i][1]; }
+      var avg = filled > 0 ? cost / filled : null;
+      if (filled > 0) last = fills[fills.length - 1][0];
+
+      avgEl.textContent = avg === null ? '—' : money(avg, 4);
+      var impact = (avg !== null && preBest !== null) ? (side === 'buy' ? avg - preBest : preBest - avg) : null;
+      if (impact === null) {
+        impactEl.textContent = '—';
+        impactEl.style.color = '';
+      } else {
+        impactEl.textContent = (impact * 100).toFixed(1) + '¢/sh';
+        impactEl.style.color = impact > 0.0001 ? 'var(--down)' : 'var(--up)';
+      }
+      renderStats();
+      renderBook();
+
+      var parts = [];
+      if (filled > 0) {
+        parts.push('Filled ' + num(filled) + ' of ' + num(qty) + ' shares across ' + fills.length + ' price level' + (fills.length > 1 ? 's' : '') + ' (avg ' + money(avg, 4) + ').');
+        if (impact > 0.0001) parts.push('You walked the book: avg fill was ' + (impact * 100).toFixed(1) + '¢/share worse than the pre-trade best quote of ' + money(preBest) + '.');
+        else parts.push('Entire order filled at the best quote — no price impact.');
+      }
+      if (rem > 0) {
+        if (type === 'limit') parts.push(num(rem) + ' shares are now resting at ' + money(lim) + ' — you are part of the book. Note how the ladder changed.');
+        else parts.push(num(rem) + ' shares could not fill — the ' + (side === 'buy' ? 'ask' : 'bid') + ' side is empty. Hit Reset to reseed.');
+      }
+      if (filled === 0 && rem === qty && type === 'limit') {
+        parts = ['No immediate match at ' + money(lim) + ' — your whole order rests in the book. Passive orders can earn the spread, but risk never filling.'];
+      }
+      if (filled === 0 && type === 'market' && !book.length) {
+        parts = ['No liquidity left on that side — nothing to match against. Hit Reset to reseed the book.'];
+      }
+      msgEl.textContent = parts.join(' ');
+
+      var html = '<p style="margin:0;color:var(--muted)">Fills:</p>';
+      if (fills.length) {
+        for (i = 0; i < fills.length; i++) html += '<p style="margin:0;color:var(--ink-2)">' + num(fills[i][1]) + ' @ ' + money(fills[i][0]) + '</p>';
+      } else {
+        html = '<p style="margin:0;color:var(--muted)">Fills: none</p>';
+      }
+      fillsEl.innerHTML = html;
+    }
+
+    function reset() {
+      bids = clone(SEED_BIDS);
+      asks = clone(SEED_ASKS);
+      last = 100.00;
+      avgEl.textContent = '—';
+      impactEl.textContent = '—';
+      impactEl.style.color = '';
+      fillsEl.innerHTML = '';
+      msgEl.textContent = 'Book reseeded: 5 bid levels, 5 ask levels around $100. Submit an order to begin.';
+      renderStats();
+      renderBook();
+    }
+
+    var sideBtns = root.querySelectorAll('[data-side]');
+    var typeBtns = root.querySelectorAll('[data-type]');
+    function wireGroup(btns, fn) {
+      for (var i = 0; i < btns.length; i++) {
+        (function (b) {
+          b.addEventListener('click', function () {
+            for (var j = 0; j < btns.length; j++) btns[j].classList.remove('is-active');
+            b.classList.add('is-active');
+            fn(b);
+          });
+        })(btns[i]);
+      }
+    }
+    wireGroup(sideBtns, function (b) { side = b.getAttribute('data-side'); });
+    wireGroup(typeBtns, function (b) {
+      type = b.getAttribute('data-type');
+      pxIn.disabled = (type === 'market');
+    });
+
+    qtyIn.addEventListener('input', function () {
+      qtyOut.textContent = num(parseInt(qtyIn.value, 10)) + ' sh';
+    });
+    pxIn.addEventListener('change', function () {
+      var v = parseFloat(pxIn.value);
+      if (isNaN(v)) v = 100;
+      v = Math.min(105, Math.max(95, Math.round(v * 20) / 20));
+      pxIn.value = v.toFixed(2);
+      pxOut.textContent = money(v);
+    });
+    root.querySelector('[data-role="submit"]').addEventListener('click', submit);
+    root.querySelector('[data-role="reset"]').addEventListener('click', reset);
+
+    reset();
+  })();
+  </script>
+
+  <p>Play with three scenarios. First, the default market buy of 600 fills 200 @ $100.05 and 400 @ $100.10 — average $100.0833, already a third of a cent of slippage. Second, a limit buy of 500 at $100.05 fills the 200 on offer and leaves 300 resting as the new best bid, tightening the spread to $0.05 — you just <em>provided</em> liquidity. Third, hammer the book with repeated 2,000-share market buys and watch the ask side evaporate and the last price climb: that is price impact made visible, and it's exactly what execution algorithms are built to minimize.</p>
+
+  <h3 id="s06-lifecycle">A trade, end to end</h3>
+  <p>You tap Buy on your phone. What actually happens? More than you'd think, across three very different timescales.</p>
+  <p><strong>Milliseconds — routing and execution.</strong> Your broker's systems validate the order and route it to an execution venue: a public exchange, or (for most retail orders) a wholesale market maker who pays the broker for the privilege. The venue's matching engine crosses your order against the book, and you get a confirmation before your thumb leaves the screen. Economically, the shares are yours from this instant.</p>
+  <p><strong>Hours — clearing.</strong> Overnight, a <dfn class="term" tabindex="0" data-def="Central counterparty clearing house: steps between buyer and seller, guaranteeing both sides of every trade.">clearing house</dfn> (in US stocks, the NSCC) performs <dfn class="term" tabindex="0" data-def="The clearing house replaces the original trade with two trades: buyer-vs-clearinghouse and clearinghouse-vs-seller.">novation</dfn>: it inserts itself as buyer to every seller and seller to every buyer, so nobody needs to trust a stranger. It also does <dfn class="term" tabindex="0" data-def="Offsetting all of a member's buys and sells so only the net amount of cash and securities moves.">netting</dfn> — a firm that bought 5 million shares and sold 4.9 million settles only the net 100,000. Netting routinely shrinks settlement obligations by ~98%, a compression trick any data engineer will appreciate.</p>
+  <p><strong>One day — settlement and custody.</strong> On <dfn class="term" tabindex="0" data-def="Trade date plus one business day — when cash and securities legally change hands in US markets.">T+1</dfn> (trade date plus one business day, the US standard since May 2024), <dfn class="term" tabindex="0" data-def="The final exchange of cash for securities that legally completes a trade.">settlement</dfn> happens: cash and shares swap at the Depository Trust Company, the central vault where nearly all US securities live as electronic entries. Your broker's custodian records you as beneficial owner. The whole apparatus exists to crush <dfn class="term" tabindex="0" data-def="The risk that the other side of your trade fails to deliver the cash or securities they owe.">counterparty risk</dfn> — the risk that the stranger on the other side simply doesn't pay.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 280" role="img" aria-label="Trade lifecycle timeline from tapping Buy through broker routing, execution, clearing, and T+1 settlement.">
+      <rect x="28" y="50" width="124" height="64" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <text x="90" y="72" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">You tap Buy</text>
+      <text x="90" y="89" text-anchor="middle" font-size="12" style="fill:var(--ink-2)">order leaves</text>
+      <text x="90" y="104" text-anchor="middle" font-size="12" style="fill:var(--ink-2)">your app</text>
+      <rect x="168" y="50" width="124" height="64" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <text x="230" y="72" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">Broker routes</text>
+      <text x="230" y="89" text-anchor="middle" font-size="12" style="fill:var(--ink-2)">to exchange or</text>
+      <text x="230" y="104" text-anchor="middle" font-size="12" style="fill:var(--ink-2)">market maker</text>
+      <rect x="308" y="50" width="124" height="64" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)"></rect>
+      <text x="370" y="72" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">Execution</text>
+      <text x="370" y="89" text-anchor="middle" font-size="12" style="fill:var(--ink-2)">book matches;</text>
+      <text x="370" y="104" text-anchor="middle" font-size="12" style="fill:var(--ink-2)">price is set</text>
+      <rect x="448" y="50" width="124" height="64" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <text x="510" y="72" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">Clearing (CCP)</text>
+      <text x="510" y="89" text-anchor="middle" font-size="12" style="fill:var(--ink-2)">nets trades,</text>
+      <text x="510" y="104" text-anchor="middle" font-size="12" style="fill:var(--ink-2)">guarantees both</text>
+      <rect x="588" y="50" width="124" height="64" rx="8" style="fill:var(--surface-2);stroke:var(--border)"></rect>
+      <text x="650" y="72" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">Settlement</text>
+      <text x="650" y="89" text-anchor="middle" font-size="12" style="fill:var(--ink-2)">cash for shares</text>
+      <text x="650" y="104" text-anchor="middle" font-size="12" style="fill:var(--ink-2)">at the DTC</text>
+      <line x1="90" y1="114" x2="90" y2="150" style="stroke:var(--grid)" stroke-width="1"></line>
+      <line x1="230" y1="114" x2="230" y2="150" style="stroke:var(--grid)" stroke-width="1"></line>
+      <line x1="370" y1="114" x2="370" y2="150" style="stroke:var(--grid)" stroke-width="1"></line>
+      <line x1="510" y1="114" x2="510" y2="150" style="stroke:var(--grid)" stroke-width="1"></line>
+      <line x1="650" y1="114" x2="650" y2="150" style="stroke:var(--grid)" stroke-width="1"></line>
+      <path d="M40,150 L700,150" fill="none" style="stroke:var(--axis)" stroke-width="2" marker-end="url(#s06-arrow)"></path>
+      <text x="90" y="175" text-anchor="middle" font-size="13" style="fill:var(--muted)">t = 0</text>
+      <text x="230" y="175" text-anchor="middle" font-size="13" style="fill:var(--muted)">milliseconds</text>
+      <text x="370" y="175" text-anchor="middle" font-size="13" style="fill:var(--muted)">milliseconds</text>
+      <text x="510" y="175" text-anchor="middle" font-size="13" style="fill:var(--muted)">same evening</text>
+      <text x="650" y="175" text-anchor="middle" font-size="13" style="fill:var(--muted)">next day (T+1)</text>
+      <text x="360" y="215" text-anchor="middle" font-size="13" style="fill:var(--muted)">Economically the shares are yours at execution; legally, cash and</text>
+      <text x="360" y="233" text-anchor="middle" font-size="13" style="fill:var(--muted)">securities move at settlement. Custodians keep the records forever after.</text>
+    </svg>
+    <figcaption><strong>Figure 6.4</strong> — The life of a trade. Execution takes milliseconds; the plumbing that makes it safe — clearing, netting, settlement, custody — takes a day, and is invisible until the moment it isn't.</figcaption>
+  </figure>
+
+  <div class="callout co-real"><p class="co-label">Real world: January 2021</p><p>When meme-stock volumes exploded, the clearing house demanded billions more in collateral (<dfn class="term" tabindex="0" data-def="Cash or assets posted as a security deposit against a position moving the wrong way before settlement.">margin</dfn>) from brokers to cover the two-day settlement gap that then existed. Several brokers restricted buying in <code>GME</code> because they literally couldn't post the deposit fast enough. The invisible plumbing became front-page news — and the episode accelerated the US move from T+2 to T+1.</p></div>
+
+  <details class="deep"><summary>Deep dive: where your &ldquo;free&rdquo; retail order really goes</summary>
+    <p>Most US retail brokers charge zero commission because of <dfn class="term" tabindex="0" data-def="Payment for order flow: market makers pay brokers to receive and execute their customers' orders.">payment for order flow</dfn> (PFOF): wholesale market makers like Citadel Securities pay the broker a fraction of a cent per share to execute your order internally rather than send it to an exchange. Why pay for it? Retail orders are &ldquo;uninformed&rdquo; in the statistical sense — a random retail buy predicts nothing about the next price move, so making markets against retail is safer than quoting on an exchange where sharper counterparties lurk. Wholesalers typically fill retail slightly <em>inside</em> the public quote (price improvement of a fraction of a cent), and brokers must report execution quality. Critics argue the improvement is measured against a quote the wholesalers themselves help set, and that the conflict — your broker is paid by your counterparty — deserves more scrutiny; the EU banned PFOF outright from 2026. Either way, &ldquo;free&rdquo; means the spread, not the commission, is where the money moves.</p>
+  </details>
+
+  <p>Zoom back out. You now hold the whole map: two channels (markets and intermediaries), a cast of institutions on the buy and sell sides, referees for each arena, a primary market where securities are born, a secondary market where an order book prices them tick by tick, and a clearing-and-settlement pipeline that makes strangers safe to trade with. The next four sections walk through what actually flows through these pipes: <a href="#s07">equities</a>, <a href="#s08">bonds</a>, <a href="#s09">derivatives</a>, and <a href="#s10">currencies, commodities &amp; alternatives</a>.</p>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. A bank funds 30-year mortgages using deposits customers can withdraw at any time. This is called…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Diversification</button>
+        <button class="quiz-opt" data-correct>Maturity transformation</button>
+        <button class="quiz-opt">Regulatory arbitrage</button>
+        <button class="quiz-opt">Novation</button>
+      </div>
+      <p class="quiz-explain">Borrowing short (deposits) to lend long (mortgages) is maturity transformation — a core service of banks, and the reason bank runs are possible when everyone demands their short-term money at once.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. A hedge fund analyst and an investment-bank M&amp;A analyst are, respectively…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Sell side and buy side</button>
+        <button class="quiz-opt">Both sell side</button>
+        <button class="quiz-opt" data-correct>Buy side and sell side</button>
+        <button class="quiz-opt">Both buy side</button>
+      </div>
+      <p class="quiz-explain">Hedge funds manage money (buy side); investment banks sell services — deals, underwriting, execution — to the money (sell side).</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. The book shows asks of 200 shares at $100.05 and 400 at $100.10. A market buy for 600 shares fills at an average of…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">$100.05 — market orders fill at the best ask</button>
+        <button class="quiz-opt" data-correct>$100.0833 — it walks the book across two levels</button>
+        <button class="quiz-opt">$100.075 — the midpoint of the two ask prices</button>
+      </div>
+      <p class="quiz-explain">(200 × 100.05 + 400 × 100.10) ÷ 600 = 60,050 ÷ 600 = $100.0833. It's a size-weighted average, not a simple midpoint — the extra 3.3¢ over the best ask is slippage.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. You buy 100 shares of <code>AAPL</code> through your broker today. Who receives your money?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Apple Inc.</button>
+        <button class="quiz-opt">The SEC, which redistributes it</button>
+        <button class="quiz-opt" data-correct>Whoever sold you the shares in the secondary market</button>
+        <button class="quiz-opt">The exchange where the trade printed</button>
+      </div>
+      <p class="quiz-explain">Secondary-market trades move money between investors. Apple was paid once — in the primary market, when the shares were originally issued.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. What does a clearing house (CCP) fundamentally do?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Sets the official closing price for each stock</button>
+        <button class="quiz-opt">Holds every investor's shares in a central vault</button>
+        <button class="quiz-opt" data-correct>Becomes the counterparty to both sides of each trade and nets obligations</button>
+        <button class="quiz-opt">Approves which companies may list on an exchange</button>
+      </div>
+      <p class="quiz-explain">Through novation the CCP guarantees both legs of every trade, and through netting it shrinks what actually has to move at settlement. Central custody is the depository's job (the DTC), not the clearing house's.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>The financial system routes money from savers to users of capital via two channels: direct finance (markets) and indirect finance (intermediaries such as banks and funds).</li>
+      <li>Intermediaries exist to solve information asymmetry, perform maturity transformation, and provide diversification — services no individual saver can replicate alone.</li>
+      <li>Buy side manages money and earns fees on assets; sell side sells execution, research, and new issues, and earns on activity. Every finance job sits on one side or the other.</li>
+      <li>Regulators map to market failures: the SEC forces disclosure, the Fed and FDIC contain systemic risk and bank runs, FINRA polices brokers, the CFTC covers derivatives.</li>
+      <li>Issuers get paid only in the primary market (IPOs, bond issues, via underwriters); the secondary market prices those claims continuously and gives them liquidity.</li>
+      <li>The order book is two price-time priority queues; the bid–ask spread is the price of immediacy, and big market orders walk the book, paying slippage.</li>
+      <li>A trade executes in milliseconds but settles at T+1: clearing houses net trades and guarantee both sides, then cash and securities swap at the depository, with custodians keeping the records.</li>
+    </ul>
+  </div>
+</section>

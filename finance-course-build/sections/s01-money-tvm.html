@@ -1,0 +1,474 @@
+<section class="lesson" id="s01" data-num="01" data-title="Money and the Time Value of Money">
+  <p class="eyebrow">Part I · Economic Foundations</p>
+  <h2>1. Money and the Time Value of Money</h2>
+  <p class="lede">Every price, every loan, every stock valuation, and every retirement plan rests on one idea: a dollar today and a dollar next year are different things with different values. Master that idea here and you will recognize it, wearing different costumes, in every section that follows.</p>
+
+  <h3 id="s01-what-money-is">What money actually is</h3>
+  <p>Welcome to the start of the course. Over five parts you will build from raw fundamentals (Part I: money, <a href="#s02">micro</a>, <a href="#s03">macro</a>, <a href="#s04">central banks</a>, <a href="#s05">governments</a>) through <a href="#s06">markets and instruments</a> (Part II), <a href="#s11">company analysis and valuation</a> (Part III), <a href="#s15">portfolios and risk</a> (Part IV), and finally <a href="#s18">quant tooling, fintech, and your career map</a> (Part V). Everything compounds — fittingly, that is also the subject of this section.</p>
+  <p>Before money can have a time value, we should pin down what money <em>is</em>. Imagine an economy with no money: you write code, your neighbor grows wheat. To eat, you need a farmer who happens to want software — economists call this the <dfn class="term" tabindex="0" data-def="The barter problem: a trade only happens if each side wants exactly what the other offers, at the same time.">double coincidence of wants</dfn>, and it makes <dfn class="term" tabindex="0" data-def="Direct exchange of goods and services without money.">barter</dfn> hopeless at scale. Money solves it by acting as a universal intermediary. Anything that society accepts in that role is money — and it must do three jobs:</p>
+  <ul>
+    <li><strong>Medium of exchange</strong> — everyone accepts it as payment, so you can sell code for money and buy wheat with money. Two searches instead of one impossible one.</li>
+    <li><strong>Store of value</strong> — it holds its worth over time, so you can earn today and spend next month. Fish would fail this test; gold and dollars (mostly) pass.</li>
+    <li><strong>Unit of account</strong> — it is the common denominator for prices. Instead of quoting wheat in code-hours and shoes in wheat, everything is quoted in one unit. Think of it as the schema that makes every value in the economy comparable.</li>
+  </ul>
+  <p>Historically, money began as <dfn class="term" tabindex="0" data-def="Money with intrinsic value of its own, such as gold, silver, or salt.">commodity money</dfn> — cowrie shells, salt, and above all precious metals. The kingdom of Lydia struck standardized coins around 600 BCE; Song-dynasty China circulated paper notes a thousand years ago; and by the 19th century most major currencies were paper claims redeemable for gold under the <dfn class="term" tabindex="0" data-def="A system in which a currency's value is fixed to a specific quantity of gold, redeemable on demand.">gold standard</dfn>. That link was cut in stages and ended for good in 1971, when the US stopped converting dollars to gold.</p>
+  <p>Since then, all major currencies are <dfn class="term" tabindex="0" data-def="Money that has value by government declaration and public trust, not because it is backed by a commodity.">fiat money</dfn> — from the Latin for "let it be done." A dollar is not a claim on anything physical; it is valuable because everyone agrees it is, because the government demands taxes in it (guaranteeing baseline demand), because it is <dfn class="term" tabindex="0" data-def="Money that must legally be accepted to settle debts.">legal tender</dfn>, and because a <dfn class="term" tabindex="0" data-def="The public institution that issues a currency and manages its supply and interest rates, e.g. the Federal Reserve or ECB.">central bank</dfn> manages its scarcity. Fiat is a shared protocol: it works as long as the network of users keeps trusting it, and its integrity is maintained not by cryptography but by institutions — how, exactly, is the story of <a href="#s04">Section 4</a>.</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall</p><p>"Fiat money is backed by nothing, so it's worthless" is a popular take and a wrong one. Fiat is backed by enforced tax demand, legal status, and managed scarcity. When that management fails — Weimar Germany in 1923, Zimbabwe in 2008 — the store-of-value function collapses first, and prices explode. Scarcity, not substance, is what money requires.</p></div>
+
+  <h3 id="s01-why-interest">Why money has a time price: interest</h3>
+  <p>Here is the pivotal question of this section: if I borrow $1,000 from you today and repay $1,000 in a year, have you broken even? No — you have lost, three times over. <dfn class="term" tabindex="0" data-def="The price of borrowing money, or the reward for lending it, usually quoted as a percent per year.">Interest</dfn> is the price that compensates the lender, and it bundles three distinct charges:</p>
+  <ul>
+    <li><strong>Opportunity cost</strong> — the term for the best alternative you gave up. Your $1,000 could have been earning a return elsewhere; lending it to me means forgoing that.</li>
+    <li><strong>Inflation</strong> — the general rise in prices over time. If prices rise 3%, the $1,000 I return buys about 3% less than the $1,000 you gave me.</li>
+    <li><strong><dfn class="term" tabindex="0" data-def="The chance that a borrower fails to repay as promised.">Default risk</dfn></strong> — I might not pay you back at all. Lenders charge a <dfn class="term" tabindex="0" data-def="Extra expected return demanded as compensation for bearing risk.">risk premium</dfn> on top of everything else to be paid for that possibility.</li>
+  </ul>
+  <p>So an interest rate is never arbitrary: it is a data-rich price that encodes time preference, expected inflation, and perceived risk. That is why the US government borrows more cheaply than a startup, and why rates jump when inflation expectations do.</p>
+  <p>There are two ways interest can accumulate on the <dfn class="term" tabindex="0" data-def="The original amount lent or invested, before any interest.">principal</dfn>. With <dfn class="term" tabindex="0" data-def="Interest computed only on the original principal each period; earnings do not earn.">simple interest</dfn>, you earn on the original amount only: $1,000 at 10% simple pays $100 every year — $1,300 after three years. With <dfn class="term" tabindex="0" data-def="Interest computed on principal plus all previously earned interest; earnings earn.">compound interest</dfn>, each period's interest joins the principal and starts earning itself: $1,000 becomes $1,100, then $1,210, then $1,331. The gap looks trivial at year three. It is not trivial at year thirty.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 380" role="img" aria-label="Line chart showing $10,000 growing at 7% for 30 years: compound interest reaches $76,123 while simple interest reaches only $31,000">
+      <line x1="70" y1="330" x2="680" y2="330" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="70" y1="257.5" x2="680" y2="257.5" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="70" y1="185" x2="680" y2="185" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="70" y1="112.5" x2="680" y2="112.5" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="70" y1="40" x2="680" y2="40" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="62" y="334" text-anchor="end" font-size="13" style="fill:var(--muted)">$0</text>
+      <text x="62" y="261" text-anchor="end" font-size="13" style="fill:var(--muted)">$20k</text>
+      <text x="62" y="189" text-anchor="end" font-size="13" style="fill:var(--muted)">$40k</text>
+      <text x="62" y="116" text-anchor="end" font-size="13" style="fill:var(--muted)">$60k</text>
+      <text x="62" y="44" text-anchor="end" font-size="13" style="fill:var(--muted)">$80k</text>
+      <line x1="70" y1="330" x2="680" y2="330" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="70" y="352" text-anchor="middle" font-size="13" style="fill:var(--muted)">0</text>
+      <text x="273" y="352" text-anchor="middle" font-size="13" style="fill:var(--muted)">10</text>
+      <text x="477" y="352" text-anchor="middle" font-size="13" style="fill:var(--muted)">20</text>
+      <text x="680" y="352" text-anchor="middle" font-size="13" style="fill:var(--muted)">30 years</text>
+      <text x="90" y="30" font-size="14" font-weight="600" style="fill:var(--ink)">Growth of $10,000 at 7% per year</text>
+      <path d="M70,293.8 L680,217.6" fill="none" style="stroke:var(--c2)" stroke-width="2.5"/>
+      <path d="M70,293.8 L171.7,279.2 L273.3,258.7 L375,230 L476.7,189.7 L578.3,133.3 L680,54.1" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>
+      <text x="668" y="44" text-anchor="end" font-size="14" font-weight="600" style="fill:var(--c1)">Compound: $76,123</text>
+      <text x="668" y="207" text-anchor="end" font-size="14" font-weight="600" style="fill:var(--c2)">Simple: $31,000</text>
+    </svg>
+    <figcaption><strong>Figure 1.1</strong> — Same $10,000, same 7% rate, wildly different outcomes: compounding earns interest on interest, so by year 30 it has produced more than double the simple-interest result. The curve's bend is the whole story of long-term investing.</figcaption>
+  </figure>
+  <div class="callout co-real"><p class="co-label">Real world: the $24 island</p><p>In 1626 the Dutch reportedly bought Manhattan from the Lenape for goods worth about $24. Terrible deal? Compounded at 7% per year for the 400 years since, $24 grows to roughly $13.6 <em>trillion</em> — several times the market value of all Manhattan real estate today. At 5% it grows to only about $7.2 billion. Two lessons: compounding over long horizons produces absurd numbers, and the rate matters enormously.</p></div>
+
+  <h3 id="s01-compounding">The compounding machine: FV, the rule of 72, and APR vs APY</h3>
+  <p>Time to formalize. If you invest a <dfn class="term" tabindex="0" data-def="What an amount today will grow to at a given rate after a given number of periods.">future value</dfn> problem, one line does it all:</p>
+  <div class="formula">
+    <div class="formula-main">FV = PV × (1 + r)<sup>n</sup></div>
+    <div class="formula-legend">FV = future value · PV = present value (amount today) · r = rate per period · n = number of periods</div>
+  </div>
+  <p>Each year multiplies your balance by (1 + r), and exponents stack the multiplications. To a CS graduate this should feel familiar: compounding is exponential growth, the same recurrence as <code>b = b * (1 + r)</code> run in a loop. And like all exponentials, it is deceptively slow early and violent late — the last decade of a 30-year investment typically creates more wealth than the first two combined. Check Figure 1.1 again: the curve earns most of its money at the right edge.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example</p><p>You invest $10,000 at 7% per year for 30 years. FV = 10,000 × (1.07)<sup>30</sup> = 10,000 × 7.612 = <strong>$76,123</strong>. Total interest: $66,123 — of which only $21,000 (30 × $700) is interest on the original principal. The other $45,123 is interest earned by interest.</p></div>
+  <p>A handy mental shortcut: the <dfn class="term" tabindex="0" data-def="Estimate of doubling time: years to double is roughly 72 divided by the percent growth rate.">rule of 72</dfn>. Money doubles in approximately 72 ÷ r years. At 8%, doubling takes about 72 ÷ 8 = 9 years (the exact answer is 9.006 — eerily good). At 10%, about 7.2 years. It also runs in reverse: at 6% growth, 12 years per doubling, so a 36-year career gives you three doublings, or 8×. The rule is a first-order approximation that is tightest for rates between about 4% and 12% — fine for napkins, not for contracts.</p>
+  <p><strong>Compounding frequency.</strong> Rates are quoted per year, but interest is often credited monthly or daily. If a 6% annual rate compounds monthly, each month applies 0.5%, and the twelve multiplications overshoot 6% slightly, because each month's interest starts earning immediately:</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Compounding of a 6% quoted rate</th><th>$10,000 after one year</th><th>Effective yield</th></tr></thead>
+    <tbody>
+      <tr><td>Annual</td><td class="td-num">$10,600.00</td><td class="td-num">6.000%</td></tr>
+      <tr><td>Semi-annual</td><td class="td-num">$10,609.00</td><td class="td-num">6.090%</td></tr>
+      <tr><td>Quarterly</td><td class="td-num">$10,613.64</td><td class="td-num">6.136%</td></tr>
+      <tr><td>Monthly</td><td class="td-num">$10,616.78</td><td class="td-num">6.168%</td></tr>
+      <tr><td>Daily</td><td class="td-num">$10,618.31</td><td class="td-num">6.183%</td></tr>
+    </tbody>
+  </table></div>
+  <p>This is why the same loan can wear two different numbers. The <dfn class="term" tabindex="0" data-def="Annual percentage rate: the quoted yearly rate, ignoring the effect of intra-year compounding.">APR</dfn> is the quoted rate — the periodic rate times the number of periods. The <dfn class="term" tabindex="0" data-def="Annual percentage yield (also called effective annual rate, EAR): the true one-year growth including compounding.">APY</dfn> (also called the <dfn class="term" tabindex="0" data-def="Effective annual rate — identical concept to APY: what the money actually grows by in one year.">effective annual rate</dfn>, or EAR) is what your balance actually does in a year:</p>
+  <div class="formula">
+    <div class="formula-main">EAR = (1 + APR ÷ m)<sup>m</sup> − 1</div>
+    <div class="formula-legend">m = compounding periods per year (12 for monthly, 365 for daily)</div>
+  </div>
+  <div class="callout co-warn"><p class="co-label">Common pitfall</p><p>A credit card advertising "24% APR" compounds monthly: 2% per month, so EAR = (1.02)<sup>12</sup> − 1 = 26.8%. Lenders quote loans in APR (looks smaller) and savings in APY (looks bigger) — always convert to EAR before comparing anything. A 12% APR compounded monthly is really 12.68%; the chart below shows how the gap grows with frequency, with diminishing returns as you approach continuous compounding.</p></div>
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="Bar chart of the effective annual yield on a 12% APR under annual, semi-annual, quarterly, monthly, and daily compounding, rising from 12.00% to 12.75%">
+      <text x="90" y="28" font-size="14" font-weight="600" style="fill:var(--ink)">Effective yield on a 12% APR — bar height shows the bonus above 12%</text>
+      <line x1="90" y1="223.3" x2="680" y2="223.3" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="90" y1="146.7" x2="680" y2="146.7" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="90" y1="70" x2="680" y2="70" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="84" y="227" text-anchor="end" font-size="12" style="fill:var(--muted)">+0.25pp</text>
+      <text x="84" y="151" text-anchor="end" font-size="12" style="fill:var(--muted)">+0.50pp</text>
+      <text x="84" y="74" text-anchor="end" font-size="12" style="fill:var(--muted)">+0.75pp</text>
+      <rect x="109" y="297" width="80" height="3" style="fill:var(--c1)"/>
+      <rect x="227" y="189.6" width="80" height="110.4" rx="4" style="fill:var(--c1)"/>
+      <rect x="345" y="131.3" width="80" height="168.7" rx="4" style="fill:var(--c1)"/>
+      <rect x="463" y="91.5" width="80" height="208.5" rx="4" style="fill:var(--c1)"/>
+      <rect x="581" y="70" width="80" height="230" rx="4" style="fill:var(--c1)"/>
+      <line x1="90" y1="300" x2="680" y2="300" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="149" y="289" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">12.00%</text>
+      <text x="267" y="181.6" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">12.36%</text>
+      <text x="385" y="123.3" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">12.55%</text>
+      <text x="503" y="83.5" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">12.68%</text>
+      <text x="621" y="62" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">12.75%</text>
+      <text x="149" y="322" text-anchor="middle" font-size="13" style="fill:var(--muted)">Annual</text>
+      <text x="267" y="322" text-anchor="middle" font-size="13" style="fill:var(--muted)">Semi-annual</text>
+      <text x="385" y="322" text-anchor="middle" font-size="13" style="fill:var(--muted)">Quarterly</text>
+      <text x="503" y="322" text-anchor="middle" font-size="13" style="fill:var(--muted)">Monthly</text>
+      <text x="621" y="322" text-anchor="middle" font-size="13" style="fill:var(--muted)">Daily</text>
+    </svg>
+    <figcaption><strong>Figure 1.2</strong> — The same quoted 12% APR delivers between 12.00% and 12.75% effective yield depending on compounding frequency. The gains shrink as frequency rises — daily is barely better than monthly, and the continuous-compounding limit is 12.7497%.</figcaption>
+  </figure>
+  <p>Now stop reading and drive the machine yourself. The lab below opens with the worked example above ($10,000, 7%, 30 years) so you can confirm the $76,123 — then add a monthly contribution and watch what steady saving plus compounding does. The rate is treated as an effective annual rate, and contributions are added at the end of each month.</p>
+
+  <div class="widget" id="s01-compound-lab">
+    <div class="widget-head">
+      <h4>Compound interest lab</h4>
+      <p>Drag the sliders; try 15 vs 30 years at the same rate, then add a $500 monthly contribution.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Starting amount <output class="ctl-val" id="s01-lab-p-out">$10,000</output>
+          <input type="range" id="s01-lab-p" min="1000" max="100000" step="1000" value="10000"></label>
+        <label class="ctl">Annual rate <output class="ctl-val" id="s01-lab-r-out">7%</output>
+          <input type="range" id="s01-lab-r" min="0" max="15" step="0.25" value="7"></label>
+        <label class="ctl">Years <output class="ctl-val" id="s01-lab-y-out">30 yrs</output>
+          <input type="range" id="s01-lab-y" min="1" max="50" step="1" value="30"></label>
+        <label class="ctl">Monthly contribution <output class="ctl-val" id="s01-lab-c-out">$0/mo</output>
+          <input type="range" id="s01-lab-c" min="0" max="2000" step="50" value="0"></label>
+      </div>
+      <div class="ctl-row">
+        <div class="btn-group">
+          <button class="btn is-active" id="s01-lab-mode-simple">Compare vs simple interest</button>
+          <button class="btn" id="s01-lab-mode-contrib">Compare vs contributions only</button>
+        </div>
+      </div>
+      <svg id="s01-lab-chart" viewBox="0 0 720 360" role="img" aria-label="Line chart of balance over time: compound growth versus the selected baseline"></svg>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">Final value</span><span class="stat-value" id="s01-lab-final">—</span></div>
+        <div class="stat"><span class="stat-label">Total contributed</span><span class="stat-value" id="s01-lab-contrib">—</span></div>
+        <div class="stat"><span class="stat-label">Interest earned</span><span class="stat-value" id="s01-lab-int">—</span></div>
+        <div class="stat"><span class="stat-label" id="s01-lab-alt-label">Baseline ending value</span><span class="stat-value" id="s01-lab-alt">—</span></div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s01-compound-lab');
+    if (!root) return;
+    var pIn = root.querySelector('#s01-lab-p'), rIn = root.querySelector('#s01-lab-r'),
+        yIn = root.querySelector('#s01-lab-y'), cIn = root.querySelector('#s01-lab-c');
+    var pOut = root.querySelector('#s01-lab-p-out'), rOut = root.querySelector('#s01-lab-r-out'),
+        yOut = root.querySelector('#s01-lab-y-out'), cOut = root.querySelector('#s01-lab-c-out');
+    var finalEl = root.querySelector('#s01-lab-final'), contribEl = root.querySelector('#s01-lab-contrib'),
+        intEl = root.querySelector('#s01-lab-int'), altEl = root.querySelector('#s01-lab-alt'),
+        altLabelEl = root.querySelector('#s01-lab-alt-label');
+    var btnSimple = root.querySelector('#s01-lab-mode-simple'), btnContrib = root.querySelector('#s01-lab-mode-contrib');
+    var chart = root.querySelector('#s01-lab-chart');
+    var mode = 'simple';
+    function clamp(v, lo, hi) { v = parseFloat(v); if (isNaN(v)) v = lo; return Math.min(hi, Math.max(lo, v)); }
+    function fmt(x) { return '$' + Math.round(x).toLocaleString('en-US', { maximumFractionDigits: 0 }); }
+    function fmtAxis(v) {
+      if (v >= 1000000) { var m = v / 1000000; return '$' + (m >= 10 ? Math.round(m) : Math.round(m * 10) / 10) + 'M'; }
+      if (v >= 1000) return '$' + Math.round(v / 1000) + 'k';
+      return '$' + Math.round(v);
+    }
+    function niceMax(v) {
+      if (!(v > 0)) return 1;
+      var p = Math.pow(10, Math.floor(Math.log(v) / Math.LN10));
+      var m = v / p;
+      var nice = m <= 1 ? 1 : m <= 1.5 ? 1.5 : m <= 2 ? 2 : m <= 3 ? 3 : m <= 4 ? 4 : m <= 5 ? 5 : m <= 8 ? 8 : 10;
+      return nice * p;
+    }
+    function draw() {
+      var P = clamp(pIn.value, 1000, 100000);
+      var r = clamp(rIn.value, 0, 15) / 100;
+      var yrs = Math.round(clamp(yIn.value, 1, 50));
+      var c = clamp(cIn.value, 0, 2000);
+      pOut.textContent = fmt(P);
+      rOut.textContent = (r * 100).toFixed(2).replace(/\.?0+$/, '') + '%';
+      yOut.textContent = yrs + (yrs === 1 ? ' yr' : ' yrs');
+      cOut.textContent = fmt(c) + '/mo';
+      var n = yrs * 12;
+      var rm = Math.pow(1 + r, 1 / 12) - 1;
+      var comp = [P], alt = [P], b = P, m;
+      for (m = 1; m <= n; m++) {
+        b = b * (1 + rm) + c;
+        comp.push(b);
+        alt.push(mode === 'simple'
+          ? P * (1 + r * m / 12) + c * m + c * r * (m * (m - 1) / 2) / 12
+          : P + c * m);
+      }
+      var contributed = P + c * n;
+      var finalV = comp[n], altV = alt[n];
+      var interest = finalV - contributed;
+      finalEl.textContent = fmt(finalV);
+      contribEl.textContent = fmt(contributed);
+      intEl.textContent = fmt(interest);
+      intEl.style.color = interest > 0.5 ? 'var(--up)' : '';
+      altLabelEl.textContent = mode === 'simple' ? 'Simple-interest ending value' : 'Contributions-only ending value';
+      altEl.textContent = fmt(altV);
+      var L = 70, R = 690, T = 30, B = 310;
+      var ymax = niceMax(Math.max(finalV, altV, P));
+      function xs(i) { return L + (R - L) * i / n; }
+      function ys(v) { return B - (B - T) * v / ymax; }
+      var step = Math.max(1, Math.round(n / 120));
+      function path(arr) {
+        var d = 'M' + xs(0).toFixed(1) + ',' + ys(arr[0]).toFixed(1), i;
+        for (i = step; i < n; i += step) d += 'L' + xs(i).toFixed(1) + ',' + ys(arr[i]).toFixed(1);
+        return d + 'L' + xs(n).toFixed(1) + ',' + ys(arr[n]).toFixed(1);
+      }
+      var g = '', k, gy;
+      for (k = 0; k <= 4; k++) {
+        gy = B - (B - T) * k / 4;
+        g += '<line x1="' + L + '" y1="' + gy + '" x2="' + R + '" y2="' + gy + '" style="stroke:var(--grid)" stroke-width="1"/>';
+        g += '<text x="' + (L - 8) + '" y="' + (gy + 4) + '" text-anchor="end" font-size="12" style="fill:var(--muted)">' + fmtAxis(ymax * k / 4) + '</text>';
+      }
+      g += '<line x1="' + L + '" y1="' + B + '" x2="' + R + '" y2="' + B + '" style="stroke:var(--axis)" stroke-width="1.5"/>';
+      var xt = yrs >= 4 ? [0, Math.round(yrs / 2), yrs] : [0, yrs];
+      for (k = 0; k < xt.length; k++) {
+        g += '<text x="' + xs(xt[k] * 12).toFixed(1) + '" y="' + (B + 22) + '" text-anchor="middle" font-size="12" style="fill:var(--muted)">' + xt[k] + 'y</text>';
+      }
+      g += '<path d="' + path(alt) + '" fill="none" style="stroke:var(--c2)" stroke-width="2.5"/>';
+      g += '<path d="' + path(comp) + '" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>';
+      var y1 = Math.max(T + 12, Math.min(B - 6, ys(finalV)));
+      var y2 = Math.max(T + 12, Math.min(B - 6, ys(altV)));
+      if (y2 - y1 < 30) y2 = y1 + 30;
+      y2 = Math.min(B - 6, y2);
+      g += '<text x="' + (R - 6) + '" y="' + (y1 - 8) + '" text-anchor="end" font-size="13" font-weight="600" style="fill:var(--c1)">Compound</text>';
+      g += '<text x="' + (R - 6) + '" y="' + (y2 + 16) + '" text-anchor="end" font-size="13" font-weight="600" style="fill:var(--c2)">' + (mode === 'simple' ? 'Simple' : 'Contributions') + '</text>';
+      chart.innerHTML = g;
+    }
+    function setMode(m) {
+      mode = m;
+      if (btnSimple.classList) {
+        btnSimple.classList.toggle('is-active', m === 'simple');
+        btnContrib.classList.toggle('is-active', m === 'contrib');
+      }
+      draw();
+    }
+    pIn.addEventListener('input', draw);
+    rIn.addEventListener('input', draw);
+    yIn.addEventListener('input', draw);
+    cIn.addEventListener('input', draw);
+    btnSimple.addEventListener('click', function () { setMode('simple'); });
+    btnContrib.addEventListener('click', function () { setMode('contrib'); });
+    draw();
+  })();
+  </script>
+
+  <details class="deep"><summary>Deep dive: continuous compounding and e</summary>
+    <p>What happens as compounding frequency goes to infinity — every second, every nanosecond? The one-year growth factor (1 + r/m)<sup>m</sup> converges to e<sup>r</sup> as m → ∞. This is the very limit that defines Euler's number, discovered by Jacob Bernoulli while studying exactly this compound-interest question in 1683. So continuously compounded money grows as FV = PV × e<sup>rt</sup>.</p>
+    <p>The practical gap is tiny — at 6%, daily compounding gives 6.1831% effective and continuous gives 6.1837% — but the form is beloved by quants because log-returns add across time instead of multiplying, which makes the math (and the code) dramatically cleaner. You will meet e<sup>rt</sup> again in <a href="#s09">Section 9 (Derivatives)</a>, where option-pricing models live entirely in continuous time.</p>
+  </details>
+
+  <h3 id="s01-present-value">Discounting: the most important idea in finance</h3>
+  <p>Now run the machine backwards. If money grows going forward, it must shrink going backward: a dollar promised in the future is worth <em>less</em> than a dollar today. Computing exactly how much less is called <dfn class="term" tabindex="0" data-def="Translating a future amount into its equivalent value today by removing the interest it could have earned.">discounting</dfn>, and the result is the <dfn class="term" tabindex="0" data-def="What a future payment is worth in today's money.">present value</dfn>. Just invert the compounding formula:</p>
+  <div class="formula">
+    <div class="formula-main">PV = <span class="frac"><span>FV</span><span>(1 + r)<sup>n</sup></span></span></div>
+    <div class="formula-legend">r here is called the discount rate — the return you could earn elsewhere on money of similar risk</div>
+  </div>
+  <figure class="fig">
+    <svg viewBox="0 0 720 310" role="img" aria-label="Timeline diagram: compounding moves $1,000 today forward five years to $1,276; discounting moves $1,276 in five years back to $1,000 today">
+      <defs>
+        <marker id="s01-arr-c1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" style="fill:var(--c1)"/>
+        </marker>
+        <marker id="s01-arr-c2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" style="fill:var(--c2)"/>
+        </marker>
+      </defs>
+      <text x="360" y="52" text-anchor="middle" font-size="14" style="fill:var(--ink)">Compounding: multiply by (1+r)ⁿ … $1,000 × 1.05⁵ = $1,276</text>
+      <path d="M100,120 Q360,40 620,120" fill="none" style="stroke:var(--c1)" stroke-width="2.5" marker-end="url(#s01-arr-c1)"/>
+      <line x1="80" y1="170" x2="640" y2="170" style="stroke:var(--axis)" stroke-width="2"/>
+      <line x1="80" y1="164" x2="80" y2="176" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="192" y1="164" x2="192" y2="176" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="304" y1="164" x2="304" y2="176" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="416" y1="164" x2="416" y2="176" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="528" y1="164" x2="528" y2="176" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="640" y1="164" x2="640" y2="176" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="80" y="196" text-anchor="middle" font-size="13" style="fill:var(--muted)">0</text>
+      <text x="192" y="196" text-anchor="middle" font-size="13" style="fill:var(--muted)">1</text>
+      <text x="304" y="196" text-anchor="middle" font-size="13" style="fill:var(--muted)">2</text>
+      <text x="416" y="196" text-anchor="middle" font-size="13" style="fill:var(--muted)">3</text>
+      <text x="528" y="196" text-anchor="middle" font-size="13" style="fill:var(--muted)">4</text>
+      <text x="640" y="196" text-anchor="middle" font-size="13" style="fill:var(--muted)">5</text>
+      <text x="668" y="196" text-anchor="start" font-size="13" style="fill:var(--muted)">yrs</text>
+      <circle cx="80" cy="170" r="6" style="fill:var(--accent)"/>
+      <circle cx="640" cy="170" r="6" style="fill:var(--c1)"/>
+      <text x="86" y="146" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">PV = $1,000</text>
+      <text x="632" y="146" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">FV = $1,276</text>
+      <path d="M620,215 Q360,305 100,215" fill="none" style="stroke:var(--c2)" stroke-width="2.5" marker-end="url(#s01-arr-c2)"/>
+      <text x="360" y="292" text-anchor="middle" font-size="14" style="fill:var(--ink)">Discounting: divide by (1+r)ⁿ … $1,276 ÷ 1.05⁵ = $1,000</text>
+    </svg>
+    <figcaption><strong>Figure 1.3</strong> — Compounding and discounting are the same operation run in opposite directions along the timeline. At 5%, $1,000 today and $1,276 in five years are the <em>same amount of money</em>.</figcaption>
+  </figure>
+  <p>Why is this "the most important idea in finance"? Because nearly every financial object is a bundle of future cash payments, and discounting is the only honest way to compare bundles with different timings. A bond is a list of promised coupons — <a href="#s08">Section 8</a> is, at its core, one long exercise in discounting them. A stock is a claim on future profits — the valuation models of <a href="#s13">Section 13</a> discount those. A pension, a lawsuit settlement, a startup's business plan: all just cash-flow lists waiting to be discounted. Learn this one operation and you have the skeleton key.</p>
+  <div class="callout co-key"><p class="co-label">Key idea</p><p>The time value of money: amounts at different dates are different currencies, and (1 + r)<sup>n</sup> is the exchange rate between them. Never add or compare dollar amounts from different dates without converting them to the same date first.</p></div>
+  <p>The <dfn class="term" tabindex="0" data-def="The interest rate used to translate future cash into present value; higher rate means lower present value.">discount rate</dfn> you choose is doing a lot of quiet work. It encodes pure time preference (even a risk-free promise must beat sitting on cash), expected inflation, and — crucially — risk: the shakier the promise, the higher the rate, and the less the promise is worth today. Discount $1,000,000 arriving in 40 years at 7% and it is worth 1,000,000 ÷ 1.07<sup>40</sup> = <strong>$66,780</strong> today; at 10% it collapses to about $22,000. Small changes in r produce huge changes in PV at long horizons — which is why analysts argue endlessly about discount rates, and why long-dated assets swing so hard when interest rates move.</p>
+  <div class="callout co-you"><p class="co-label">Your edge</p><p>You already know this function. Discounting is exponential decay — PV = FV × (1 + r)<sup>−n</sup> is the same shape as radioactive half-life or a decaying cache score. The rule of 72 works in reverse too: at a 7.2% discount rate, a future payment loses half its present value every 10 years. And a discount rate plays the same role as a decay constant in your models: one parameter that quietly controls everything downstream.</p></div>
+
+  <div class="widget" id="s01-pv-flipper">
+    <div class="widget-head">
+      <h4>Present value flipper</h4>
+      <p>Type any future amount and see what it is worth today — then raise the rate and watch it melt.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Future amount ($)
+          <input type="number" class="num-in" id="s01-pv-fv" min="1" max="1000000000" step="1000" value="100000"></label>
+        <label class="ctl">Years from now
+          <input type="number" class="num-in" id="s01-pv-n" min="0" max="100" step="1" value="20"></label>
+        <label class="ctl">Discount rate <output class="ctl-val" id="s01-pv-r-out">6%</output>
+          <input type="range" id="s01-pv-r" min="0" max="20" step="0.5" value="6"></label>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">Present value</span><span class="stat-value" id="s01-pv-out">—</span></div>
+      </div>
+      <p id="s01-pv-note" style="color:var(--ink-2)">—</p>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s01-pv-flipper');
+    if (!root) return;
+    var fvIn = root.querySelector('#s01-pv-fv'), nIn = root.querySelector('#s01-pv-n'),
+        rIn = root.querySelector('#s01-pv-r'), rOut = root.querySelector('#s01-pv-r-out'),
+        pvOut = root.querySelector('#s01-pv-out'), note = root.querySelector('#s01-pv-note');
+    function clamp(v, lo, hi) { v = parseFloat(v); if (isNaN(v)) v = lo; return Math.min(hi, Math.max(lo, v)); }
+    function fmt(x) { return '$' + Math.round(x).toLocaleString('en-US', { maximumFractionDigits: 0 }); }
+    function update() {
+      var fv = clamp(fvIn.value, 1, 1000000000);
+      var n = Math.round(clamp(nIn.value, 0, 100));
+      var r = clamp(rIn.value, 0, 20) / 100;
+      var rTxt = (r * 100).toFixed(2).replace(/\.?0+$/, '') + '%';
+      rOut.textContent = rTxt;
+      var pv = fv / Math.pow(1 + r, n);
+      pvOut.textContent = fmt(pv);
+      var cents = Math.round(100 * pv / fv);
+      if (n === 0) {
+        note.textContent = 'A payment arriving today is already in present-value terms: ' + fmt(fv) + ' is worth exactly ' + fmt(fv) + '.';
+      } else if (r === 0) {
+        note.textContent = 'At a 0% discount rate, waiting costs nothing, so ' + fmt(fv) + ' in ' + n + ' year' + (n === 1 ? '' : 's') + ' is worth its full face value today.';
+      } else {
+        note.textContent = 'At a ' + rTxt + ' discount rate, a promise of ' + fmt(fv) + ' in ' + n + ' year' + (n === 1 ? '' : 's') + ' is worth ' + fmt(pv) + ' today — about ' + cents + '¢ per promised dollar.';
+      }
+    }
+    fvIn.addEventListener('input', update);
+    nIn.addEventListener('input', update);
+    rIn.addEventListener('input', update);
+    update();
+  })();
+  </script>
+
+  <h3 id="s01-annuities">Streams of cash flows: annuities and perpetuities</h3>
+  <p>Real financial life rarely involves a single future payment. Mortgages, salaries, pensions, bond coupons, and subscription revenues are <em>streams</em> — sequences of <dfn class="term" tabindex="0" data-def="Any movement of money in or out at a point in time; the atomic unit of finance.">cash flows</dfn>. The universal recipe: discount each payment individually and sum. Present values add — that linearity is what makes finance computable.</p>
+  <p>Two special streams are so common they earn their own formulas. An <dfn class="term" tabindex="0" data-def="A stream of equal payments at regular intervals for a fixed number of periods.">annuity</dfn> pays a fixed amount C each period for n periods. Summing the geometric series of discounted payments (derivation in the deep dive) collapses to:</p>
+  <div class="formula">
+    <div class="formula-main">PV<sub>annuity</sub> = C × <span class="frac"><span>1 − (1 + r)<sup>−n</sup></span><span>r</span></span></div>
+    <div class="formula-legend">C = payment per period · r = rate per period · n = number of payments</div>
+  </div>
+  <div class="callout co-ex"><p class="co-label">Worked example: the lottery's fine print</p><p>A "$1,000,000 jackpot" paid as $50,000 a year for 20 years is not worth $1,000,000. At a 5% discount rate: PV = 50,000 × (1 − 1.05<sup>−20</sup>) ÷ 0.05 = 50,000 × 12.462 = <strong>$623,111</strong>. The headline number quietly ignores the time value of money — which is exactly why lump-sum options are always advertised smaller.</p></div>
+  <p>Run the formula in reverse and you get every <dfn class="term" tabindex="0" data-def="A loan secured by real estate, repaid in equal installments that cover both interest and principal.">mortgage</dfn> payment ever quoted: the bank sets PV equal to the loan amount and solves for C. Borrow $400,000 for 30 years at 6% (0.5% monthly, 360 payments) and C = 400,000 × 0.005 ÷ (1 − 1.005<sup>−360</sup>) = <strong>$2,398.20 per month</strong>. Over the full term you pay about $863,353 — more interest than principal. Each payment first covers the month's interest and puts the remainder toward the balance, a schedule called <dfn class="term" tabindex="0" data-def="Gradually paying down a loan's principal over time via scheduled payments.">amortization</dfn>: early payments are mostly interest, late ones mostly principal.</p>
+  <p>Let n → ∞ and the annuity becomes a <dfn class="term" tabindex="0" data-def="A stream of equal payments that continues forever.">perpetuity</dfn> — payments forever. Infinite payments, finite value, because distant payments discount toward zero. The formula is almost embarrassingly simple:</p>
+  <div class="formula">
+    <div class="formula-main">PV<sub>perpetuity</sub> = C ÷ r</div>
+    <div class="formula-legend">C = payment per period, forever · r = discount rate per period</div>
+  </div>
+  <p>This is the intuition behind endowments and pensions: a $100 million university endowment at a sustainable 4% supports $4 million of spending per year, forever. It is not hypothetical, either — the British government issued actual perpetual bonds ("consols") from 1751, redeeming the last ones only in 2015. And the workhorse valuation model of <a href="#s13">Section 13</a> is a perpetuity whose payment grows at rate g each year: PV = C ÷ (r − g), the growing perpetuity. Three formulas — single payment, annuity, perpetuity — and you can price a startling fraction of the financial world.</p>
+  <details class="deep"><summary>Deep dive: deriving the annuity formula in four lines</summary>
+    <p>The PV of an annuity is a geometric series — the same one you summed in Algorithms when analyzing divide-and-conquer costs. Write x = 1 ÷ (1 + r). Then:</p>
+    <p>PV = Cx + Cx<sup>2</sup> + … + Cx<sup>n</sup> = Cx × (1 − x<sup>n</sup>) ÷ (1 − x).</p>
+    <p>Substitute x = 1 ÷ (1 + r), multiply numerator and denominator by (1 + r), and note 1 − x = r ÷ (1 + r). The (1 + r) factors cancel, leaving PV = C × (1 − (1 + r)<sup>−n</sup>) ÷ r.</p>
+    <p>For the perpetuity, let n → ∞: since x &lt; 1, x<sup>n</sup> → 0 and PV → C ÷ r. Sanity check via the lottery example: as n grows from 20 to ∞ at r = 5%, the multiplier rises from 12.46 to 20 — even an <em>infinite</em> stream of $50,000 payments is worth only $1,000,000 today. Distant money is cheap money.</p>
+  </details>
+
+  <h3 id="s01-real-nominal">Nominal vs real: the inflation adjustment</h3>
+  <p>One correction remains, and skipping it invalidates everything above. All our numbers so far are <dfn class="term" tabindex="0" data-def="Measured in current dollars, with no adjustment for inflation.">nominal</dfn> — raw dollar counts. But dollars are a measuring stick that shrinks: <dfn class="term" tabindex="0" data-def="A sustained rise in the general level of prices, which erodes what each unit of money buys.">inflation</dfn> means each year's dollar buys a little less. What you actually care about is the <dfn class="term" tabindex="0" data-def="Measured in constant purchasing power, after removing the effect of inflation.">real</dfn> quantity: <dfn class="term" tabindex="0" data-def="The amount of goods and services a unit of money can actually buy.">purchasing power</dfn>, not dollar count.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 380" role="img" aria-label="Line chart of the purchasing power of $100 over 30 years at 2%, 5%, and 8% inflation, falling to $55, $23, and $10 respectively">
+      <line x1="70" y1="330" x2="680" y2="330" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="70" y1="257.5" x2="680" y2="257.5" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="70" y1="185" x2="680" y2="185" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="70" y1="112.5" x2="680" y2="112.5" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="70" y1="40" x2="680" y2="40" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="62" y="334" text-anchor="end" font-size="13" style="fill:var(--muted)">$0</text>
+      <text x="62" y="261" text-anchor="end" font-size="13" style="fill:var(--muted)">$25</text>
+      <text x="62" y="189" text-anchor="end" font-size="13" style="fill:var(--muted)">$50</text>
+      <text x="62" y="116" text-anchor="end" font-size="13" style="fill:var(--muted)">$75</text>
+      <text x="62" y="44" text-anchor="end" font-size="13" style="fill:var(--muted)">$100</text>
+      <line x1="70" y1="330" x2="680" y2="330" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="70" y="352" text-anchor="middle" font-size="13" style="fill:var(--muted)">0</text>
+      <text x="273" y="352" text-anchor="middle" font-size="13" style="fill:var(--muted)">10</text>
+      <text x="477" y="352" text-anchor="middle" font-size="13" style="fill:var(--muted)">20</text>
+      <text x="680" y="352" text-anchor="middle" font-size="13" style="fill:var(--muted)">30 years</text>
+      <text x="90" y="30" font-size="14" font-weight="600" style="fill:var(--ink)">What $100 still buys, after years of inflation</text>
+      <path d="M70,40 L171.7,67.3 L273.3,92.2 L375,114.5 L476.7,134.8 L578.3,153.1 L680,169.9" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>
+      <path d="M70,40 L171.7,102.6 L273.3,151.9 L375,190.5 L476.7,220.7 L578.3,244.5 L680,263" fill="none" style="stroke:var(--c2)" stroke-width="2.5"/>
+      <path d="M70,40 L171.7,132.5 L273.3,195.7 L375,238.6 L476.7,267.7 L578.3,287.7 L680,301.3" fill="none" style="stroke:var(--c3)" stroke-width="2.5"/>
+      <text x="674" y="162" text-anchor="end" font-size="14" font-weight="600" style="fill:var(--c1)">2%: $55 left</text>
+      <text x="674" y="255" text-anchor="end" font-size="14" font-weight="600" style="fill:var(--c2)">5%: $23 left</text>
+      <text x="674" y="296" text-anchor="end" font-size="14" font-weight="600" style="fill:var(--c3)">8%: $10 left</text>
+    </svg>
+    <figcaption><strong>Figure 1.4</strong> — Inflation is compounding running against you. At the Fed's 2% target, $100 quietly loses almost half its purchasing power in 30 years; at 8% — the US peak in 2022 was 9.1% — it loses 90%.</figcaption>
+  </figure>
+  <p>Notice that Figure 1.4 is just discounting in disguise: purchasing power decays by the inflation rate exactly as present value decays by the discount rate. To convert between nominal and real returns, use the <dfn class="term" tabindex="0" data-def="The identity linking nominal rates, real rates, and inflation: one plus nominal equals one plus real times one plus inflation.">Fisher equation</dfn>, named for economist Irving Fisher:</p>
+  <div class="formula">
+    <div class="formula-main">(1 + r<sub>nominal</sub>) = (1 + r<sub>real</sub>) × (1 + i)</div>
+    <div class="formula-legend">i = inflation rate · quick approximation: r<sub>real</sub> ≈ r<sub>nominal</sub> − i (good when rates are small)</div>
+  </div>
+  <div class="callout co-ex"><p class="co-label">Worked example</p><p>Your portfolio returns 8% in a year with 3% inflation. Real return = 1.08 ÷ 1.03 − 1 = <strong>4.85%</strong> — close to the 5% the subtraction shortcut gives, but not equal, and the gap widens as rates rise. Nastier case: in 1979 US inflation hit about 13%, while regulated passbook savings accounts paid 5.5%. Savers' nominal balances grew every month while their real wealth shrank about 7% a year. Positive nominal, negative real: the books looked fine and the purchasing power bled out.</p></div>
+  <p>The discipline this imposes is simple: state every return, discount rate, and projection as nominal or real, and never mix the two in one calculation. Discount nominal cash flows at nominal rates and real cash flows at real rates — mixing them double-counts inflation. Markets even let you observe the split directly: the US Treasury issues inflation-protected bonds (TIPS) whose yields are real, so the gap between regular Treasury yields and TIPS yields reveals the market's inflation expectation — a trick we will use in <a href="#s08">Section 8</a>. Where inflation itself comes from, and how the Fed fights it, is the business of <a href="#s03">Sections 3</a> and <a href="#s04">4</a>.</p>
+  <div class="callout co-key"><p class="co-label">Key idea</p><p>Compounding grows your money; inflation compounds against it. Only the real rate — roughly nominal minus inflation — builds actual purchasing power. An investment "up 20%" during 20% inflation made you nothing.</p></div>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. Which of these is NOT one of the three classic functions of money?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Medium of exchange</button>
+        <button class="quiz-opt" data-correct>Hedge against investment risk</button>
+        <button class="quiz-opt">Store of value</button>
+        <button class="quiz-opt">Unit of account</button>
+      </div>
+      <p class="quiz-explain">Money's three functions are medium of exchange, store of value, and unit of account. Managing investment risk is the job of diversification and hedging instruments (Sections 15 and 16), not of money itself — holding cash actually exposes you to inflation risk.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. You invest $1,000 at 10% per year, compounded annually. What is it worth after 2 years?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">$1,200</button>
+        <button class="quiz-opt">$1,100</button>
+        <button class="quiz-opt" data-correct>$1,210</button>
+        <button class="quiz-opt">$1,221</button>
+      </div>
+      <p class="quiz-explain">1,000 × 1.10² = $1,210. The extra $10 over the simple-interest answer ($1,200) is year two's interest earned on year one's $100 of interest. ($1,221 would be roughly three years' compounding.)</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. Using the rule of 72, how long does money take to double at 6% per year?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">About 6 years</button>
+        <button class="quiz-opt" data-correct>About 12 years</button>
+        <button class="quiz-opt">About 24 years</button>
+      </div>
+      <p class="quiz-explain">72 ÷ 6 = 12 years (the exact answer is 11.9). The rule of 72 divides 72 by the percentage rate to approximate doubling time.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. The discount rate used to value a future payment rises from 5% to 8%. The payment's present value…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Rises, because higher rates mean more growth</button>
+        <button class="quiz-opt">Stays the same — the future payment hasn't changed</button>
+        <button class="quiz-opt" data-correct>Falls, because the divisor (1 + r)ⁿ gets bigger</button>
+      </div>
+      <p class="quiz-explain">PV = FV ÷ (1 + r)ⁿ, so a higher discount rate shrinks present value. This inverse relationship between rates and the value of future cash flows drives bond prices (Section 8) and stock valuations (Section 13) alike.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. Your savings earn 6% nominal in a year with 4% inflation. Your real return is approximately…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">10%</button>
+        <button class="quiz-opt">6%</button>
+        <button class="quiz-opt" data-correct>2%</button>
+        <button class="quiz-opt">−4%</button>
+      </div>
+      <p class="quiz-explain">The Fisher approximation gives 6% − 4% = 2% (exactly: 1.06 ÷ 1.04 − 1 = 1.92%). Only that slice grew your purchasing power; the other 4 percentage points merely kept pace with rising prices.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>Money is whatever reliably serves three functions — medium of exchange, store of value, unit of account. Modern fiat money is backed by trust, tax demand, and managed scarcity, not by gold.</li>
+      <li>Interest is the price of time: it compensates for opportunity cost, expected inflation, and default risk. Every rate you see encodes all three.</li>
+      <li>Compound interest earns interest on interest: FV = PV × (1 + r)ⁿ. It is exponential — slow early, explosive late — and money doubles roughly every 72 ÷ r years.</li>
+      <li>Quoted APRs understate true cost; convert to the effective annual rate, (1 + APR ÷ m)ᵐ − 1, before comparing anything.</li>
+      <li>Discounting is compounding in reverse: PV = FV ÷ (1 + r)ⁿ. Nearly all of finance — bonds, stocks, pensions, projects — is discounting streams of future cash flows.</li>
+      <li>Annuities (fixed payments for n periods) and perpetuities (payments forever, PV = C ÷ r) price mortgages, lotteries, pensions, and endowments with two compact formulas.</li>
+      <li>Always separate nominal from real: (1 + nominal) = (1 + real)(1 + inflation). Only real returns build purchasing power.</li>
+    </ul>
+  </div>
+</section>

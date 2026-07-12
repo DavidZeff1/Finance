@@ -1,0 +1,401 @@
+<section class="lesson" id="s19" data-num="19" data-title="FinTech: How Technology Is Rewiring Finance">
+  <p class="eyebrow">Part V · Your Edge: Data Meets Finance</p>
+  <h2>19. FinTech: How Technology Is Rewiring Finance</h2>
+  <p class="lede">Finance is, underneath, an information-processing industry — which is exactly why software is eating it, and exactly why your skills belong here. By the end of this section you'll be able to trace a card payment through five parties in two seconds, tell the money rails apart by speed and cost, read a blockchain like the append-only log it is, and name the roles where a data person walks in the front door.</p>
+
+  <h3 id="s19-cards">Card payments, end to end</h3>
+  <p>Start with the most familiar act in modern commerce: you tap a card and buy a coffee. It feels like one event. It is actually a five-party choreography that clears in about two seconds and finishes settling two days later — and the gap between "approved" and "money actually moved" is where a surprising amount of fintech lives.</p>
+  <p>The structure is called the <dfn class="term" tabindex="0" data-def="The standard card-payment structure linking cardholder, merchant, issuing bank, acquiring bank, and card network.">four-party model</dfn> (the network makes it five, but the name stuck). The <dfn class="term" tabindex="0" data-def="The person paying with a card.">cardholder</dfn> holds a card issued by their bank, the <dfn class="term" tabindex="0" data-def="The bank that gave the cardholder their card and extends them credit or holds their deposits.">issuer</dfn>. The <dfn class="term" tabindex="0" data-def="The business accepting the card as payment.">merchant</dfn> banks with an <dfn class="term" tabindex="0" data-def="The merchant's bank, which onboards it to accept cards and receives the sale funds.">acquirer</dfn>. Between them sits the <dfn class="term" tabindex="0" data-def="The rails that route authorization and clearing messages between issuers and acquirers, such as Visa or Mastercard.">card network</dfn> — Visa, Mastercard, and friends — which owns no accounts and lends no money; it is a message-routing and rule-setting utility, closer to a protocol than a bank.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 430" role="img" aria-label="A ring diagram of the four-party card model. Cardholder and merchant sit on top, issuer and acquirer below, the network in the center. Numbered arrows trace the loop. A bar at the bottom splits a two-dollar-thirty merchant fee into interchange, network, and acquirer slices.">
+      <text x="360" y="30" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">One tap, five parties, ~2 seconds to "approved"</text>
+      <g font-size="13.5" font-weight="600">
+        <rect x="40" y="66" width="150" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="115" y="94" text-anchor="middle" style="fill:var(--ink)">Cardholder</text><text x="115" y="112" text-anchor="middle" font-size="11" font-weight="400" style="fill:var(--muted)">you, tapping</text>
+        <rect x="530" y="66" width="150" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="605" y="94" text-anchor="middle" style="fill:var(--ink)">Merchant</text><text x="605" y="112" text-anchor="middle" font-size="11" font-weight="400" style="fill:var(--muted)">the coffee shop</text>
+        <rect x="40" y="286" width="150" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="115" y="314" text-anchor="middle" style="fill:var(--ink)">Issuer</text><text x="115" y="332" text-anchor="middle" font-size="11" font-weight="400" style="fill:var(--muted)">your bank</text>
+        <rect x="530" y="286" width="150" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="605" y="314" text-anchor="middle" style="fill:var(--ink)">Acquirer</text><text x="605" y="332" text-anchor="middle" font-size="11" font-weight="400" style="fill:var(--muted)">merchant's bank</text>
+        <rect x="285" y="176" width="150" height="60" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)"/><text x="360" y="204" text-anchor="middle" style="fill:var(--ink)">Network</text><text x="360" y="222" text-anchor="middle" font-size="11" font-weight="400" style="fill:var(--muted)">Visa / Mastercard</text>
+      </g>
+      <g style="stroke:var(--axis)" stroke-width="1.7" fill="none">
+        <line x1="190" y1="90" x2="524" y2="90" marker-end="url(#s19-car)"/>
+        <line x1="605" y1="126" x2="605" y2="280" marker-end="url(#s19-car)"/>
+        <line x1="558" y1="300" x2="440" y2="222" marker-end="url(#s19-car)"/>
+        <line x1="280" y1="222" x2="162" y2="300" marker-end="url(#s19-car)"/>
+        <line x1="115" y1="286" x2="115" y2="132" marker-end="url(#s19-car)"/>
+      </g>
+      <g font-size="11.5" style="fill:var(--muted)">
+        <text x="357" y="82" text-anchor="middle">1 buy $100</text>
+        <text x="615" y="208" >2 auth req</text>
+        <text x="474" y="252" text-anchor="middle">3 route</text>
+        <text x="246" y="252" text-anchor="middle">4 route</text>
+        <text x="6" y="208">5 approve</text>
+      </g>
+      <text x="40" y="378" font-size="12.5" font-weight="600" style="fill:var(--ink)">Where the ~$2.30 merchant fee on a $100 sale goes:</text>
+      <g>
+        <rect x="40" y="388" width="499" height="24" rx="3" style="fill:var(--c1)"/>
+        <rect x="541" y="388" width="38" height="24" rx="3" style="fill:var(--c2)"/>
+        <rect x="581" y="388" width="99" height="24" rx="3" style="fill:var(--c3)"/>
+        <text x="289" y="404" text-anchor="middle" font-size="11.5" style="fill:var(--bg)">interchange → issuer ($1.80)</text>
+        <text x="630" y="404" text-anchor="middle" font-size="11" style="fill:var(--bg)">acquirer ($0.37)</text>
+      </g>
+      <defs><marker id="s19-car" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,1 L8,4.5 L0,8 Z" style="fill:var(--axis)"/></marker></defs>
+    </svg>
+    <figcaption><strong>Figure 19.1</strong> — Authorization races clockwise around the ring and back in about two seconds; the funds settle the same path in reverse a day or two later. The lion's share of the fee is <em>interchange</em>, which the merchant's side pays to your bank.</figcaption>
+  </figure>
+  <p>Here is the two-second sequence. You tap; the terminal sends an <dfn class="term" tabindex="0" data-def="A real-time check asking the issuer to confirm the card is valid and funds or credit are available, placing a hold.">authorization</dfn> request to the acquirer, which hands it to the network, which routes it to your issuer. The issuer checks that the card is real, that you have room, and that the pattern isn't fraud, then answers yes or no. That approval walks all the way back. No money has moved yet — the issuer has merely placed a hold on your balance.</p>
+  <p>Money moves in two later stages. <dfn class="term" tabindex="0" data-def="Batching the day's approved transactions and exchanging the final amounts owed between issuers and acquirers through the network.">Clearing</dfn> happens when the merchant batches the day's approved sales and the network computes who owes whom. <dfn class="term" tabindex="0" data-def="The actual transfer of funds between banks that discharges the cleared obligations, usually a day or two after the sale.">Settlement</dfn> is the actual bank-to-bank transfer that discharges those obligations, typically a day or two on. Auth is a promise; clearing is the invoice; settlement is the cash. Keep those three words straight and you understand more about payments than most people who use them daily.</p>
+  <p>Now the economics, because someone pays for all this. The merchant does not receive your full $100; the acquirer deducts a <dfn class="term" tabindex="0" data-def="The total fee a merchant pays to accept a card payment, bundling interchange, network fees, and the acquirer's markup.">merchant discount</dfn> of roughly 2%, so about $97.70 lands. The largest slice, called <dfn class="term" tabindex="0" data-def="A fee set by the card network that the acquirer pays to the issuer on every transaction, funding rewards and credit risk.">interchange</dfn>, flows from the acquirer's side to your issuer. That is the counterintuitive engine of the whole system: the merchant funds your bank, and your bank funds your cashback and points. Rewards cards aren't generous — they're interchange rebates, paid by the coffee shop and, ultimately, by every customer through slightly higher prices.</p>
+  <div class="callout co-analogy"><p class="co-label">Analogy: the network is an API, not a bank</p><p>Think of Visa as a message bus with a strict schema and an SLA, not as a place that holds money. Issuers and acquirers are the services that own state (your balances); the network just guarantees the request reaches the right service and the response comes back in milliseconds, and it charges a tiny toll per call. Interchange is a business rule the bus enforces, not a cost of moving bytes.</p></div>
+
+  <h3 id="s19-rails">Bank-to-bank rails: ACH, wires, and real-time</h3>
+  <p>Cards are one rail. Underneath every neobank, payroll run, and rent payment sit the plumbing rails that move money directly between bank accounts, and they differ so sharply that choosing the wrong one is a real engineering decision. The three axes that matter are speed, cost, and reversibility — and, annoyingly, you rarely get all three.</p>
+  <p>The workhorse in the US is <dfn class="term" tabindex="0" data-def="The Automated Clearing House: a batch system that moves money between US bank accounts cheaply over one to two business days.">ACH</dfn> — the Automated Clearing House. It is a <dfn class="term" tabindex="0" data-def="Processing transactions in grouped batches at set times rather than one by one in real time.">batch</dfn> system: transactions pile up and settle in scheduled windows over one to two business days. It is gloriously cheap (cents) and it is <em>reversible</em> — an erroneous or fraudulent debit can be clawed back for a window of days, which is why it underpins payroll and subscriptions. Slow, cheap, undoable. Its European cousin is SEPA.</p>
+  <p>When you need speed and finality, you send a <dfn class="term" tabindex="0" data-def="A same-day, individually processed bank transfer that is fast and final but expensive, used for large or urgent payments.">wire</dfn>. Wires (Fedwire in the US, CHAPS in the UK) process one at a time, settle the same day, and are <dfn class="term" tabindex="0" data-def="A payment that cannot be reversed once sent; the recipient's funds are final.">irreversible</dfn>. That finality is the point — it's how houses and companies change hands — but it also makes wires the favorite tool of scammers, because a mistaken wire is usually gone. Fast, expensive (often $15–$30), final.</p>
+  <p>The new layer is <dfn class="term" tabindex="0" data-def="Payment systems that settle individual transfers in seconds, any time of day, with immediate finality — such as RTP and FedNow in the US.">real-time rails</dfn>: <dfn class="term" tabindex="0" data-def="The Real-Time Payments network run by The Clearing House, live in the US since 2017.">RTP</dfn> and the Federal Reserve's <dfn class="term" tabindex="0" data-def="The Fed's instant-payment rail, launched in 2023, settling transfers in seconds around the clock.">FedNow</dfn>, launched in 2023. These settle in <em>seconds</em>, 24/7, with immediate finality, for a few cents — finally collapsing the old trade-off between speed and cost. The catch is the same as wires: instant plus final means instant fraud is instant loss, so these rails lean hard on up-front verification. Elsewhere the model is already mature — the UK's Faster Payments, India's UPI, Brazil's Pix.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 360" role="img" aria-label="A scatter of payment rails plotted by settlement speed on the horizontal axis and cost on the vertical axis. ACH is slow and cheap, wires fast and expensive, real-time rails instant and cheap, cards instant and costly to merchants, and cross-border correspondent banking slow and expensive.">
+      <text x="360" y="26" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Every rail trades off speed, cost, and reversibility</text>
+      <line x1="80" y1="310" x2="690" y2="310" style="stroke:var(--axis)" stroke-width="1.4"/>
+      <line x1="80" y1="50" x2="80" y2="310" style="stroke:var(--axis)" stroke-width="1.4"/>
+      <text x="385" y="344" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">slower ←   settlement speed   → instant</text>
+      <text x="30" y="180" font-size="12.5" style="fill:var(--muted)" transform="rotate(-90 30 180)">cheaper ←   cost per transfer   → costly</text>
+      <g font-size="12.5">
+        <circle cx="150" cy="270" r="9" style="fill:var(--c1)"/><text x="166" y="266" style="fill:var(--ink)" font-weight="600">ACH</text><text x="166" y="282" font-size="11" style="fill:var(--muted)">1–2 days · ¢ · ↩ reversible</text>
+        <circle cx="150" cy="110" r="9" style="fill:var(--c4)"/><text x="166" y="106" style="fill:var(--ink)" font-weight="600">Cross-border</text><text x="166" y="122" font-size="11" style="fill:var(--muted)">2–5 days · $$ · correspondent chain</text>
+        <circle cx="470" cy="95" r="9" style="fill:var(--c2)"/><text x="486" y="91" style="fill:var(--ink)" font-weight="600">Wire</text><text x="486" y="107" font-size="11" style="fill:var(--muted)">same day · $15–30 · ⚠ final</text>
+        <circle cx="600" cy="150" r="9" style="fill:var(--c3)"/><text x="454" y="150" text-anchor="end" style="fill:var(--ink)" font-weight="600">Card</text><text x="454" y="166" text-anchor="end" font-size="11" style="fill:var(--muted)">seconds · ~2% to merchant · ↩ chargeback</text>
+        <circle cx="640" cy="272" r="9" style="fill:var(--accent)"/><text x="624" y="268" text-anchor="end" style="fill:var(--ink)" font-weight="600">RTP / FedNow</text><text x="624" y="284" text-anchor="end" font-size="11" style="fill:var(--muted)">seconds · ¢ · ⚠ final</text>
+      </g>
+    </svg>
+    <figcaption><strong>Figure 19.2</strong> — Real-time rails (bottom-right) are the disruptive newcomers: they finally deliver instant <em>and</em> cheap. Note the pattern — the faster and cheaper a rail, the more likely it is final and unforgiving.</figcaption>
+  </figure>
+  <p>Now the genuinely broken part: sending money across borders. There is no global bank, so a payment from a small bank in Kenya to a small bank in Peru travels through a chain of <dfn class="term" tabindex="0" data-def="Large banks that hold accounts for smaller banks abroad, relaying international payments through a chain of intermediaries.">correspondent banks</dfn> — each holding an account for the next, each taking a cut and a day, each re-checking for sanctions and fraud. The messaging standard, <dfn class="term" tabindex="0" data-def="The interbank messaging network that carries international payment instructions between banks; it moves messages, not money.">SWIFT</dfn>, only carries instructions, not cash, so the money crawls hop by hop. The result is the worst product in finance: slow, opaque, and expensive, with fees that can exceed 6% on small remittances.</p>
+  <div class="callout co-real"><p class="co-label">Real world: how the "instant, cheap" cross-border apps actually work</p><p>Firms in the Wise mold don't send your money abroad at all. They keep pre-funded accounts in many countries and simply <dfn class="term" tabindex="0" data-def="Settling offsetting flows against each other so only the small net difference actually crosses a border.">net</dfn> offsetting flows: your dollars pay someone who wanted dollars locally, while their pool pays your recipient in local currency from the destination-country account. Nothing crosses the border for most transactions — they've turned an international transfer into two cheap domestic ones plus a spreadsheet. That's the whole trick, and it's a data-and-treasury problem, not a banking one.</p></div>
+
+  <h3 id="s19-stack">The fintech stack: developers, BaaS, and neobanks</h3>
+  <p>Given how baroque the rails are, the biggest fintech businesses are the ones that hide the mess behind an API. This is the layer where your instincts translate most directly, because it is literally software abstraction applied to money.</p>
+  <p>The canonical example is the developer layer — <dfn class="term" tabindex="0" data-def="A payments platform exposing card acceptance, payouts, and compliance as developer APIs so businesses don't integrate the rails themselves.">payment processors</dfn> like Stripe and Adyen. Before them, accepting cards meant a months-long integration with an acquirer and a stack of compliance paperwork. Now it's a few lines of code. They sit on top of the acquiring relationship, the network rules, and the fraud tooling, and sell you a clean interface — taking a slice (famously around 2.9% + 30¢) for making the four-party model disappear. Their moat is not the rails; it is developer experience and fraud models trained on enormous transaction volume.</p>
+  <p>One layer down is <dfn class="term" tabindex="0" data-def="Banking-as-a-Service: chartered banks renting out their license, accounts, and rail access to non-banks through APIs.">banking-as-a-service</dfn> (BaaS). A real, chartered bank rents out the thing only a bank legally has — a license, insured accounts, direct rail access — through APIs, so a startup can offer accounts and cards without becoming a bank. This is the quiet infrastructure behind dozens of apps that feel like banks but aren't.</p>
+  <p>Which brings us to <dfn class="term" tabindex="0" data-def="A digital-only consumer bank with no branches, often running on a partner bank's license and rails.">neobanks</dfn> — the branchless, app-first banks (Chime, Revolut, N26, Nubank). Many don't hold their own license at all; they're a slick front end on a BaaS partner. Their business model reveals what banking actually is. Some earn mostly interchange (spend more, they earn more); the sturdier ones chase <dfn class="term" tabindex="0" data-def="Customer money held at a bank; the bank pays little on it and lends or invests it for more, earning the spread.">deposits</dfn>, because deposits are the cheapest funding on earth and the foundation of the lending spread we met in <a href="#s06">Section 6 (The Financial System)</a>.</p>
+  <div class="callout co-key"><p class="co-label">Key idea: regulation and deposits are the real moat</p><p>You can rebuild any fintech's app in a weekend. What you cannot rebuild is a banking charter, deposit insurance, and direct access to Fed rails — those take years, capital, and regulators' permission. This is why, however far up the stack a fintech climbs, a <em>bank</em> is almost always sitting underneath, and why the <a href="#s04">central bank</a> and its rules still anchor the entire tower. The interesting jobs cluster exactly where software meets that regulatory bedrock.</p></div>
+
+  <h3 id="s19-lending">Lending tech: scoring, alternative data, and BNPL</h3>
+  <p>Lending is the other half of a bank, and it is being rebuilt on data — your home turf. The old world ran on a <dfn class="term" tabindex="0" data-def="A single number summarizing a borrower's credit risk from their history of borrowing and repayment, such as a FICO score.">credit score</dfn>: a model (in the US, FICO) that compresses your borrowing history into one number from payment history, balances, and account age. It works, but it's slow-moving and blind to anyone <dfn class="term" tabindex="0" data-def="Having too little borrowing history for a traditional credit score, despite possibly being creditworthy.">thin-file</dfn> — new arrivals, young people, whole countries with no bureau.</p>
+  <p>The fintech move is <dfn class="term" tabindex="0" data-def="Assessing credit risk from non-traditional signals — cash-flow, rent, telecom, or transaction data — instead of only bureau history.">alternative-data underwriting</dfn>: predict default from cash-flow data (the actual money in and out of a bank account via an API), rent and utility payments, even phone-bill regularity. To you this is just a classification problem with richer, messier features — and it's genuinely inclusive, scoring people the bureau can't see. It also carries the exact hazards you already respect: <dfn class="term" tabindex="0" data-def="When a model uses features that act as stand-ins for protected traits like race, producing illegal discrimination without naming them.">proxy discrimination</dfn>, where an innocent-looking feature encodes a protected attribute, and the need for a model whose decisions you can explain to a regulator. Fair-lending law makes explainability non-optional here.</p>
+  <p>The flashiest new product is <dfn class="term" tabindex="0" data-def="Buy Now, Pay Later: splitting a purchase into a few interest-free installments, with the provider paying the merchant up front.">BNPL</dfn> — Buy Now, Pay Later (Klarna, Affirm, Afterpay). Mechanically it's simple: at checkout the provider pays the merchant in full immediately, minus a fee larger than a card's, and you repay in four installments, classically interest-free. The merchant happily pays because BNPL demonstrably lifts conversion and basket size.</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall: where the BNPL risk actually hides</p><p>"Interest-free" hides two real risks. First, the provider takes on <dfn class="term" tabindex="0" data-def="The risk that a borrower fails to repay; for BNPL it is concentrated in short, unsecured, lightly-underwritten loans.">credit risk</dfn> on millions of tiny, lightly-underwritten, unsecured loans, and its profit depends on late fees and on default rates staying low — which they don't in a downturn. Second is the systemic blind spot: because much BNPL debt isn't reported to bureaus, no single lender sees a borrower stacking five simultaneous plans across five apps. That invisible leverage is precisely the kind of hidden, correlated exposure that <a href="#s17">Section 17</a> warned turns individual defaults into a cluster.</p></div>
+
+  <h3 id="s19-blockchain">Blockchain for a CS reader</h3>
+  <p>You can skip the hype and read a blockchain as what it is: an append-only, replicated log with cryptographic integrity and no admin. We'll build up the mechanism precisely, flag the risks factually, and score what's solved versus hyped — no cheerleading, no dunking.</p>
+  <p>Start with the data structure. A <dfn class="term" tabindex="0" data-def="A list of blocks where each block stores the cryptographic hash of the previous one, so any tampering breaks the chain.">blockchain</dfn> is a linked list where each block header includes the <dfn class="term" tabindex="0" data-def="A fixed-length fingerprint of data produced by a one-way function; any change to the input changes the output unpredictably.">hash</dfn> of the previous block. Since a hash is a tamper-evident fingerprint, editing any past transaction changes that block's hash, which breaks the "previous hash" pointer in every block after it. The chain is its own integrity check — a Merkle-linked audit trail you already understand from Git.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 240" role="img" aria-label="Three blocks in a row, each showing a previous-hash field, transaction data, a nonce, and its own hash. An arrow runs from each block's hash into the next block's previous-hash field, illustrating the chain link.">
+      <text x="360" y="26" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Each block commits to the one before it</text>
+      <g font-size="11.5">
+        <rect x="30" y="52" width="196" height="150" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+        <text x="42" y="74" font-weight="600" style="fill:var(--ink)">Block 11</text>
+        <text x="42" y="98" style="fill:var(--muted)">prev: 0000·9c4a</text>
+        <text x="42" y="120" style="fill:var(--ink)">txns: A→B, C→D</text>
+        <text x="42" y="142" style="fill:var(--muted)">nonce: 74211</text>
+        <text x="42" y="176" font-weight="600" style="fill:var(--accent)">hash: 0000·1f7e</text>
+        <rect x="262" y="52" width="196" height="150" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+        <text x="274" y="74" font-weight="600" style="fill:var(--ink)">Block 12</text>
+        <text x="274" y="98" style="fill:var(--accent)">prev: 0000·1f7e</text>
+        <text x="274" y="120" style="fill:var(--ink)">txns: E→F</text>
+        <text x="274" y="142" style="fill:var(--muted)">nonce: 30985</text>
+        <text x="274" y="176" font-weight="600" style="fill:var(--accent)">hash: 0000·b2d1</text>
+        <rect x="494" y="52" width="196" height="150" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+        <text x="506" y="74" font-weight="600" style="fill:var(--ink)">Block 13</text>
+        <text x="506" y="98" style="fill:var(--accent)">prev: 0000·b2d1</text>
+        <text x="506" y="120" style="fill:var(--ink)">txns: G→H, I→J</text>
+        <text x="506" y="142" style="fill:var(--muted)">nonce: 58120</text>
+        <text x="506" y="176" font-weight="600" style="fill:var(--accent)">hash: 0000·5a90</text>
+      </g>
+      <g style="stroke:var(--axis)" stroke-width="1.7" fill="none">
+        <path d="M226,168 C244,168 244,90 260,90" marker-end="url(#s19-bar)"/>
+        <path d="M458,168 C476,168 476,90 492,90" marker-end="url(#s19-bar)"/>
+      </g>
+      <text x="360" y="228" text-anchor="middle" font-size="12" style="fill:var(--muted)">Edit one old transaction → its hash changes → every "prev" pointer downstream is now wrong.</text>
+      <defs><marker id="s19-bar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,1 L8,4.5 L0,8 Z" style="fill:var(--axis)"/></marker></defs>
+    </svg>
+    <figcaption><strong>Figure 19.3</strong> — The "0000" prefix on each hash is the proof-of-work target: a valid block's hash must start with enough zeros, which is only findable by brute-forcing the nonce.</figcaption>
+  </figure>
+  <p>Integrity alone isn't enough; thousands of copies must agree on <em>which</em> chain is real without a boss. That agreement mechanism is <dfn class="term" tabindex="0" data-def="The rule by which a decentralized network agrees on the single valid history without a trusted coordinator.">consensus</dfn>, and two designs dominate. <dfn class="term" tabindex="0" data-def="A consensus rule where miners race to find a hash below a target by brute force; the winner adds the block and the longest chain wins.">Proof-of-work</dfn> (Bitcoin) makes writing a block deliberately expensive: miners burn electricity brute-forcing a nonce until the block's hash clears a difficulty target, and rewriting history means out-computing the entire honest network — secure, but power-hungry by design. <dfn class="term" tabindex="0" data-def="A consensus rule where validators post collateral (stake) and are chosen to add blocks; cheating forfeits the stake.">Proof-of-stake</dfn> (Ethereum since 2022) instead makes validators post collateral; the protocol picks who writes the next block, and provably cheating destroys their stake. Same goal — make lying costlier than honesty — swapping electricity for capital at risk, and cutting energy use by over 99%.</p>
+  <p>On top of this ledger sit <dfn class="term" tabindex="0" data-def="Programs stored on a blockchain that run exactly as written when called, moving funds and updating state deterministically.">smart contracts</dfn>. Strip the mystique: a smart contract is a deterministic program deployed to the chain that every node re-executes and agrees on, so it runs exactly as written and no one can stop it mid-way. It's not smart and it's barely a contract — it's stored, public, tamper-proof code that custodies money. That's powerful and dangerous in equal measure: a bug isn't a patch ticket, it's a permanent, exploitable hole with real funds behind it.</p>
+  <p>The most useful application so far is the <dfn class="term" tabindex="0" data-def="A crypto token designed to hold a steady value, usually pegged to one US dollar.">stablecoin</dfn> — a token engineered to stay worth $1. The credible ones (USDC, USDT) are <dfn class="term" tabindex="0" data-def="Backed one-for-one by real reserves like cash and short-term Treasuries held off-chain.">fully reserved</dfn>: each token is meant to be backed by a real dollar or Treasury bill held in a bank. They're genuinely useful as fast, programmable, 24/7 dollars — but they relocate the hard question rather than removing it: <em>is the reserve actually there, safe, and audited?</em> A stablecoin is only as stable as the least trustworthy asset on its balance sheet, and history's failures were mostly reserve failures, not code failures.</p>
+  <p>Then there's <dfn class="term" tabindex="0" data-def="Decentralized finance: financial services like trading and lending rebuilt as smart contracts, without an intermediary institution.">DeFi</dfn> — decentralized finance — which rebuilds exchanges and lenders as smart contracts. Its cleverest primitive is the <dfn class="term" tabindex="0" data-def="An automated market maker: a smart contract that quotes prices from a formula over its token reserves instead of matching buyers to sellers.">automated market maker</dfn> (AMM). Instead of an order book matching buyers and sellers, an AMM holds a pool of two tokens and prices trades with one algebraic rule — the constant-product formula.</p>
+  <div class="formula">
+    <div class="formula-main">x · y = k</div>
+    <div class="formula-legend">x = reserve of token A · y = reserve of token B · k = a constant the pool must preserve on every trade</div>
+  </div>
+  <p>The pool keeps the product of its two reserves constant. Buy some token A (shrinking x) and you must add enough token B (growing y) to hold k fixed. Price falls out automatically as the ratio y÷x, and — crucially — the more you buy, the worse your price gets, because you're sliding along a hyperbola. That built-in <dfn class="term" tabindex="0" data-def="The gap between the quoted spot price and the average price you actually pay, growing with trade size relative to pool depth.">slippage</dfn> is not a bug; it's how a fixed formula defends a finite pool. Let's feel it.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="A constant-product curve plotting a pool's ETH reserve against its USDC reserve as a downward hyperbola. A point marks the starting pool at 100 ETH and 200,000 USDC; buying 10 ETH slides the pool up-left to 90 ETH and 222,222 USDC. A shaded vertical band marks the slippage zone between the two.">
+      <text x="360" y="26" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">x · y = k : buying ETH pushes the pool up the curve</text>
+      <rect x="320" y="40" width="60" height="260" style="fill:var(--accent-soft)"/>
+      <line x1="80" y1="300" x2="690" y2="300" style="stroke:var(--axis)" stroke-width="1.4"/>
+      <line x1="80" y1="40" x2="80" y2="300" style="stroke:var(--axis)" stroke-width="1.4"/>
+      <path d="M80,40 L140,104.2 L200,150.1 L260,184.4 L320,211.2 L380,232.6 L440,250.1 L500,264.7 L560,277 L620,287.6 L680,296.8" fill="none" style="stroke:var(--c1)" stroke-width="2.75"/>
+      <circle cx="380" cy="232.6" r="5.5" style="fill:var(--ink)"/>
+      <circle cx="320" cy="211.2" r="5.5" style="fill:var(--down)"/>
+      <text x="392" y="230" font-size="12" style="fill:var(--ink)">spot: 100 ETH × 200,000 USDC</text>
+      <text x="314" y="200" text-anchor="end" font-size="12" style="fill:var(--down)">after buying 10 ETH:</text>
+      <text x="314" y="216" text-anchor="end" font-size="12" style="fill:var(--down)">90 × 222,222</text>
+      <text x="350" y="330" text-anchor="middle" font-size="11.5" style="fill:var(--muted)">slippage zone</text>
+      <text x="360" y="316" text-anchor="middle" font-size="12.5" style="fill:var(--muted)">← ETH reserve (x)   ·   USDC reserve (y) ↑</text>
+    </svg>
+    <figcaption><strong>Figure 19.4</strong> — The trade pays the <em>area</em> you climb, not the spot price. Buying 10 of 100 ETH costs 22,222 USDC — an effective 2,222/ETH against a 2,000 spot, an 11.1% price impact. Small pool, big slippage.</figcaption>
+  </figure>
+
+  <div class="widget" id="s19-amm">
+    <div class="widget-head">
+      <h4>AMM playground: the constant-product pool</h4>
+      <p>A pool starts at 100 ETH × 200,000 USDC, so k = 20,000,000 and the spot price is 2,000 USDC/ETH. Drag to buy ETH out of the pool and watch price impact grow non-linearly — the formula, not a market maker, sets your price.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Buy ETH <output class="ctl-val" id="s19-amm-buy-out">10</output><input type="range" id="s19-amm-buy" min="1" max="50" step="1" value="10"></label>
+      </div>
+      <svg id="s19-amm-svg" viewBox="0 0 720 320" role="img" aria-label="The constant-product curve with a moving point showing the pool state after your trade.">
+        <g id="s19-amm-plot"></g>
+      </svg>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">USDC you pay</span><span class="stat-value" id="s19-amm-paid">—</span></div>
+        <div class="stat"><span class="stat-label">Effective price</span><span class="stat-value" id="s19-amm-eff">—</span></div>
+        <div class="stat"><span class="stat-label">Price impact vs 2,000 spot</span><span class="stat-value" id="s19-amm-impact">—</span></div>
+        <div class="stat"><span class="stat-label">Pool after trade</span><span class="stat-value" id="s19-amm-pool">—</span></div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s19-amm');
+    if (!root) return;
+    var K = 20000000, X0 = 100, Y0 = 200000, SPOT = 2000;
+    var buyEl = root.querySelector('#s19-amm-buy');
+    function pxOf(eth) { return 80 + (eth - 50) / 100 * 600; }
+    function pyOf(usdc) { var p = 300 - (usdc - 130000) / 270000 * 260; if (p < 40) p = 40; if (p > 300) p = 300; return p; }
+    var curve = '';
+    (function () {
+      var d = '';
+      for (var e = 50; e <= 150.0001; e += 2) { var u = K / e; d += (d ? 'L' : 'M') + pxOf(e).toFixed(1) + ',' + pyOf(u).toFixed(1) + ' '; }
+      curve = d;
+    })();
+    function fmt(x) { return Math.round(x).toLocaleString('en-US'); }
+    function update() {
+      var buy = parseInt(buyEl.value, 10);
+      if (isNaN(buy)) buy = 10;
+      buy = Math.min(50, Math.max(1, buy));
+      buyEl.value = buy;
+      root.querySelector('#s19-amm-buy-out').textContent = buy;
+      var newX = X0 - buy, newY = K / newX, paid = newY - Y0;
+      var eff = paid / buy, impact = (eff - SPOT) / SPOT;
+      root.querySelector('#s19-amm-paid').textContent = fmt(paid) + ' USDC';
+      root.querySelector('#s19-amm-eff').textContent = eff.toLocaleString('en-US', { maximumFractionDigits: 2 }) + ' /ETH';
+      var imp = root.querySelector('#s19-amm-impact');
+      imp.textContent = '+' + (impact * 100).toFixed(1) + '%';
+      imp.style.color = 'var(--down)';
+      root.querySelector('#s19-amm-pool').textContent = newX + ' ETH × ' + fmt(newY) + ' USDC';
+      var sx = pxOf(X0), sy = pyOf(Y0), nx = pxOf(newX), ny = pyOf(newY);
+      var arc = '';
+      for (var e = newX; e <= X0 + 0.0001; e += 1) { arc += (arc ? 'L' : 'M') + pxOf(e).toFixed(1) + ',' + pyOf(K / e).toFixed(1) + ' '; }
+      var s = '';
+      s += '<rect x="' + nx.toFixed(1) + '" y="40" width="' + (sx - nx).toFixed(1) + '" height="260" style="fill:var(--accent-soft)"/>';
+      s += '<line x1="80" y1="300" x2="690" y2="300" style="stroke:var(--axis)" stroke-width="1.3"/>';
+      s += '<line x1="80" y1="40" x2="80" y2="300" style="stroke:var(--axis)" stroke-width="1.3"/>';
+      s += '<path d="' + curve + '" fill="none" style="stroke:var(--c1)" stroke-width="2.25" opacity="0.55"/>';
+      s += '<path d="' + arc + '" fill="none" style="stroke:var(--accent)" stroke-width="3"/>';
+      s += '<circle cx="' + sx.toFixed(1) + '" cy="' + sy.toFixed(1) + '" r="5" style="fill:var(--ink)"/>';
+      s += '<circle cx="' + nx.toFixed(1) + '" cy="' + ny.toFixed(1) + '" r="5.5" style="fill:var(--down)"/>';
+      s += '<text x="360" y="24" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">You climb the highlighted arc — the steeper it gets, the worse your price</text>';
+      s += '<text x="' + (sx + 8).toFixed(1) + '" y="' + (sy + 4).toFixed(1) + '" font-size="11.5" style="fill:var(--muted)">spot (100, 200k)</text>';
+      s += '<text x="' + (nx - 8).toFixed(1) + '" y="' + (ny - 8).toFixed(1) + '" text-anchor="end" font-size="11.5" font-weight="600" style="fill:var(--down)">after: ' + newX + ' ETH</text>';
+      s += '<text x="360" y="316" text-anchor="middle" font-size="11.5" style="fill:var(--muted)">← ETH reserve   ·   USDC reserve ↑</text>';
+      root.querySelector('#s19-amm-plot').innerHTML = s;
+    }
+    buyEl.addEventListener('input', update);
+    update();
+  })();
+  </script>
+
+  <p>Two more DeFi realities. Liquidity providers who fund these pools suffer <dfn class="term" tabindex="0" data-def="The loss a liquidity provider takes versus simply holding the two tokens, caused by the pool rebalancing as prices move.">impermanent loss</dfn> — the pool automatically sells the winner and buys the loser, so you underperform just holding — and the whole edifice is only as sound as its smart-contract code, which has been drained for billions in exploits. And <dfn class="term" tabindex="0" data-def="Recording ownership of a real-world asset — a bond, property, or fund share — as a token on a blockchain.">tokenization</dfn> of real assets (Treasuries, real estate, fund shares) is the current frontier, promising instant settlement and fractional ownership — though a token is only as good as the legal claim that ties it to the real thing.</p>
+  <div class="callout co-key"><p class="co-label">Honest scorecard: solved vs hyped</p><p><strong>Genuinely solved:</strong> a censorship-resistant ledger without an operator; fast, programmable dollars via stablecoins; trustless swaps via AMMs. <strong>Real but constrained:</strong> tokenization and 24/7 settlement, gated by law and reserve trust. <strong>Still mostly hype:</strong> that decentralization removes risk (it relocates it into code and reserves), that most tokens have a use beyond speculation, and that "trustless" means safe — the exploits are trustless too. The engineering is real; the marketing outran it.</p></div>
+
+  <h3 id="s19-wealth">Wealth and trading tech</h3>
+  <p>Software has quietly rebuilt investing too, mostly by ruthlessly cutting cost. The headline example is the <dfn class="term" tabindex="0" data-def="An automated service that builds and maintains a diversified portfolio from your goals and risk tolerance, for a low annual fee.">robo-advisor</dfn> (Betterment, Wealthfront), and it's worth demystifying what its algorithm actually does — because it's less magic than the fee history implies. It asks a few questions to gauge your risk tolerance, maps you to a target mix of cheap index funds straight out of <a href="#s15">Portfolio Theory</a>, auto-<dfn class="term" tabindex="0" data-def="Periodically trading back to your target weights as markets drift them apart, mechanically selling high and buying low.">rebalances</dfn> as markets drift, and runs <dfn class="term" tabindex="0" data-def="Selling a losing position to realize a tax-deductible loss, then buying a similar asset to keep market exposure.">tax-loss harvesting</dfn>. That's it — undergraduate finance, executed cheaply and without emotion. The revolution wasn't the math; it was charging 0.25% for what advisors charged 1%+. And on a lifetime, that gap is enormous.</p>
+
+  <div class="widget" id="s19-feedrag">
+    <div class="widget-head">
+      <h4>Fee drag calculator: what 1% really costs</h4>
+      <p>The same portfolio, the same gross return, three fee levels: a 1.00% human advisor, a 0.25% robo, and a 0.03% DIY index fund. Watch the paths fan apart — the fee compounds against you exactly as returns compound for you.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Starting amount <input type="number" class="num-in" id="s19-fd-start" min="1000" max="10000000" step="1000" value="100000"></label>
+        <label class="ctl">Years <output class="ctl-val" id="s19-fd-yrs-out">30</output><input type="range" id="s19-fd-yrs" min="10" max="40" step="1" value="30"></label>
+        <label class="ctl">Gross return <output class="ctl-val" id="s19-fd-g-out">7.0%</output><input type="range" id="s19-fd-g" min="4" max="10" step="0.1" value="7"></label>
+      </div>
+      <svg id="s19-fd-svg" viewBox="0 0 720 360" role="img" aria-label="Three growing wealth curves over time; the low-fee index path finishes highest, the robo in the middle, and the 1 percent advisor lowest, with the gap widening every year.">
+        <g id="s19-fd-plot"></g>
+      </svg>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">Index DIY (0.03%)</span><span class="stat-value" id="s19-fd-diy">—</span></div>
+        <div class="stat"><span class="stat-label">Robo (0.25%)</span><span class="stat-value" id="s19-fd-robo">—</span></div>
+        <div class="stat"><span class="stat-label">Advisor (1.00%)</span><span class="stat-value" id="s19-fd-adv">—</span></div>
+        <div class="stat"><span class="stat-label">Advisor's lifetime cost vs DIY</span><span class="stat-value" id="s19-fd-cost">—</span></div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s19-feedrag');
+    if (!root) return;
+    var startEl = root.querySelector('#s19-fd-start');
+    var yrsEl = root.querySelector('#s19-fd-yrs');
+    var gEl = root.querySelector('#s19-fd-g');
+    var FEES = [0.0003, 0.0025, 0.0100];
+    var COLS = ['var(--c1)', 'var(--c2)', 'var(--c3)'];
+    var NAMES = ['Index 0.03%', 'Robo 0.25%', 'Advisor 1.00%'];
+    function money(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
+    function update() {
+      var start = parseFloat(startEl.value);
+      if (isNaN(start) || start < 1000) start = 1000;
+      if (start > 10000000) start = 10000000;
+      var yrs = parseInt(yrsEl.value, 10); if (isNaN(yrs)) yrs = 30; yrs = Math.min(40, Math.max(10, yrs));
+      var g = parseFloat(gEl.value); if (isNaN(g)) g = 7; g = Math.min(10, Math.max(4, g)); g = g / 100;
+      yrsEl.value = yrs; gEl.value = g * 100;
+      root.querySelector('#s19-fd-yrs-out').textContent = yrs;
+      root.querySelector('#s19-fd-g-out').textContent = (g * 100).toFixed(1) + '%';
+      var paths = [[], [], []], finals = [0, 0, 0];
+      for (var s = 0; s < 3; s++) {
+        var net = g - FEES[s], v = start;
+        for (var t = 0; t <= yrs; t++) { paths[s].push(v); v = v * (1 + net); }
+        finals[s] = paths[s][yrs];
+      }
+      root.querySelector('#s19-fd-diy').textContent = money(finals[0]);
+      root.querySelector('#s19-fd-robo').textContent = money(finals[1]);
+      root.querySelector('#s19-fd-adv').textContent = money(finals[2]);
+      var cost = root.querySelector('#s19-fd-cost');
+      cost.textContent = '−' + money(finals[0] - finals[2]);
+      cost.style.color = 'var(--down)';
+      draw(paths, yrs, finals);
+    }
+    function draw(paths, yrs, finals) {
+      var X0 = 62, X1 = 604, Y0 = 44, Y1 = 300;
+      var ymax = finals[0] * 1.06, ymin = paths[0][0] * 0.9;
+      function x(t) { return X0 + t / yrs * (X1 - X0); }
+      function y(v) { return Y1 - (v - ymin) / (ymax - ymin) * (Y1 - Y0); }
+      var s = '';
+      s += '<line x1="' + X0 + '" y1="' + Y1 + '" x2="' + X1 + '" y2="' + Y1 + '" style="stroke:var(--axis)" stroke-width="1.3"/>';
+      s += '<line x1="' + X0 + '" y1="' + Y0 + '" x2="' + X0 + '" y2="' + Y1 + '" style="stroke:var(--axis)" stroke-width="1.3"/>';
+      var gl = 4;
+      for (var i = 1; i <= gl; i++) {
+        var gv = ymin + (ymax - ymin) * i / gl, gy = y(gv);
+        s += '<line x1="' + X0 + '" y1="' + gy.toFixed(1) + '" x2="' + X1 + '" y2="' + gy.toFixed(1) + '" style="stroke:var(--grid)" stroke-width="1"/>';
+        s += '<text x="' + (X0 - 6) + '" y="' + (gy + 4).toFixed(1) + '" text-anchor="end" font-size="11" style="fill:var(--muted)">$' + Math.round(gv / 1000) + 'k</text>';
+      }
+      s += '<text x="' + X0 + '" y="' + (Y1 + 22) + '" font-size="11.5" style="fill:var(--muted)">year 0</text>';
+      s += '<text x="' + X1 + '" y="' + (Y1 + 22) + '" text-anchor="end" font-size="11.5" style="fill:var(--muted)">year ' + yrs + '</text>';
+      for (var p = 2; p >= 0; p--) {
+        var d = '';
+        for (var t = 0; t <= yrs; t++) { d += (t ? 'L' : 'M') + x(t).toFixed(1) + ',' + y(paths[p][t]).toFixed(1) + ' '; }
+        s += '<path d="' + d + '" fill="none" style="stroke:' + COLS[p] + '" stroke-width="2.6"/>';
+        var ly = y(finals[p]);
+        s += '<text x="' + (X1 + 8) + '" y="' + (ly + 4).toFixed(1) + '" font-size="11.5" font-weight="600" style="fill:' + COLS[p] + '">' + NAMES[p] + '</text>';
+      }
+      root.querySelector('#s19-fd-plot').innerHTML = s;
+    }
+    startEl.addEventListener('input', update);
+    yrsEl.addEventListener('input', update);
+    gEl.addEventListener('input', update);
+    update();
+  })();
+  </script>
+
+  <p>At the calculator's defaults — $100k, 7% gross, 30 years — the DIY path grows at 6.97% to about $755k, while the 1% advisor grows at 6.00% to about $574k. That 1% fee quietly vaporized roughly $180k, about a third of the potential gain, without a single bad market. Compounding is agnostic: it magnifies a fee drag as faithfully as a return.</p>
+  <p>On the trading side, one term earns its own paragraph because it's misunderstood and quietly everywhere: <dfn class="term" tabindex="0" data-def="Payment for order flow: brokers sell their customers' orders to market makers, who execute them and share a slice of the profit back.">payment for order flow</dfn> (PFOF). When a "free" broker takes your buy order, it often sells that order to a wholesale market maker, who executes it and rebates the broker a fraction of a cent. This is how commission-free trading pays for itself. The debate is whether you get a subtly worse price in exchange for the "free," and it links straight to the market-microstructure and <a href="#s06">execution</a> ideas — and to the algorithmic and high-frequency trading we met in <a href="#s06">Section 6</a>, where the fastest players compete in microseconds to be the counterparty on exactly these retail orders.</p>
+
+  <h3 id="s19-jobs">Where the jobs are</h3>
+  <p>Every mechanism in this section is a hiring surface for a data person, and the roles are more accessible than the trading-desk glamour jobs. Here's the map, by domain.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Domain</th><th>What the data work is</th><th>Why you fit</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Payments</strong></td><td>Real-time fraud models, authorization-rate optimization, dispute and chargeback analytics.</td><td>High-volume, well-labeled classification — the ideal ML setting.</td></tr>
+      <tr><td><strong>Lending</strong></td><td>Credit and alternative-data underwriting, default prediction, explainable and fair-lending models.</td><td>Classic supervised learning with a regulatory twist you can learn.</td></tr>
+      <tr><td><strong>Crypto / DeFi</strong></td><td>On-chain analytics, wallet-clustering, exploit and wash-trade detection.</td><td>Every transaction is public data — a graph-analytics playground.</td></tr>
+      <tr><td><strong>Wealth</strong></td><td>Robo-advisor logic, rebalancing engines, personalization and goal modeling.</td><td>Portfolio math from <a href="#s15">Section 15</a> plus productionized code.</td></tr>
+      <tr><td><strong>RegTech</strong></td><td>Anti-money-laundering models, transaction monitoring, sanctions screening, KYC automation.</td><td>The quiet giant — every institution must staff it, and it's underserved.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Sit with that last row. <dfn class="term" tabindex="0" data-def="Regulatory technology: software that automates compliance — anti-money-laundering, sanctions, know-your-customer, and reporting.">RegTech</dfn> is the least glamorous and most durable of these. Every bank and fintech is legally obligated to run <dfn class="term" tabindex="0" data-def="Anti-money-laundering: the rules and systems banks use to detect and report funds tied to crime.">anti-money-laundering</dfn> (AML) monitoring, sanctions screening, and <dfn class="term" tabindex="0" data-def="Know Your Customer: the mandatory process of verifying a customer's identity before and during a banking relationship.">know-your-customer</dfn> (KYC) checks — and the classic rule-based systems drown teams in false positives. Reframing that as an anomaly-detection and graph problem is exactly your wheelhouse, the demand is non-cyclical because it's mandatory, and almost nobody dreams of it — which is precisely why it's a great door.</p>
+  <div class="callout co-you"><p class="co-label">Your edge: fintech hires for your exact shape</p><p>Notice what these roles share: they're data and software problems wearing a thin layer of finance vocabulary — the same shape as <a href="#s18">Section 18</a>'s quant-adjacent jobs, but usually with a lower finance-theory bar and a higher engineering one. A fraud model is a classifier, an AML alert is anomaly detection, on-chain analysis is graph mining, a rebalancer is a scheduled optimization. You already own the hard part. What this section gave you is the domain map to point those skills at — and <a href="#s20">Section 20 (Career Roadmap)</a> turns the map into a plan.</p></div>
+  <details class="deep"><summary>Deep dive: why don't banks just move to instant rails for everything?</summary><p>Because reversibility is a feature, not a bug. Batch, reversible ACH gives the system time to catch fraud and errors before money is unrecoverable — a payroll typo can be undone; a mistaken wire usually can't. Instant-and-final rails move the fraud fight entirely up front, to identity verification and real-time scoring, and they expose consumers to authorized-push-payment scams where a victim is tricked into sending irreversible money themselves. That's why the mature instant systems (UPI, Pix, FedNow) pair speed with heavy investment in verification, confirmation-of-payee checks, and fraud analytics — which is, again, precisely where the data jobs are. Every design choice in payments is a risk trade-off, and every risk trade-off is a modeling problem.</p></details>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. In the four-party card model, who receives the bulk of the fee (interchange) on a purchase?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">The card network (Visa/Mastercard)</button>
+        <button class="quiz-opt" data-correct>The issuer — the cardholder's own bank</button>
+        <button class="quiz-opt">The merchant</button>
+        <button class="quiz-opt">The acquirer</button>
+      </div>
+      <p class="quiz-explain">Interchange flows from the acquiring side to the issuer, the cardholder's bank. That inbound fee is what funds credit risk and rewards — which is why "free" cashback is really merchant-funded.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. You need to send a payment that settles the same day and cannot be reversed. Which rail fits?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">ACH</button>
+        <button class="quiz-opt" data-correct>A wire</button>
+        <button class="quiz-opt">A card payment</button>
+        <button class="quiz-opt">A correspondent-bank chain</button>
+      </div>
+      <p class="quiz-explain">Wires process individually, settle same-day, and are final — that irreversibility is exactly why they're used for large, urgent, trusted transfers like property purchases. ACH is slow and reversible; correspondent chains are slow and expensive.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. An AMM pool holds 100 ETH and 200,000 USDC (k = 20,000,000). You buy 10 ETH. Roughly what do you pay per ETH?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Exactly 2,000 — the spot price</button>
+        <button class="quiz-opt" data-correct>About 2,222 — worse than spot, because of slippage</button>
+        <button class="quiz-opt">About 1,800 — a bulk discount</button>
+        <button class="quiz-opt">Exactly 20,000</button>
+      </div>
+      <p class="quiz-explain">Keeping x·y=k, the pool moves to 90 ETH × 222,222 USDC, so you pay 22,222 USDC for 10 ETH — an effective 2,222 each, an 11.1% price impact. The formula makes larger trades cost progressively more.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. What is the single biggest open question about a fully-reserved stablecoin like USDC?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Whether the blockchain code has a bug</button>
+        <button class="quiz-opt">Whether proof-of-work uses too much energy</button>
+        <button class="quiz-opt" data-correct>Whether the real-dollar reserves backing each token are actually there, safe, and audited</button>
+        <button class="quiz-opt">Whether the tokens can be transferred quickly</button>
+      </div>
+      <p class="quiz-explain">A fully-reserved stablecoin's stability rests entirely on the off-chain reserve. The code can be flawless and the coin still fails if the backing assets aren't real, safe, and verifiable — historically, the failures were reserve failures.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. Over 30 years at a 7% gross return, why does a 1% annual advisor fee cost roughly a third of your gains rather than just "1% a year"?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Advisors charge hidden extra fees on top</button>
+        <button class="quiz-opt" data-correct>The fee compounds against you every year, so the forgone growth on forgone growth snowballs</button>
+        <button class="quiz-opt">Because returns are guaranteed to fall over time</button>
+        <button class="quiz-opt">Taxes multiply the fee</button>
+      </div>
+      <p class="quiz-explain">A 1% fee turns a 6.97% net return into 6.00%. Over 30 years that gap compounds — $755k versus $574k — because each year's fee also removes all the future growth that money would have earned. Compounding magnifies drags exactly as it magnifies gains.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>A card tap runs the four-party model in about two seconds (authorization), then clears and settles over a day or two; the ~2% merchant fee is mostly interchange, paid to the cardholder's own bank — that's what funds rewards.</li>
+      <li>Bank rails trade off speed, cost, and reversibility: ACH is slow, cheap, and reversible; wires are fast, costly, and final; RTP/FedNow finally deliver instant-and-cheap — at the price of instant-and-final fraud risk. Cross-border is broken by design, and netting (Wise-style) is the fix.</li>
+      <li>The fintech stack is abstraction over messy rails: processors (Stripe/Adyen) sell APIs, BaaS rents bank licenses, neobanks front it all — but a chartered bank, deposits, and regulation still anchor the tower.</li>
+      <li>Lending is moving to alternative-data underwriting (a classification problem with fairness and explainability constraints); BNPL hides its risk in unsecured micro-loans and in debt-stacking invisible to any single lender.</li>
+      <li>Read a blockchain as an append-only hash-linked log secured by consensus (proof-of-work burns electricity; proof-of-stake risks capital); a smart contract is just deterministic, unstoppable code that holds money.</li>
+      <li>Crypto's honest scorecard: stablecoins, trustless AMM swaps (x·y=k with built-in slippage), and a censorship-resistant ledger are real; "decentralization removes risk" is hype — it relocates risk into code and reserves.</li>
+      <li>A 1% fee is not small: compounded over decades it can eat a third of your gains, which is the whole economic case for robo-advisors and index DIY.</li>
+      <li>The jobs for a data person span payments (fraud), lending (underwriting), crypto (on-chain analytics), wealth (robo logic), and RegTech (AML/KYC) — the quiet, mandatory, underserved giant and one of your best doors in.</li>
+    </ul>
+  </div>
+</section>

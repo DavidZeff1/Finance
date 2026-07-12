@@ -1,0 +1,406 @@
+<section class="lesson" id="s10" data-num="10" data-title="FX, Commodities and Alternative Investments">
+  <p class="eyebrow">Part II · Financial Markets &amp; Instruments</p>
+  <h2>10. FX, Commodities and Alternative Investments</h2>
+  <p class="lede">Beyond stocks and bonds sits a sprawling world: the currency market that dwarfs every other, commodities you can only sensibly touch through futures, and the "alternatives" — real estate, private equity, hedge funds, crypto — that dominate institutional portfolios and finance-job postings alike. By the end of this section you'll be able to read an FX quote, hedge a currency exposure, compute a cap rate, and decode a 2-and-20 fee structure.</p>
+
+  <h3 id="s10-fx-market">The FX market: the biggest market you've never seen a building for</h3>
+  <p>The <dfn class="term" tabindex="0" data-def="Foreign exchange — the global market where one currency is traded for another.">foreign exchange (FX)</dfn> market turns over roughly <strong>$7.5 trillion per day</strong> (BIS 2022 survey). For scale: that's more in a week than global stock markets trade in a year. There's no exchange floor — it's a decentralized, 24-hour-a-weekday network of bank dealers, an <dfn class="term" tabindex="0" data-def="A dealer market where trades happen directly between two parties rather than on a central exchange.">over-the-counter</dfn> market like the swaps you met in <a href="#s09">Section 9 (Derivatives)</a>.</p>
+  <p>Currencies trade in <dfn class="term" tabindex="0" data-def="Two currencies quoted against each other, e.g. EUR/USD; you always buy one by selling the other.">pairs</dfn>, and the quote convention trips up everyone at first. <code>EUR/USD = 1.10</code> means <em>one euro costs 1.10 US dollars</em>. The first currency (EUR) is the <dfn class="term" tabindex="0" data-def="The first currency in a pair — the thing being priced, always exactly one unit of it.">base currency</dfn> — the thing being priced, always one unit. The second (USD) is the <dfn class="term" tabindex="0" data-def="The second currency in a pair — the currency the price is expressed in.">quote currency</dfn> — the units on the price tag. So when EUR/USD <em>rises</em> from 1.10 to 1.20, the euro got stronger and the dollar got weaker, even though "USD went up" is what your eye wants to read.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 300" role="img" aria-label="Anatomy of an FX quote: EUR/USD equals 1.1000, with the base currency, quote currency, price meaning and pip labeled">
+      <text x="160" y="100" text-anchor="middle" font-size="44" font-weight="700" style="fill:var(--c1)">EUR</text>
+      <text x="218" y="100" text-anchor="middle" font-size="36" style="fill:var(--muted)">/</text>
+      <text x="285" y="100" text-anchor="middle" font-size="44" font-weight="700" style="fill:var(--c2)">USD</text>
+      <text x="360" y="100" text-anchor="middle" font-size="36" style="fill:var(--muted)">=</text>
+      <text x="410" y="100" font-size="44" font-weight="700"><tspan style="fill:var(--ink)">1.100</tspan><tspan style="fill:var(--accent)">0</tspan></text>
+      <line x1="160" y1="112" x2="115" y2="162" style="stroke:var(--axis)" stroke-width="1"/>
+      <line x1="285" y1="112" x2="285" y2="162" style="stroke:var(--axis)" stroke-width="1"/>
+      <line x1="480" y1="112" x2="530" y2="162" style="stroke:var(--axis)" stroke-width="1"/>
+      <text x="40" y="186" font-size="12" font-weight="700" style="fill:var(--c1)">BASE CURRENCY</text>
+      <text x="40" y="206" font-size="13" style="fill:var(--ink)">what is being priced —</text>
+      <text x="40" y="224" font-size="13" style="fill:var(--ink)">always exactly 1 unit</text>
+      <text x="235" y="186" font-size="12" font-weight="700" style="fill:var(--c2)">QUOTE CURRENCY</text>
+      <text x="235" y="206" font-size="13" style="fill:var(--ink)">the units on the</text>
+      <text x="235" y="224" font-size="13" style="fill:var(--ink)">price tag</text>
+      <text x="455" y="186" font-size="12" font-weight="700" style="fill:var(--muted)">THE PRICE</text>
+      <text x="455" y="206" font-size="13" style="fill:var(--ink)">one euro costs</text>
+      <text x="455" y="224" font-size="13" style="fill:var(--ink)">1.10 US dollars</text>
+      <line x1="60" y1="248" x2="660" y2="248" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="360" y="276" text-anchor="middle" font-size="13.5" style="fill:var(--muted)">The 4th decimal (0.0001) is one pip — a move from 1.1000 to 1.1050 is "+50 pips"</text>
+    </svg>
+    <figcaption><strong>Figure 10.1</strong> — Read EUR/USD as "dollars per euro": a rising number means a stronger euro, not a stronger dollar.</figcaption>
+  </figure>
+
+  <p>Price moves are measured in <dfn class="term" tabindex="0" data-def="The smallest conventional price increment in an FX quote — 0.0001 for most pairs.">pips</dfn> (0.0001 for most pairs). On a standard €100,000 position, one pip is worth 0.0001 × 100,000 = $10 — which tells you why FX traders care about the fourth decimal. Most volume is <dfn class="term" tabindex="0" data-def="An FX trade settling almost immediately, usually within two business days, at today's price.">spot</dfn> (exchange now, settle in two days), but a huge share is <dfn class="term" tabindex="0" data-def="An agreement to exchange currencies at a fixed rate on a fixed future date.">forwards</dfn> and swaps — the derivative machinery from <a href="#s09">Section 9</a> applied to money itself.</p>
+  <p>What moves currencies? Mostly the forces you met in <a href="#s05">Section 5 (Fiscal Policy, Debt &amp; Trade)</a>: <strong>interest-rate differentials</strong> (capital flows toward higher yields, set by the central banks of <a href="#s04">Section 4</a>), <strong>inflation differentials</strong> (high inflation erodes purchasing power and, eventually, the exchange rate), and <strong>trade and capital flows</strong> (persistent deficits need financing). Layer on risk sentiment — in a panic, money runs to the dollar, yen and Swiss franc — and you have most of the story.</p>
+  <p>Rate differentials also power the most famous FX strategy: the <dfn class="term" tabindex="0" data-def="Borrowing in a low-interest-rate currency to invest in a higher-yielding one, pocketing the rate gap.">carry trade</dfn>. Borrow yen at 0.5%, convert, invest in Australian assets at 4.5%, and pocket the 4-percentage-point gap — as long as exchange rates sit still. That's the catch. Carry trades earn small steady gains and then, occasionally, lose catastrophically when everyone unwinds at once: a 5% yen rally erases more than a year of carry in days. Traders call it "picking up nickels in front of a steamroller," and the August 2024 yen-carry unwind — which briefly knocked global equities down several percent — showed the steamroller is real.</p>
+
+  <div class="widget" id="s10-fxwinners">
+    <div class="widget-head">
+      <h4>Currency moves: who wins?</h4>
+      <p>Drag EUR/USD away from the 1.10 baseline and watch who gains and who bleeds — the same move, four opposite experiences.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">EUR/USD exchange rate <output class="ctl-val">1.10</output>
+          <input type="range" min="0.90" max="1.40" step="0.01" value="1.10">
+        </label>
+      </div>
+      <p style="color:var(--muted); font-size:0.9em;" data-cell="mood">At the 1.10 baseline — no change yet.</p>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Who</th><th>Position</th><th class="td-num">Dollar amount now</th><th class="td-num">vs 1.10 baseline</th></tr></thead>
+        <tbody>
+          <tr><td>US importer</td><td>owes a €1,000,000 invoice</td><td class="td-num" data-cell="imp-usd">$1,100,000</td><td class="td-num" data-cell="imp-d">—</td></tr>
+          <tr><td>US exporter</td><td>books €1,000,000 of sales</td><td class="td-num" data-cell="exp-usd">$1,100,000</td><td class="td-num" data-cell="exp-d">—</td></tr>
+          <tr><td>US tourist</td><td>faces a €3,000 hotel bill</td><td class="td-num" data-cell="tour-usd">$3,300</td><td class="td-num" data-cell="tour-d">—</td></tr>
+          <tr><td>US investor</td><td>holds €100,000 of European stocks (flat in €)</td><td class="td-num" data-cell="inv-usd">$110,000</td><td class="td-num" data-cell="inv-d">—</td></tr>
+        </tbody>
+      </table></div>
+      <p style="color:var(--muted); font-size:0.9em;">Payers of euros (importer, tourist) want a weak euro; receivers and holders of euro assets (exporter, investor) want a strong one. Same price, opposite rooting interests.</p>
+    </div>
+  </div>
+  <script>
+(function () {
+  var root = document.getElementById('s10-fxwinners');
+  if (!root) return;
+  var slider = root.querySelector('input[type="range"]');
+  var out = root.querySelector('.ctl-val');
+  var mood = root.querySelector('[data-cell="mood"]');
+  var BASE = 1.10;
+  var actors = [
+    { key: 'imp', amt: 1000000, dir: -1 },
+    { key: 'exp', amt: 1000000, dir: 1 },
+    { key: 'tour', amt: 3000, dir: -1 },
+    { key: 'inv', amt: 100000, dir: 1 }
+  ];
+  function fmt(x) {
+    return '$' + Math.round(x).toLocaleString('en-US', { maximumFractionDigits: 0 });
+  }
+  function update() {
+    var r = parseFloat(slider.value);
+    if (isNaN(r)) r = BASE;
+    r = Math.min(1.40, Math.max(0.90, r));
+    out.textContent = r.toFixed(2);
+    if (Math.abs(r - BASE) < 0.005) {
+      mood.textContent = 'At the 1.10 baseline — no change yet.';
+    } else if (r > BASE) {
+      mood.textContent = 'Euro stronger / dollar weaker than the 1.10 baseline.';
+    } else {
+      mood.textContent = 'Euro weaker / dollar stronger than the 1.10 baseline.';
+    }
+    actors.forEach(function (a) {
+      var usd = a.amt * r;
+      var delta = (r - BASE) * a.amt * a.dir;
+      var usdCell = root.querySelector('[data-cell="' + a.key + '-usd"]');
+      var dCell = root.querySelector('[data-cell="' + a.key + '-d"]');
+      if (usdCell) usdCell.textContent = fmt(usd);
+      if (!dCell) return;
+      if (Math.abs(delta) < 0.5) {
+        dCell.textContent = '—';
+        dCell.style.color = 'var(--muted)';
+      } else if (delta > 0) {
+        dCell.textContent = 'gains ' + fmt(delta);
+        dCell.style.color = 'var(--up)';
+      } else {
+        dCell.textContent = 'loses ' + fmt(-delta);
+        dCell.style.color = 'var(--down)';
+      }
+    });
+  }
+  slider.addEventListener('input', update);
+  update();
+})();
+  </script>
+
+  <h3 id="s10-fx-corporate">How companies live with FX</h3>
+  <p>For a multinational, currency risk isn't a trading opportunity — it's weather. It comes in two flavors. <dfn class="term" tabindex="0" data-def="FX risk on specific future cash flows — invoices or revenues already agreed in a foreign currency.">Transaction exposure</dfn> is risk on actual cash flows: you've agreed to pay or receive foreign currency at a future date, and the rate can move before it does. <dfn class="term" tabindex="0" data-def="FX risk from converting foreign subsidiaries' accounts into the parent's reporting currency.">Translation exposure</dfn> is an accounting effect: a US parent must restate its German subsidiary's euro results in dollars, so reported revenue swings with the exchange rate even if the business itself never changes. A subsidiary earning €50M shows up as $55M at 1.10 but only $50M at parity — a $5M "decline" with zero operational cause. (You'll see this flagged as "constant-currency growth" when you read filings in <a href="#s11">Section 11</a>.)</p>
+  <p>Transaction exposure is the one companies actively hedge, usually with the forwards from <a href="#s09">Section 9</a>. The logic: give up the upside to delete the downside, because a manufacturer's edge is manufacturing, not currency speculation.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example: a European exporter hedges dollar revenue</p>
+    <p>A German machine-tool maker signs a contract to receive <strong>$5,000,000</strong> in six months. Its costs are in euros, so a weakening dollar (EUR/USD rising) directly shrinks its margin. It sells the dollars forward at today's six-month forward rate of 1.10, locking in $5,000,000 ÷ 1.10 = <strong>€4,545,455</strong>, guaranteed.</p>
+    <p>Six months later, suppose spot has moved to 1.20. Unhedged, the $5M would convert to only $5,000,000 ÷ 1.20 = €4,166,667. The hedge preserved <strong>€378,788</strong> — likely more than the entire profit margin on the machines. If instead spot had fallen to 1.00, the unhedged value would have been €5,000,000 and the hedge "cost" €454,545 of foregone upside. That's the deal: certainty in both directions.</p>
+  </div>
+  <div class="callout co-you"><p class="co-label">Your edge</p><p>Corporate FX desks and treasury analytics teams are heavy consumers of data skills: forecasting exposures from ERP data, computing hedge ratios, simulating rate scenarios. "Treasury analyst" is one of the most underrated data-adjacent entry points into finance.</p></div>
+
+  <details class="deep"><summary>Deep dive: where forward FX rates come from</summary>
+    <p>Forward rates are not a forecast — they're arbitrage arithmetic, exactly like the futures pricing in <a href="#s09">Section 9</a>. If US one-year rates are 4% and euro rates are 2%, the one-year forward must satisfy <em>F = S × (1 + r<sub>USD</sub>) ÷ (1 + r<sub>EUR</sub>)</em> = 1.10 × 1.04 ÷ 1.02 ≈ <strong>1.1216</strong>. Why: holding dollars for a year earns 4%; holding euros earns 2% plus whatever the currency does. If the forward sat anywhere else, you could borrow one currency, lend the other, lock the forward, and print riskless profit. This relationship is called <dfn class="term" tabindex="0" data-def="The no-arbitrage rule tying forward FX rates to the two currencies' interest rates.">covered interest parity</dfn>, and it's one of the most reliably enforced identities in finance. Note the implication: the higher-yielding currency trades at a forward <em>discount</em> — the forward market "gives back" the carry.</p>
+  </details>
+
+  <h3 id="s10-commodities">Commodities: futures curves, oil and the strange case of gold</h3>
+  <p>Commodities — oil, gas, wheat, copper, gold — are the only asset class you could theoretically dump in your driveway. That's exactly why almost nobody holds them physically: storage, insurance and transport are expensive, and a barrel of oil pays no dividend while it sits there. So financial investors get exposure through the <dfn class="term" tabindex="0" data-def="Exchange-traded contracts to buy or sell a commodity at a set price on a set future date.">futures</dfn> contracts from <a href="#s09">Section 9</a>: standardized, liquid, no warehouse required.</p>
+  <p>But futures introduce a subtlety that catches even professionals: the <em>shape of the futures curve</em> drives your returns as much as the commodity's price does. Plot the futures price against contract maturity. If longer-dated contracts cost <em>more</em> than spot, the curve is in <dfn class="term" tabindex="0" data-def="A futures curve where longer-dated contracts trade above the spot price, typically reflecting storage and financing costs.">contango</dfn> — normal when storage is costly. If they cost <em>less</em>, it's in <dfn class="term" tabindex="0" data-def="A futures curve where longer-dated contracts trade below the spot price, often signaling scarcity today.">backwardation</dfn> — typical when the physical commodity is scarce right now.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="Futures price versus contract maturity showing an upward-sloping contango curve and a downward-sloping backwardation curve diverging from today's spot price">
+      <line x1="70" y1="40" x2="70" y2="280" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="70" y1="280" x2="660" y2="280" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="70" y1="160" x2="650" y2="160" style="stroke:var(--grid)" stroke-width="1" stroke-dasharray="5 4"/>
+      <text x="645" y="150" text-anchor="end" font-size="13" style="fill:var(--muted)">spot price today</text>
+      <path d="M 70 160 C 250 128 450 100 620 70" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>
+      <path d="M 70 160 C 250 192 450 222 620 250" fill="none" style="stroke:var(--c2)" stroke-width="2.5"/>
+      <text x="618" y="56" text-anchor="end" font-size="14" font-weight="700" style="fill:var(--c1)">Contango</text>
+      <text x="618" y="270" text-anchor="end" font-size="14" font-weight="700" style="fill:var(--c2)">Backwardation</text>
+      <text x="290" y="92" text-anchor="middle" font-size="13" style="fill:var(--muted)">rolling long here = buy high, drift down (drag)</text>
+      <text x="290" y="243" text-anchor="middle" font-size="13" style="fill:var(--muted)">rolling long here = buy low, drift up (tailwind)</text>
+      <text x="70" y="302" text-anchor="middle" font-size="13" style="fill:var(--muted)">spot</text>
+      <text x="215" y="302" text-anchor="middle" font-size="13" style="fill:var(--muted)">3m</text>
+      <text x="360" y="302" text-anchor="middle" font-size="13" style="fill:var(--muted)">6m</text>
+      <text x="505" y="302" text-anchor="middle" font-size="13" style="fill:var(--muted)">9m</text>
+      <text x="650" y="302" text-anchor="middle" font-size="13" style="fill:var(--muted)">12m</text>
+      <text x="72" y="28" font-size="13" style="fill:var(--muted)">Futures price, by contract maturity →</text>
+    </svg>
+    <figcaption><strong>Figure 10.2</strong> — The curve's slope, not just the spot price, sets a futures investor's return: contango bleeds you on every roll; backwardation pays you.</figcaption>
+  </figure>
+
+  <p>Here's why it matters. Futures expire, so a long-term investor must <em>roll</em>: sell the expiring contract, buy the next one out. In contango you repeatedly sell the cheap near contract and buy the expensive far one, and as each contract ages it tends to slide down the curve toward spot. That systematic drag is negative <dfn class="term" tabindex="0" data-def="The return component from a futures contract converging toward spot as it approaches expiry.">roll yield</dfn> — an oil ETF can lose money over a year in which spot oil is flat, purely from rolling. In backwardation the same mechanics work in your favor. If you've built a data pipeline with scheduled jobs, the analogy is apt: roll yield is a recurring cost (or credit) baked into the schedule, independent of what the underlying data does.</p>
+  <p>Two market notes. <strong>Oil</strong> is the macro commodity: benchmarks <code>WTI</code> (US, NYMEX) and <code>Brent</code> (global, ICE) trade in contracts of 1,000 barrels, and the price feeds straight into the inflation dynamics of <a href="#s03">Section 3</a>. In April 2020, WTI futures famously settled at <em>negative</em> $37 — storage was full, and holders paid to escape taking physical delivery. That episode is the cleanest proof you'll find that a futures price is about delivery logistics, not just abstract value.</p>
+  <p><strong>Gold</strong> is the odd one out. It has almost no industrial use in proportion to its price and generates no cash flow, yet central banks hold about 35,000 tonnes of it. The honest framing: gold is the <em>anti-currency</em> — a monetary asset that no government can print. It tends to rise when <dfn class="term" tabindex="0" data-def="Interest rates after subtracting inflation — the true purchasing-power return on cash.">real interest rates</dfn> fall (cash pays less, so gold's zero yield hurts less) and when trust in monetary policy wobbles. You can't value it with the discounting tools of <a href="#s01">Section 1</a>; you can only reason about its supply, its demand and its 5,000-year incumbency as the asset people run to.</p>
+
+  <h3 id="s10-realestate">Real estate and REITs: leverage plus a yield you can compute</h3>
+  <p>Real estate is the world's largest asset class by value, and its defining feature is <dfn class="term" tabindex="0" data-def="Using borrowed money to control an asset, which multiplies both gains and losses on your equity.">leverage</dfn>. Nobody buys a $500,000 building with $500,000 of cash; they put down $100,000 and borrow $400,000. Now a 10% rise in the property's price ($50,000) is a <strong>50% gain on your equity</strong> — and a 20% fall wipes your equity to zero. Same asset, radically different risk, purely because of the financing. Keep that multiplier in mind for <a href="#s16">Section 16 (Risk Management)</a>; it's the engine of most property busts, 2008 included.</p>
+  <p>The valuation workhorse is beautifully simple. A property's <dfn class="term" tabindex="0" data-def="Net operating income — rental revenue minus operating expenses, before mortgage payments and taxes.">net operating income (NOI)</dfn> is rent minus operating costs (maintenance, insurance, property tax, management — but <em>not</em> the mortgage). The <dfn class="term" tabindex="0" data-def="Capitalization rate — a property's net operating income divided by its price; its unlevered current yield.">cap rate</dfn> is:</p>
+  <div class="formula">
+    <div class="formula-main">Cap rate = NOI ÷ Price</div>
+    <div class="formula-legend">NOI = annual rent − operating costs (excluding mortgage) · Price = purchase price · result = unlevered yield</div>
+  </div>
+  <div class="callout co-ex"><p class="co-label">Worked example</p><p>A rental property costs $500,000, brings in $42,000 of annual rent and costs $12,000 a year to run. NOI = 42,000 − 12,000 = <strong>$30,000</strong>, so the cap rate is 30,000 ÷ 500,000 = <strong>6.0%</strong>. Compare that to the 10-year Treasury from <a href="#s08">Section 8</a>: if Treasuries yield 4%, the property offers a 2-percentage-point spread as compensation for illiquidity, vacancies, leaky roofs and tenant risk. If Treasuries rose to 6%, that spread vanishes — which is exactly why property prices sag when rates climb.</p></div>
+
+  <div class="widget" id="s10-caprate">
+    <div class="widget-head">
+      <h4>Cap rate calculator</h4>
+      <p>Price a property like an analyst: change the numbers and watch the yield spread against Treasuries.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Property price ($) <input type="number" class="num-in" min="1" step="10000" value="500000" data-in="price"></label>
+        <label class="ctl">Annual rent ($) <input type="number" class="num-in" min="0" step="1000" value="42000" data-in="rent"></label>
+        <label class="ctl">Annual operating costs ($) <input type="number" class="num-in" min="0" step="1000" value="12000" data-in="costs"></label>
+      </div>
+      <div class="ctl-row">
+        <label class="ctl">10-year Treasury yield <output class="ctl-val">4.0%</output>
+          <input type="range" min="0" max="10" step="0.1" value="4.0" data-in="ty">
+        </label>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">NOI (rent − costs)</span><span class="stat-value" data-out="noi">$30,000</span></div>
+        <div class="stat"><span class="stat-label">Cap rate</span><span class="stat-value" data-out="cap">6.00%</span></div>
+        <div class="stat"><span class="stat-label">Spread vs Treasury</span><span class="stat-value" data-out="spread">+2.0 pp</span></div>
+      </div>
+      <p style="color:var(--muted); font-size:0.9em;" data-out="verdict"></p>
+    </div>
+  </div>
+  <script>
+(function () {
+  var root = document.getElementById('s10-caprate');
+  if (!root) return;
+  var priceIn = root.querySelector('[data-in="price"]');
+  var rentIn = root.querySelector('[data-in="rent"]');
+  var costsIn = root.querySelector('[data-in="costs"]');
+  var tyIn = root.querySelector('[data-in="ty"]');
+  var tyOut = root.querySelector('.ctl-val');
+  var noiOut = root.querySelector('[data-out="noi"]');
+  var capOut = root.querySelector('[data-out="cap"]');
+  var spreadOut = root.querySelector('[data-out="spread"]');
+  var verdict = root.querySelector('[data-out="verdict"]');
+  function num(el, fallback, min) {
+    var v = parseFloat(el.value);
+    if (isNaN(v)) v = fallback;
+    return Math.max(min, v);
+  }
+  function money(x) {
+    var sign = x < 0 ? '−$' : '$';
+    return sign + Math.abs(Math.round(x)).toLocaleString('en-US', { maximumFractionDigits: 0 });
+  }
+  function update() {
+    var price = num(priceIn, 500000, 1);
+    var rent = num(rentIn, 42000, 0);
+    var costs = num(costsIn, 12000, 0);
+    var ty = Math.min(10, num(tyIn, 4, 0));
+    tyOut.textContent = ty.toFixed(1) + '%';
+    var noi = rent - costs;
+    var cap = (noi / price) * 100;
+    var spread = cap - ty;
+    noiOut.textContent = money(noi);
+    noiOut.style.color = noi < 0 ? 'var(--down)' : 'var(--ink)';
+    capOut.textContent = cap.toFixed(2) + '%';
+    spreadOut.textContent = (spread >= 0 ? '+' : '−') + Math.abs(spread).toFixed(1) + ' pp';
+    spreadOut.style.color = spread >= 0 ? 'var(--up)' : 'var(--down)';
+    if (noi < 0) {
+      verdict.textContent = 'Negative NOI: this property loses money before you even think about the mortgage.';
+    } else if (spread >= 2) {
+      verdict.textContent = 'A healthy spread over the risk-free rate — payment for illiquidity, vacancies and repairs.';
+    } else if (spread >= 0) {
+      verdict.textContent = 'A thin spread: you take property risk for barely more than a Treasury pays.';
+    } else {
+      verdict.textContent = 'The cap rate is below the Treasury yield — you would earn less than the risk-free rate, with far more risk. Buyers here are betting on rent growth or price appreciation.';
+    }
+  }
+  [priceIn, rentIn, costsIn].forEach(function (el) { el.addEventListener('input', update); });
+  tyIn.addEventListener('input', update);
+  update();
+})();
+  </script>
+
+  <p>Because buildings are lumpy and illiquid, markets built a liquid wrapper: the <dfn class="term" tabindex="0" data-def="Real estate investment trust — a listed company that owns income-producing property and must pay out at least 90% of taxable income as dividends.">REIT</dfn>. A REIT is a listed company that owns portfolios of properties — apartments, warehouses, cell towers, data centers — and, in exchange for paying no corporate tax, must distribute at least 90% of taxable income as dividends. You get diversified property exposure with stock-market liquidity: buy <code>VNQ</code> or a single REIT in seconds. The trade-off: because REITs trade like the stocks of <a href="#s07">Section 7</a>, they crash like stocks too — in 2008 they fell alongside equities even as "real estate diversification" was the reason people held them. Liquidity has a price: it imports equity-market volatility.</p>
+
+  <h3 id="s10-pe-vc">Private equity and venture capital: illiquidity as a business model</h3>
+  <p><dfn class="term" tabindex="0" data-def="Investing in companies that are not publicly traded, typically by buying whole businesses with borrowed money.">Private equity (PE)</dfn> buys entire companies off the public market — or ones that were never on it. The signature move is the <dfn class="term" tabindex="0" data-def="Leveraged buyout — acquiring a company mostly with borrowed money, using the company itself as collateral.">leveraged buyout (LBO)</dfn>, which is the real-estate leverage trick applied to a whole business. One worked paragraph: a PE firm buys a company generating $125M of <dfn class="term" tabindex="0" data-def="Earnings before interest, taxes, depreciation and amortization — a rough proxy for operating cash flow.">EBITDA</dfn> for 8× EBITDA = $1,000M, funding it with $400M of its own equity and $600M of debt loaded onto the company. Over five years the firm pushes EBITDA to $150M and uses the company's cash flow to pay debt down to $300M. It exits at the same 8× multiple: $1,200M, minus $300M of debt, leaves <strong>$900M of equity — 2.25× the money in, roughly a 17.6% annualized return</strong>. Notice the sources of profit: some operational improvement, but a lot of leverage and debt paydown. That's the LBO in one breath.</p>
+  <p><dfn class="term" tabindex="0" data-def="Funding for young high-risk companies in exchange for equity, expecting most to fail and a few to return the fund.">Venture capital (VC)</dfn> plays the opposite statistical game. Instead of leveraging stable cash flows, it buys lottery tickets governed by a <dfn class="term" tabindex="0" data-def="A distribution where a tiny fraction of outcomes accounts for most of the total — extreme skew, fat right tail.">power law</dfn>. A stylized fund makes twenty $1M investments: thirteen go to zero, five limp back their $1M each, one returns 5×, and one returns 30×. Total: $40M on $20M invested — a respectable 2× — and the single 30× winner returned more than everything else combined. For a data scientist this should feel familiar: it's an extreme-skew distribution where the mean is meaningless without the tail, and "median startup outcome" is a rounding error above zero. VC diligence is therefore tail-hunting, not average-estimating.</p>
+  <p>Both run on the same fund plumbing. Investors — pensions, endowments, sovereign funds — are <dfn class="term" tabindex="0" data-def="Limited partner — an investor in a private fund with limited liability and no management role.">limited partners (LPs)</dfn>; the firm managing the money is the <dfn class="term" tabindex="0" data-def="General partner — the firm that manages a private fund and earns fees plus a share of profits.">general partner (GP)</dfn>. LPs commit capital that the GP calls down over several years as it finds deals. Fees follow the famous <strong>2-and-20</strong>: roughly 2% annual management fee plus 20% of profits — the profit share is called <dfn class="term" tabindex="0" data-def="The GP's share of fund profits, typically 20%, usually paid only above a hurdle return.">carried interest</dfn> — often only above a <dfn class="term" tabindex="0" data-def="A minimum return, commonly 8% a year, that LPs must earn before the GP takes carry.">hurdle rate</dfn> of ~8%. The cash-flow rhythm produces the <dfn class="term" tabindex="0" data-def="The typical private-fund pattern of negative returns in early years, then rising returns as investments exit.">J-curve</dfn>: early years are all outflows (capital calls, fees) and markdowns, then exits start returning cash and the curve climbs.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 330" role="img" aria-label="The private equity J-curve: cumulative net cash flow to investors dips negative for the first several years, then rises above break-even as exits return cash">
+      <line x1="80" y1="180" x2="660" y2="180" style="stroke:var(--grid)" stroke-width="1" stroke-dasharray="5 4"/>
+      <text x="648" y="170" text-anchor="end" font-size="13" style="fill:var(--muted)">break-even</text>
+      <line x1="80" y1="290" x2="660" y2="290" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <path d="M 80 180 C 140 230 190 262 250 262 C 330 262 350 215 400 180 C 460 138 560 95 650 70" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>
+      <text x="95" y="150" font-size="13" style="fill:var(--muted)">years 1–4: capital calls and fees flow OUT</text>
+      <text x="440" y="225" font-size="13" style="fill:var(--muted)">later years: exits return cash to LPs</text>
+      <text x="80" y="28" font-size="13" style="fill:var(--muted)">Cumulative net cash flow to LPs</text>
+      <text x="80" y="314" text-anchor="middle" font-size="13" style="fill:var(--muted)">0</text>
+      <text x="194" y="314" text-anchor="middle" font-size="13" style="fill:var(--muted)">2</text>
+      <text x="308" y="314" text-anchor="middle" font-size="13" style="fill:var(--muted)">4</text>
+      <text x="422" y="314" text-anchor="middle" font-size="13" style="fill:var(--muted)">6</text>
+      <text x="536" y="314" text-anchor="middle" font-size="13" style="fill:var(--muted)">8</text>
+      <text x="650" y="314" text-anchor="middle" font-size="13" style="fill:var(--muted)">10 yrs</text>
+    </svg>
+    <figcaption><strong>Figure 10.3</strong> — The J-curve: a private fund looks like a loser for years by design, which is why LPs must be able to wait a decade.</figcaption>
+  </figure>
+
+  <div class="callout co-warn"><p class="co-label">Common pitfall: smooth ≠ safe</p><p>Private funds report returns from <em>appraised</em> valuations, updated quarterly by the GP itself, not from market prices. Stale, managed marks make the return series look eerily smooth — low "volatility," low "correlation" with stocks. Much of that is measurement artifact, not economics: if you only reprice your house once a year, its price chart is smooth too. Practitioners call this volatility laundering. When you build risk models in <a href="#s16">Section 16</a>, de-smoothing private-asset returns is a real analytical task.</p></div>
+
+  <h3 id="s10-hedgefunds">Hedge funds: the strategy zoo and the fee arithmetic</h3>
+  <p>A <dfn class="term" tabindex="0" data-def="A lightly regulated private investment fund that can short, use leverage and derivatives, and charges performance fees.">hedge fund</dfn> is best defined by what it's <em>allowed</em> to do that a mutual fund isn't: <dfn class="term" tabindex="0" data-def="Selling a borrowed security hoping to buy it back cheaper — profiting from price declines.">short selling</dfn>, heavy leverage, derivatives, concentration. The name is historical; many hedge funds hedge nothing. The main strategy families:</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Strategy</th><th>The bet</th><th>Example</th></tr></thead>
+    <tbody>
+      <tr><td>Long/short equity</td><td>Stock picking on both sides — long the good, short the bad</td><td>Long <code>AMD</code>, short a weaker rival; market moves partly cancel</td></tr>
+      <tr><td>Global macro</td><td>Big directional calls on rates, currencies, commodities</td><td>Soros shorting the pound in 1992</td></tr>
+      <tr><td>Arbitrage / relative value</td><td>Tiny pricing gaps between related securities, levered up</td><td>Convertible bond vs the issuer's stock</td></tr>
+      <tr><td>Quantitative / systematic</td><td>Statistical signals traded by algorithm at scale</td><td>Renaissance, Two Sigma — where your skill set aims (<a href="#s18">Section 18</a>)</td></tr>
+      <tr><td>Event-driven</td><td>Mergers, bankruptcies, restructurings</td><td>Buying a takeover target below the deal price</td></tr>
+    </tbody>
+  </table></div>
+  <p>Now the fee arithmetic, because it's brutal and interview-relevant. Take 2-and-20 with the common simple convention: management fee first, then 20% of what remains. A fund earning <strong>10% gross</strong> nets its investor (10% − 2%) × 0.80 = <strong>6.4%</strong>. Compound that for a decade on $100: gross wealth grows to $259, net wealth to $186. The manager's take is the gap — <strong>$73, which is 46% of the $159 of gross profit</strong>. To justify itself net of fees, a hedge fund can't merely match the market; it needs persistent, large outperformance — exactly the thing <a href="#s17">Section 17 (Market Efficiency)</a> says is rare.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 310" role="img" aria-label="Grouped bars comparing the growth of 100 dollars at 10 percent gross versus 6.4 percent net of 2-and-20 fees, at years 1, 5 and 10, showing the gap widening to 259 versus 186 dollars">
+      <line x1="60" y1="176.7" x2="680" y2="176.7" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="60" y1="103.4" x2="680" y2="103.4" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="55" y="181" text-anchor="end" font-size="12" style="fill:var(--muted)">$100</text>
+      <text x="55" y="108" text-anchor="end" font-size="12" style="fill:var(--muted)">$200</text>
+      <rect x="96" y="169.4" width="70" height="80.6" rx="4" style="fill:var(--c1)"/>
+      <rect x="174" y="172.0" width="70" height="78.0" rx="4" style="fill:var(--c2)"/>
+      <rect x="306" y="131.9" width="70" height="118.1" rx="4" style="fill:var(--c1)"/>
+      <rect x="384" y="150.0" width="70" height="100.0" rx="4" style="fill:var(--c2)"/>
+      <rect x="516" y="60.0" width="70" height="190.0" rx="4" style="fill:var(--c1)"/>
+      <rect x="594" y="113.7" width="70" height="136.3" rx="4" style="fill:var(--c2)"/>
+      <text x="131" y="161" text-anchor="middle" font-size="13" style="fill:var(--ink)">$110</text>
+      <text x="209" y="164" text-anchor="middle" font-size="13" style="fill:var(--ink)">$106</text>
+      <text x="341" y="124" text-anchor="middle" font-size="13" style="fill:var(--ink)">$161</text>
+      <text x="419" y="142" text-anchor="middle" font-size="13" style="fill:var(--ink)">$136</text>
+      <text x="551" y="50" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--c1)">Gross: $259</text>
+      <text x="629" y="104" text-anchor="middle" font-size="13" font-weight="700" style="fill:var(--c2)">Net: $186</text>
+      <line x1="60" y1="250" x2="680" y2="250" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="170" y="274" text-anchor="middle" font-size="13" style="fill:var(--muted)">Year 1</text>
+      <text x="380" y="274" text-anchor="middle" font-size="13" style="fill:var(--muted)">Year 5</text>
+      <text x="590" y="274" text-anchor="middle" font-size="13" style="fill:var(--muted)">Year 10</text>
+      <text x="370" y="300" text-anchor="middle" font-size="13" style="fill:var(--muted)">$100 growing at 10%/yr gross vs 6.4%/yr net of 2-and-20</text>
+    </svg>
+    <figcaption><strong>Figure 10.4</strong> — Fee drag compounds: over ten years, 2-and-20 hands the manager 46% of this fund's gross profits.</figcaption>
+  </figure>
+
+  <p>One more filter for reading hedge-fund marketing: <dfn class="term" tabindex="0" data-def="Distortion that arises when failed funds drop out of the data, making the survivors look like the whole population.">survivorship bias</dfn>. Hedge fund indices are built from funds that voluntarily report; funds that blow up stop reporting and vanish from the history, and new funds often "backfill" only their good early years. Studies put the resulting overstatement of average returns at several percentage points a year. You already know this bug from ML — it's training on a dataset where the failures were silently dropped. Always ask what happened to the funds that aren't in the sample.</p>
+
+  <h3 id="s10-crypto">Crypto as an asset class: how an analyst frames it honestly</h3>
+  <p>We'll cover blockchain mechanics in <a href="#s19">Section 19 (FinTech)</a>; here, treat crypto purely as a portfolio asset. Three facts dominate. First, <strong>volatility</strong>: bitcoin's annualized volatility has historically run 60–80%, versus roughly 15–20% for the S&amp;P 500 — drawdowns of 70–80% have happened repeatedly. Second, <strong>custody risk</strong>: owning crypto means controlling cryptographic keys, and <dfn class="term" tabindex="0" data-def="The safekeeping of assets; in crypto, control of the private keys that move the coins.">custody</dfn> failures — lost keys, hacked wallets, or the exchange itself collapsing, as FTX did in 2022 — can produce a 100% loss with no market move at all. That failure mode simply doesn't exist for a Treasury bond in <a href="#s06">Section 6</a>'s custodial plumbing.</p>
+  <p>Third, and analytically deepest: <strong>no cash flows</strong>. A stock has earnings, a bond has coupons, a building has rent — so the discounting machinery of <a href="#s01">Section 1</a> and <a href="#s13">Section 13 (Valuation)</a> can produce an intrinsic value to argue about. Bitcoin pays nothing, so its value rests entirely on scarcity (a hard-coded 21M supply cap) plus what the next holder will pay. That doesn't make it worthless — gold has traded on the same basis for millennia — but it changes the epistemics: there is no model that says bitcoin is "cheap at $40,000," only supply, demand, and narrative. The honest analyst's framing: a high-volatility, custody-fragile, cash-flow-free speculative asset whose diversification benefit is unstable — its correlation with tech stocks, near zero in the 2010s, jumped sharply in the 2022 tightening cycle, exactly when diversification was needed. Sized accordingly (small, survivable), it's a position; sized on faith, it's a lottery ticket with a login page.</p>
+
+  <h3 id="s10-why-alts">Why alternatives at all — and the Part II instrument map</h3>
+  <p>After all these fees, lockups and custody nightmares, why do pensions and endowments pour trillions into <dfn class="term" tabindex="0" data-def="Investments outside public stocks, bonds and cash — real estate, private equity, hedge funds, commodities, crypto.">alternative investments</dfn>? One word: <dfn class="term" tabindex="0" data-def="A measure from −1 to +1 of how much two assets move together; lower correlation means better diversification.">correlation</dfn>. Portfolio risk depends not just on each asset's volatility but on how assets move <em>together</em> — combine assets with correlation below 1 and the portfolio's volatility drops below the weighted average of the parts, a free lunch you'll derive properly in <a href="#s15">Section 15 (Portfolio Theory)</a>. Real assets that track inflation, macro funds that profit in chaos, farmland that ignores the Nasdaq: each imperfect correlation is a diversification credit. Two caveats keep you honest: correlations tend to spike toward 1 in a crisis (2008 taught that painfully), and some of the advertised low correlation is the appraisal smoothing you saw above. The pitch is real, but smaller than the brochure.</p>
+  <p>That closes Part II. You've now met every major instrument class — here's the map to keep:</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Instrument</th><th>What it is</th><th>Who uses it</th><th>Risk level</th><th>Where you'll meet it in a job</th></tr></thead>
+    <tbody>
+      <tr><td>Common stock (<a href="#s07">s07</a>)</td><td>Ownership share of a company's profits</td><td>Everyone: retail to pensions</td><td class="td-num">Medium–high</td><td>Equity research, any valuation work</td></tr>
+      <tr><td>Index funds / ETFs (<a href="#s07">s07</a>)</td><td>One ticker holding a whole market basket</td><td>Retail, advisors, institutions</td><td class="td-num">Medium</td><td>Asset management, fund analytics</td></tr>
+      <tr><td>Treasuries (<a href="#s08">s08</a>)</td><td>Loans to the US government; the risk-free benchmark</td><td>Central banks, funds, banks</td><td class="td-num">Low (rate risk only)</td><td>Every discount rate you'll ever compute</td></tr>
+      <tr><td>Corporate bonds (<a href="#s08">s08</a>)</td><td>Loans to companies, priced by credit spread</td><td>Insurers, pensions, credit funds</td><td class="td-num">Low–medium</td><td>Credit analysis, ratings, risk teams</td></tr>
+      <tr><td>Futures / forwards (<a href="#s09">s09</a>)</td><td>Locked-in future price for an asset</td><td>Hedgers and speculators</td><td class="td-num">High (levered)</td><td>Commodities desks, treasury, clearing</td></tr>
+      <tr><td>Options (<a href="#s09">s09</a>)</td><td>The right, not obligation, to buy/sell at a set price</td><td>Hedgers, traders, employees</td><td class="td-num">High (asymmetric)</td><td>Derivatives pricing, market risk, comp packages</td></tr>
+      <tr><td>Swaps (<a href="#s09">s09</a>)</td><td>Exchanging cash-flow streams (fixed vs floating)</td><td>Banks, corporates, funds</td><td class="td-num">Varies</td><td>Bank ALM, rates desks, XVA analytics</td></tr>
+      <tr><td>FX (s10)</td><td>One currency priced in another</td><td>Corporates, banks, macro funds</td><td class="td-num">Medium (levered: high)</td><td>Treasury, international anything</td></tr>
+      <tr><td>Commodities (s10)</td><td>Physical goods accessed via futures</td><td>Producers, consumers, CTAs</td><td class="td-num">High</td><td>Energy trading, inflation modeling</td></tr>
+      <tr><td>REITs (s10)</td><td>Listed companies owning income property</td><td>Income investors, allocators</td><td class="td-num">Medium–high</td><td>Real-asset research, dividend models</td></tr>
+      <tr><td>PE / VC funds (s10)</td><td>Locked-up funds buying private companies</td><td>Institutions, the wealthy</td><td class="td-num">High + illiquid</td><td>Deal teams, LP analytics, fund reporting</td></tr>
+      <tr><td>Hedge funds (s10)</td><td>Flexible private funds; short, leverage, derivatives</td><td>Institutions, the wealthy</td><td class="td-num">Varies wildly</td><td>Quant research — the natural home for your skills</td></tr>
+      <tr><td>Crypto (s10)</td><td>Digital scarce assets with no cash flows</td><td>Retail, some institutions</td><td class="td-num">Very high</td><td>FinTech, digital-asset risk teams</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. EUR/USD rises from 1.10 to 1.25. Who is hurt?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">A US exporter with euro-denominated sales</button>
+        <button class="quiz-opt" data-correct>A US importer with euro-denominated invoices to pay</button>
+        <button class="quiz-opt">A US investor holding European stocks</button>
+        <button class="quiz-opt">A European tourist visiting New York</button>
+      </div>
+      <p class="quiz-explain">EUR/USD rising means each euro costs more dollars. Anyone who must <em>pay</em> euros — like the importer — now needs more dollars to settle the same invoice. Euro receivers and euro-asset holders gain, and the European tourist finds America cheaper.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. An oil ETF rolls its long futures position monthly while the curve is in steep contango and spot oil stays flat all year. The ETF most likely…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Matches spot oil's flat return</button>
+        <button class="quiz-opt">Gains, because futures converge up to the higher forward prices</button>
+        <button class="quiz-opt" data-correct>Loses money, because each roll sells low and buys higher</button>
+      </div>
+      <p class="quiz-explain">In contango the next contract is always pricier than the expiring one, and each contract tends to slide down toward spot as it ages. That negative roll yield produces losses even when spot goes nowhere.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. A hedge fund returns 10% gross. Under 2-and-20 (management fee taken first, then 20% of the remainder), the investor nets about…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">8.0%</button>
+        <button class="quiz-opt">6.0%</button>
+        <button class="quiz-opt" data-correct>6.4%</button>
+        <button class="quiz-opt">4.0%</button>
+      </div>
+      <p class="quiz-explain">(10% − 2%) × 0.80 = 6.4%. The 2% management fee comes off the top, then the manager keeps 20% of the remaining 8%.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. A building generates $30,000 of NOI and is priced at $600,000. Its cap rate is…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">6.0%</button>
+        <button class="quiz-opt" data-correct>5.0%</button>
+        <button class="quiz-opt">20%</button>
+        <button class="quiz-opt">4.2%</button>
+      </div>
+      <p class="quiz-explain">Cap rate = NOI ÷ price = 30,000 ÷ 600,000 = 5.0%. (20% is the inverted ratio — price over NOI gives the "multiple," 20×, not the yield.)</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. The core risk of a carry trade (borrow yen at 0.5%, invest in Australian dollars at 4.5%) is that…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">The 4-percentage-point rate gap is too small to matter</button>
+        <button class="quiz-opt">Australian rates might rise, hurting the position</button>
+        <button class="quiz-opt" data-correct>The funding currency (yen) appreciates sharply, wiping out years of carry at once</button>
+      </div>
+      <p class="quiz-explain">Carry accrues slowly, but the FX loss when the low-rate funding currency rallies can arrive all at once — especially in a crowded unwind, as in August 2024. Steady nickels, occasional steamroller.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>FX quotes price the <strong>base</strong> currency in units of the <strong>quote</strong> currency: EUR/USD = 1.10 means one euro costs $1.10, and a rising quote means a stronger euro.</li>
+      <li>Currencies move on rate differentials, inflation gaps and capital flows; the carry trade harvests the rate gap and periodically gets crushed when it unwinds.</li>
+      <li>Companies hedge <em>transaction</em> exposure with forwards — trading upside away to lock certainty — while <em>translation</em> exposure is an accounting effect you'll meet in filings.</li>
+      <li>Commodity investors live on the futures curve: contango bleeds negative roll yield, backwardation pays positive roll yield, regardless of what spot does. Gold is the cash-flow-free anti-currency.</li>
+      <li>Real estate = leverage plus a computable yield: cap rate = NOI ÷ price, judged as a spread over Treasuries; REITs make property liquid at the cost of stock-like volatility.</li>
+      <li>PE and VC run on GP/LP fund mechanics, 2-and-20 with carry, and a J-curve; VC returns follow a power law where one winner carries the fund, and smooth private "returns" partly reflect stale appraisals.</li>
+      <li>Fee drag compounds: 10% gross becomes 6.4% net under 2-and-20 — $259 vs $186 on $100 over a decade — and survivorship bias inflates the track records you're shown.</li>
+      <li>Crypto is a high-volatility asset with custody risk and no cash flows to discount; alternatives in general earn their place only through genuine (not appraisal-smoothed) low correlation — the bridge to <a href="#s15">Section 15</a>.</li>
+    </ul>
+  </div>
+</section>

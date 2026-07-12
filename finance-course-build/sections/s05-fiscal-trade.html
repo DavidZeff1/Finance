@@ -1,0 +1,441 @@
+<section class="lesson" id="s05" data-num="05" data-title="Fiscal Policy, Government Debt and Global Trade">
+  <p class="eyebrow">Part I · Economic Foundations</p>
+  <h2>5. Fiscal Policy, Government Debt and Global Trade</h2>
+  <p class="lede">Central banks steer the economy by setting the price of money; governments steer it by taxing, spending and borrowing — and every country does all of this while trading with everyone else. By the end of this section you'll be able to judge whether a national debt is sustainable, explain why trade isn't a scoreboard, and read a headline about tariffs or a falling currency without flinching.</p>
+
+  <h3 id="s05-fiscal">The government's other lever: taxing and spending</h3>
+  <p><dfn class="term" tabindex="0" data-def="The use of government spending and taxation to influence the economy.">Fiscal policy</dfn> is the demand-side lever that <a href="#s04">Section 4</a> didn't cover. Where the central bank changes the <em>price</em> of borrowing, the government changes spending and taxes directly: build a bridge, cut payroll taxes, mail out checks. The money lands in specific hands immediately — no waiting for banks to pass a rate cut along.</p>
+  <p>Some of it happens with no vote at all. <dfn class="term" tabindex="0" data-def="Tax and spending rules that automatically cushion booms and busts without new legislation.">Automatic stabilizers</dfn> are built-in negative feedback: in a recession, incomes fall, so tax bills fall, while unemployment insurance and food assistance payments rise — the deficit widens on its own and props up spending. In a boom the same machinery runs in reverse. <dfn class="term" tabindex="0" data-def="Deliberate, legislated changes to spending or taxes aimed at boosting or cooling the economy.">Discretionary stimulus</dfn> — the CARES Act of 2020, the 2009 Recovery Act — requires Congress to act, which means recognition lags, debate lags and implementation lags.</p>
+  <div class="callout co-analogy"><p class="co-label">Analogy: autoscaling vs paging the on-call</p><p>Automatic stabilizers are autoscaling — traffic spikes, capacity adjusts, nobody gets paged. Discretionary stimulus is paging a human to provision servers by hand: potentially much bigger, but slow, and sometimes the extra capacity arrives after the traffic spike has passed. That timing risk is a core critique of discretionary fiscal policy.</p></div>
+  <p>How much bang per dollar? The <dfn class="term" tabindex="0" data-def="The change in total GDP produced by one dollar of extra government spending or tax cuts.">fiscal multiplier</dfn> captures the knock-on effects. Pay a contractor $100 billion to build roads; the contractor's workers spend part of their new income at restaurants; the restaurant owners spend part of theirs; and so on. If each recipient spends 60 cents of every marginal dollar — a <dfn class="term" tabindex="0" data-def="The fraction of each extra dollar of income that a household spends rather than saves.">marginal propensity to consume</dfn> of 0.6 — the naive total is a geometric series: 100 × (1 + 0.6 + 0.36 + …) = 100 ÷ (1 − 0.6) = $250 billion. You know this series; it's the same recursion as expected visits in a Markov chain.</p>
+  <p>Real-world estimates land far below 2.5, and they disagree — for structural reasons, not sloppy econometrics. Money leaks out each round into savings, taxes and imports. If the economy is already at full capacity, extra demand mostly bids up prices instead of output. And if the central bank fears inflation, it raises rates to offset the stimulus, deliberately shrinking the multiplier toward zero. Empirical estimates cluster around 0.5–1.5: highest in deep recessions with rates stuck near zero (nothing to crowd out, no Fed pushback), lowest in booms. When you see two economists quote different multipliers, ask what state of the world each one assumed.</p>
+
+  <h3 id="s05-deficit-debt">Deficit vs debt: a flow and a stock</h3>
+  <p>These two words get mangled daily, and the distinction is one you already know from programming. The <dfn class="term" tabindex="0" data-def="The gap between government spending and revenue in a single year; a flow.">budget deficit</dfn> is a <em>flow</em> — the shortfall this year, like the delta in one iteration of a loop. The <dfn class="term" tabindex="0" data-def="The total amount a government owes, accumulated from all past deficits; a stock.">national debt</dfn> is a <em>stock</em> — the accumulator variable. The deficit is the derivative; the debt is the integral. A government can shrink its deficit every year while the debt still grows, exactly as a function can rise while its slope falls.</p>
+  <p>Raw dollar figures are nearly useless — "$36 trillion of debt" tells you nothing without a denominator, just as "500ms latency" means nothing without knowing the workload. The right scale is the <dfn class="term" tabindex="0" data-def="Government debt divided by annual GDP; measures debt against the economy's capacity to carry it.">debt-to-GDP ratio</dfn>: debt divided by the annual income of the whole economy (<a href="#s03">Section 3</a>). A household owing $360,000 is drowning on a $40,000 income and comfortable on $900,000. US federal debt sits around 120% of GDP in the mid-2020s gross; Japan carries roughly 240%; Germany about 63%.</p>
+  <p>Who is actually owed the money? Mostly not foreign rivals — mostly the country's own institutions. US federal debt takes the form of <dfn class="term" tabindex="0" data-def="Bonds issued by the US federal government; considered the benchmark safe asset in global finance.">Treasury securities</dfn>, which you'll meet properly in <a href="#s08">Section 8 (Fixed Income)</a>. The rough breakdown:</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Holder of US federal debt</th><th class="td-num">Rough share (mid-2020s)</th><th>What that means</th></tr></thead>
+    <tbody>
+      <tr><td>US government accounts (Social Security trust fund, etc.)</td><td class="td-num">~20%</td><td>One arm of the government owes another</td></tr>
+      <tr><td>Federal Reserve</td><td class="td-num">~12%</td><td>Bought during QE (<a href="#s04">Section 4</a>); interest largely flows back to the Treasury</td></tr>
+      <tr><td>US private investors — funds, banks, pensions, insurers, households</td><td class="td-num">~43%</td><td>Americans' own savings, parked in the safe asset</td></tr>
+      <tr><td>Foreign investors (Japan, China, UK among the largest)</td><td class="td-num">~25%</td><td>The mirror image of trade flows — see the balance of payments below</td></tr>
+    </tbody>
+  </table></div>
+  <p>Notice that "we owe it to ourselves" is three-quarters true for the US. That doesn't make debt free — interest payments still redistribute from taxpayers to bondholders — but it changes what kind of problem it is.</p>
+
+  <h3 id="s05-broke">Can a government go broke?</h3>
+  <p>It depends entirely on <em>what currency the debt is in</em>. A government that borrows in its own currency — the US, Japan, the UK — can always print the money to pay; a technical <dfn class="term" tabindex="0" data-def="A government's failure to make promised payments on its debt.">sovereign default</dfn> on own-currency debt is a choice (or a political accident, like a debt-ceiling standoff), never an arithmetic necessity. A government that borrows in someone else's currency can genuinely run out. Argentina's dollar debts have defaulted repeatedly; Greece in 2010 discovered that the euro is effectively a foreign currency for its members — Athens can't print euros — and its private creditors eventually took a haircut of more than 50% (more in <a href="#s17">Section 17</a>).</p>
+  <p>"Can always print" is not "can safely print." Covering deficits with newly created money — <dfn class="term" tabindex="0" data-def="Financing government deficits by creating new money rather than borrowing from savers.">monetization</dfn> — taxes everyone who holds the currency through inflation, a revenue stream economists call <dfn class="term" tabindex="0" data-def="The real resources a government gains by creating money; effectively an inflation tax.">seigniorage</dfn>. Inflation is the escape valve, and it works: it quietly shrinks the real value of old fixed-rate debt. But push it hard and you get the costs from <a href="#s03">Section 3</a> — scrambled price signals, savaged savers, and eventually lenders who demand double-digit yields or refuse your currency altogether. Weimar Germany and 2018 Venezuela are the valve jammed fully open.</p>
+  <p>There's a quieter cost even without an inflation crisis. <dfn class="term" tabindex="0" data-def="When government borrowing absorbs savings and pushes up interest rates, squeezing out private investment.">Crowding out</dfn> is the claim that heavy government borrowing competes with companies for the same pool of savings, raising interest rates and displacing private investment — the factory not built because the savings bought Treasuries instead. It bites hardest at full employment, when resources are genuinely scarce; in a deep recession with idle savings, there may be little to crowd out. This is precisely why the multiplier debate above never resolves.</p>
+  <div class="callout co-real"><p class="co-label">Real world: markets discipline even money-printers</p><p>In September 2022 the UK — an own-currency borrower — announced large unfunded tax cuts. Within days, 30-year government bond yields jumped by more than a full percentage point, the pound slumped, and pension funds hit margin spirals severe enough that the Bank of England intervened. The prime minister was gone within weeks. No default, no arithmetic crisis — just the bond market repricing fiscal credibility in real time. Own-currency status buys patience, not immunity.</p></div>
+
+  <h3 id="s05-r-vs-g">Debt sustainability: the r vs g race</h3>
+  <p>Here is the single most useful equation in fiscal policy. Let d be the debt-to-GDP ratio, r the average nominal interest rate the government pays, g the nominal growth rate of GDP, and the <dfn class="term" tabindex="0" data-def="The budget deficit excluding interest payments on existing debt.">primary deficit</dfn> the gap between spending and revenue <em>before</em> interest. Then the ratio evolves as:</p>
+  <div class="formula">
+    <div class="formula-main">d<sub>t+1</sub> = d<sub>t</sub> × <span class="frac"><span>1 + r</span><span>1 + g</span></span> + primary deficit</div>
+    <div class="formula-legend">d = debt ÷ GDP · r = avg nominal interest rate on debt · g = nominal GDP growth · primary deficit as % of GDP</div>
+  </div>
+  <p>The intuition: interest makes the numerator (debt) compound at r, while growth plus inflation make the denominator (GDP) compound at g. If g exceeds r, the ratio has a built-in shrink factor every year — the economy outgrows its old debts — and even a permanent modest deficit just glides toward a finite plateau. If r exceeds g, interest compounds faster than income, and only primary surpluses can hold the line.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example: a 30-year trajectory</p><p>Start at debt = 100% of GDP, with r = 2%, g = 6% (say 3.5% real growth + 2.5% inflation), and a primary deficit of 1% of GDP, forever. Year 1: 100 × (1.02 ÷ 1.06) + 1 = 97.2%. Year 2: 97.2 × 0.9623 + 1 = 94.6%. After 10 years: 76.5%. After 30: 49.7% — half the starting ratio, despite never once balancing the budget. The path is gliding toward a plateau of 1 ÷ (1 − 0.9623) = 26.5%. Growth did all the work.</p></div>
+  <p>This is exactly how the United States escaped its Second World War debts. In 1946, federal debt held by the public stood near 106% of GDP; by 1974 it was about 23%. Washington never "paid it off" — primary budgets were only roughly balanced. Instead, nominal GDP grew around 7% a year while the average interest rate on the debt stayed near 2–3%, helped by <dfn class="term" tabindex="0" data-def="Policies that hold interest rates artificially low so government debt shrinks in real terms.">financial repression</dfn>: rate caps and regulations that kept captive savers in low-yielding bonds. Each year the denominator quietly outran the numerator. The opposite regime — <dfn class="term" tabindex="0" data-def="Cutting deficits through spending cuts or tax rises, usually to stabilize debt.">austerity</dfn> with r above g — is a grind: Italy ran primary surpluses through most of the 1990s and 2000s and barely held its ratio flat, because high rates kept refilling the tub as fast as it drained.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 358" role="img" aria-label="Two-by-two quadrant chart of debt dynamics by whether growth exceeds interest rates and whether the primary budget is in deficit or surplus">
+      <rect x="90" y="45" width="300" height="135" style="fill:var(--surface-2)"/>
+      <rect x="390" y="45" width="300" height="135" style="fill:var(--down)" opacity="0.12"/>
+      <rect x="90" y="180" width="300" height="135" style="fill:var(--up)" opacity="0.10"/>
+      <rect x="390" y="180" width="300" height="135" style="fill:var(--surface-2)"/>
+      <line x1="90" y1="180" x2="690" y2="180" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="390" y1="45" x2="390" y2="315" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <rect x="90" y="45" width="600" height="270" fill="none" style="stroke:var(--border)"/>
+      <text x="240" y="82" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">Drifts to a plateau</text>
+      <text x="240" y="100" text-anchor="middle" font-size="13" style="fill:var(--muted)">sustainable if deficits stay modest</text>
+      <circle cx="185" cy="130" r="5" style="fill:var(--c1)"/>
+      <text x="197" y="134" font-size="13" style="fill:var(--ink)">Japan 2013–22</text>
+      <text x="540" y="82" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">Doom loop</text>
+      <text x="540" y="100" text-anchor="middle" font-size="13" style="fill:var(--muted)">the ratio compounds without limit</text>
+      <circle cx="490" cy="130" r="5" style="fill:var(--c2)"/>
+      <text x="502" y="134" font-size="13" style="fill:var(--ink)">Greece 2010</text>
+      <text x="240" y="222" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">Debt melts away</text>
+      <text x="240" y="240" text-anchor="middle" font-size="13" style="fill:var(--muted)">growth quietly shrinks old debt</text>
+      <circle cx="185" cy="272" r="5" style="fill:var(--c3)"/>
+      <text x="197" y="276" font-size="13" style="fill:var(--ink)">US 1946–74</text>
+      <text x="540" y="222" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">Stabilizes only with discipline</text>
+      <text x="540" y="240" text-anchor="middle" font-size="13" style="fill:var(--muted)">needs lasting primary surpluses</text>
+      <circle cx="490" cy="272" r="5" style="fill:var(--c4)"/>
+      <text x="502" y="276" font-size="13" style="fill:var(--ink)">Italy 1990s</text>
+      <text x="240" y="341" text-anchor="middle" font-size="13" style="fill:var(--muted)">g &gt; r — growth outruns interest</text>
+      <text x="540" y="341" text-anchor="middle" font-size="13" style="fill:var(--muted)">r &gt; g — interest outruns growth</text>
+      <text x="26" y="180" text-anchor="middle" font-size="13" style="fill:var(--muted)" transform="rotate(-90 26 180)">surplus ← primary balance → deficit</text>
+    </svg>
+    <figcaption><strong>Figure 5.1</strong> — The fate of a debt ratio is set by two switches: whether growth beats the interest rate, and whether the primary budget borrows or repays. Only the top-right quadrant is unconditionally explosive.</figcaption>
+  </figure>
+
+  <p>Now run the race yourself. The simulator below iterates the equation above for 30 years — try the presets first, then find the knife-edge where a path flips from plateau to runaway.</p>
+
+  <div class="widget" id="s05-debtsim">
+    <div class="widget-head">
+      <h4>Debt dynamics simulator</h4>
+      <p>Drag r, g and the primary deficit and watch 30 years of debt/GDP unfold — start with the presets, then try to build your own doom loop.</p>
+    </div>
+    <div class="widget-body">
+      <div class="btn-group">
+        <button class="btn" data-preset="ww2">Post-WW2 US: g &gt; r</button>
+        <button class="btn" data-preset="austerity">Austerity</button>
+        <button class="btn" data-preset="doom">Doom loop: r &gt; g</button>
+      </div>
+      <div class="ctl-row">
+        <label class="ctl">Primary deficit (% of GDP) <output class="ctl-val">+2.0%</output><input id="s05-ds-pd" type="range" min="-3" max="8" step="0.5" value="2"></label>
+        <label class="ctl">Nominal GDP growth g <output class="ctl-val">4.0%</output><input id="s05-ds-g" type="range" min="0" max="8" step="0.5" value="4"></label>
+        <label class="ctl">Avg interest rate r <output class="ctl-val">3.0%</output><input id="s05-ds-r" type="range" min="0" max="8" step="0.5" value="3"></label>
+        <label class="ctl">Starting debt (% of GDP) <output class="ctl-val">100%</output><input id="s05-ds-d0" type="range" min="30" max="150" step="5" value="100"></label>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">Debt/GDP in year 30</span><span class="stat-value" data-role="d30">—</span></div>
+        <div class="stat"><span class="stat-label">Change vs today</span><span class="stat-value" data-role="chg">—</span></div>
+        <div class="stat"><span class="stat-label">Long-run plateau</span><span class="stat-value" data-role="plat">—</span></div>
+      </div>
+      <p data-role="verdict" style="margin:10px 2px 2px; color:var(--ink-2)"></p>
+      <svg viewBox="0 0 720 320" role="img" aria-label="Line chart of the projected debt-to-GDP ratio over 30 years under the chosen assumptions">
+        <g data-role="chart"></g>
+      </svg>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s05-debtsim');
+    if (!root) return;
+    var ins = {
+      pd: root.querySelector('#s05-ds-pd'),
+      g:  root.querySelector('#s05-ds-g'),
+      r:  root.querySelector('#s05-ds-r'),
+      d0: root.querySelector('#s05-ds-d0')
+    };
+    var outs = {
+      d30: root.querySelector('[data-role="d30"]'),
+      chg: root.querySelector('[data-role="chg"]'),
+      plat: root.querySelector('[data-role="plat"]'),
+      verdict: root.querySelector('[data-role="verdict"]'),
+      chart: root.querySelector('[data-role="chart"]')
+    };
+    var btns = root.querySelectorAll('.btn[data-preset]');
+    var presets = {
+      ww2:       { pd: 0,  g: 6.5, r: 2.5, d0: 110 },
+      austerity: { pd: -2, g: 2,   r: 4,   d0: 90  },
+      doom:      { pd: 3,  g: 2,   r: 6,   d0: 120 }
+    };
+    var YEARS = 30, CAP = 2000;
+    var L = 56, R = 700, T = 18, B = 284;
+
+    function clamp(v, lo, hi) { return Math.min(hi, Math.max(lo, isFinite(v) ? v : lo)); }
+    function vals() {
+      return {
+        pd: clamp(parseFloat(ins.pd.value), -3, 8),
+        g:  clamp(parseFloat(ins.g.value), 0, 8),
+        r:  clamp(parseFloat(ins.r.value), 0, 8),
+        d0: clamp(parseFloat(ins.d0.value), 30, 150)
+      };
+    }
+    function simulate(v) {
+      var a = (1 + v.r / 100) / (1 + v.g / 100);
+      var path = [v.d0], d = v.d0, capped = false;
+      for (var t = 0; t < YEARS; t++) {
+        d = d * a + v.pd;
+        if (d < 0) d = 0;
+        if (d > CAP) { d = CAP; capped = true; }
+        path.push(d);
+      }
+      return { path: path, a: a, capped: capped };
+    }
+    function fmtPct(v, dec) { return v.toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) + '%'; }
+    function updateLabels(v) {
+      ins.pd.parentNode.querySelector('output').textContent = (v.pd >= 0 ? '+' : '−') + Math.abs(v.pd).toFixed(1) + '%';
+      ins.g.parentNode.querySelector('output').textContent = v.g.toFixed(1) + '%';
+      ins.r.parentNode.querySelector('output').textContent = v.r.toFixed(1) + '%';
+      ins.d0.parentNode.querySelector('output').textContent = Math.round(v.d0) + '%';
+    }
+    function niceMax(m) {
+      var steps = [10, 20, 25, 50, 100, 200, 250, 500], i, s = 500;
+      for (i = 0; i < steps.length; i++) { if (m * 1.08 / steps[i] <= 6) { s = steps[i]; break; } }
+      return { step: s, max: Math.max(s, Math.ceil(m * 1.08 / s) * s) };
+    }
+    function draw(sim, v) {
+      var m = 0, i;
+      for (i = 0; i < sim.path.length; i++) { if (sim.path[i] > m) m = sim.path[i]; }
+      var sc = niceMax(m);
+      var X = function (t) { return L + (t / YEARS) * (R - L); };
+      var Y = function (val) { return B - (val / sc.max) * (B - T); };
+      var s = [];
+      var yv;
+      for (yv = 0; yv <= sc.max; yv += sc.step) {
+        s.push('<line x1="' + L + '" y1="' + Y(yv) + '" x2="' + R + '" y2="' + Y(yv) + '" style="stroke:var(--grid)" stroke-width="1"/>');
+        s.push('<text x="' + (L - 8) + '" y="' + (Y(yv) + 4) + '" text-anchor="end" font-size="12" style="fill:var(--muted)">' + yv + '</text>');
+      }
+      var t;
+      for (t = 0; t <= YEARS; t += 5) {
+        s.push('<text x="' + X(t) + '" y="304" text-anchor="middle" font-size="12" style="fill:var(--muted)">' + t + '</text>');
+      }
+      s.push('<line x1="' + L + '" y1="' + B + '" x2="' + R + '" y2="' + B + '" style="stroke:var(--axis)" stroke-width="1"/>');
+      s.push('<text x="4" y="14" font-size="12" style="fill:var(--muted)">% of GDP</text>');
+      s.push('<text x="' + R + '" y="318" text-anchor="end" font-size="12" style="fill:var(--muted)">years from now</text>');
+      var y0 = Y(v.d0);
+      s.push('<line x1="' + L + '" y1="' + y0 + '" x2="' + R + '" y2="' + y0 + '" style="stroke:var(--muted)" stroke-width="1" stroke-dasharray="4 4" opacity="0.6"/>');
+      s.push('<text x="' + (L + 4) + '" y="' + (y0 < 32 ? y0 + 14 : y0 - 6) + '" font-size="11" style="fill:var(--muted)">start ' + Math.round(v.d0) + '%</text>');
+      var pts = [];
+      for (t = 0; t <= YEARS; t++) { pts.push(X(t).toFixed(1) + ',' + Y(sim.path[t]).toFixed(1)); }
+      s.push('<polyline points="' + pts.join(' ') + '" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>');
+      var dEnd = sim.path[YEARS], yEnd = Y(dEnd);
+      s.push('<circle cx="' + X(YEARS) + '" cy="' + yEnd + '" r="4" style="fill:var(--c1)"/>');
+      s.push('<text x="' + (R - 4) + '" y="' + (yEnd < 40 ? yEnd + 18 : yEnd - 10) + '" text-anchor="end" font-size="13" font-weight="600" style="fill:var(--ink)">' + (sim.capped ? '&gt;' : '') + Math.round(dEnd).toLocaleString('en-US') + '%</text>');
+      outs.chart.innerHTML = s.join('');
+    }
+    function render() {
+      var v = vals();
+      updateLabels(v);
+      var sim = simulate(v);
+      var d30 = sim.path[YEARS], chg = d30 - v.d0;
+      outs.d30.textContent = (sim.capped ? '>' : '') + Math.round(d30).toLocaleString('en-US') + '%';
+      outs.chg.textContent = (chg >= 0 ? '+' : '−') + Math.abs(Math.round(chg)).toLocaleString('en-US') + ' pts';
+      outs.d30.style.color = Math.abs(chg) <= 1 ? '' : (chg < 0 ? 'var(--up)' : 'var(--down)');
+      outs.chg.style.color = outs.d30.style.color;
+      var plat = null;
+      if (sim.a < 1) plat = Math.max(0, v.pd / (1 - sim.a));
+      outs.plat.textContent = plat === null ? '—' : Math.round(plat).toLocaleString('en-US') + '%';
+      var verdict;
+      if (d30 <= 1) {
+        verdict = 'The debt is essentially gone well before year 30 — growth and repayment together erase it.';
+      } else if (chg < -1) {
+        verdict = d30 < 0.6 * v.d0
+          ? 'Sustainable: growth and the primary balance outrun interest, and the ratio melts away — the post-WW2 playbook.'
+          : 'Sustainable: the ratio drifts down year after year, no crisis in sight.';
+      } else if (Math.abs(chg) <= 1) {
+        verdict = 'Knife-edge: the ratio is roughly stable, so small shocks to r, g or the budget decide which way it tips.';
+      } else if (sim.a < 1) {
+        verdict = 'Rising, but because g exceeds r it levels off near ' + Math.round(plat).toLocaleString('en-US') + '% of GDP — sustainable arithmetic, though markets may lose patience first.';
+      } else if (v.r === v.g) {
+        verdict = 'With r equal to g, the ratio climbs by exactly the primary deficit every year — a straight line with no plateau.';
+      } else {
+        verdict = 'Doom loop: r exceeds g, so interest compounds faster than the economy grows and the ratio runs away without limit.';
+      }
+      outs.verdict.textContent = 'Verdict: ' + verdict;
+      draw(sim, v);
+    }
+    function clearActive() {
+      var i;
+      for (i = 0; i < btns.length; i++) btns[i].classList.remove('is-active');
+    }
+    var k;
+    for (k in ins) {
+      if (ins.hasOwnProperty(k)) {
+        ins[k].addEventListener('input', function () { clearActive(); render(); });
+      }
+    }
+    var i;
+    for (i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () {
+        var p = presets[this.getAttribute('data-preset')];
+        if (!p) return;
+        ins.pd.value = p.pd; ins.g.value = p.g; ins.r.value = p.r; ins.d0.value = p.d0;
+        clearActive();
+        this.classList.add('is-active');
+        render();
+      });
+    }
+    render();
+  })();
+  </script>
+
+  <details class="deep"><summary>Deep dive: deriving the debt equation</summary>
+    <p>Let D be debt in dollars, Y nominal GDP, and PD the primary deficit in dollars. Each year the debt grows by interest plus new borrowing: D<sub>t+1</sub> = D<sub>t</sub>(1 + r) + PD. GDP grows as Y<sub>t+1</sub> = Y<sub>t</sub>(1 + g). Divide the first equation by the second and write d = D ÷ Y, pd = PD ÷ Y:</p>
+    <div class="formula">
+      <div class="formula-main">d<sub>t+1</sub> = d<sub>t</sub> × <span class="frac"><span>1 + r</span><span>1 + g</span></span> + <span class="frac"><span>pd</span><span>1 + g</span></span></div>
+      <div class="formula-legend">The simulator drops the (1+g) under pd — a &lt;0.5% approximation at realistic rates.</div>
+    </div>
+    <p>This is a linear recurrence d<sub>t+1</sub> = a·d<sub>t</sub> + b with a = (1+r)/(1+g). From any discrete-systems course: it converges to the fixed point b ÷ (1 − a) when |a| &lt; 1 (that is, g &gt; r) and diverges when a &gt; 1 (r &gt; g). The whole sustainability debate is a fight about one eigenvalue.</p>
+  </details>
+
+  <h3 id="s05-trade">Trade: why it isn't zero-sum</h3>
+  <p>Switch from one government's books to the links between countries. The deepest result in trade economics is <dfn class="term" tabindex="0" data-def="The principle that countries gain by producing what they give up least to make, even if one country is better at everything.">comparative advantage</dfn>: both sides gain from trade even when one of them is better at producing <em>everything</em>. What matters is not who is best — <dfn class="term" tabindex="0" data-def="Being able to produce a good using fewer resources than someone else.">absolute advantage</dfn> — but each country's <dfn class="term" tabindex="0" data-def="What you give up of one thing to produce a unit of another.">opportunity cost</dfn>, the concept from <a href="#s02">Section 2</a>.</p>
+  <p>Take two countries, Acadia and Bolandia, making chips and shirts with 120 labor-hours each. Acadia needs 2 hours per chip and 3 per shirt; Bolandia needs 8 and 4. Acadia is faster at both. But every chip costs Acadia only ⅔ of a shirt, while it costs Bolandia 2 shirts — so Acadia should make chips, and Bolandia, whose shirts cost it only half a chip, should make shirts. Under <dfn class="term" tabindex="0" data-def="Self-sufficiency: a country producing everything it consumes, with no trade.">autarky</dfn>, splitting hours evenly, the world produces 37.5 chips and 35 shirts. Reassign the same 240 hours — Acadia mostly chips, Bolandia all shirts — and output rises to 45 chips and 40 shirts. Nothing new was invented; the schedule just improved. If they then trade 10 chips for 12 shirts, Acadia ends with 35 chips + 22 shirts (vs 30 + 20 alone) and Bolandia with 10 chips + 18 shirts (vs 7.5 + 15). Both consume more of <em>both</em> goods. Any price between ⅔ and 2 shirts per chip makes both better off — this is a positive-sum assignment problem, not a tug-of-war.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 345" role="img" aria-label="Worked comparative advantage table for two countries and the world output gain from specialization and trade">
+      <defs>
+        <marker id="s05-arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" style="fill:var(--axis)"/></marker>
+      </defs>
+      <text x="66" y="58" font-size="13" font-weight="600" style="fill:var(--muted)">Country</text>
+      <text x="300" y="58" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--muted)">hours / chip</text>
+      <text x="440" y="58" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--muted)">hours / shirt</text>
+      <text x="590" y="58" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--muted)">opp. cost of 1 chip</text>
+      <line x1="50" y1="68" x2="670" y2="68" style="stroke:var(--border)"/>
+      <rect x="510" y="80" width="160" height="26" rx="6" style="fill:var(--accent-soft)"/>
+      <text x="66" y="98" font-size="14" font-weight="600" style="fill:var(--ink)">Acadia</text>
+      <text x="300" y="98" text-anchor="middle" font-size="14" style="fill:var(--ink)">2 h</text>
+      <text x="440" y="98" text-anchor="middle" font-size="14" style="fill:var(--ink)">3 h</text>
+      <text x="590" y="98" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">⅔ shirt — cheapest</text>
+      <rect x="380" y="110" width="120" height="26" rx="6" style="fill:var(--accent-soft)"/>
+      <text x="66" y="128" font-size="14" font-weight="600" style="fill:var(--ink)">Bolandia</text>
+      <text x="300" y="128" text-anchor="middle" font-size="14" style="fill:var(--ink)">8 h</text>
+      <text x="440" y="128" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">4 h — its edge</text>
+      <text x="590" y="128" text-anchor="middle" font-size="14" style="fill:var(--ink)">2 shirts</text>
+      <line x1="50" y1="142" x2="670" y2="142" style="stroke:var(--border)"/>
+      <text x="360" y="166" text-anchor="middle" font-size="13" style="fill:var(--muted)">Each has 120 labor-hours. Acadia is faster at everything — but its edge is biggest in chips.</text>
+      <rect x="50" y="190" width="290" height="110" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="195" y="214" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">No trade (each makes both)</text>
+      <text x="195" y="238" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">Acadia: 30 chips + 20 shirts</text>
+      <text x="195" y="258" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">Bolandia: 7.5 chips + 15 shirts</text>
+      <text x="195" y="284" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">World: 37.5 chips · 35 shirts</text>
+      <line x1="345" y1="245" x2="375" y2="245" style="stroke:var(--axis)" stroke-width="2" marker-end="url(#s05-arr2)"/>
+      <rect x="380" y="190" width="290" height="110" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="525" y="214" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Specialize, then trade</text>
+      <text x="525" y="238" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">Acadia: 45 chips + 10 shirts</text>
+      <text x="525" y="258" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">Bolandia: 0 chips + 30 shirts</text>
+      <text x="525" y="284" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">World: 45 chips · 40 shirts</text>
+      <text x="360" y="330" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--accent)">+7.5 chips and +5 shirts from the same 240 hours — just a better assignment.</text>
+    </svg>
+    <figcaption><strong>Figure 5.2</strong> — Acadia beats Bolandia at both goods, yet both gain from trade: what matters is opportunity cost, not raw speed. Specialization raises world output with zero new resources.</figcaption>
+  </figure>
+
+  <p>So why is trade politically radioactive? Because the gains are diffuse and the losses are concentrated. Every consumer saves a little on cheaper shirts; the shirt-town in Acadia loses its factory, and its workers can't costlessly become chip designers. The "China shock" research found that US regions exposed to Chinese import competition after 2000 suffered deep, persistent hits to employment and wages. Trade grows the pie and simultaneously creates identifiable losers — both statements are true, and honest policy debates are about compensation and transition, not about denying either half.</p>
+  <p>Enter the <dfn class="term" tabindex="0" data-def="A tax on imported goods, collected at the border.">tariff</dfn> — a tax on imports, the classic tool of <dfn class="term" tabindex="0" data-def="Policies that shield domestic industries from foreign competition, e.g. tariffs and quotas.">protectionism</dfn>. The crucial question is <dfn class="term" tabindex="0" data-def="Who actually bears the economic burden of a tax, regardless of who legally pays it.">incidence</dfn>: who really pays? The exporter writes no check to US customs; the importer does, and studies of the 2018–19 US tariffs found the cost passed through almost entirely into US prices. Consumers pay more; protected domestic producers gain some; the government collects revenue; and two slivers of value — output produced at higher cost than the world price, and purchases deterred by the artificial markup — vanish entirely as <dfn class="term" tabindex="0" data-def="Value destroyed by a policy or tax: losses to some that are gains to no one.">deadweight loss</dfn>. One famous estimate: the 2018 washing-machine tariffs preserved manufacturing jobs at a consumer cost of roughly $800,000 per job per year.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 385" role="img" aria-label="Supply and demand diagram showing that a tariff raises the domestic price, transferring surplus from consumers to producers and government while destroying some value">
+      <defs>
+        <marker id="s05-arr3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" style="fill:var(--axis)"/></marker>
+      </defs>
+      <polygon points="70,200 250,200 310,140 70,140" style="fill:var(--up)" opacity="0.18"/>
+      <polygon points="250,200 310,140 310,200" style="fill:var(--down)" opacity="0.28"/>
+      <rect x="310" y="140" width="180" height="60" style="fill:var(--accent-soft)"/>
+      <polygon points="490,140 550,200 490,200" style="fill:var(--down)" opacity="0.28"/>
+      <line x1="70" y1="330" x2="660" y2="330" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="70" y1="40" x2="70" y2="330" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="130" y1="320" x2="350" y2="100" style="stroke:var(--c1)" stroke-width="2.5"/>
+      <line x1="430" y1="80" x2="660" y2="310" style="stroke:var(--c2)" stroke-width="2.5"/>
+      <line x1="70" y1="200" x2="660" y2="200" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="70" y1="140" x2="660" y2="140" style="stroke:var(--accent)" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <text x="64" y="204" text-anchor="end" font-size="13" style="fill:var(--muted)">$100</text>
+      <text x="64" y="144" text-anchor="end" font-size="13" style="fill:var(--muted)">$125</text>
+      <text x="344" y="96" text-anchor="end" font-size="13" style="fill:var(--ink)">Domestic supply</text>
+      <text x="444" y="74" font-size="13" style="fill:var(--ink)">Domestic demand</text>
+      <text x="150" y="174" font-size="13" font-weight="600" style="fill:var(--ink)">A</text>
+      <text x="290" y="190" font-size="13" font-weight="600" style="fill:var(--ink)">B</text>
+      <text x="393" y="174" font-size="13" font-weight="600" style="fill:var(--ink)">C</text>
+      <text x="497" y="190" font-size="13" font-weight="600" style="fill:var(--ink)">D</text>
+      <text x="575" y="118" text-anchor="middle" font-size="13" style="fill:var(--ink)">Consumers lose A+B+C+D</text>
+      <line x1="620" y1="146" x2="620" y2="194" style="stroke:var(--axis)" stroke-width="1.5" marker-start="url(#s05-arr3)" marker-end="url(#s05-arr3)"/>
+      <text x="628" y="173" font-size="12" style="fill:var(--muted)">25% tariff</text>
+      <line x1="310" y1="134" x2="490" y2="134" style="stroke:var(--axis)" stroke-width="1.5" marker-start="url(#s05-arr3)" marker-end="url(#s05-arr3)"/>
+      <text x="400" y="124" text-anchor="middle" font-size="12" style="fill:var(--muted)">imports after</text>
+      <line x1="250" y1="212" x2="550" y2="212" style="stroke:var(--axis)" stroke-width="1.5" marker-start="url(#s05-arr3)" marker-end="url(#s05-arr3)"/>
+      <text x="400" y="228" text-anchor="middle" font-size="12" style="fill:var(--muted)">imports before the tariff</text>
+      <text x="70" y="30" font-size="13" style="fill:var(--muted)">Price</text>
+      <text x="660" y="348" text-anchor="end" font-size="13" style="fill:var(--muted)">Quantity →</text>
+      <text x="360" y="372" text-anchor="middle" font-size="13" style="fill:var(--muted)">A = producer gain · C = tariff revenue · B, D = deadweight loss (value nobody gets)</text>
+    </svg>
+    <figcaption><strong>Figure 5.3</strong> — A 25% tariff lifts the domestic price from $100 to $125. Consumers pay the whole shaded band; producers capture A, the government collects C, and B and D are destroyed outright. Imports shrink from the wide arrow to the narrow one.</figcaption>
+  </figure>
+
+  <h3 id="s05-bop">The balance of payments: a forced mirror</h3>
+  <p>Every cross-border transaction a country makes is recorded in its <dfn class="term" tabindex="0" data-def="The complete double-entry record of a country's transactions with the rest of the world.">balance of payments</dfn> — and it is literally double-entry bookkeeping at national scale, which means it contains an identity you can lean on like a conservation law. The <dfn class="term" tabindex="0" data-def="Net flows of goods, services, investment income and transfers between a country and the world.">current account</dfn> tracks trade in goods and services plus cross-border income; the <dfn class="term" tabindex="0" data-def="Net purchases of assets — bonds, stocks, property, factories — between a country and the world.">capital account</dfn> (formally the financial account) tracks who bought what assets. By construction, the two must mirror: current account + capital account = 0.</p>
+  <p>Follow one import. An American buys a $1,000 machine from Osaka. The exporter now holds 1,000 US dollars, which are useless in Japan until they come back — as a purchase of something American. If not American goods (that would cancel the deficit), then American <em>assets</em>: Treasuries, Apple shares, a Cleveland apartment block. So a <dfn class="term" tabindex="0" data-def="When a country imports more goods and services than it exports.">trade deficit</dfn> is not money leaking into the void. It means the country is consuming and investing more than it produces, with foreigners financing the gap by accumulating claims on it. Equivalently — one identity, rearranged — a current-account deficit equals the gap between domestic investment and domestic savings.</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall: reading the deficit as a scoreboard</p><p>A trade deficit is not "losing at trade," and a surplus is not winning — Germany ran huge surpluses through a decade of stagnant wages, while the US ran huge deficits through its strongest growth runs. The deficit is an accounting mirror of savings and investment choices, and its twin is foreigners' eagerness to hold US assets. Judge it by what the borrowed resources bought: productive investment is a very different story from consumption.</p></div>
+  <p>The US case has one more twist: the dollar is the world's <dfn class="term" tabindex="0" data-def="A currency that foreign governments and institutions hold in bulk for savings and international payments.">reserve currency</dfn>, so global demand for safe dollar assets is enormous and structural. Foreigners line up to buy Treasuries; that capital inflow is the mirror image of the persistent US trade deficit — and it circles back to the table above showing who holds the debt.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 300" role="img" aria-label="Diagram showing that a net inflow of goods into the United States is mirrored by an equal net outflow of financial claims">
+      <defs>
+        <marker id="s05-arr4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" style="fill:var(--axis)"/></marker>
+      </defs>
+      <rect x="60" y="80" width="200" height="140" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="160" y="140" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">United States</text>
+      <text x="160" y="162" text-anchor="middle" font-size="13" style="fill:var(--muted)">buys more than it sells</text>
+      <rect x="460" y="80" width="200" height="140" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="560" y="140" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">Rest of world</text>
+      <text x="560" y="162" text-anchor="middle" font-size="13" style="fill:var(--muted)">accumulates US claims</text>
+      <text x="360" y="100" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">Net goods &amp; services</text>
+      <text x="360" y="116" text-anchor="middle" font-size="13" style="fill:var(--muted)">~$0.9T flows in per year</text>
+      <line x1="456" y1="128" x2="268" y2="128" style="stroke:var(--axis)" stroke-width="2" marker-end="url(#s05-arr4)"/>
+      <line x1="264" y1="182" x2="452" y2="182" style="stroke:var(--accent)" stroke-width="2" marker-end="url(#s05-arr4)"/>
+      <text x="360" y="204" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">Net claims: Treasuries, stocks, property</text>
+      <text x="360" y="220" text-anchor="middle" font-size="13" style="fill:var(--muted)">~$0.9T flows out per year</text>
+      <text x="360" y="268" text-anchor="middle" font-size="14" style="fill:var(--ink-2)">Current account (−$0.9T) + capital account (+$0.9T) = 0, always.</text>
+    </svg>
+    <figcaption><strong>Figure 5.4</strong> — The balance-of-payments mirror: every net dollar of goods flowing into a country is matched by a dollar of claims on that country flowing out. The two accounts cannot disagree — it's double-entry bookkeeping.</figcaption>
+  </figure>
+
+  <h3 id="s05-fx">Exchange rates: floating, pegged, and the Big Mac test</h3>
+  <p>An <dfn class="term" tabindex="0" data-def="The price of one currency expressed in another, e.g. 150 yen per dollar.">exchange rate</dfn> is just a price — yen per dollar — set in the largest market on Earth, with over $7 trillion changing hands daily. Under a <dfn class="term" tabindex="0" data-def="A currency regime where the exchange rate is set freely by market supply and demand.">floating exchange rate</dfn> (the dollar, euro, yen, pound), that price moves continuously with supply and demand. Under a <dfn class="term" tabindex="0" data-def="A regime where the central bank commits to holding its currency at a fixed rate against another, buying or selling reserves to defend it.">currency peg</dfn> (the Hong Kong dollar, the Gulf currencies against the dollar), the central bank promises a fixed rate and stands ready to buy or sell reserves to defend it. Pegs deliver stability until they don't: a peg abandoned under speculative attack — Britain in 1992, Thailand in 1997 — snaps in a violent <dfn class="term" tabindex="0" data-def="A deliberate or forced fall in a pegged currency's official exchange rate.">devaluation</dfn>.</p>
+  <p>What moves a floating currency? Four forces dominate. Interest-rate differentials: if US rates rise above Japan's, holding dollars pays better, capital flows in, the dollar strengthens — connecting FX directly to the central-bank decisions of <a href="#s04">Section 4</a>. Inflation differentials: a country inflating at 30% a year watches its currency lose purchasing power and, eventually, exchange value. Trade and capital flows: persistent demand for a country's exports or assets bids up its currency. And risk appetite: in a panic, money stampedes into dollars, yen and Swiss francs — the <dfn class="term" tabindex="0" data-def="An asset investors flock to during market stress, expecting it to hold value.">safe haven</dfn> currencies — regardless of fundamentals.</p>
+  <p>The long-run anchor is <dfn class="term" tabindex="0" data-def="The idea that exchange rates should adjust until the same basket of goods costs the same in every currency.">purchasing power parity</dfn> (PPP): identical goods should cost the same everywhere once converted, or arbitrage would fix it. The Economist's Big Mac index turns this into a joke that works: the burger is a standardized basket of tradable ingredients, local labor and rent. Suppose a Big Mac costs $5.80 in the US and ¥480 in Japan. The PPP exchange rate is 480 ÷ 5.80 ≈ 83 yen per dollar; if the market rate is 150, the yen looks about 45% undervalued against burger parity. PPP deviations persist for years — haircuts and rent don't ship — but the index reliably flags extremes, and currencies do drift toward PPP over decades.</p>
+  <div class="callout co-key"><p class="co-label">Key idea: closing Part I — the four macro levers</p><p>You now hold the full demand-management toolkit. Monetary policy (<a href="#s04">Section 4</a>) works through the price of money: policy rates and the central bank's balance sheet. Fiscal policy works through the government's budget: taxes and spending. Markets referee both in real time — the bond market prices fiscal credibility into yields (<a href="#s08">Section 8</a>), the currency market prices the policy mix (<a href="#s10">Section 10</a>), and equities price the growth consequences (<a href="#s07">Section 7</a>). When both levers push the same way, expect regime-sized moves: 2021's floored rates plus trillions of stimulus fed the inflation that <a href="#s04">Section 4</a>'s tightening then had to break. Every macro headline you'll ever read is some combination of these four dials — and Part II begins with the machine that transmits them: <a href="#s06">the financial system</a>.</p></div>
+  <div class="callout co-you"><p class="co-label">Your edge: macro data is free and clean</p><p>Everything in this section is public, well-curated time series: FRED (fred.stlouisfed.org) has debt-to-GDP, deficits and interest costs; the BEA publishes the full balance of payments; the BIS posts effective exchange rates. Rebuilding Figure 5.1's quadrants from raw FRED series, or backtesting the r-vs-g recurrence against actual US history, is an afternoon in pandas — and exactly the kind of portfolio piece that shows a hiring manager you can connect an equation to a dataset.</p></div>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. Which of these is a <em>stock</em> rather than a <em>flow</em>?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">The budget deficit</button>
+        <button class="quiz-opt" data-correct>The national debt</button>
+        <button class="quiz-opt">GDP growth</button>
+        <button class="quiz-opt">Annual interest payments</button>
+      </div>
+      <p class="quiz-explain">The debt is the accumulated total — the integral. Deficits, growth and interest payments are all per-period flows that feed into it.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. A country has debt at 100% of GDP, pays r = 3% on it, grows nominally at g = 5%, and runs a primary balance of exactly zero. Over time its debt ratio will…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Stay locked at 100%</button>
+        <button class="quiz-opt">Explode, because 100% is already too high</button>
+        <button class="quiz-opt" data-correct>Decline steadily, since GDP compounds faster than the debt</button>
+      </div>
+      <p class="quiz-explain">With a zero primary balance, the ratio is multiplied by (1.03 ÷ 1.05) ≈ 0.981 each year. Growth outruns interest, so the ratio melts — the post-WW2 US mechanism.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. Acadia produces both chips and shirts more efficiently than Bolandia. Why does Acadia still gain from trading with it?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-correct>Bolandia's opportunity cost of shirts is lower, so specialization raises total output for both</button>
+        <button class="quiz-opt">It doesn't — the more efficient country always loses from trade</button>
+        <button class="quiz-opt">Only because Bolandia's wages are lower</button>
+        <button class="quiz-opt">Because tariffs redistribute the gains to Acadia</button>
+      </div>
+      <p class="quiz-explain">Comparative advantage runs on opportunity cost, not absolute efficiency. Every hour Acadia spends on shirts is an hour not spent on chips, where its edge is far bigger — so it pays to buy shirts from Bolandia.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. The US runs a $900 billion trade deficit this year. Which statement must also be true?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">The US economy lost $900 billion of wealth</button>
+        <button class="quiz-opt">The dollar must depreciate by an offsetting amount</button>
+        <button class="quiz-opt" data-correct>Foreigners acquired roughly $900 billion of net claims on US assets</button>
+        <button class="quiz-opt">US unemployment rose in proportion</button>
+      </div>
+      <p class="quiz-explain">The balance of payments is double-entry: a current-account deficit is mirrored, dollar for dollar, by a capital-account surplus. The dollars spent on imports return as purchases of Treasuries, stocks and property.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. Studies of the 2018–19 US tariffs found that the cost was borne mostly by…</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Foreign exporters, who cut their prices to absorb the tax</button>
+        <button class="quiz-opt" data-correct>US importers and consumers, through nearly full pass-through into US prices</button>
+        <button class="quiz-opt">No one — the tariff revenue offset the losses</button>
+      </div>
+      <p class="quiz-explain">Pass-through was close to complete: US import prices rose by roughly the tariff amount. That's incidence — the legal payer and the economic payer are different questions, and revenue never offsets the deadweight loss.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>Fiscal policy moves demand directly through taxes and spending; automatic stabilizers act instantly, discretionary stimulus is powerful but slow, and the multiplier depends on slack, leakages and the central bank's reaction.</li>
+      <li>Deficit is the flow, debt is the stock — and only debt-to-GDP, not raw dollars, tells you whether the burden is heavy.</li>
+      <li>An own-currency sovereign can't be forced into arithmetic default, but inflation is the escape valve and markets can still repunish fiscal recklessness through yields and the currency.</li>
+      <li>Debt sustainability hinges on r vs g: when growth exceeds the interest rate, even permanent modest deficits plateau; when r &gt; g, only primary surpluses prevent a doom loop — the post-WW2 US grew out of 106% debt/GDP without ever repaying it.</li>
+      <li>Comparative advantage makes trade positive-sum even against a country that's better at everything, but the gains are diffuse while the losses are concentrated on specific workers and towns.</li>
+      <li>Tariff incidence usually lands on domestic consumers, with part of the loss pure deadweight — value destroyed rather than transferred.</li>
+      <li>The balance of payments is double-entry bookkeeping: a trade deficit is exactly matched by foreigners accumulating claims, so it reflects savings-versus-investment choices, not "losing."</li>
+      <li>Exchange rates respond to rate differentials, inflation gaps, trade flows and risk appetite; purchasing power parity — Big Mac included — anchors them only over long horizons.</li>
+    </ul>
+  </div>
+</section>

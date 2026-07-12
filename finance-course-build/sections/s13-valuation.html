@@ -1,0 +1,393 @@
+<section class="lesson" id="s13" data-num="13" data-title="Valuation: What Is a Company Worth?">
+  <p class="eyebrow">Part III · Corporate Finance &amp; Accounting</p>
+  <h2>13. Valuation: What Is a Company Worth?</h2>
+  <p class="lede">Every price on a stock screen is an opinion; valuation is how you form your own. By the end of this section you will be able to build a discounted cash flow model from scratch, sanity-check it with multiples, and answer the classic interview question "walk me through a DCF" without breaking a sweat.</p>
+
+  <h3 id="s13-price-vs-value">Price is what you pay, value is what you estimate</h3>
+  <p>In <a href="#s07">Section 7 (Equities)</a> you saw that a stock's market price is just the last price at which two strangers agreed to trade. That number is a fact. What the company is actually <em>worth</em> — its <dfn class="term" tabindex="0" data-def="The value of an asset based on the cash it will generate over its life, independent of its current market price.">intrinsic value</dfn> — is not a fact. It's an estimate, and every serious valuation comes with error bars, whether the analyst admits it or not.</p>
+  <p>There are two big families of valuation. <strong>Intrinsic valuation</strong> asks: what cash will this business hand its owners over its lifetime, and what is that stream worth today? That's the discounted cash flow (DCF) approach, and it's just the time-value machinery from <a href="#s01">Section 1</a> pointed at an entire company. <strong>Relative valuation</strong> asks a lazier but often smarter question: what are <em>similar</em> companies selling for right now? That's the world of <dfn class="term" tabindex="0" data-def="Valuation ratios like P/E or EV/EBITDA that express price relative to a fundamental such as earnings or cash flow.">multiples</dfn> and comparable companies.</p>
+  <div class="callout co-analogy"><p class="co-label">Analogy</p><p>Pricing a house works the same way. Intrinsic: estimate the rent it could earn forever and discount it. Relative: check what the three nearly identical houses on the same street sold for last quarter. Neither is "the truth" — a good agent runs both and gets suspicious when they disagree wildly.</p></div>
+  <p>Here's the mindset shift that separates professionals from spreadsheet jockeys: a valuation model is <em>structured estimation under uncertainty</em>. You are not computing the answer; you are organizing your assumptions so that the disagreement between your number and the market's number is <em>legible</em>. If your DCF says $31.50 and the market says $28, the model tells you exactly which beliefs — growth, margins, risk — you'd have to hold for either number to be right. That's the entire point.</p>
+  <div class="callout co-you"><p class="co-label">Your edge</p><p>You already do this. A valuation model is a forward inference with hand-tuned priors: point estimates in, point estimate out, and the honest deliverable is a sensitivity analysis, not a single number. Treat "intrinsic value = $31.50" the way you'd treat a regression prediction with no confidence interval — politely, but skeptically.</p></div>
+
+  <h3 id="s13-dcf-walkthrough">A DCF end to end: every single number</h3>
+  <p>Meet <strong>Cascade Beverages</strong>, our fictional workhorse. It generated <dfn class="term" tabindex="0" data-def="Cash a business generates after operating costs, taxes, and investment in equipment and working capital — cash truly available to investors.">free cash flow</dfn> (FCF) of <strong>$100M</strong> this year, carries <dfn class="term" tabindex="0" data-def="Total debt minus cash and equivalents; what the company would owe if it used its cash to pay down debt today.">net debt</dfn> of <strong>$200M</strong>, has <strong>50M shares</strong> outstanding, and trades at <strong>$28</strong> per share. FCF is the star of the show: it comes from the statements you built in <a href="#s11">Section 11</a> — roughly operating profit after tax, plus depreciation, minus capital expenditure and working-capital growth. It's what's left for the people who financed the business.</p>
+  <p>A DCF has five moves. <strong>Move 1 — project the explicit years.</strong> We forecast FCF for 5 years. Assume Cascade grows FCF at 10% per year:</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Year</th><th class="td-num">FCF ($M)</th><th class="td-num">Discount factor (÷1.10<sup>t</sup>)</th><th class="td-num">Present value ($M)</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td class="td-num">110.00</td><td class="td-num">0.9091</td><td class="td-num">100.00</td></tr>
+      <tr><td>2</td><td class="td-num">121.00</td><td class="td-num">0.8264</td><td class="td-num">100.00</td></tr>
+      <tr><td>3</td><td class="td-num">133.10</td><td class="td-num">0.7513</td><td class="td-num">100.00</td></tr>
+      <tr><td>4</td><td class="td-num">146.41</td><td class="td-num">0.6830</td><td class="td-num">100.00</td></tr>
+      <tr><td>5</td><td class="td-num">161.05</td><td class="td-num">0.6209</td><td class="td-num">100.00</td></tr>
+      <tr><td><strong>Sum</strong></td><td class="td-num"></td><td class="td-num"></td><td class="td-num"><strong>500.00</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>(Each present value is exactly $100M because we happened to pick growth equal to the discount rate — 10% growth compounding up, 10% discounting back down. A tidy coincidence, and a reminder that growth only creates value when it beats the discount rate.)</p>
+  <p><strong>Move 2 — the terminal value.</strong> Cascade doesn't vaporize after year 5, so we need the value of everything beyond the forecast horizon. The standard tool is the <dfn class="term" tabindex="0" data-def="A formula valuing a cash-flow stream that grows at a constant rate forever: value = next cash flow ÷ (discount rate − growth rate).">Gordon growth model</dfn>: assume FCF grows at a modest constant rate <em>g</em> forever, and value that <dfn class="term" tabindex="0" data-def="A cash-flow stream that continues indefinitely.">perpetuity</dfn>. With terminal growth g = 2% and a discount rate (WACC, next subsection) of 10%:</p>
+  <div class="formula">
+    <div class="formula-main">TV = FCF<sub>5</sub> × (1 + g) ÷ (WACC − g) = 161.05 × 1.02 ÷ (0.10 − 0.02) = $2,053.4M</div>
+    <div class="formula-legend">TV = <dfn class="term" tabindex="0" data-def="The lump-sum value at the forecast horizon of all cash flows beyond it; usually the largest piece of a DCF.">terminal value</dfn> at end of year 5 · g = perpetual growth rate · WACC = discount rate</div>
+  </div>
+  <p><strong>Move 3 — discount everything to today.</strong> The explicit years are already done ($500M). The terminal value sits at the end of year 5, so it gets the year-5 discount factor: 2,053.4 × 0.6209 = <strong>$1,275.0M</strong>. Adding up gives <dfn class="term" tabindex="0" data-def="The value of a company's entire operating business, belonging to debt and equity holders together.">enterprise value</dfn> (EV): 500 + 1,275 = <strong>$1,775M</strong>. Notice the uncomfortable ratio: the terminal value is <strong>72%</strong> of the total. Most of a typical DCF is the part you know least about.</p>
+  <p><strong>Move 4 — from the business to the shareholders.</strong> EV belongs to everyone who financed the company. Lenders have first claim, so subtract net debt to get <dfn class="term" tabindex="0" data-def="The portion of enterprise value belonging to shareholders: EV minus net debt.">equity value</dfn>: 1,775 − 200 = <strong>$1,575M</strong>. <strong>Move 5 — per share.</strong> Divide by 50M shares: <strong>$31.50</strong>. Against the $28 market price, our model implies about <strong>12.5% upside</strong> — or, said honestly, our assumptions are about 12.5% more optimistic than the market's.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 360" role="img" aria-label="DCF timeline showing five annual free cash flows discounted back to today, plus a large terminal value bubble at year 5; a bar below shows the terminal value is 72 percent of enterprise value.">
+      <defs>
+        <marker id="s13-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--axis)"/></marker>
+      </defs>
+      <line x1="70" y1="210" x2="650" y2="210" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="90" y="232" text-anchor="middle" font-size="13" style="fill:var(--muted)">Now</text>
+      <text x="185" y="232" text-anchor="middle" font-size="13" style="fill:var(--muted)">Yr 1</text>
+      <text x="280" y="232" text-anchor="middle" font-size="13" style="fill:var(--muted)">Yr 2</text>
+      <text x="375" y="232" text-anchor="middle" font-size="13" style="fill:var(--muted)">Yr 3</text>
+      <text x="470" y="232" text-anchor="middle" font-size="13" style="fill:var(--muted)">Yr 4</text>
+      <text x="565" y="232" text-anchor="middle" font-size="13" style="fill:var(--muted)">Yr 5</text>
+      <rect x="163" y="155" width="44" height="55" rx="4" style="fill:var(--c1)"/>
+      <rect x="258" y="149" width="44" height="61" rx="4" style="fill:var(--c1)"/>
+      <rect x="353" y="143" width="44" height="67" rx="4" style="fill:var(--c1)"/>
+      <rect x="448" y="137" width="44" height="73" rx="4" style="fill:var(--c1)"/>
+      <rect x="543" y="129" width="44" height="81" rx="4" style="fill:var(--c1)"/>
+      <text x="185" y="147" text-anchor="middle" font-size="12" style="fill:var(--ink)">110</text>
+      <text x="280" y="141" text-anchor="middle" font-size="12" style="fill:var(--ink)">121</text>
+      <text x="375" y="135" text-anchor="middle" font-size="12" style="fill:var(--ink)">133</text>
+      <text x="470" y="129" text-anchor="middle" font-size="12" style="fill:var(--ink)">146</text>
+      <text x="565" y="121" text-anchor="middle" font-size="12" style="fill:var(--ink)">161</text>
+      <ellipse cx="608" cy="70" rx="70" ry="42" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+      <text x="608" y="65" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Terminal value</text>
+      <text x="608" y="84" text-anchor="middle" font-size="13" style="fill:var(--ink)">$2,053M at Yr 5</text>
+      <rect x="30" y="58" width="126" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="93" y="82" text-anchor="middle" font-size="13" style="fill:var(--muted)">EV today</text>
+      <text x="93" y="102" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--accent)">$1,775M</text>
+      <path d="M 540,60 C 420,15 250,25 162,68" fill="none" style="stroke:var(--axis)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#s13-arr)"/>
+      <path d="M 178,152 C 165,132 152,118 140,112" fill="none" style="stroke:var(--axis)" stroke-width="1.5" stroke-dasharray="5 4" marker-end="url(#s13-arr)"/>
+      <text x="350" y="14" text-anchor="middle" font-size="13" style="fill:var(--muted)">discount everything at WACC: ÷ (1 + WACC)ᵗ</text>
+      <text x="70" y="285" font-size="13" style="fill:var(--muted)">Where the $1,775M comes from:</text>
+      <rect x="70" y="296" width="164" height="26" rx="4" style="fill:var(--c1)"/>
+      <rect x="238" y="296" width="412" height="26" rx="4" style="fill:var(--c2)"/>
+      <text x="152" y="340" text-anchor="middle" font-size="12" style="fill:var(--muted)">Yr 1–5 FCF: $500M (28%)</text>
+      <text x="444" y="313" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--bg)">PV of terminal value: $1,275M (72%)</text>
+    </svg>
+    <figcaption><strong>Figure 13.1</strong> — A DCF discounts five forecast cash flows plus one giant terminal blob. In a typical model the terminal value is 60–80% of enterprise value: most of your answer rides on the part you can see least clearly.</figcaption>
+  </figure>
+
+  <h3 id="s13-wacc">WACC: the price tag on risk</h3>
+  <p>We discounted at 10%. Where did that come from? The discount rate for a whole company is the <dfn class="term" tabindex="0" data-def="Weighted average cost of capital: the blended return a company must earn to satisfy both its lenders and its shareholders.">WACC</dfn> — weighted average cost of capital. The logic: a company is financed by a mix of debt and equity, each with its own required return, so the business as a whole must clear a blend of the two. It is literally a weighted average — no scarier than that.</p>
+  <div class="formula">
+    <div class="formula-main">WACC = (E ÷ V) × r<sub>e</sub> + (D ÷ V) × r<sub>d</sub> × (1 − t)</div>
+    <div class="formula-legend">E = market value of equity · D = market value of debt · V = E + D · r<sub>e</sub> = cost of equity · r<sub>d</sub> = cost of debt · t = tax rate</div>
+  </div>
+  <p>The <dfn class="term" tabindex="0" data-def="The return shareholders require for holding a company's stock, given its risk; usually estimated with CAPM.">cost of equity</dfn> is the return shareholders demand. The workhorse estimate is the <dfn class="term" tabindex="0" data-def="Capital Asset Pricing Model: expected return = risk-free rate + beta × equity risk premium. Prices only non-diversifiable risk.">CAPM</dfn>: r<sub>e</sub> = r<sub>f</sub> + β × ERP, where r<sub>f</sub> is the risk-free rate (a long Treasury yield, from <a href="#s08">Section 8</a>), <dfn class="term" tabindex="0" data-def="A measure of how much a stock moves with the overall market; 1 = moves with the market, above 1 = amplifies it.">beta</dfn> measures how much the stock swings with the market, and the <dfn class="term" tabindex="0" data-def="The extra annual return investors demand for holding the stock market instead of risk-free government bonds; typically estimated at 4–6%.">equity risk premium</dfn> (ERP) is the extra return the market demands over Treasuries. The full story behind CAPM — diversification, why only market risk gets paid — lives in <a href="#s15">Section 15 (Portfolio Theory)</a>; for now, treat it as a pricing formula for risk.</p>
+  <p>For Cascade: r<sub>f</sub> = 4%, β = 1.25, ERP = 5.5% → r<sub>e</sub> = 4% + 1.25 × 5.5% = <strong>10.9%</strong>. The <dfn class="term" tabindex="0" data-def="The interest rate a company pays on its borrowing, usually approximated by the yield on its bonds.">cost of debt</dfn> is what lenders charge — say 6% — but interest is tax-deductible, creating a <dfn class="term" tabindex="0" data-def="The tax saving a company gets because interest payments are deducted from taxable income.">tax shield</dfn>, so the after-tax cost at a 25% tax rate is 6% × 0.75 = <strong>4.5%</strong>. Weight by market values: equity = 50M × $28 = $1,400M; debt = $300M (gross debt; the $200M net debt is $300M debt minus $100M cash). So:</p>
+  <div class="formula">
+    <div class="formula-main">WACC = (1,400 ÷ 1,700) × 10.9% + (300 ÷ 1,700) × 4.5% = 8.98% + 0.79% ≈ 9.8%</div>
+    <div class="formula-legend">We round to 10% for clean arithmetic — and because pretending WACC is precise to two decimals is theater.</div>
+  </div>
+  <p>Why does riskier mean a higher discount rate? Because a dollar you might not get is worth less than a dollar you will. Discounting a volatile biotech's projected cash flows at 6% quietly asserts they're as dependable as a utility's — and the model will happily reward that lie with a huge valuation. The discount rate is where skepticism about the cash flows gets encoded. (How companies <em>choose</em> their debt-equity mix — and whether WACC can be engineered down — is the subject of <a href="#s14">Section 14</a>.)</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall</p><p>Weighting WACC with book values from the balance sheet instead of market values, or using yesterday's interest rates for r<sub>f</sub>. WACC is a <em>current market</em> opportunity cost: what investors could earn elsewhere today, not what the company paid historically.</p></div>
+
+  <h3 id="s13-sensitivity">The embarrassing truth: sensitivity</h3>
+  <p>Now for the part practitioners whisper about. Nudge WACC from 10% to 9% and terminal growth from 2% to 3%, and Cascade's per-share value jumps from $31.50 to <strong>$42.22</strong>. Push the other way — WACC 11%, growth 1% — and it drops to <strong>$25.04</strong>. That's a <strong>69% swing</strong> from moving two inputs by one percentage point each, inputs nobody can estimate to within a point anyway. The culprit is the terminal value's denominator, WACC − g: it's a small difference of two uncertain numbers, and dividing by a small shaky number is exactly as unstable as it sounds.</p>
+  <p>Honest analysts respond in two ways. First, the <strong>sensitivity table</strong>: a grid of valuations across WACC and g, so the reader sees the whole distribution instead of a false point estimate. Second, the <dfn class="term" tabindex="0" data-def="A chart showing the valuation range produced by each method side by side, so readers see where the ranges overlap.">football field</dfn> chart: the valuation range from each method drawn as horizontal bars, with the market price overlaid. Where the bars overlap is where your conviction should live.</p>
+  <p>Try both live. The model below is the exact Cascade DCF from above — same base FCF, same net debt, same share count — with the three big assumptions on sliders.</p>
+
+  <div class="widget" id="s13-dcf">
+    <div class="widget-head">
+      <h4>Mini DCF model: Cascade Beverages</h4>
+      <p>Base FCF $100M, net debt $200M, 50M shares, market price $28. Move the sliders and watch the value — and the sensitivity grid — react.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">FCF growth, yrs 1–5 <output class="ctl-val">10.0%</output><input type="range" min="0" max="25" step="0.5" value="10" data-role="g"></label>
+        <label class="ctl">Terminal growth <output class="ctl-val">2.00%</output><input type="range" min="0" max="4" step="0.25" value="2" data-role="tg"></label>
+        <label class="ctl">WACC <output class="ctl-val">10.00%</output><input type="range" min="6" max="14" step="0.25" value="10" data-role="w"></label>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">Enterprise value</span><span class="stat-value" data-role="ev">—</span></div>
+        <div class="stat"><span class="stat-label">Equity value</span><span class="stat-value" data-role="eq">—</span></div>
+        <div class="stat"><span class="stat-label">Value per share</span><span class="stat-value" data-role="ps">—</span></div>
+        <div class="stat"><span class="stat-label">vs $28 market price</span><span class="stat-value" data-role="up">—</span></div>
+      </div>
+      <svg viewBox="0 0 640 64" role="img" aria-label="Stacked bar showing enterprise value split between present value of explicit-year cash flows and present value of terminal value." style="display:block;width:100%">
+        <rect x="20" y="14" height="26" rx="4" data-role="bar-e" style="fill:var(--c1)"/>
+        <rect x="0" y="14" height="26" rx="4" data-role="bar-t" style="fill:var(--c2)"/>
+        <text data-role="lbl-e" x="0" y="58" font-size="12" style="fill:var(--muted)">Yr 1–5</text>
+        <text data-role="lbl-t" x="0" y="58" font-size="12" text-anchor="end" style="fill:var(--muted)">Terminal value</text>
+      </svg>
+      <div class="tbl-wrap"><table>
+        <thead><tr><th>Per-share value</th><th class="td-num" data-role="h-tg0">g −1pp</th><th class="td-num" data-role="h-tg1">g</th><th class="td-num" data-role="h-tg2">g +1pp</th></tr></thead>
+        <tbody>
+          <tr><th data-role="h-w0">WACC −1pp</th><td class="td-num" data-cell="0-0">—</td><td class="td-num" data-cell="0-1">—</td><td class="td-num" data-cell="0-2">—</td></tr>
+          <tr><th data-role="h-w1">WACC</th><td class="td-num" data-cell="1-0">—</td><td class="td-num" data-cell="1-1">—</td><td class="td-num" data-cell="1-2">—</td></tr>
+          <tr><th data-role="h-w2">WACC +1pp</th><td class="td-num" data-cell="2-0">—</td><td class="td-num" data-cell="2-1">—</td><td class="td-num" data-cell="2-2">—</td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:0.85em;color:var(--muted);margin:0">Cells are shaded by upside (toward <span style="color:var(--up)">green</span>) or downside (toward <span style="color:var(--down)">red</span>) vs the $28 market price. The grid clamps WACC − g to at least 0.5pp so the perpetuity never divides by zero — watch values explode as the spread shrinks.</p>
+    </div>
+  </div>
+  <script>
+(function () {
+  var root = document.getElementById('s13-dcf');
+  if (!root) return;
+  var FCF0 = 100, NETDEBT = 200, SHARES = 50, PRICE = 28;
+  var sliders = {
+    g: root.querySelector('input[data-role="g"]'),
+    tg: root.querySelector('input[data-role="tg"]'),
+    w: root.querySelector('input[data-role="w"]')
+  };
+  var outs = {
+    ev: root.querySelector('[data-role="ev"]'),
+    eq: root.querySelector('[data-role="eq"]'),
+    ps: root.querySelector('[data-role="ps"]'),
+    up: root.querySelector('[data-role="up"]')
+  };
+  function clamp(x, lo, hi) { return Math.min(hi, Math.max(lo, x)); }
+  function perShare(g, tg, w) {
+    var pvE = 0, f = FCF0;
+    for (var t = 1; t <= 5; t++) { f = f * (1 + g); pvE += f / Math.pow(1 + w, t); }
+    var spread = Math.max(w - tg, 0.005);
+    var tv = f * (1 + tg) / spread;
+    var pvT = tv / Math.pow(1 + w, 5);
+    var ev = pvE + pvT;
+    return { pvE: pvE, pvT: pvT, ev: ev, eq: ev - NETDEBT, ps: (ev - NETDEBT) / SHARES };
+  }
+  function fmtM(x) { return '$' + x.toLocaleString('en-US', { maximumFractionDigits: 0 }) + 'M'; }
+  function fmtPS(x) { return '$' + x.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function update() {
+    var g = clamp(parseFloat(sliders.g.value) || 0, 0, 25) / 100;
+    var tg = clamp(parseFloat(sliders.tg.value) || 0, 0, 4) / 100;
+    var w = clamp(parseFloat(sliders.w.value) || 6, 6, 14) / 100;
+    sliders.g.previousElementSibling.textContent = (g * 100).toFixed(1) + '%';
+    sliders.tg.previousElementSibling.textContent = (tg * 100).toFixed(2) + '%';
+    sliders.w.previousElementSibling.textContent = (w * 100).toFixed(2) + '%';
+    var r = perShare(g, tg, w);
+    outs.ev.textContent = fmtM(r.ev);
+    outs.eq.textContent = fmtM(r.eq);
+    outs.ps.textContent = fmtPS(r.ps);
+    var up = r.ps / PRICE - 1;
+    outs.up.textContent = (up >= 0 ? '+' : '−') + Math.abs(up * 100).toFixed(1) + '%';
+    outs.up.style.color = up >= 0 ? 'var(--up)' : 'var(--down)';
+    // composition bar (total width 600, x from 20 to 620)
+    var wE = Math.max(6, 600 * r.pvE / r.ev);
+    var wT = Math.max(6, 600 - wE);
+    var barE = root.querySelector('[data-role="bar-e"]');
+    var barT = root.querySelector('[data-role="bar-t"]');
+    barE.setAttribute('width', wE.toFixed(1));
+    barT.setAttribute('x', (20 + wE).toFixed(1));
+    barT.setAttribute('width', wT.toFixed(1));
+    var lblE = root.querySelector('[data-role="lbl-e"]');
+    var lblT = root.querySelector('[data-role="lbl-t"]');
+    lblE.setAttribute('x', 20);
+    lblE.textContent = 'Yr 1–5 FCF: ' + fmtM(r.pvE) + ' (' + (100 * r.pvE / r.ev).toFixed(0) + '%)';
+    lblT.setAttribute('x', 620);
+    lblT.textContent = 'Terminal value: ' + fmtM(r.pvT) + ' (' + (100 * r.pvT / r.ev).toFixed(0) + '%)';
+    // sensitivity grid: rows = WACC -1/0/+1 pp, cols = tg -1/0/+1 pp
+    var ws = [w - 0.01, w, w + 0.01];
+    var tgs = [tg - 0.01, tg, tg + 0.01];
+    root.querySelector('[data-role="h-tg0"]').textContent = 'g ' + (tgs[0] * 100).toFixed(2) + '%';
+    root.querySelector('[data-role="h-tg1"]').textContent = 'g ' + (tgs[1] * 100).toFixed(2) + '%';
+    root.querySelector('[data-role="h-tg2"]').textContent = 'g ' + (tgs[2] * 100).toFixed(2) + '%';
+    root.querySelector('[data-role="h-w0"]').textContent = 'WACC ' + (ws[0] * 100).toFixed(2) + '%';
+    root.querySelector('[data-role="h-w1"]').textContent = 'WACC ' + (ws[1] * 100).toFixed(2) + '%';
+    root.querySelector('[data-role="h-w2"]').textContent = 'WACC ' + (ws[2] * 100).toFixed(2) + '%';
+    for (var i = 0; i < 3; i++) {
+      for (var j = 0; j < 3; j++) {
+        var ps = perShare(g, tgs[j], ws[i]).ps;
+        var cell = root.querySelector('[data-cell="' + i + '-' + j + '"]');
+        cell.textContent = fmtPS(ps);
+        var upC = ps / PRICE - 1;
+        var pct = Math.round(clamp(Math.abs(upC) * 60, 0, 32));
+        var tone = upC >= 0 ? 'var(--up)' : 'var(--down)';
+        cell.style.background = 'color-mix(in srgb, ' + tone + ' ' + pct + '%, transparent)';
+        cell.style.fontWeight = (i === 1 && j === 1) ? '700' : '400';
+        cell.style.boxShadow = (i === 1 && j === 1) ? 'inset 0 0 0 2px var(--accent)' : 'none';
+      }
+    }
+  }
+  for (var k in sliders) { sliders[k].addEventListener('input', update); }
+  update();
+})();
+  </script>
+
+  <p>Play with it for two minutes and the lesson lands: the explicit-year sliders barely move the answer; WACC and terminal growth dominate. That's why interviewers probe your discount-rate reasoning and mostly shrug at your year-3 revenue estimate.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 360" role="img" aria-label="Football field chart showing valuation ranges from five methods as horizontal bars against a dashed vertical line at the 28 dollar market price.">
+      <line x1="80" y1="30" x2="80" y2="320" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="165.7" y1="30" x2="165.7" y2="320" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="251.4" y1="30" x2="251.4" y2="320" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="337.1" y1="30" x2="337.1" y2="320" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="422.9" y1="30" x2="422.9" y2="320" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="508.6" y1="30" x2="508.6" y2="320" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="594.3" y1="30" x2="594.3" y2="320" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="680" y1="30" x2="680" y2="320" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="80" y1="320" x2="680" y2="320" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="80" y="340" text-anchor="middle" font-size="12" style="fill:var(--muted)">$15</text>
+      <text x="165.7" y="340" text-anchor="middle" font-size="12" style="fill:var(--muted)">$20</text>
+      <text x="251.4" y="340" text-anchor="middle" font-size="12" style="fill:var(--muted)">$25</text>
+      <text x="337.1" y="340" text-anchor="middle" font-size="12" style="fill:var(--muted)">$30</text>
+      <text x="422.9" y="340" text-anchor="middle" font-size="12" style="fill:var(--muted)">$35</text>
+      <text x="508.6" y="340" text-anchor="middle" font-size="12" style="fill:var(--muted)">$40</text>
+      <text x="594.3" y="340" text-anchor="middle" font-size="12" style="fill:var(--muted)">$45</text>
+      <text x="680" y="340" text-anchor="middle" font-size="12" style="fill:var(--muted)">$50</text>
+      <text x="195" y="53" text-anchor="end" font-size="13" style="fill:var(--ink)">52-week range</text>
+      <rect x="200" y="49" width="188.6" height="22" rx="4" style="fill:var(--c1)"/>
+      <text x="394" y="65" font-size="12" style="fill:var(--muted)">$22–33</text>
+      <text x="228" y="112" text-anchor="end" font-size="13" style="fill:var(--ink)">Comps: P/E</text>
+      <rect x="234.3" y="108" width="137.1" height="22" rx="4" style="fill:var(--c2)"/>
+      <text x="377" y="124" font-size="12" style="fill:var(--muted)">$24–32</text>
+      <text x="262" y="171" text-anchor="end" font-size="13" style="fill:var(--ink)">Comps: EV/EBITDA</text>
+      <rect x="268.6" y="167" width="171.4" height="22" rx="4" style="fill:var(--c3)"/>
+      <text x="445" y="183" font-size="12" style="fill:var(--muted)">$26–36</text>
+      <text x="382" y="230" text-anchor="end" font-size="13" style="fill:var(--ink)">Precedent deals</text>
+      <rect x="388.6" y="226" width="188.5" height="22" rx="4" style="fill:var(--c4)"/>
+      <text x="582" y="242" font-size="12" style="fill:var(--muted)">$33–44</text>
+      <text x="245" y="289" text-anchor="end" font-size="13" style="fill:var(--ink)">DCF</text>
+      <rect x="251.4" y="285" width="291.5" height="22" rx="4" style="fill:var(--c5)"/>
+      <text x="548" y="301" font-size="12" style="fill:var(--muted)">$25–42</text>
+      <line x1="302.9" y1="26" x2="302.9" y2="320" style="stroke:var(--accent)" stroke-width="2" stroke-dasharray="6 4"/>
+      <text x="302.9" y="18" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--accent)">market: $28</text>
+    </svg>
+    <figcaption><strong>Figure 13.2</strong> — A football field for Cascade. Each method yields a <em>range</em>, not a number. Precedent deals sit highest (control premium); the zone where most bars overlap — roughly $26–33 — is where honest conviction lives.</figcaption>
+  </figure>
+
+  <h3 id="s13-relative">Relative valuation: comps and precedents</h3>
+  <p>Relative valuation outsources the hard assumptions to the market. The <dfn class="term" tabindex="0" data-def="Comparable companies analysis: valuing a company by applying the valuation multiples of similar public companies.">comps</dfn> method (comparable companies) runs in five steps. <strong>Step 1: choose the peer set</strong> — companies with similar business models, growth, margins, and size. This is the step that quietly decides your answer; put a sleepy bottler in a peer set of energy-drink rockets and everything downstream is garbage-in. <strong>Step 2:</strong> pull each peer's multiples. <strong>Step 3:</strong> take the median (medians resist the one weird outlier). <strong>Step 4:</strong> apply it to your company's metric. <strong>Step 5:</strong> convert to per-share value.</p>
+  <p>The two workhorse multiples divide the world by capital structure. <dfn class="term" tabindex="0" data-def="Enterprise value divided by earnings before interest, taxes, depreciation and amortization; a capital-structure-neutral valuation multiple.">EV/EBITDA</dfn> compares the whole business to a pre-interest profit measure (you met EBITDA in <a href="#s12">Section 12</a>), so it's immune to how much debt each peer carries — ideal when leverage varies across the set, and standard in deal-making. The <dfn class="term" tabindex="0" data-def="Price-to-earnings ratio: share price divided by earnings per share; an equity-only valuation multiple.">P/E ratio</dfn> compares equity price to equity earnings — fine when peers have similar debt loads, and the default for quick public-market comparisons. Mixing them up is a classic rookie tell: never put an equity price over a pre-interest profit measure, or you're comparing numerators and denominators that belong to different claimants.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example</p><p>Cascade's EBITDA is $180M. Five peers trade at EV/EBITDA of 9.2×, 10.1×, 10.8×, 11.5×, and 14.0× (median <strong>10.8×</strong>). Implied EV = 10.8 × 180 = <strong>$1,944M</strong>. Subtract $200M net debt → equity $1,744M → ÷ 50M shares → <strong>$34.88</strong>. Note the same tail-end steps as the DCF: multiples on EV still require the EV → equity → per-share march.</p></div>
+  <p><dfn class="term" tabindex="0" data-def="Valuation based on prices actually paid in past acquisitions of similar companies.">Precedent transactions</dfn> are comps built from actual acquisitions instead of trading prices. They come out systematically higher because buyers pay a <dfn class="term" tabindex="0" data-def="The extra amount, often 20–40% above market price, an acquirer pays for the power to control a company's decisions.">control premium</dfn> — typically 20–40% over the pre-announcement price — for the right to run the company, fire the CEO, and capture synergies. Use precedents to value a company being <em>sold</em>; use trading comps to value shares you'd merely hold.</p>
+  <div class="callout co-key"><p class="co-label">Key idea</p><p>A multiple is a compressed DCF. EV/EBITDA of 10.8× is shorthand for a whole bundle of growth, margin, and risk assumptions the market is making about the peers. Comps don't avoid assumptions — they borrow the market's, which is great exactly when the market knows more than you and dangerous exactly when it doesn't (see <a href="#s17">Section 17</a> on bubbles).</p></div>
+
+  <h3 id="s13-interview">"Walk me through a DCF" — the interview answer</h3>
+  <p>This is the single most common technical question in finance interviews. Here is an answer you can deliver verbatim in about sixty seconds — every clause of which you can now defend:</p>
+  <div class="callout co-ex"><p class="co-label">Say this</p>
+    <ol>
+      <li>"A DCF values a company as the present value of its future free cash flows. I'd start by <strong>projecting unlevered free cash flow for five to ten years</strong> — revenue growth down to operating profit, taxed, plus depreciation, minus capex and the change in working capital."</li>
+      <li>"Next I'd estimate a <strong>terminal value</strong> for everything beyond the projection window, either with the Gordon growth method — final-year FCF times one plus g, over WACC minus g — or an exit multiple on terminal-year EBITDA, and I'd cross-check one against the other."</li>
+      <li>"Then I'd <strong>discount the explicit cash flows and the terminal value back to today at the WACC</strong> — cost of equity from CAPM, after-tax cost of debt, weighted by market values. That sum is enterprise value."</li>
+      <li>"To get to what shareholders own, I'd <strong>subtract net debt</strong> — and any preferred stock or minority interests — to reach equity value, then <strong>divide by diluted shares</strong> for a per-share value."</li>
+      <li>"Finally I'd <strong>sensitize it</strong> — a WACC-versus-terminal-growth grid — because the terminal value usually carries 60 to 80 percent of the total, and I'd triangulate against trading comps and precedent transactions before trusting the number."</li>
+    </ol>
+  </div>
+  <p>Two follow-ups arrive almost every time. <em>"Why do you subtract net debt?"</em> Because enterprise value belongs to all capital providers and lenders get paid first; equity holders own only what's left. <em>"What dominates the output?"</em> WACC and terminal growth — which is precisely why you sensitize them rather than defend a point estimate. Saying that last part signals you've actually built one.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 400" role="img" aria-label="Value driver tree showing how revenue growth, margins, reinvestment, cost of capital, terminal growth, and net debt flow into free cash flow, WACC, terminal value, enterprise value, and finally per-share value.">
+      <defs>
+        <marker id="s13-arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--axis)"/></marker>
+      </defs>
+      <rect x="20" y="30" width="170" height="36" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="105" y="53" text-anchor="middle" font-size="14" style="fill:var(--ink)">Revenue growth</text>
+      <rect x="20" y="80" width="170" height="36" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="105" y="103" text-anchor="middle" font-size="14" style="fill:var(--ink)">Operating margin</text>
+      <rect x="20" y="130" width="170" height="36" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="105" y="153" text-anchor="middle" font-size="14" style="fill:var(--ink)">Capex &amp; working capital</text>
+      <rect x="20" y="196" width="170" height="36" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="105" y="219" text-anchor="middle" font-size="14" style="fill:var(--ink)">Cost of equity (CAPM)</text>
+      <rect x="20" y="246" width="170" height="36" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="105" y="269" text-anchor="middle" font-size="14" style="fill:var(--ink)">After-tax cost of debt</text>
+      <rect x="20" y="312" width="170" height="36" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="105" y="335" text-anchor="middle" font-size="14" style="fill:var(--ink)">Terminal growth g</text>
+      <rect x="250" y="80" width="170" height="40" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="335" y="105" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">FCF, years 1–5</text>
+      <rect x="250" y="216" width="170" height="40" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="335" y="241" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">WACC</text>
+      <rect x="250" y="310" width="170" height="40" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="335" y="335" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Terminal value</text>
+      <rect x="480" y="90" width="180" height="46" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="570" y="110" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Enterprise value</text>
+      <text x="570" y="128" text-anchor="middle" font-size="12" style="fill:var(--muted)">PV of FCF + PV of TV</text>
+      <rect x="480" y="196" width="180" height="36" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="570" y="219" text-anchor="middle" font-size="14" style="fill:var(--ink)">− Net debt</text>
+      <rect x="480" y="286" width="180" height="52" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)" stroke-width="1.5"/>
+      <text x="570" y="308" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Equity ÷ shares</text>
+      <text x="570" y="328" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--accent)">= value per share</text>
+      <line x1="190" y1="48" x2="248" y2="90" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s13-arr2)"/>
+      <line x1="190" y1="98" x2="248" y2="100" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s13-arr2)"/>
+      <line x1="190" y1="148" x2="248" y2="110" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s13-arr2)"/>
+      <line x1="190" y1="214" x2="248" y2="230" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s13-arr2)"/>
+      <line x1="190" y1="264" x2="248" y2="242" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s13-arr2)"/>
+      <line x1="190" y1="330" x2="248" y2="330" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s13-arr2)"/>
+      <path d="M 262,118 C 215,160 215,285 246,323" fill="none" style="stroke:var(--axis)" stroke-width="1.5" stroke-dasharray="4 4" marker-end="url(#s13-arr2)"/>
+      <line x1="420" y1="100" x2="478" y2="105" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s13-arr2)"/>
+      <line x1="420" y1="236" x2="478" y2="130" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s13-arr2)"/>
+      <line x1="420" y1="330" x2="478" y2="132" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s13-arr2)"/>
+      <line x1="570" y1="136" x2="570" y2="194" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s13-arr2)"/>
+      <line x1="570" y1="232" x2="570" y2="284" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s13-arr2)"/>
+      <text x="240" y="190" font-size="12" style="fill:var(--muted)">FCF₅ feeds TV</text>
+    </svg>
+    <figcaption><strong>Figure 13.3</strong> — The value-driver tree: every slider in the widget maps to one of these boxes. Growth and margins build the cash flows; WACC and g set what those flows are worth; net debt and share count translate it to your brokerage screen.</figcaption>
+  </figure>
+
+  <h3 id="s13-limits">Where each method breaks — and why analysts triangulate</h3>
+  <p>Every valuation tool has a failure mode, and knowing them is worth more than knowing the formulas. <strong>DCF breaks for pre-revenue startups</strong>: with negative cash flows for years, essentially 100% of the value sits in a terminal value built on guesses stacked on guesses — the model becomes a random-number generator wearing a suit. Venture investors use staged expected-value thinking and comparables instead. <strong>P/E breaks for <dfn class="term" tabindex="0" data-def="A company whose profits rise and fall sharply with the economic cycle, like automakers or airlines.">cyclicals</dfn></strong>: an automaker looks cheapest (low P/E) at the peak of the cycle, exactly when earnings are about to collapse — the multiple is low because the E is temporarily inflated. Analysts use normalized, mid-cycle earnings instead. <strong><dfn class="term" tabindex="0" data-def="The accounting value of equity on the balance sheet: assets minus liabilities at recorded values.">Book value</dfn> breaks for asset-light companies</strong>: a software firm's engineers, code, and brand barely appear on its balance sheet (as you saw in <a href="#s11">Section 11</a>), so price-to-book is nearly meaningless for them.</p>
+  <p>Banks get their own playbook. For a bank, debt isn't financing — it's raw material (deposits in, loans out), so "enterprise value" and EV/EBITDA stop making sense. Analysts value banks on equity-side measures: P/E, price-to-book (book value actually means something when assets are financial and marked close to reality), and dividend-based models, all disciplined by regulatory capital requirements from <a href="#s06">Section 6</a>.</p>
+  <p>Hence the professional habit you saw in the football field: <strong>triangulate</strong>. Run a DCF for the fundamental logic, trading comps for market context, precedents if a sale is plausible — then interrogate the disagreements. If the DCF says $42 and comps say $30, either your assumptions are heroic or the market is mispricing the sector; both are worth knowing, and the gap itself is the insight. Many investors also demand a <dfn class="term" tabindex="0" data-def="Buying only when price is comfortably below estimated value, so estimation errors do not turn into losses.">margin of safety</dfn> — acting only when price sits far below the whole range — precisely because they know their estimate has error bars.</p>
+  <details class="deep"><summary>Deep dive: two refinements you'll meet in real models</summary>
+    <p><strong>Exit multiples.</strong> Instead of Gordon growth, many bankers set the terminal value as a multiple of terminal-year EBITDA — e.g. TV = 10 × EBITDA<sub>5</sub> — borrowing today's comps for the far future. It feels more concrete but smuggles relative valuation into your intrinsic model; best practice computes TV both ways and checks that each implies a sane version of the other (a Gordon TV implies an exit multiple, and vice versa).</p>
+    <p><strong>Mid-year convention.</strong> Our model discounts each year's FCF as if it all arrives on December 31, but cash actually dribbles in through the year. Discounting at t = 0.5, 1.5, 2.5… (dividing by (1+WACC)<sup>t−0.5</sup>) treats flows as arriving mid-year and raises the valuation by roughly half a year of discounting — about 4–5% at a 10% WACC. Small, but interviewers love asking about it.</p>
+  </details>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. Your DCF gives an enterprise value of $1,775M. The company has $300M of debt, $100M of cash, and 50M shares. What is the per-share value?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">$35.50 — divide EV directly by shares</button>
+        <button class="quiz-opt" data-correct>$31.50 — subtract net debt of $200M first, then divide</button>
+        <button class="quiz-opt">$29.50 — subtract gross debt of $300M first, then divide</button>
+      </div>
+      <p class="quiz-explain">EV belongs to debt and equity holders together. Subtract net debt (300 − 100 = 200) to get equity value of $1,575M, then divide by 50M shares: $31.50. Ignoring debt overstates the answer; ignoring the cash understates it.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. In a typical 5-year DCF, roughly what share of enterprise value comes from the terminal value?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">10–20%</button>
+        <button class="quiz-opt">40–50%</button>
+        <button class="quiz-opt" data-correct>60–80%</button>
+        <button class="quiz-opt">Over 95% in almost every model</button>
+      </div>
+      <p class="quiz-explain">Terminal value usually carries 60–80% of EV (72% in our Cascade model). That is why WACC and terminal growth dominate the output — and why honest analysts always present a sensitivity grid.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. You're comping five peers whose debt loads range from zero to heavy. Which multiple keeps the comparison fair?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-correct>EV/EBITDA, because both sides are measured before interest and capital structure</button>
+        <button class="quiz-opt">P/E, because earnings are the bottom line everyone cares about</button>
+        <button class="quiz-opt">Price-to-book, because the balance sheet reflects the debt</button>
+      </div>
+      <p class="quiz-explain">P/E mixes an equity price with post-interest earnings, so leverage distorts it differently for each peer. EV/EBITDA compares whole-business value to pre-interest profit, neutralizing capital-structure differences.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. WACC is 8% and terminal growth is 3%. An analyst nudges terminal growth to 4%. What happens to the terminal value?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">It rises about 1%, matching the change in g</button>
+        <button class="quiz-opt" data-correct>It jumps roughly 25%, because the denominator shrinks from 5% to 4%</button>
+        <button class="quiz-opt">It falls, because higher growth means more reinvestment</button>
+        <button class="quiz-opt">It is unchanged — terminal value depends only on WACC</button>
+      </div>
+      <p class="quiz-explain">TV = FCF×(1+g)/(WACC−g). The denominator drops from 0.05 to 0.04 (a 25% boost) and the numerator ticks up too — about a 26% jump in total from a one-point tweak. The WACC−g spread is the most explosive input in the model.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. Why does a DCF fail for a pre-revenue startup?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Startups have no beta, so WACC cannot be computed at all</button>
+        <button class="quiz-opt">The Gordon growth formula only works for dividend-paying companies</button>
+        <button class="quiz-opt" data-correct>Near-term cash flows are negative, so essentially all value sits in a highly speculative terminal value</button>
+      </div>
+      <p class="quiz-explain">The mechanics still run — you can always discount numbers — but with negative explicit-year flows, the answer is nearly 100% terminal value built on guesses. The model outputs false precision rather than insight; comparables and staged expected-value approaches work better.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>Price is a fact; intrinsic value is an estimate with error bars. A valuation model organizes your assumptions so disagreement with the market becomes legible.</li>
+      <li>DCF in five moves: project FCF for 5–10 years → terminal value via TV = FCF×(1+g)/(WACC−g) → discount everything at WACC → EV − net debt = equity value → ÷ shares. Cascade: $500M + $1,275M = $1,775M EV → $31.50/share.</li>
+      <li>WACC blends the CAPM cost of equity (r<sub>f</sub> + β×ERP) with the after-tax cost of debt, weighted at market values. Riskier cash flows get higher rates because a dollar you might not receive is worth less.</li>
+      <li>Terminal value is typically 60–80% of EV, and ±1pp on WACC or g swings the answer by double digits — present sensitivity grids and football fields, not point estimates.</li>
+      <li>Comps borrow the market's assumptions: pick honest peers, use median multiples, EV/EBITDA when leverage differs, P/E when it doesn't. Precedent transactions run 20–40% higher because of the control premium.</li>
+      <li>Every method has a failure mode — DCF for pre-revenue startups, P/E for cyclicals, book value for asset-light firms — and banks get equity-side multiples because their debt is raw material. So professionals triangulate.</li>
+      <li>You can now answer "walk me through a DCF" verbatim — and the follow-ups about net debt and sensitivity that prove you mean it.</li>
+    </ul>
+  </div>
+</section>

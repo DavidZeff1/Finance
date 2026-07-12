@@ -1,0 +1,421 @@
+<section class="lesson" id="s09" data-num="09" data-title="Derivatives: Futures, Options and Swaps">
+  <p class="eyebrow">Part II · Financial Markets &amp; Instruments</p>
+  <h2>9. Derivatives: Futures, Options and Swaps</h2>
+  <p class="lede">Derivatives are contracts whose value is computed from something else — a stock, a bond, a barrel of oil, an interest rate. Master this section and you will be able to read an option chain, price out a hedge, and explain why the same instrument that saves a farmer's season can vaporize a hedge fund.</p>
+
+  <h3 id="s09-what">A contract about a price, not the thing itself</h3>
+  <p>A <dfn class="term" tabindex="0" data-def="A contract whose value is derived from the price of another asset, rate, or index (the underlying).">derivative</dfn> is a legal agreement whose payoff is a <em>function</em> of some other price. That other price — the stock, the commodity, the interest rate — is called the <dfn class="term" tabindex="0" data-def="The asset, rate, or index that a derivative's payoff is calculated from.">underlying</dfn>. You never need to own the underlying to trade the derivative, any more than you need to own a database to write a query against it.</p>
+  <div class="callout co-analogy"><p class="co-label">Analogy</p><p>Think of a derivative as a <em>derived column</em>: it stores no data of its own, just a formula like <code>payoff = max(price − 100, 0)</code> evaluated against a live feed. All the machinery in this section is about who gets paid when that formula is evaluated, and when.</p></div>
+  <p>Two kinds of people show up to trade these contracts, and both are necessary. A <dfn class="term" tabindex="0" data-def="Someone who uses a derivative to reduce a risk they already have from their real-world business or portfolio.">hedger</dfn> already carries a risk — a farmer exposed to wheat prices, an airline exposed to jet fuel — and uses the contract to shed it. A <dfn class="term" tabindex="0" data-def="Someone who takes on risk in a derivative hoping to profit from a price move, with no offsetting real-world exposure.">speculator</dfn> has no such exposure and takes the other side hoping to profit. Speculators get the bad press, but without them hedgers often couldn't find a counterparty at a fair price. Speculators are the <dfn class="term" tabindex="0" data-def="How easily something can be bought or sold quickly without moving its price.">liquidity</dfn> providers of the risk-transfer business.</p>
+  <p>Two properties make derivatives different from the assets in <a href="#s07">Section 7 (Equities)</a> and <a href="#s08">Section 8 (Fixed Income)</a>:</p>
+  <p><strong>They are zero-sum before costs.</strong> Every derivative has two sides, and one side's gain is exactly the other side's loss. A stock can make both buyer and (earlier) seller money over time because the company itself creates value; a futures contract cannot. After commissions and spreads, the average derivative trader is slightly underwater by construction. That is fine — for a hedger, the "loss" is an insurance premium happily paid.</p>
+  <p><strong>They embed enormous <dfn class="term" tabindex="0" data-def="Controlling a large exposure with a small amount of committed capital, which amplifies both gains and losses.">leverage</dfn>.</strong> A few thousand dollars of collateral can control a six-figure exposure. Leverage scales your P&amp;L in both directions with the same multiplier: a 3% move in the underlying can be a 60% move in your account. Derivatives are professional risk-transfer tools first; the retail lottery-ticket use case came later, and most retail option buyers lose money. Keep that ordering in mind for the rest of this section.</p>
+  <div class="callout co-key"><p class="co-label">Key idea</p><p>Derivatives don't create or destroy risk — they <em>relocate</em> it, from someone who doesn't want it to someone who is paid to hold it. Pricing a derivative is pricing that relocation.</p></div>
+
+  <h3 id="s09-futures">Forwards and futures: locking a price today</h3>
+  <p>The oldest derivative is a promise. A <dfn class="term" tabindex="0" data-def="A private, customized agreement to buy or sell an asset at a set price on a set future date.">forward</dfn> is a private contract: I agree today to sell you 50,000 bushels of wheat in December at $6.00 per bushel, whatever the market price is then. No money changes hands now; we just shake on the price.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example: the farmer and the flour mill</p><p>A farmer will harvest 50,000 bushels in December and needs $5.20/bu to cover costs. Today's December price is $6.00. She sells forward at $6.00, locking in revenue of 50,000 × $6.00 = $300,000 and a profit of $40,000.</p>
+  <p>If December spot wheat is $5.00: she sells her crop for $250,000, but her forward position gains ($6.00 − $5.00) × 50,000 = $50,000. Total: $300,000. If spot is $7.00: crop fetches $350,000, forward loses $50,000. Total: $300,000 again. The hedge doesn't make her rich — it makes her <em>predictable</em>. The airline hedging jet fuel runs the same trade in mirror image, buying forward to cap its costs.</p></div>
+  <p>Forwards have two problems: you must find a counterparty who wants your exact size and date, and you must trust them to pay up in December — <dfn class="term" tabindex="0" data-def="The risk that the other side of a contract fails to pay what they owe.">counterparty risk</dfn>. A <dfn class="term" tabindex="0" data-def="A standardized, exchange-traded forward contract, guaranteed by a clearinghouse and settled daily.">futures contract</dfn> solves both. It is a forward that has been standardized (fixed size, fixed delivery months, fixed quality specs) and listed on an exchange like the CME, with a <dfn class="term" tabindex="0" data-def="An intermediary that becomes the buyer to every seller and the seller to every buyer, guaranteeing both sides of a trade.">clearinghouse</dfn> inserted in the middle so that neither side ever faces the other directly.</p>
+  <p>The clearinghouse protects itself with two mechanisms. First, both sides post <dfn class="term" tabindex="0" data-def="Collateral deposited with the clearinghouse to guarantee you can cover losses on a futures position.">margin</dfn> — a good-faith deposit, typically 3–12% of the contract's value. Second, positions are <dfn class="term" tabindex="0" data-def="Revaluing a position at the current market price and settling the gain or loss in cash, usually daily.">marked to market</dfn> every day: each evening, that day's gain or loss is moved in cash between the two margin accounts. Losses are never allowed to pile up unpaid. If your balance falls below the <dfn class="term" tabindex="0" data-def="The minimum margin balance; falling below it triggers a demand to top the account back up.">maintenance margin</dfn>, you get a <dfn class="term" tabindex="0" data-def="A demand to deposit more collateral immediately or have your position closed.">margin call</dfn>: top up or be liquidated. Figure 9.1 walks through a week of this for our farmer.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 360" role="img" aria-label="Table showing five days of futures settlement prices, daily gains and losses, margin balance and margin call for a short wheat position">
+      <text x="30" y="30" style="fill:var(--ink)" font-size="15" font-weight="700">Daily mark-to-market: short 5,000 bu at $6.00 (initial margin $2,000, maintenance $1,500)</text>
+      <text x="40" y="66" style="fill:var(--muted)" font-size="13" font-weight="700">Day</text>
+      <text x="205" y="66" text-anchor="end" style="fill:var(--muted)" font-size="13" font-weight="700">Settle</text>
+      <text x="330" y="66" text-anchor="end" style="fill:var(--muted)" font-size="13" font-weight="700">Short's daily P&amp;L</text>
+      <text x="450" y="66" text-anchor="end" style="fill:var(--muted)" font-size="13" font-weight="700">Margin balance</text>
+      <text x="480" y="66" style="fill:var(--muted)" font-size="13" font-weight="700">Action</text>
+      <line x1="30" y1="78" x2="690" y2="78" style="stroke:var(--axis)" stroke-width="1"/>
+      <text x="40" y="102" style="fill:var(--ink)" font-size="14">Mon</text><text x="205" y="102" text-anchor="end" style="fill:var(--ink)" font-size="14">$6.00</text><text x="330" y="102" text-anchor="end" style="fill:var(--muted)" font-size="14">—</text><text x="450" y="102" text-anchor="end" style="fill:var(--ink)" font-size="14">$2,000</text><text x="480" y="102" style="fill:var(--muted)" font-size="13">post initial margin</text>
+      <line x1="30" y1="114" x2="690" y2="114" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="40" y="138" style="fill:var(--ink)" font-size="14">Tue</text><text x="205" y="138" text-anchor="end" style="fill:var(--ink)" font-size="14">$6.10</text><text x="330" y="138" text-anchor="end" style="fill:var(--down)" font-size="14">−$500</text><text x="450" y="138" text-anchor="end" style="fill:var(--ink)" font-size="14">$1,500</text><text x="480" y="138" style="fill:var(--muted)" font-size="13">at maintenance — no call yet</text>
+      <line x1="30" y1="150" x2="690" y2="150" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="40" y="174" style="fill:var(--ink)" font-size="14">Wed</text><text x="205" y="174" text-anchor="end" style="fill:var(--ink)" font-size="14">$6.25</text><text x="330" y="174" text-anchor="end" style="fill:var(--down)" font-size="14">−$750</text><text x="450" y="174" text-anchor="end" style="fill:var(--ink)" font-size="14">$750 → $2,000</text><text x="480" y="174" style="fill:var(--accent)" font-size="13" font-weight="700">margin call: deposit $1,250</text>
+      <line x1="30" y1="186" x2="690" y2="186" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="40" y="210" style="fill:var(--ink)" font-size="14">Thu</text><text x="205" y="210" text-anchor="end" style="fill:var(--ink)" font-size="14">$6.05</text><text x="330" y="210" text-anchor="end" style="fill:var(--up)" font-size="14">+$1,000</text><text x="450" y="210" text-anchor="end" style="fill:var(--ink)" font-size="14">$3,000</text><text x="480" y="210" style="fill:var(--muted)" font-size="13">—</text>
+      <line x1="30" y1="222" x2="690" y2="222" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="40" y="246" style="fill:var(--ink)" font-size="14">Fri</text><text x="205" y="246" text-anchor="end" style="fill:var(--ink)" font-size="14">$5.90</text><text x="330" y="246" text-anchor="end" style="fill:var(--up)" font-size="14">+$750</text><text x="450" y="246" text-anchor="end" style="fill:var(--ink)" font-size="14">$3,750</text><text x="480" y="246" style="fill:var(--muted)" font-size="13">—</text>
+      <line x1="30" y1="264" x2="690" y2="264" style="stroke:var(--axis)" stroke-width="1"/>
+      <text x="40" y="294" style="fill:var(--ink)" font-size="14">Net: price fell $0.10, so the short is up 0.10 × 5,000 = <tspan style="fill:var(--up)" font-weight="700">+$500</tspan>.</text>
+      <text x="40" y="320" style="fill:var(--muted)" font-size="13">Check: $3,750 final balance − $3,250 total deposited = +$500. Losses were settled in cash daily, never owed.</text>
+    </svg>
+    <figcaption><strong>Figure 9.1</strong> — Daily mark-to-market turns one big December settlement into many small daily ones, so no one ever owes more than a day's move. Note Wednesday: the position later recovered, but the margin call still had to be met in cash that morning.</figcaption>
+  </figure>
+  <p>That Wednesday row is the hidden cost of hedging with futures: even a hedge that is guaranteed to work out at delivery can demand cash <em>today</em>. Being "right eventually" doesn't help if you can't fund the margin calls along the way. The practical differences in one line each: futures are standardized, exchange-traded, clearinghouse-guaranteed, marked to market daily, and easy to exit; forwards are custom, private, carry counterparty risk, settle once at the end, and are hard to exit early. Most physical commodity futures are closed out before delivery — hedgers usually want the price protection, not the truckloads of wheat (more on commodities in <a href="#s10">Section 10</a>).</p>
+
+  <h3 id="s09-options">Options: the right, but not the obligation</h3>
+  <p>A future obligates both sides. An <dfn class="term" tabindex="0" data-def="A contract giving the buyer the right, but not the obligation, to buy or sell an underlying at a set price by a set date.">option</dfn> is asymmetric: the buyer gets a <em>right</em>, the seller takes on an <em>obligation</em>. A <dfn class="term" tabindex="0" data-def="An option giving the right to BUY the underlying at the strike price.">call</dfn> is the right to buy the underlying at a fixed price; a <dfn class="term" tabindex="0" data-def="An option giving the right to SELL the underlying at the strike price.">put</dfn> is the right to sell. That fixed price is the <dfn class="term" tabindex="0" data-def="The pre-agreed price at which an option lets you buy (call) or sell (put) the underlying.">strike</dfn>, the deadline is the <dfn class="term" tabindex="0" data-def="The date after which an option can no longer be exercised and expires worthless or is settled.">expiry</dfn>, and the price you pay up front for the right is the <dfn class="term" tabindex="0" data-def="The upfront price paid by the option buyer to the option seller (writer).">premium</dfn>. The seller — called the <dfn class="term" tabindex="0" data-def="The seller of an option, who collects the premium and must deliver on the contract if the buyer exercises.">writer</dfn> — pockets the premium and must perform if the buyer <dfn class="term" tabindex="0" data-def="To use an option's right: buy at the strike (call) or sell at the strike (put).">exercises</dfn>. US equity options cover 100 shares per contract, so a quoted premium of $3.02 costs $302.</p>
+  <p>Because the buyer will only ever exercise when it helps them, option payoffs are kinked — the famous hockey sticks in Figure 9.2. A call buyer's loss is capped at the premium while the upside is open-ended; the call writer's profile is the exact mirror, capped gain and open-ended loss. Zero-sum, always.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 400" role="img" aria-label="Four payoff diagrams at expiry: long call, short call, long put and short put, each with strike 100 and premium 10">
+      <text x="40" y="40" style="fill:var(--ink)" font-size="14" font-weight="700">Long call (buy)</text>
+      <line x1="40" y1="105" x2="300" y2="105" style="stroke:var(--axis)" stroke-width="1"/>
+      <text x="34" y="109" text-anchor="end" style="fill:var(--muted)" font-size="12">0</text>
+      <line x1="170" y1="52" x2="170" y2="160" style="stroke:var(--grid)" stroke-width="1" stroke-dasharray="3 3"/>
+      <polyline points="40,118.8 170,118.8 300,63.8" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>
+      <text x="50" y="136" style="fill:var(--muted)" font-size="12">max loss = premium</text>
+      <text x="298" y="58" text-anchor="end" style="fill:var(--muted)" font-size="12">unlimited gain ↗</text>
+      <text x="170" y="176" text-anchor="middle" style="fill:var(--muted)" font-size="12">K = 100</text>
+      <text x="400" y="40" style="fill:var(--ink)" font-size="14" font-weight="700">Short call (write)</text>
+      <line x1="400" y1="105" x2="660" y2="105" style="stroke:var(--axis)" stroke-width="1"/>
+      <text x="394" y="109" text-anchor="end" style="fill:var(--muted)" font-size="12">0</text>
+      <line x1="530" y1="52" x2="530" y2="160" style="stroke:var(--grid)" stroke-width="1" stroke-dasharray="3 3"/>
+      <polyline points="400,91.2 530,91.2 660,146.2" fill="none" style="stroke:var(--c2)" stroke-width="2.5"/>
+      <text x="410" y="84" style="fill:var(--muted)" font-size="12">max gain = premium</text>
+      <text x="658" y="160" text-anchor="end" style="fill:var(--muted)" font-size="12">unlimited loss ↘</text>
+      <text x="530" y="176" text-anchor="middle" style="fill:var(--muted)" font-size="12">K = 100</text>
+      <text x="40" y="240" style="fill:var(--ink)" font-size="14" font-weight="700">Long put (buy)</text>
+      <line x1="40" y1="305" x2="300" y2="305" style="stroke:var(--axis)" stroke-width="1"/>
+      <text x="34" y="309" text-anchor="end" style="fill:var(--muted)" font-size="12">0</text>
+      <line x1="170" y1="252" x2="170" y2="360" style="stroke:var(--grid)" stroke-width="1" stroke-dasharray="3 3"/>
+      <polyline points="40,263.8 170,318.8 300,318.8" fill="none" style="stroke:var(--c3)" stroke-width="2.5"/>
+      <text x="298" y="334" text-anchor="end" style="fill:var(--muted)" font-size="12">max loss = premium</text>
+      <text x="46" y="256" style="fill:var(--muted)" font-size="12">↖ gains as stock falls</text>
+      <text x="170" y="376" text-anchor="middle" style="fill:var(--muted)" font-size="12">K = 100</text>
+      <text x="400" y="240" style="fill:var(--ink)" font-size="14" font-weight="700">Short put (write)</text>
+      <line x1="400" y1="305" x2="660" y2="305" style="stroke:var(--axis)" stroke-width="1"/>
+      <text x="394" y="309" text-anchor="end" style="fill:var(--muted)" font-size="12">0</text>
+      <line x1="530" y1="252" x2="530" y2="360" style="stroke:var(--grid)" stroke-width="1" stroke-dasharray="3 3"/>
+      <polyline points="400,346.2 530,291.2 660,291.2" fill="none" style="stroke:var(--c4)" stroke-width="2.5"/>
+      <text x="658" y="284" text-anchor="end" style="fill:var(--muted)" font-size="12">max gain = premium</text>
+      <text x="404" y="330" style="fill:var(--muted)" font-size="12">↙ big loss if stock craters</text>
+      <text x="530" y="376" text-anchor="middle" style="fill:var(--muted)" font-size="12">K = 100</text>
+    </svg>
+    <figcaption><strong>Figure 9.2</strong> — The four basic positions at expiry (strike $100, premium $10, P&amp;L per share). Buyers pay a known premium for open-ended or large potential gains; writers collect a capped premium against open-ended or large potential losses.</figcaption>
+  </figure>
+  <p>An option's value at any moment splits into two parts. <dfn class="term" tabindex="0" data-def="What an option would be worth if exercised right now: max(S−K, 0) for a call, max(K−S, 0) for a put.">Intrinsic value</dfn> is what exercising immediately would earn: for a call, max(S − K, 0). <dfn class="term" tabindex="0" data-def="The part of an option's premium above intrinsic value; payment for the chance that the option becomes more valuable before expiry.">Time value</dfn> is everything above that — payment for the <em>possibility</em> that things improve before expiry. Related jargon: <dfn class="term" tabindex="0" data-def="Where the underlying price sits relative to the strike: in, at, or out of the money.">moneyness</dfn>. A call with the stock above the strike is <dfn class="term" tabindex="0" data-def="Having positive intrinsic value: stock above strike for a call, below strike for a put.">in the money</dfn> (ITM); stock near the strike is at the money (ATM); stock below the strike leaves the call <dfn class="term" tabindex="0" data-def="Having zero intrinsic value: the option is currently a pure bet on future movement.">out of the money</dfn> (OTM) — pure time value, pure hope.</p>
+  <p>Here is a realistic <dfn class="term" tabindex="0" data-def="The table of all listed options on one underlying: strikes down the rows, calls and puts side by side, with quotes and stats.">option chain</dfn> for a $100 stock with 30 days to expiry:</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Strike</th><th>Call bid/ask</th><th>Call delta</th><th>Put bid/ask</th><th>Impl. vol</th><th>Call moneyness</th></tr></thead>
+    <tbody>
+      <tr><td class="td-num">95</td><td class="td-num">6.15 / 6.30</td><td class="td-num">0.79</td><td class="td-num">0.85 / 0.95</td><td class="td-num">25%</td><td>ITM: $5 intrinsic + ~$1.20 time</td></tr>
+      <tr><td class="td-num">100</td><td class="td-num">2.95 / 3.10</td><td class="td-num">0.53</td><td class="td-num">2.60 / 2.75</td><td class="td-num">25%</td><td>ATM: all time value</td></tr>
+      <tr><td class="td-num">105</td><td class="td-num">1.10 / 1.20</td><td class="td-num">0.27</td><td class="td-num">5.75 / 5.90</td><td class="td-num">25%</td><td>OTM: all time value</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout co-ex"><p class="co-label">Worked example: leverage cuts both ways</p><p>Buy the 100-strike call at $3.02 ($302 per contract). If the stock closes at $110 at expiry, the call is worth $10.00 — a gain of $6.98 per share, or +231%, versus +10% for the stock. If the stock closes at $100 (unchanged!), the call expires worthless: −100% versus 0% for the stock. The option didn't just lever the direction — it added a deadline. You now need to be right about <em>what</em>, <em>how much</em>, and <em>by when</em>. That triple hurdle is why most retail option buyers lose money even when their directional view is decent.</p></div>
+
+  <h3 id="s09-greeks">What an option is worth: volatility and the Greeks</h3>
+  <p>Why is the ATM call above worth $3.02 rather than $1 or $8? Intuitively: an option is worth the probability-weighted average of its payoffs. Anything that widens the distribution of possible stock prices — more time, more volatility — raises the value of a contract that keeps the upside and discards the downside. Practitioners summarize an option's sensitivities with the <dfn class="term" tabindex="0" data-def="Sensitivities of an option's price to its inputs — delta, theta, vega and friends; mathematically, partial derivatives.">Greeks</dfn>, and if you know calculus you already know what they are: partial derivatives of price with respect to each input.</p>
+  <p><dfn class="term" tabindex="0" data-def="How much an option's price moves per $1 move in the underlying; also roughly the probability of expiring in the money.">Delta</dfn> (∂V/∂S) is the slope: a 0.53-delta call gains about $0.53 when the stock gains $1. Delta also doubles as a rough probability of finishing ITM — see the chain above, where the deep ITM call has delta 0.79 and the OTM call 0.27. <dfn class="term" tabindex="0" data-def="How much an option loses per day from the passage of time alone, all else equal.">Theta</dfn> (∂V/∂t) is time decay: the option bleeds value every day the stock fails to move, and the bleed accelerates near expiry (Figure 9.3). <dfn class="term" tabindex="0" data-def="How much an option's price changes when implied volatility changes by one percentage point.">Vega</dfn> (∂V/∂σ) is sensitivity to volatility itself.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 300" role="img" aria-label="Curve showing an at-the-money option's time value decaying slowly at first and rapidly in the final weeks before expiry">
+      <line x1="70" y1="250" x2="680" y2="250" style="stroke:var(--axis)" stroke-width="1"/>
+      <line x1="70" y1="40" x2="70" y2="250" style="stroke:var(--axis)" stroke-width="1"/>
+      <line x1="70" y1="156.7" x2="680" y2="156.7" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="70" y1="63.3" x2="680" y2="63.3" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="62" y="254" text-anchor="end" style="fill:var(--muted)" font-size="13">$0</text>
+      <text x="62" y="161" text-anchor="end" style="fill:var(--muted)" font-size="13">$4</text>
+      <text x="62" y="68" text-anchor="end" style="fill:var(--muted)" font-size="13">$8</text>
+      <text x="70" y="272" text-anchor="middle" style="fill:var(--muted)" font-size="13">90</text>
+      <text x="273" y="272" text-anchor="middle" style="fill:var(--muted)" font-size="13">60</text>
+      <text x="477" y="272" text-anchor="middle" style="fill:var(--muted)" font-size="13">30</text>
+      <text x="680" y="272" text-anchor="middle" style="fill:var(--muted)" font-size="13">0</text>
+      <text x="375" y="292" text-anchor="middle" style="fill:var(--muted)" font-size="13">days remaining until expiry</text>
+      <polyline fill="none" style="stroke:var(--c1)" stroke-width="2.5" points="70,63.3 172,80.1 273,97.6 375,118 477,142.2 545,162 612,187.8 646,206 666,222.2 680,250"/>
+      <circle cx="527.5" cy="156.7" r="5" style="fill:var(--accent)"/>
+      <text x="512" y="132" text-anchor="end" style="fill:var(--ink)" font-size="13">¼ of the life left,</text>
+      <text x="512" y="149" text-anchor="end" style="fill:var(--ink)" font-size="13">½ of the time value left</text>
+      <text x="662" y="200" text-anchor="end" style="fill:var(--muted)" font-size="13">the final weeks burn fastest</text>
+      <text x="86" y="52" style="fill:var(--muted)" font-size="13">ATM time value ≈ proportional to √(time remaining)</text>
+    </svg>
+    <figcaption><strong>Figure 9.3</strong> — Theta decay for an at-the-money option. Time value shrinks roughly with the square root of time remaining, so half the value is still intact with only a quarter of the life left — and it all evaporates in the final stretch.</figcaption>
+  </figure>
+  <p>Of the pricing inputs — stock price, strike, time, interest rate, volatility — only one is not directly observable: future <dfn class="term" tabindex="0" data-def="How much an asset's price fluctuates, usually quoted as the annualized standard deviation of returns.">volatility</dfn>. So volatility is the thing option markets actually trade. Quote an option price and I can invert the pricing model to recover the volatility that price implies — the <dfn class="term" tabindex="0" data-def="The volatility that, plugged into an option pricing model, reproduces the option's market price; the market's forecast of movement.">implied volatility</dfn> in the chain above. When traders say options are "expensive," they mean implied volatility is high relative to what they expect to be realized.</p>
+  <p>The model everyone inverts is <dfn class="term" tabindex="0" data-def="The 1973 formula giving a fair option price from the stock price, strike, time, rate and volatility, assuming lognormal price moves.">Black-Scholes</dfn>. You do not need its derivation (that lives in <a href="#s18">Section 18 (Quant Finance)</a>); you need to know it exists, what goes in, and that it is trivially implementable.</p>
+  <details class="deep"><summary>Deep dive: Black-Scholes in ten lines</summary>
+    <div class="formula">
+      <div class="formula-main">C = S·N(d<sub>1</sub>) − K·e<sup>−rT</sup>·N(d<sub>2</sub>)</div>
+      <div class="formula-legend">C = call price · S = stock price · K = strike · r = risk-free rate · T = years to expiry · N = standard normal CDF</div>
+    </div>
+    <div class="formula">
+      <div class="formula-main">d<sub>1</sub> = <span class="frac"><span>ln(S ÷ K) + (r + σ²/2)·T</span><span>σ·√T</span></span>&nbsp;&nbsp;&nbsp;d<sub>2</sub> = d<sub>1</sub> − σ·√T</div>
+      <div class="formula-legend">σ = annualized volatility · put price via put-call parity: P = C − S + K·e<sup>−rT</sup></div>
+    </div>
+    <p>As a CS person you can ship this before lunch: <code>N(x) = 0.5 * (1 + erf(x / sqrt(2)))</code> using the error function in any math library, then the two formulas above — about ten lines of Python. Sanity check: <code>S=100, K=100, T=30/365, r=4%, σ=25%</code> gives C ≈ $3.02 and P ≈ $2.69, matching the option chain earlier. Implied volatility is the inverse problem: given a market price, root-find for σ (bisection or Newton's method — the vega is the derivative you need). Note what the buyer's edge must be: the formula assumes volatility; if you pay 25% implied and the stock only realizes 18%, you overpaid even if the model is perfect.</p>
+    <p>Black-Scholes also gives closed-form Greeks: the call delta is simply N(d<sub>1</sub>) — which is where the 0.79 / 0.53 / 0.27 column in the chain came from.</p>
+  </details>
+
+  <h3 id="s09-strategies">Strategies: composing hockey sticks</h3>
+  <p>Options are payoff Lego. Because each leg is a simple kinked function, you can compose positions whose expiry P&amp;L has almost any shape — and you should always look at that shape before trading. Three canonical compositions:</p>
+  <p>A <dfn class="term" tabindex="0" data-def="Owning the stock and selling a call against it: income now in exchange for capping the upside.">covered call</dfn> = own the stock + write a call. You collect the premium as income but surrender any gains above the strike. A <dfn class="term" tabindex="0" data-def="Owning the stock and buying a put on it: paying a premium to put a floor under losses.">protective put</dfn> = own the stock + buy a put: an insurance policy with the premium as the deductible-plus-premium cost and the strike as the floor. A <dfn class="term" tabindex="0" data-def="Buying a call and a put at the same strike and expiry: a bet on a big move in either direction.">straddle</dfn> = buy a call <em>and</em> a put at the same strike: you don't know direction, you're betting on <em>magnitude</em> — a volatility trade. And the mirror image of insurance is the <dfn class="term" tabindex="0" data-def="Selling a put while holding enough cash to buy the stock at the strike if assigned.">cash-secured put</dfn>: sell someone else downside protection and keep the premium if it isn't needed.</p>
+  <p>Build each one below. Watch the readouts, not just the line: breakeven, max gain, max loss are the three numbers that define a strategy.</p>
+
+  <div class="widget" id="s09-payoff">
+    <div class="widget-head">
+      <h4>Option payoff builder</h4>
+      <p>Pick a strategy, drag the strike and premium, and read the P&amp;L-at-expiry line against just holding the stock. Stock legs assume shares bought at $100; all figures are per share (×100 for one contract).</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Strategy
+          <select class="sel" id="s09-strat">
+            <option value="lc" selected>Long call</option>
+            <option value="lp">Long put</option>
+            <option value="cc">Covered call (stock @ $100 + short call)</option>
+            <option value="pp">Protective put (stock @ $100 + long put)</option>
+            <option value="st">Long straddle</option>
+            <option value="sp">Cash-secured short put</option>
+          </select>
+        </label>
+        <label class="ctl">Strike K <output class="ctl-val" id="s09-k1-val">$100</output>
+          <input type="range" id="s09-k1" min="80" max="120" step="1" value="100">
+        </label>
+        <label class="ctl">Premium (per leg) <output class="ctl-val" id="s09-prem-val">$5.00</output>
+          <input type="range" id="s09-prem" min="1" max="15" step="0.5" value="5">
+        </label>
+        <label class="ctl" id="s09-k2wrap">Put strike K<sub>2</sub> <output class="ctl-val" id="s09-k2-val">$100</output>
+          <input type="range" id="s09-k2" min="80" max="120" step="1" value="100">
+        </label>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">Breakeven(s)</span><span class="stat-value" id="s09-st-be">—</span></div>
+        <div class="stat"><span class="stat-label">Max gain</span><span class="stat-value" id="s09-st-gain">—</span></div>
+        <div class="stat"><span class="stat-label">Max loss</span><span class="stat-value" id="s09-st-loss">—</span></div>
+        <div class="stat"><span class="stat-label">Net premium</span><span class="stat-value" id="s09-st-prem">—</span></div>
+      </div>
+      <svg id="s09-payoff-svg" viewBox="0 0 720 340" role="img" aria-label="Interactive payoff-at-expiry chart for the selected option strategy versus holding the stock">
+        <line x1="60" y1="53" x2="690" y2="53" style="stroke:var(--grid)" stroke-width="1"/>
+        <line x1="60" y1="109" x2="690" y2="109" style="stroke:var(--grid)" stroke-width="1"/>
+        <line x1="60" y1="221" x2="690" y2="221" style="stroke:var(--grid)" stroke-width="1"/>
+        <line x1="60" y1="277" x2="690" y2="277" style="stroke:var(--grid)" stroke-width="1"/>
+        <line x1="217.5" y1="25" x2="217.5" y2="305" style="stroke:var(--grid)" stroke-width="1"/>
+        <line x1="375" y1="25" x2="375" y2="305" style="stroke:var(--grid)" stroke-width="1"/>
+        <line x1="532.5" y1="25" x2="532.5" y2="305" style="stroke:var(--grid)" stroke-width="1"/>
+        <line x1="60" y1="165" x2="690" y2="165" style="stroke:var(--axis)" stroke-width="1.5"/>
+        <line x1="60" y1="25" x2="60" y2="305" style="stroke:var(--axis)" stroke-width="1"/>
+        <line x1="60" y1="305" x2="690" y2="305" style="stroke:var(--axis)" stroke-width="1"/>
+        <line id="s09-kline" x1="375" y1="25" x2="375" y2="305" style="stroke:var(--accent)" stroke-width="1" stroke-dasharray="4 4" opacity="0.5"/>
+        <line id="s09-k2line" x1="375" y1="25" x2="375" y2="305" style="stroke:var(--accent)" stroke-width="1" stroke-dasharray="2 5" opacity="0.5" display="none"/>
+        <path id="s09-stockline" d="M60,258.3 L690,71.7" fill="none" style="stroke:var(--c2)" stroke-width="2" stroke-dasharray="6 5" opacity="0.85"/>
+        <path id="s09-payoff-line" d="" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>
+        <circle id="s09-be1" cx="0" cy="165" r="5" style="fill:var(--accent)" display="none"/>
+        <circle id="s09-be2" cx="0" cy="165" r="5" style="fill:var(--accent)" display="none"/>
+        <text x="60" y="324" text-anchor="middle" style="fill:var(--muted)" font-size="13">$50</text>
+        <text x="217.5" y="324" text-anchor="middle" style="fill:var(--muted)" font-size="13">$75</text>
+        <text x="375" y="324" text-anchor="middle" style="fill:var(--muted)" font-size="13">$100</text>
+        <text x="532.5" y="324" text-anchor="middle" style="fill:var(--muted)" font-size="13">$125</text>
+        <text x="690" y="324" text-anchor="middle" style="fill:var(--muted)" font-size="13">$150</text>
+        <text x="375" y="339" text-anchor="middle" style="fill:var(--muted)" font-size="12">stock price at expiry</text>
+        <text x="52" y="57" text-anchor="end" style="fill:var(--muted)" font-size="13">+60</text>
+        <text x="52" y="113" text-anchor="end" style="fill:var(--muted)" font-size="13">+30</text>
+        <text x="52" y="169" text-anchor="end" style="fill:var(--muted)" font-size="13">0</text>
+        <text x="52" y="225" text-anchor="end" style="fill:var(--muted)" font-size="13">−30</text>
+        <text x="52" y="281" text-anchor="end" style="fill:var(--muted)" font-size="13">−60</text>
+      </svg>
+      <p style="color:var(--muted)"><span style="color:var(--c1)">━ strategy P&amp;L at expiry</span> &nbsp;·&nbsp; <span style="color:var(--c2)">╌ stock only (bought at $100)</span> &nbsp;·&nbsp; <span style="color:var(--accent)">● breakeven</span>. For the straddle, equal strikes is the classic straddle; drag the put strike K<sub>2</sub> below the call strike to build a strangle.</p>
+    </div>
+  </div>
+  <script>
+(function () {
+  var root = document.getElementById('s09-payoff');
+  if (!root) return;
+  var sel = root.querySelector('#s09-strat');
+  var kIn = root.querySelector('#s09-k1');
+  var pIn = root.querySelector('#s09-prem');
+  var k2In = root.querySelector('#s09-k2');
+  var k2Wrap = root.querySelector('#s09-k2wrap');
+  var kVal = root.querySelector('#s09-k1-val');
+  var pVal = root.querySelector('#s09-prem-val');
+  var k2Val = root.querySelector('#s09-k2-val');
+  var line = root.querySelector('#s09-payoff-line');
+  var kLine = root.querySelector('#s09-kline');
+  var k2Line = root.querySelector('#s09-k2line');
+  var beDots = [root.querySelector('#s09-be1'), root.querySelector('#s09-be2')];
+  var stBE = root.querySelector('#s09-st-be');
+  var stGain = root.querySelector('#s09-st-gain');
+  var stLoss = root.querySelector('#s09-st-loss');
+  var stPrem = root.querySelector('#s09-st-prem');
+  var X0 = 60, X1 = 690, Y0 = 25, Y1 = 305;
+
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, isFinite(v) ? v : lo)); }
+  function sx(S) { return X0 + (S - 50) / 100 * (X1 - X0); }
+  function sy(v) { var c = clamp(v, -75, 75); return Y1 - (c + 75) / 150 * (Y1 - Y0); }
+  function usd(v) {
+    return (v < 0 ? '−$' : '$') + Math.abs(v).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
+  function payoff(S, strat, K, p, K2) {
+    if (strat === 'lc') return Math.max(S - K, 0) - p;
+    if (strat === 'lp') return Math.max(K - S, 0) - p;
+    if (strat === 'cc') return (S - 100) + p - Math.max(S - K, 0);
+    if (strat === 'pp') return (S - 100) - p + Math.max(K - S, 0);
+    if (strat === 'st') return Math.max(S - K, 0) + Math.max(K2 - S, 0) - 2 * p;
+    return p - Math.max(K - S, 0); /* sp: cash-secured short put */
+  }
+
+  function update() {
+    var strat = sel.value;
+    var K = clamp(parseFloat(kIn.value), 80, 120);
+    var p = clamp(parseFloat(pIn.value), 1, 15);
+    var K2 = clamp(parseFloat(k2In.value), 80, 120);
+    kVal.textContent = '$' + K;
+    pVal.textContent = usd(p);
+    k2Val.textContent = '$' + K2;
+    var isSt = strat === 'st';
+    k2Wrap.style.display = isSt ? '' : 'none';
+    k2Line.setAttribute('display', isSt ? '' : 'none');
+    kLine.setAttribute('x1', sx(K)); kLine.setAttribute('x2', sx(K));
+    k2Line.setAttribute('x1', sx(K2)); k2Line.setAttribute('x2', sx(K2));
+
+    var d = '', S;
+    for (S = 50; S <= 150; S++) {
+      d += (S === 50 ? 'M' : 'L') + sx(S).toFixed(1) + ',' + sy(payoff(S, strat, K, p, K2)).toFixed(1);
+    }
+    line.setAttribute('d', d);
+
+    var bes = [], maxV = -Infinity, minV = Infinity;
+    var prev = payoff(0, strat, K, p, K2), cur, s, t;
+    maxV = Math.max(maxV, prev); minV = Math.min(minV, prev);
+    for (s = 0.25; s <= 300.0001; s += 0.25) {
+      cur = payoff(s, strat, K, p, K2);
+      maxV = Math.max(maxV, cur); minV = Math.min(minV, cur);
+      if ((prev < -1e-9 && cur > 1e-9) || (prev > 1e-9 && cur < -1e-9)) {
+        t = prev / (prev - cur);
+        bes.push(s - 0.25 + 0.25 * t);
+      } else if (Math.abs(cur) <= 1e-9 && Math.abs(prev) > 1e-9) {
+        bes.push(s);
+      }
+      prev = cur;
+    }
+    var slopeUp = payoff(400, strat, K, p, K2) - payoff(399, strat, K, p, K2) > 1e-6;
+
+    stBE.textContent = bes.length ? bes.map(function (b) { return usd(b); }).join(' and ') : 'none (never profitable)';
+    if (slopeUp) {
+      stGain.textContent = 'Unlimited';
+      stGain.style.color = 'var(--up)';
+    } else {
+      stGain.textContent = usd(Math.max(maxV, 0)) + (maxV < 0 ? ' (best case still a loss of ' + usd(Math.abs(maxV)) + ')' : '');
+      stGain.style.color = maxV > 0 ? 'var(--up)' : 'var(--down)';
+    }
+    stLoss.textContent = minV < 0 ? usd(Math.abs(minV)) : '$0.00';
+    stLoss.style.color = minV < 0 ? 'var(--down)' : 'var(--ink)';
+    var paid = (strat === 'cc' || strat === 'sp') ? -p : (isSt ? 2 * p : p);
+    stPrem.textContent = paid >= 0 ? usd(paid) + ' paid' : usd(Math.abs(paid)) + ' received';
+
+    var i, cxv;
+    for (i = 0; i < 2; i++) {
+      if (i < bes.length && bes[i] >= 50 && bes[i] <= 150) {
+        cxv = sx(bes[i]);
+        beDots[i].setAttribute('cx', cxv.toFixed(1));
+        beDots[i].setAttribute('display', '');
+      } else {
+        beDots[i].setAttribute('display', 'none');
+      }
+    }
+  }
+
+  sel.addEventListener('change', function () {
+    if (sel.value === 'st') { k2In.value = kIn.value; }
+    update();
+  });
+  kIn.addEventListener('input', update);
+  pIn.addEventListener('input', update);
+  k2In.addEventListener('input', update);
+  update();
+})();
+  </script>
+
+  <p>Play with the covered call at strike 80: there are premiums at which the position can <em>never</em> break even — you sold away all the upside for less than the downside you kept. The builder also makes the straddle's problem obvious: you pay two premiums, so the stock must move a lot in <em>either</em> direction before you earn a cent. If everyone expects a big earnings move, that expectation is already in the premiums via implied volatility — you profit only if the move beats the market's forecast.</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall: selling options is not free money</p><p>Short option strategies win small amounts very often — the writer keeps the premium in most months — which makes the P&amp;L history look like a beautiful, smooth, upward line. Right up until it isn't. The distribution is extremely skewed: frequent small gains, rare catastrophic losses. Traders call it picking up pennies in front of a steamroller. Funds that sold volatility this way (see the February 2018 "Volmageddon" episode, and <a href="#s17">Section 17</a> for the general pattern) lost years of gains in days. If a strategy's backtest never loses, ask what tail it is short — your statistics background is exactly the edge here: always look at the full distribution, not the mean.</p></div>
+
+  <h3 id="s09-swaps">Swaps: trading cash-flow streams</h3>
+  <p>A <dfn class="term" tabindex="0" data-def="An agreement to exchange two streams of future cash flows, most commonly fixed interest payments for floating ones.">swap</dfn> is an agreement to exchange one stream of cash flows for another. The workhorse is the <dfn class="term" tabindex="0" data-def="A swap exchanging fixed-rate interest payments for floating-rate payments on the same notional amount.">interest-rate swap</dfn>: one side pays a fixed rate, the other pays a floating rate that resets with the market — today usually <dfn class="term" tabindex="0" data-def="Secured Overnight Financing Rate: the benchmark US floating interest rate that replaced LIBOR.">SOFR</dfn>, the benchmark that replaced LIBOR. Both legs are computed on a <dfn class="term" tabindex="0" data-def="The reference amount a swap's payments are calculated from; it is never actually exchanged.">notional</dfn> amount that is never actually exchanged — it is just the number the percentages multiply. Headlines about "hundreds of trillions in derivatives outstanding" are quoting notionals; the actual net cash at risk is a tiny fraction of that.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example: fixing a floating loan</p><p>TechCo borrowed $100M from its bank at SOFR + 1.25%, floating. The CFO can't budget around a rate that resets constantly, so TechCo enters a swap: pay 4.00% fixed, receive SOFR, on a $100M notional. Only the <em>net</em> moves each period:</p>
+  <p>Year 1, SOFR averages 3.50%: TechCo owes 4.00% and is owed 3.50%, so it pays the dealer the net 0.50% = $500,000. Year 2, SOFR averages 4.50%: now TechCo <em>receives</em> the net 0.50% = $500,000. Combine the swap with the loan and the SOFR terms cancel: TechCo's all-in cost is 4.00% + 1.25% = 5.25% fixed, forever, no matter what the <a href="#s04">Fed</a> does. Same trick, reversed, is how banks and insurers manage the rate risk in their <a href="#s08">bond portfolios</a>.</p></div>
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="Diagram of an interest rate swap: TechCo pays fixed 4 percent to a swap dealer, receives SOFR, and pays SOFR plus 1.25 percent to its bank lender">
+      <defs>
+        <marker id="s09-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" style="fill:var(--axis)"/>
+        </marker>
+      </defs>
+      <text x="30" y="34" style="fill:var(--muted)" font-size="13">Notional: $100M — never exchanged, only referenced</text>
+      <rect x="60" y="90" width="200" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="160" y="115" text-anchor="middle" style="fill:var(--ink)" font-size="15" font-weight="700">TechCo</text>
+      <text x="160" y="136" text-anchor="middle" style="fill:var(--muted)" font-size="12">borrower, wants fixed</text>
+      <rect x="460" y="90" width="200" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="560" y="115" text-anchor="middle" style="fill:var(--ink)" font-size="15" font-weight="700">Swap dealer</text>
+      <text x="560" y="136" text-anchor="middle" style="fill:var(--muted)" font-size="12">bank trading desk</text>
+      <line x1="270" y1="103" x2="450" y2="103" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s09-arrow)"/>
+      <text x="360" y="92" text-anchor="middle" style="fill:var(--ink)" font-size="13">① fixed 4.00% = $4.0M/yr</text>
+      <line x1="450" y1="137" x2="270" y2="137" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s09-arrow)"/>
+      <text x="360" y="158" text-anchor="middle" style="fill:var(--ink)" font-size="13">② SOFR (floating)</text>
+      <rect x="60" y="250" width="200" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="160" y="275" text-anchor="middle" style="fill:var(--ink)" font-size="15" font-weight="700">Bank lender</text>
+      <text x="160" y="296" text-anchor="middle" style="fill:var(--muted)" font-size="12">holds the $100M loan</text>
+      <line x1="160" y1="150" x2="160" y2="240" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s09-arrow)"/>
+      <text x="175" y="200" style="fill:var(--ink)" font-size="13">③ SOFR + 1.25% on the loan</text>
+      <rect x="420" y="230" width="270" height="80" rx="8" style="fill:var(--accent-soft);stroke:var(--border)"/>
+      <text x="555" y="262" text-anchor="middle" style="fill:var(--ink)" font-size="14" font-weight="700">Net cost: 4.00% + 1.25% = 5.25% fixed</text>
+      <text x="555" y="288" text-anchor="middle" style="fill:var(--muted)" font-size="13">the SOFR legs (② and ③) cancel out</text>
+    </svg>
+    <figcaption><strong>Figure 9.4</strong> — An interest-rate swap converts TechCo's floating loan into synthetic fixed-rate debt. The floating payments it receives on the swap (②) exactly offset the floating payments on its loan (③), leaving only fixed flows.</figcaption>
+  </figure>
+  <p>The other swap you must know is the <dfn class="term" tabindex="0" data-def="A contract where the protection buyer pays a periodic fee and the seller pays out if a specified borrower defaults on its debt.">credit default swap</dfn> (CDS): insurance on a bond. The protection buyer pays a periodic fee (say 1% of notional per year); if the referenced borrower defaults, the seller covers the loss. Useful in moderation — a lender can hedge a loan without ending the relationship, and CDS spreads are a real-time market vote on <a href="#s08">credit risk</a>, often faster than rating agencies.</p>
+  <div class="callout co-real"><p class="co-label">Real world: CDS and 2008</p><p>Two features made CDS the star of the 2008 crisis. You can buy protection on bonds you don't own — like insuring your neighbor's house — so total CDS notional grew to a multiple of the underlying debt. And because CDS were then private, uncleared contracts with little margin, sellers could write essentially unlimited protection. AIG's financial products unit sold protection on mortgage securities against which it held almost no reserves; when housing cracked, collateral calls arrived it could not meet, and the US government committed roughly $182 billion so AIG's failure wouldn't cascade through every counterparty. Post-crisis reforms pushed standard swaps into clearinghouses with daily margin — futures-style plumbing, precisely because that plumbing worked. The full story is in <a href="#s17">Section 17 (Crises)</a>.</p></div>
+  <div class="callout co-you"><p class="co-label">Your edge</p><p>A swap is just two projected cash-flow vectors netted against each other, and its fair value is the difference of their present values — discounting you already know from <a href="#s01">Section 1</a>. Swap desks literally hire people to build and maintain those discount curves in code. If you can write clean numerical Python, this corner of finance is one of the most natural entry points (see <a href="#s20">Section 20</a>).</p></div>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. A farmer shorts wheat futures at $6.00 to hedge her harvest, and by delivery wheat trades at $6.80. Which statement is right?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">She lost money overall, because her futures position lost $0.80 per bushel</button>
+        <button class="quiz-opt" data-correct>Her futures loss is offset by selling her crop at the higher spot price — she still nets about $6.00 per bushel</button>
+        <button class="quiz-opt">The clearinghouse absorbs her futures loss, since hedgers are exempt from margin</button>
+      </div>
+      <p class="quiz-explain">The hedge locks the price in both directions: the $0.80 futures loss is offset by an extra $0.80 on the physical crop. She gave up the upside — that is the cost of certainty, not a mistake. And no one is exempt from margin.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. You are long one crude oil futures contract (1,000 barrels) bought at $80. Today's settlement price is $78. What happens to your margin account today?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Nothing — gains and losses only settle when you close the position</button>
+        <button class="quiz-opt">$2,000 is debited only if your balance falls below initial margin</button>
+        <button class="quiz-opt" data-correct>$2,000 is debited today via daily mark-to-market, regardless of anything else</button>
+        <button class="quiz-opt">$2,000 is credited, because lower prices help futures longs</button>
+      </div>
+      <p class="quiz-explain">Mark-to-market is unconditional: a $2 drop × 1,000 barrels = $2,000 leaves your account this evening. Whether you then get a margin call depends on where that leaves your balance relative to maintenance margin.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. You paid $6 for a call with a $100 strike. At expiry the stock is at $104. Which is true?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">The option expired worthless because the stock never reached $106</button>
+        <button class="quiz-opt" data-correct>The call is in the money and worth $4, but you still lost $2 per share overall</button>
+        <button class="quiz-opt">You made $4 per share, since the option finished in the money</button>
+      </div>
+      <p class="quiz-explain">Moneyness and profit are different questions. Intrinsic value at expiry is max(104 − 100, 0) = $4, so you exercise (worthless it is not) — but you paid $6 for it, so P&amp;L = 4 − 6 = −$2. Breakeven was $106.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. A strategy of selling out-of-the-money puts has been profitable 34 of the last 36 months. What is the most statistically sound reaction?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">The strategy has a proven edge; a 94% hit rate is strong evidence of skill</button>
+        <button class="quiz-opt">Selling puts is safe as long as you only sell options that are far out of the money</button>
+        <button class="quiz-opt" data-correct>Check the tail: short options earn frequent small premiums against rare, very large losses, so the hit rate says little about expected value</button>
+      </div>
+      <p class="quiz-explain">Short-option P&amp;L is heavily skewed — the mean of the distribution can be negative even with a 94% win rate if the rare losses are large enough. "Picking up pennies in front of a steamroller" is a statement about tails, and hit rate ignores tails.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. A firm pays 3% fixed and receives SOFR on a $50M notional swap. SOFR averages 2% this year. What cash actually moves?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">The firm pays $1.5M and receives $1.0M in two separate payments, plus the $50M notional at maturity</button>
+        <button class="quiz-opt" data-correct>The firm pays the net difference: 1% of $50M = $500,000; the notional never moves</button>
+        <button class="quiz-opt">The firm receives $500,000, because falling rates favor the fixed payer</button>
+      </div>
+      <p class="quiz-explain">Swaps settle net: 3% owed minus 2% received = 1% of $50M = $500,000 paid by the firm. The notional is only a reference number. And paying fixed while receiving floating <em>hurts</em> when floating rates are low — the fixed payer wins when rates rise.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>A derivative's value is a formula evaluated against an underlying price. It relocates risk from hedgers to speculators — both roles are essential — and it is zero-sum before costs.</li>
+      <li>Futures lock in a price today via a standardized, clearinghouse-guaranteed contract; daily mark-to-market and margin calls mean even a "correct" hedge can demand cash along the way.</li>
+      <li>Options are asymmetric: buyers pay a premium for capped-loss, open-ended-gain payoffs; writers accept the mirror image. Value = intrinsic + time value, and the deadline is half the bet.</li>
+      <li>The Greeks are just partial derivatives: delta is the slope versus the stock, theta the daily time decay (which accelerates near expiry), vega the sensitivity to volatility — the one input the market actually trades, via implied volatility and Black-Scholes.</li>
+      <li>Strategies compose kinked payoffs: covered calls trade upside for income, protective puts buy a floor, straddles bet on magnitude rather than direction. Judge every strategy by breakeven, max gain, max loss.</li>
+      <li>Selling options harvests frequent small gains against rare huge losses — a skewed distribution that a win rate cannot summarize. Most retail option buyers lose money; these are professional hedging tools first.</li>
+      <li>Swaps exchange cash-flow streams on a notional that never moves; an interest-rate swap converts floating debt to fixed. CDS are default insurance whose unmargined excesses helped detonate 2008 — and why swaps now clear like futures.</li>
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,398 @@
+<section class="lesson" id="s15" data-num="15" data-title="Portfolio Theory: Diversification, CAPM and Factors">
+  <p class="eyebrow">Part IV · Investing &amp; Risk</p>
+  <h2>15. Portfolio Theory: Diversification, CAPM and Factors</h2>
+  <p class="lede">Individual assets are noisy; portfolios are engineered systems whose risk you can shape with covariance math. This section gives you the core machinery — diversification, the efficient frontier, CAPM, and factor models — and it is the most "data science in disguise" material in the whole book.</p>
+
+  <h3 id="s15-risk-return">Measuring risk and return: mean and standard deviation</h3>
+  <p>Portfolio theory starts by compressing an asset's future into two numbers. The <dfn class="term" tabindex="0" data-def="The probability-weighted average of an asset's possible returns; the mean of the return distribution.">expected return</dfn> E[r] is the mean of the return distribution — what you'd earn on average across many repetitions. <dfn class="term" tabindex="0" data-def="The standard deviation of an asset's returns; the standard finance shorthand for risk.">Volatility</dfn> (σ) is the standard deviation of returns — how widely outcomes scatter around that mean. If a stock has E[r] = 8% and σ = 18%, a typical year lands somewhere in the −10% to +26% band, and roughly one year in three lands outside it.</p>
+  <p>Convention: both numbers are <dfn class="term" tabindex="0" data-def="Rescaled to a one-year horizon so assets measured at different frequencies can be compared.">annualized</dfn> so everything is comparable. Means scale linearly with time, but standard deviations scale with the <em>square root</em> of time, because variances — not standard deviations — add across independent periods. A stock with 1.2% daily volatility has annualized volatility of about 1.2% × √252 ≈ 19% (252 is the number of US trading days in a year). You already know this rule: it's the same √n that governs the standard error of a sample mean.</p>
+  <div class="formula">
+    <div class="formula-main">σ<sub>annual</sub> = σ<sub>daily</sub> × √252&nbsp;&nbsp;·&nbsp;&nbsp;E[r]<sub>annual</sub> ≈ E[r]<sub>daily</sub> × 252</div>
+    <div class="formula-legend">variance adds over independent periods, so σ grows with √time — the same √n as a standard error</div>
+  </div>
+  <p>Why does everyone use standard deviation rather than, say, drawdowns or tail quantiles? Convenience. If returns were normally distributed, mean and σ would describe the whole distribution, and everything in this section becomes clean linear algebra. That assumption is good enough to build powerful tools — and quantifiably wrong in the tails.</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall: the normal assumption</p><p>Real markets have <dfn class="term" tabindex="0" data-def="More extreme outcomes than a normal distribution predicts; large moves happen far more often than the bell curve says.">fat tails</dfn>. Under a normal distribution with σ = 1% daily, a −7% day is a 7-sigma event that should happen roughly never in the life of the universe; the S&amp;P 500 has had many. Treat everything in this section as a first-order model that works well in the middle of the distribution. <a href="#s16">Section 16 (Risk Management)</a> deals honestly with the tails.</p></div>
+
+  <h3 id="s15-diversification">Diversification: the only free lunch</h3>
+  <p>Here is the one result in finance that gives you something for nothing. Combine two assets and the portfolio's expected return is just the weighted average — no surprise. But the portfolio's <em>risk</em> is generally <em>less</em> than the weighted average of the two risks, and the discount is controlled entirely by <dfn class="term" tabindex="0" data-def="A number between -1 and +1 measuring how two return series move together; the normalized covariance.">correlation</dfn> (ρ). For a two-asset portfolio with weight w in asset A:</p>
+  <div class="formula">
+    <div class="formula-main">σ<sub>p</sub><sup>2</sup> = w<sup>2</sup>σ<sub>A</sub><sup>2</sup> + (1−w)<sup>2</sup>σ<sub>B</sub><sup>2</sup> + 2w(1−w)ρσ<sub>A</sub>σ<sub>B</sub></div>
+    <div class="formula-legend">σ<sub>p</sub> = portfolio volatility · w = weight in A · ρ = correlation between A and B · the last term is 2w(1−w) × <dfn class="term" tabindex="0" data-def="The expected co-movement of two return series: Cov(A,B) = ρ × σA × σB.">covariance</dfn>(A, B)</div>
+  </div>
+  <p>Read the three terms as a variance decomposition: A's own variance, B's own variance, and a cross term that ρ can shrink or even flip negative. At ρ = +1 the formula collapses to (wσ<sub>A</sub> + (1−w)σ<sub>B</sub>)<sup>2</sup> — a perfect square, risk is the plain weighted average, diversification does nothing. As ρ falls, the cross term shrinks and portfolio risk drops <em>while expected return is unchanged</em>. At ρ = −1 you can pick w = σ<sub>B</sub> ÷ (σ<sub>A</sub> + σ<sub>B</sub>) and drive risk to exactly zero.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example</p><p>Stocks: E[r] = 8%, σ = 18%. Bonds: E[r] = 3.5%, σ = 6%. Correlation ρ = 0.1. Put 60% in stocks. Expected return: 0.6 × 8 + 0.4 × 3.5 = <strong>6.2%</strong>. Variance: 0.36 × 324 + 0.16 × 36 + 2 × 0.6 × 0.4 × 0.1 × 18 × 6 = 116.64 + 5.76 + 5.18 = 127.58 (in %²), so σ<sub>p</sub> = <strong>11.3%</strong>. The naive weighted average of volatilities is 0.6 × 18 + 0.4 × 6 = 13.2% — correlation just handed you 1.9 points of risk reduction for free.</p></div>
+  <div class="callout co-analogy"><p class="co-label">Analogy: model ensembling</p><p>This is exactly why ensembles beat single models. Average k models with uncorrelated errors and the error variance drops by 1/k; if the errors are correlated, the benefit caps out at the shared component. Diversification is ensembling for money: idiosyncratic noise averages away, the correlated part survives.</p></div>
+  <p>That surviving part has a name. <dfn class="term" tabindex="0" data-def="Risk shared across the whole market — recessions, rate shocks, crises — that diversification cannot remove.">Systematic risk</dfn> is the market-wide component: recessions, rate shocks, pandemics hit everything at once. <dfn class="term" tabindex="0" data-def="Risk specific to one company — a failed product, a fraud, a factory fire — that washes out in a diversified portfolio.">Idiosyncratic risk</dfn> is company-specific: a botched product launch, an accounting scandal. Hold N stocks in equal weights and the portfolio variance tends toward σ²(1/N + (1 − 1/N)ρ̄), where ρ̄ is the average pairwise correlation. The 1/N term — the idiosyncratic part — dies fast; the ρ̄σ² floor never moves.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 320" role="img" aria-label="Curve showing portfolio volatility falling steeply as holdings rise from 1 to about 20 stocks, then flattening toward a systematic-risk floor near 15 percent that diversification cannot remove">
+      <line x1="60" y1="270" x2="690" y2="270" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="60" y1="30" x2="60" y2="270" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="60" y1="45" x2="690" y2="45" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="60" y1="120" x2="690" y2="120" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="60" y1="195" x2="690" y2="195" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="52" y="49" text-anchor="end" font-size="13" style="fill:var(--muted)">30%</text>
+      <text x="52" y="124" text-anchor="end" font-size="13" style="fill:var(--muted)">20%</text>
+      <text x="52" y="199" text-anchor="end" font-size="13" style="fill:var(--muted)">10%</text>
+      <text x="52" y="274" text-anchor="end" font-size="13" style="fill:var(--muted)">0%</text>
+      <text x="72" y="288" text-anchor="middle" font-size="13" style="fill:var(--muted)">1</text>
+      <text x="184" y="288" text-anchor="middle" font-size="13" style="fill:var(--muted)">10</text>
+      <text x="308" y="288" text-anchor="middle" font-size="13" style="fill:var(--muted)">20</text>
+      <text x="432" y="288" text-anchor="middle" font-size="13" style="fill:var(--muted)">30</text>
+      <text x="556" y="288" text-anchor="middle" font-size="13" style="fill:var(--muted)">40</text>
+      <text x="680" y="288" text-anchor="middle" font-size="13" style="fill:var(--muted)">50</text>
+      <text x="375" y="312" text-anchor="middle" font-size="14" style="fill:var(--muted)">number of holdings (equal-weighted)</text>
+      <text x="64" y="22" font-size="14" style="fill:var(--muted)">annualized portfolio volatility</text>
+      <line x1="60" y1="157.5" x2="690" y2="157.5" style="stroke:var(--axis)" stroke-width="1.5" stroke-dasharray="6 5"/>
+      <path d="M72.4,45 L84.8,92.1 L97.2,110.9 L109.6,121.2 L122,127.7 L146.8,135.5 L184,141.7 L246,146.8 L308,149.4 L432,152 L556,153.4 L680,154.2" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>
+      <text x="230" y="72" font-size="14" style="fill:var(--ink)">idiosyncratic risk — averaged away</text>
+      <line x1="225" y1="78" x2="142" y2="136" style="stroke:var(--axis)" stroke-width="1"/>
+      <text x="90" y="186" font-size="14" style="fill:var(--ink)">systematic risk ≈ 15% — the floor no amount of diversification removes</text>
+      <text x="435" y="140" font-size="13" style="fill:var(--muted)">σ(N) = 30% × √(1/N + (1 − 1/N) × 0.25)</text>
+    </svg>
+    <figcaption><strong>Figure 15.1</strong> — With average pairwise correlation 0.25 and single-stock volatility 30%, going from 1 to 20 holdings cuts volatility from 30% to about 16%; the next thirty stocks buy you less than one more point. Most of the free lunch is eaten by the twentieth position.</figcaption>
+  </figure>
+  <p>That decay curve is the empirical answer to "how many stocks do I need?": 20–30 well-spread holdings capture most of the diversification benefit, which is why concentrated single-stock positions (say, all your net worth in your employer's <a href="#s07">equity</a>) carry risk the market never pays you for. That last clause is the punchline of this whole section, and CAPM will make it precise.</p>
+
+  <h3 id="s15-frontier">The efficient frontier</h3>
+  <p>Now flip from analyzing one mix to choosing among all of them. Sweep the weight w from 0 to 1 (and consider every combination when there are many assets) and plot each portfolio as a point in risk–return space: σ on the x-axis, E[r] on the y-axis. The cloud of achievable portfolios is the <dfn class="term" tabindex="0" data-def="The set of all risk-return combinations achievable by some portfolio of the available assets.">feasible set</dfn>; with many assets it looks like a bullet lying on its side.</p>
+  <p>Two landmarks matter. The leftmost tip of the bullet is the <dfn class="term" tabindex="0" data-def="The portfolio with the lowest possible volatility among all combinations of the available assets.">minimum-variance portfolio</dfn> — the lowest-risk mix that exists. And the upper edge of the bullet is the <dfn class="term" tabindex="0" data-def="The set of portfolios offering the highest expected return for each level of risk; no rational mean-variance investor holds anything below it.">efficient frontier</dfn>: for every level of risk, the portfolio with the highest expected return. Any point <em>inside</em> the bullet is dominated — some frontier portfolio offers more return at the same risk, or the same return at less risk. A rational mean-variance investor therefore lives on the frontier; the only remaining question is <em>where</em> on it, which is a matter of risk appetite.</p>
+  <p>A result that surprises everyone the first time: with the stock/bond numbers above, the minimum-variance mix is about 7% stocks, 93% bonds, with σ ≈ 5.8% — <em>less</em> than the 6% volatility of bonds alone. Adding a riskier asset lowered total risk, because low correlation lets stock wiggles partially offset bond wiggles. Risk is a property of the portfolio, not a sum over its parts. This is Harry Markowitz's 1952 insight, and it won a Nobel Prize. Play with it yourself:</p>
+
+  <div class="widget" id="s15-divlab">
+    <div class="widget-head">
+      <h4>Diversification lab: two assets, one frontier</h4>
+      <p>Drag the correlation toward −1 and watch the frontier bend left into a hook — at ρ = −1 a 25/75 mix has zero risk. Then sweep your weight along the curve and watch the Sharpe ratio.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Asset A (stock-like) E[r] <output class="ctl-val" id="s15-dl-era-out">8.0%</output><input type="range" id="s15-dl-era" min="4" max="12" step="0.5" value="8"></label>
+        <label class="ctl">Asset A volatility σ <output class="ctl-val" id="s15-dl-vola-out">18%</output><input type="range" id="s15-dl-vola" min="10" max="30" step="1" value="18"></label>
+        <label class="ctl">Asset B (bond-like) E[r] <output class="ctl-val" id="s15-dl-erb-out">3.5%</output><input type="range" id="s15-dl-erb" min="2" max="6" step="0.25" value="3.5"></label>
+      </div>
+      <div class="ctl-row">
+        <label class="ctl">Asset B volatility σ <output class="ctl-val" id="s15-dl-volb-out">6.0%</output><input type="range" id="s15-dl-volb" min="3" max="12" step="0.5" value="6"></label>
+        <label class="ctl">Correlation ρ <output class="ctl-val" id="s15-dl-rho-out">0.10</output><input type="range" id="s15-dl-rho" min="-1" max="1" step="0.05" value="0.1"></label>
+        <label class="ctl">Weight in A <output class="ctl-val" id="s15-dl-w-out">60%</output><input type="range" id="s15-dl-w" min="0" max="100" step="1" value="60"></label>
+      </div>
+      <svg id="s15-dl-svg" viewBox="0 0 720 400" role="img" aria-label="Interactive risk-return scatter: the curve of all two-asset mixes, the current portfolio, the minimum-variance point, and the capital allocation line from the risk-free rate">
+        <defs><clipPath id="s15-dl-clip"><rect x="60" y="20" width="620" height="335"/></clipPath></defs>
+        <line x1="60" y1="355" x2="680" y2="355" style="stroke:var(--axis)" stroke-width="1.5"/>
+        <line x1="60" y1="20" x2="60" y2="355" style="stroke:var(--axis)" stroke-width="1.5"/>
+        <line x1="215" y1="20" x2="215" y2="355" style="stroke:var(--grid)" stroke-width="1"/>
+        <line x1="370" y1="20" x2="370" y2="355" style="stroke:var(--grid)" stroke-width="1"/>
+        <line x1="525" y1="20" x2="525" y2="355" style="stroke:var(--grid)" stroke-width="1"/>
+        <line x1="60" y1="253.5" x2="680" y2="253.5" style="stroke:var(--grid)" stroke-width="1"/>
+        <line x1="60" y1="152" x2="680" y2="152" style="stroke:var(--grid)" stroke-width="1"/>
+        <line x1="60" y1="50.5" x2="680" y2="50.5" style="stroke:var(--grid)" stroke-width="1"/>
+        <text x="60" y="372" text-anchor="middle" font-size="13" style="fill:var(--muted)">0%</text>
+        <text x="215" y="372" text-anchor="middle" font-size="13" style="fill:var(--muted)">8%</text>
+        <text x="370" y="372" text-anchor="middle" font-size="13" style="fill:var(--muted)">16%</text>
+        <text x="525" y="372" text-anchor="middle" font-size="13" style="fill:var(--muted)">24%</text>
+        <text x="680" y="372" text-anchor="middle" font-size="13" style="fill:var(--muted)">32%</text>
+        <text x="370" y="392" text-anchor="middle" font-size="14" style="fill:var(--muted)">volatility σ (annualized)</text>
+        <text x="52" y="359" text-anchor="end" font-size="13" style="fill:var(--muted)">0%</text>
+        <text x="52" y="257" text-anchor="end" font-size="13" style="fill:var(--muted)">4%</text>
+        <text x="52" y="156" text-anchor="end" font-size="13" style="fill:var(--muted)">8%</text>
+        <text x="52" y="54" text-anchor="end" font-size="13" style="fill:var(--muted)">12%</text>
+        <text x="66" y="14" font-size="13" style="fill:var(--muted)">expected return</text>
+        <path id="s15-dl-cal" d="" fill="none" style="stroke:var(--accent)" stroke-width="2" stroke-dasharray="6 5" clip-path="url(#s15-dl-clip)"/>
+        <path id="s15-dl-curve" d="" fill="none" style="stroke:var(--c1)" stroke-width="2.5" clip-path="url(#s15-dl-clip)"/>
+        <circle id="s15-dl-rfpt" cx="60" cy="304.2" r="4.5" style="fill:var(--ink-2)"/>
+        <text x="72" y="318" font-size="13" style="fill:var(--muted)">risk-free 2%</text>
+        <circle id="s15-dl-pta" r="5" style="fill:var(--c2)"/>
+        <text id="s15-dl-lbla" font-size="13" font-weight="600" style="fill:var(--ink)">A</text>
+        <circle id="s15-dl-ptb" r="5" style="fill:var(--c3)"/>
+        <text id="s15-dl-lblb" font-size="13" font-weight="600" style="fill:var(--ink)">B</text>
+        <circle id="s15-dl-ptmv" r="5" style="fill:var(--c4)"/>
+        <text id="s15-dl-lblmv" text-anchor="middle" font-size="12" style="fill:var(--muted)">min-var</text>
+        <circle id="s15-dl-pt" r="7" style="fill:var(--accent)"/>
+        <text id="s15-dl-lbl" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">your mix</text>
+      </svg>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">Portfolio E[r]</span><span class="stat-value" id="s15-dl-out-er">—</span></div>
+        <div class="stat"><span class="stat-label">Portfolio σ</span><span class="stat-value" id="s15-dl-out-sig">—</span></div>
+        <div class="stat"><span class="stat-label">Sharpe ratio (rf = 2%)</span><span class="stat-value" id="s15-dl-out-sharpe">—</span></div>
+        <div class="stat"><span class="stat-label">Min-variance mix</span><span class="stat-value" id="s15-dl-out-mv">—</span></div>
+      </div>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s15-divlab');
+    if (!root) return;
+    var RF = 2, X_MAX = 32, Y_MAX = 13;
+    function $(id) { return root.querySelector('#' + id); }
+    var ins = { era: $('s15-dl-era'), vola: $('s15-dl-vola'), erb: $('s15-dl-erb'), volb: $('s15-dl-volb'), rho: $('s15-dl-rho'), w: $('s15-dl-w') };
+    function val(el) {
+      var v = parseFloat(el.value), mn = parseFloat(el.min), mx = parseFloat(el.max);
+      if (isNaN(v)) v = mn;
+      return Math.min(mx, Math.max(mn, v));
+    }
+    function px(sig) { return 60 + (sig / X_MAX) * 620; }
+    function py(er) { return 355 - (er / Y_MAX) * 330; }
+    function mix(w, p) {
+      var er = w * p.era + (1 - w) * p.erb;
+      var v = w * w * p.vola * p.vola + (1 - w) * (1 - w) * p.volb * p.volb + 2 * w * (1 - w) * p.rho * p.vola * p.volb;
+      return { er: er, sig: Math.sqrt(Math.max(v, 0)) };
+    }
+    function update() {
+      var p = { era: val(ins.era), vola: val(ins.vola), erb: val(ins.erb), volb: val(ins.volb), rho: val(ins.rho), w: val(ins.w) / 100 };
+      $('s15-dl-era-out').textContent = p.era.toFixed(1) + '%';
+      $('s15-dl-vola-out').textContent = p.vola.toFixed(0) + '%';
+      $('s15-dl-erb-out').textContent = p.erb.toFixed(2).replace(/0$/, '') + '%';
+      $('s15-dl-volb-out').textContent = p.volb.toFixed(1) + '%';
+      $('s15-dl-rho-out').textContent = p.rho.toFixed(2);
+      $('s15-dl-w-out').textContent = Math.round(p.w * 100) + '%';
+      var d = '';
+      for (var i = 0; i <= 50; i++) {
+        var m = mix(i / 50, p);
+        d += (i === 0 ? 'M' : 'L') + px(m.sig).toFixed(1) + ',' + py(m.er).toFixed(1);
+      }
+      $('s15-dl-curve').setAttribute('d', d);
+      var cur = mix(p.w, p);
+      var den = p.vola * p.vola + p.volb * p.volb - 2 * p.rho * p.vola * p.volb;
+      var wmv = Math.abs(den) < 1e-9 ? 0.5 : Math.min(1, Math.max(0, (p.volb * p.volb - p.rho * p.vola * p.volb) / den));
+      var mv = mix(wmv, p);
+      function place(cid, lid, m, dx, dy) {
+        $(cid).setAttribute('cx', px(m.sig).toFixed(1));
+        $(cid).setAttribute('cy', py(m.er).toFixed(1));
+        $(lid).setAttribute('x', (px(m.sig) + dx).toFixed(1));
+        $(lid).setAttribute('y', (py(m.er) + dy).toFixed(1));
+      }
+      place('s15-dl-pta', 's15-dl-lbla', mix(1, p), 10, 4);
+      place('s15-dl-ptb', 's15-dl-lblb', mix(0, p), 10, 4);
+      place('s15-dl-ptmv', 's15-dl-lblmv', mv, 0, 20);
+      place('s15-dl-pt', 's15-dl-lbl', cur, 0, -13);
+      $('s15-dl-out-er').textContent = cur.er.toFixed(2) + '%';
+      $('s15-dl-out-sig').textContent = cur.sig.toFixed(1) + '%';
+      $('s15-dl-out-mv').textContent = Math.round(wmv * 100) + '% A / ' + Math.round((1 - wmv) * 100) + '% B';
+      var cal = $('s15-dl-cal'), sh = $('s15-dl-out-sharpe');
+      if (cur.sig > 0.05) {
+        var slope = (cur.er - RF) / cur.sig;
+        sh.textContent = slope.toFixed(2);
+        sh.style.color = slope >= 0 ? 'var(--up)' : 'var(--down)';
+        cal.setAttribute('d', 'M' + px(0) + ',' + py(RF).toFixed(1) + 'L' + px(X_MAX) + ',' + py(RF + slope * X_MAX).toFixed(1));
+      } else {
+        sh.textContent = '—';
+        sh.style.color = '';
+        cal.setAttribute('d', '');
+      }
+    }
+    var k;
+    for (k in ins) { if (ins.hasOwnProperty(k)) { ins[k].addEventListener('input', update); } }
+    update();
+  })();
+  </script>
+
+  <h3 id="s15-cml">Adding a risk-free asset: the capital market line</h3>
+  <p>The frontier gets a dramatic upgrade the moment you add a <dfn class="term" tabindex="0" data-def="An asset with a known return and (approximately) zero volatility — in practice, short-term government bills.">risk-free asset</dfn> — think 3-month <a href="#s08">Treasury bills</a>, whose return r<sub>f</sub> is known in advance and whose volatility is essentially zero. Any blend of the risk-free asset with a risky portfolio P plots on a <em>straight line</em> from (0, r<sub>f</sub>) through P, because mixing with a zero-variance asset scales both the excess return and the risk linearly.</p>
+  <p>So which risky portfolio should you draw your line through? The one giving the steepest line — the line that just grazes the frontier. Its point of tangency is the <dfn class="term" tabindex="0" data-def="The risky portfolio with the highest Sharpe ratio; the point where the line from the risk-free rate touches the efficient frontier.">tangency portfolio</dfn>, and the line itself is the <dfn class="term" tabindex="0" data-def="The straight line from the risk-free rate through the tangency portfolio; the best achievable risk-return trade-off.">capital market line</dfn> (CML). The slope of any such line is the portfolio's <dfn class="term" tabindex="0" data-def="Excess return per unit of volatility: (E[r] minus rf) divided by sigma. The standard score for risk-adjusted performance.">Sharpe ratio</dfn>:</p>
+  <div class="formula">
+    <div class="formula-main">Sharpe = <span class="frac"><span>E[r<sub>p</sub>] − r<sub>f</sub></span><span>σ<sub>p</sub></span></span></div>
+    <div class="formula-legend">excess return per unit of risk — the slope of the line from r<sub>f</sub> through your portfolio; the tangency portfolio maximizes it</div>
+  </div>
+  <p>The punchline is called <em>two-fund separation</em>: every mean-variance investor should hold the <em>same</em> risky portfolio — the tangency portfolio — and adjust risk only by moving along the line. Conservative? Put 40% in the tangency portfolio, 60% in T-bills. Aggressive? Borrow at (near) the risk-free rate and put 130% in — that's <dfn class="term" tabindex="0" data-def="Investing borrowed money to amplify exposure; scales both expected excess return and volatility up proportionally.">leverage</dfn>, and it extends the CML past the tangency point. Risk appetite changes your <em>position on</em> the line, never the risky mix itself. In the widget above, the dashed line through your mix is exactly this line — maximizing its slope is the whole game.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 400" role="img" aria-label="Efficient frontier bullet with minimum-variance portfolio at its tip, capital market line from the risk-free rate tangent at portfolio M, and dominated individual assets inside the bullet">
+      <line x1="70" y1="340" x2="690" y2="340" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="70" y1="40" x2="70" y2="340" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="380" y="368" text-anchor="middle" font-size="14" style="fill:var(--muted)">volatility σ →</text>
+      <text x="76" y="30" font-size="14" style="fill:var(--muted)">expected return →</text>
+      <path d="M265.2,215 L276.7,240 L307.4,265 L351.6,290" fill="none" style="stroke:var(--c1)" stroke-width="2.5" stroke-dasharray="5 5"/>
+      <path d="M265.2,215 L276.7,190 L307.4,165 L351.6,140 L403.5,115 L460.4,90 L520.2,65" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>
+      <line x1="70" y1="265" x2="570" y2="40" style="stroke:var(--accent)" stroke-width="2.5"/>
+      <circle cx="70" cy="265" r="5" style="fill:var(--ink-2)"/>
+      <text x="80" y="292" font-size="14" style="fill:var(--ink)">r</text>
+      <text x="87" y="296" font-size="11" style="fill:var(--ink)">f</text>
+      <text x="95" y="292" font-size="14" style="fill:var(--muted)"> = risk-free rate</text>
+      <circle cx="265.2" cy="215" r="5.5" style="fill:var(--c4)"/>
+      <text x="277" y="228" font-size="14" style="fill:var(--ink)">minimum-variance portfolio</text>
+      <circle cx="412.8" cy="110.8" r="6.5" style="fill:var(--accent)"/>
+      <text x="427" y="107" font-size="14" font-weight="600" style="fill:var(--ink)">M — tangency portfolio</text>
+      <text x="195" y="196" font-size="14" font-weight="600" style="fill:var(--ink)">CML</text>
+      <text x="95" y="163" font-size="13" style="fill:var(--muted)">slope = Sharpe ratio of M</text>
+      <circle cx="430" cy="190" r="4" style="fill:var(--ink-2)" opacity="0.7"/>
+      <circle cx="390" cy="255" r="4" style="fill:var(--ink-2)" opacity="0.7"/>
+      <circle cx="470" cy="225" r="4" style="fill:var(--ink-2)" opacity="0.7"/>
+      <text x="455" y="272" font-size="13" style="fill:var(--muted)">individual assets — dominated</text>
+      <text x="365" y="300" font-size="13" style="fill:var(--muted)">inefficient lower branch</text>
+      <text x="500" y="92" font-size="13" style="fill:var(--muted)">efficient frontier</text>
+      <text x="575" y="45" font-size="13" style="fill:var(--muted)">→ leverage beyond M</text>
+    </svg>
+    <figcaption><strong>Figure 15.2</strong> — The efficient frontier is the upper edge of the feasible "bullet". Adding a risk-free asset replaces the curve with the capital market line: everyone holds tangency portfolio M and dials risk by lending (left of M) or borrowing (right of M).</figcaption>
+  </figure>
+
+  <h3 id="s15-capm">CAPM: beta, the security market line, and priced risk</h3>
+  <p>Two-fund separation has a radical implication. If everyone holds the same tangency portfolio, then in equilibrium that portfolio must be the whole market — every asset held in proportion to its market value. The <dfn class="term" tabindex="0" data-def="Capital Asset Pricing Model: in equilibrium an asset's expected excess return is proportional to its beta against the market.">CAPM</dfn> (Capital Asset Pricing Model, Sharpe 1964) follows: the only risk the market pays you for is an asset's contribution to <em>market</em> risk, measured by <dfn class="term" tabindex="0" data-def="The sensitivity of an asset's returns to market returns; the OLS slope of asset excess returns regressed on market excess returns.">beta</dfn> (β).</p>
+  <div class="callout co-you"><p class="co-label">Your edge: beta is just OLS</p><p>β is literally the slope coefficient from regressing the asset's excess returns on the market's excess returns: β = Cov(r<sub>i</sub>, r<sub>m</sub>) ÷ Var(r<sub>m</sub>). Concretely: if Cov(r<sub>i</sub>, r<sub>m</sub>) = 0.000486 on daily data and Var(r<sub>m</sub>) = 0.000324, then β = 1.5 — the stock moves 1.5% for a 1% market move, on average. The regression's R² tells you how much of the stock's variance is systematic; the residual variance is the idiosyncratic part that diversification kills. And the intercept has a famous name: <dfn class="term" tabindex="0" data-def="Return above what beta exposure explains; the intercept of the excess-return regression. Positive alpha is what active managers sell.">alpha</dfn>. When a fund manager claims alpha, they are claiming a positive regression intercept — always ask for the standard error.</p></div>
+  <div class="formula">
+    <div class="formula-main">E[r<sub>i</sub>] = r<sub>f</sub> + β<sub>i</sub> × ERP</div>
+    <div class="formula-legend">ERP = <dfn class="term" tabindex="0" data-def="Equity risk premium: the expected excess return of the whole stock market over the risk-free rate, historically around 4-6% per year.">equity risk premium</dfn> = E[r<sub>m</sub>] − r<sub>f</sub> · β<sub>i</sub> = Cov(r<sub>i</sub>, r<sub>m</sub>) ÷ Var(r<sub>m</sub>)</div>
+  </div>
+  <p>Worked example: with r<sub>f</sub> = 4%, ERP = 5% and β = 1.2, the model says E[r] = 4 + 1.2 × 5 = <strong>10%</strong>. Plotting E[r] against β gives the <dfn class="term" tabindex="0" data-def="The CAPM line in beta-return space: expected return equals rf plus beta times the equity risk premium.">security market line</dfn> (SML). An asset priced to return <em>more</em> than the line demands is undervalued (positive alpha — buyers should bid its price up); one below the line is overvalued. Note the distinction from the CML: the CML lives in σ-space and holds only for efficient portfolios; the SML lives in β-space and, under CAPM, holds for <em>every</em> asset — because only the systematic slice of risk is priced. Volatility you can diversify away earns you nothing.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 380" role="img" aria-label="Security market line from the risk-free rate of 4 percent, with the market portfolio at beta one, an undervalued asset plotted above the line and an overvalued asset below it">
+      <line x1="70" y1="320" x2="690" y2="320" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="70" y1="30" x2="70" y2="320" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="380" y="366" text-anchor="middle" font-size="14" style="fill:var(--muted)">beta β →</text>
+      <text x="76" y="22" font-size="14" style="fill:var(--muted)">expected return →</text>
+      <line x1="360" y1="320" x2="360" y2="314" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="360" y="340" text-anchor="middle" font-size="13" style="fill:var(--muted)">β = 1</text>
+      <line x1="650" y1="320" x2="650" y2="314" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="650" y="340" text-anchor="middle" font-size="13" style="fill:var(--muted)">β = 2</text>
+      <line x1="70" y1="240" x2="650" y2="40" style="stroke:var(--accent)" stroke-width="2.5"/>
+      <circle cx="70" cy="240" r="5" style="fill:var(--ink-2)"/>
+      <text x="80" y="264" font-size="14" style="fill:var(--ink)">r</text>
+      <text x="87" y="268" font-size="11" style="fill:var(--ink)">f</text>
+      <text x="94" y="264" font-size="14" style="fill:var(--muted)"> = 4%</text>
+      <text x="95" y="128" font-size="14" font-weight="600" style="fill:var(--ink)">security market line</text>
+      <text x="95" y="148" font-size="13" style="fill:var(--muted)">E[r] = 4% + β × 5%</text>
+      <circle cx="360" cy="140" r="6" style="fill:var(--c1)"/>
+      <text x="372" y="158" font-size="13" style="fill:var(--ink)">market (β = 1, E[r] = 9%)</text>
+      <circle cx="302" cy="100" r="6" style="fill:var(--up)"/>
+      <line x1="302" y1="108" x2="302" y2="152" style="stroke:var(--up)" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <text x="150" y="80" font-size="13" style="fill:var(--ink)">undervalued: earns 11%, needs 8% (α = +3%)</text>
+      <circle cx="534" cy="140" r="6" style="fill:var(--down)"/>
+      <line x1="534" y1="132" x2="534" y2="84" style="stroke:var(--down)" stroke-width="1.5" stroke-dasharray="3 3"/>
+      <text x="470" y="170" font-size="13" style="fill:var(--ink)">overvalued: earns 9%, needs 12% (α = −3%)</text>
+    </svg>
+    <figcaption><strong>Figure 15.3</strong> — The security market line prices every asset by its beta. Assets above the line offer more return than their systematic risk requires (positive alpha); assets below it offer less. In CAPM equilibrium, trading pressure pushes both back onto the line.</figcaption>
+  </figure>
+  <p>How does CAPM hold up empirically? Its core qualitative claim — diversifiable risk is not rewarded, co-movement with the market is what's priced — has aged well. Its quantitative claims have not: measured over decades, the relationship between beta and average return is flatter than the model predicts (low-beta stocks do too well, high-beta stocks too poorly), and beta alone leaves large, persistent return differences unexplained. Yet CAPM remains everywhere in practice because it is simple and disciplined: it is the standard engine for the cost of equity inside <a href="#s13">Section 13's</a> DCF and WACC machinery, and beta is still the default first coordinate of any risk model.</p>
+
+  <h3 id="s15-factors">Factors: return sources beyond beta</h3>
+  <p>Those "large, persistent return differences" got names. A <dfn class="term" tabindex="0" data-def="A measurable characteristic of assets that is systematically associated with differences in average returns, e.g. value or momentum.">factor</dfn> is a characteristic that sorts assets into groups with reliably different average returns. Researchers build them the way you build features: compute a signal per stock, rank the universe, go long the top slice and short the bottom, and measure the spread. The canonical set:</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Factor</th><th>Signal (the "feature")</th><th>Classic finding</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Value</strong></td><td>Price relative to fundamentals (low P/B, P/E — see <a href="#s12">Section 12</a>)</td><td>Cheap stocks have outperformed expensive ones long-run</td></tr>
+      <tr><td><strong>Size</strong></td><td>Market capitalization</td><td>Small caps have outperformed large caps (weakest premium)</td></tr>
+      <tr><td><strong>Momentum</strong></td><td>Trailing ~12-month return, skipping the last month</td><td>Recent winners keep winning for months</td></tr>
+      <tr><td><strong>Quality</strong></td><td>Profitability, earnings stability, low leverage</td><td>Profitable, stable firms outperform junk</td></tr>
+      <tr><td><strong>Low volatility</strong></td><td>Trailing volatility or beta</td><td>Boring low-vol stocks beat what CAPM predicts</td></tr>
+    </tbody>
+  </table></div>
+  <p>Fama and French formalized the first extensions in 1992–93; their three-factor model (market, size, value) plus momentum and later profitability became the standard benchmark for judging any fund. The modern regression is your CAPM regression with more columns: r<sub>i</sub> − r<sub>f</sub> = α + β<sub>mkt</sub>·MKT + β<sub>size</sub>·SMB + β<sub>val</sub>·HML + … + ε. Whatever alpha survives <em>that</em> regression is much rarer than CAPM alpha — most "stock-picking skill" turns out to be repackaged factor exposure.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="Bar chart of illustrative long-run annualized factor premia with error bars: market about 6 percent, size 2, value 3, momentum 4, quality 3, low volatility 2, each with wide uncertainty ranges">
+      <line x1="80" y1="280" x2="690" y2="280" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="80" y1="232" x2="690" y2="232" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="80" y1="184" x2="690" y2="184" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="80" y1="136" x2="690" y2="136" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="80" y1="88" x2="690" y2="88" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="72" y="284" text-anchor="end" font-size="13" style="fill:var(--muted)">0%</text>
+      <text x="72" y="236" text-anchor="end" font-size="13" style="fill:var(--muted)">2%</text>
+      <text x="72" y="188" text-anchor="end" font-size="13" style="fill:var(--muted)">4%</text>
+      <text x="72" y="140" text-anchor="end" font-size="13" style="fill:var(--muted)">6%</text>
+      <text x="72" y="92" text-anchor="end" font-size="13" style="fill:var(--muted)">8%</text>
+      <rect x="90" y="136" width="70" height="144" rx="4" style="fill:var(--c1)"/>
+      <rect x="190" y="232" width="70" height="48" rx="4" style="fill:var(--c2)"/>
+      <rect x="290" y="208" width="70" height="72" rx="4" style="fill:var(--c3)"/>
+      <rect x="390" y="184" width="70" height="96" rx="4" style="fill:var(--c4)"/>
+      <rect x="490" y="208" width="70" height="72" rx="4" style="fill:var(--c5)"/>
+      <rect x="590" y="232" width="70" height="48" rx="4" style="fill:var(--c6)"/>
+      <line x1="125" y1="88" x2="125" y2="184" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="117" y1="88" x2="133" y2="88" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="117" y1="184" x2="133" y2="184" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="225" y1="184" x2="225" y2="278" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="217" y1="184" x2="233" y2="184" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="217" y1="278" x2="233" y2="278" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="325" y1="160" x2="325" y2="254" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="317" y1="160" x2="333" y2="160" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="317" y1="254" x2="333" y2="254" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="425" y1="124" x2="425" y2="242" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="417" y1="124" x2="433" y2="124" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="417" y1="242" x2="433" y2="242" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="525" y1="166" x2="525" y2="250" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="517" y1="166" x2="533" y2="166" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="517" y1="250" x2="533" y2="250" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="625" y1="190" x2="625" y2="274" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="617" y1="190" x2="633" y2="190" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <line x1="617" y1="274" x2="633" y2="274" style="stroke:var(--ink-2)" stroke-width="2"/>
+      <text x="125" y="302" text-anchor="middle" font-size="13" style="fill:var(--ink)">market</text>
+      <text x="225" y="302" text-anchor="middle" font-size="13" style="fill:var(--ink)">size</text>
+      <text x="325" y="302" text-anchor="middle" font-size="13" style="fill:var(--ink)">value</text>
+      <text x="425" y="302" text-anchor="middle" font-size="13" style="fill:var(--ink)">momentum</text>
+      <text x="525" y="302" text-anchor="middle" font-size="13" style="fill:var(--ink)">quality</text>
+      <text x="625" y="302" text-anchor="middle" font-size="13" style="fill:var(--ink)">low-vol</text>
+      <text x="80" y="30" font-size="13" style="fill:var(--muted)">illustrative long-run annualized premium, long-short, before costs — whiskers show sample uncertainty</text>
+    </svg>
+    <figcaption><strong>Figure 15.4</strong> — Illustrative factor premia. The honest part is the whiskers: every premium comes with wide confidence bands, varies across decades and markets, and tends to shrink after publication. The size premium's lower whisker touches zero for a reason.</figcaption>
+  </figure>
+  <p>Factor investing — marketed as <dfn class="term" tabindex="0" data-def="Rules-based index funds that tilt toward factors like value or momentum at low cost, between passive and active management.">smart beta</dfn> — packages these tilts into cheap, rules-based funds. For a data person this is home turf, so bring your ML instincts, especially the paranoid ones. A factor is a feature engineered on a finite, autocorrelated sample; the field has published hundreds ("the factor zoo"), and most fail out-of-sample — textbook overfitting via multiple hypothesis testing. The half-dozen above survive because they replicate across countries, decades and asset classes and have plausible economic mechanisms: either compensation for real risk (value stocks crash hardest in recessions) or persistent behavioral patterns (<a href="#s17">Section 17</a>) that are costly to arbitrage away. <a href="#s18">Section 18</a> shows you how factor research is actually run — and how backtests lie.</p>
+
+  <h3 id="s15-active">Passive vs active: Sharpe's brutal arithmetic</h3>
+  <p><dfn class="term" tabindex="0" data-def="Investing that tries to beat a market index through security selection or timing, charging higher fees for the attempt.">Active management</dfn> tries to beat the market; <dfn class="term" tabindex="0" data-def="Investing that replicates a market index at minimal cost rather than trying to beat it.">passive investing</dfn> buys the whole market via an <dfn class="term" tabindex="0" data-def="A fund that mechanically holds every stock in an index, like the S&amp;P 500, at market weights for a very low fee.">index fund</dfn> and accepts the market return. In 1991 William Sharpe pointed out that the contest is settled by arithmetic, not opinion. Every share is held by someone, so passive investors and active investors <em>together</em> hold the market portfolio. Passive investors earn the market return by construction. Therefore active investors, <em>in aggregate</em>, also earn exactly the market return — before costs. After their higher fees and trading costs, the average actively managed dollar <em>must</em> underperform the average passive dollar. No model, no assumptions about efficiency — just accounting.</p>
+  <p>The data cooperates. S&amp;P's SPIVA scorecards (spglobal.com/spiva) find that roughly <strong>90% of US large-cap funds underperformed the S&amp;P 500 over the trailing 15 years</strong>, with similar figures across most categories and countries. Skilled managers exist, but identifying them <em>in advance</em> is the hard problem: past outperformance barely persists, and much of what looks like alpha is factor exposure you could buy for a few basis points.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example: what a 1% fee really costs</p><p>Invest $100,000 for 30 years. At 7% you end with 100,000 × 1.07<sup>30</sup> ≈ <strong>$761,000</strong>. Pay a 1% annual <dfn class="term" tabindex="0" data-def="The annual percentage of assets a fund charges for management; deducted from returns whether or not the fund performs.">expense ratio</dfn> and compound at 6% instead: ≈ <strong>$574,000</strong>. The fee looked like 1% but consumed 25% of your final wealth, because — as <a href="#s01">Section 1</a> warned — costs compound exactly like returns. The fee-drag widget in <a href="#s19">Section 19</a> lets you feel this interactively.</p></div>
+  <div class="callout co-real"><p class="co-label">Real world</p><p>This arithmetic reshaped an industry: index funds and passive ETFs went from a curiosity in 1976 (Vanguard's first index fund was mocked as "Bogle's folly") to holding roughly half of US fund assets today, and fee competition has pushed broad-market index funds below 0.05% per year. For most portfolios, the highest-confidence "alpha" available is simply refusing to pay unnecessary fees.</p></div>
+
+  <details class="deep"><summary>Deep dive: the n-asset case is one line of linear algebra</summary>
+    <p>Everything above generalizes instantly. Stack the weights into a vector <strong>w</strong> and the pairwise covariances into the covariance matrix <strong>Σ</strong>: portfolio variance is σ<sub>p</sub><sup>2</sup> = <strong>w</strong><sup>T</sup><strong>Σw</strong>, and expected return is <strong>w</strong><sup>T</sup><strong>μ</strong>. The efficient frontier is the solution set of "minimize <strong>w</strong><sup>T</sup><strong>Σw</strong> subject to <strong>w</strong><sup>T</sup><strong>μ</strong> = target" — a quadratic program with a closed form when short sales are allowed.</p>
+    <p>The catch is estimation, not optimization. For n = 500 assets, <strong>Σ</strong> has n(n+1)/2 = 125,250 free parameters, estimated from noisy, non-stationary returns — and the optimizer greedily exploits every estimation error, loading up on whatever spurious correlations your sample contains ("error maximization"). Practitioners fight back with regularization you already know: shrinkage estimators (Ledoit–Wolf pulls the sample covariance toward a structured target), factor models that reduce <strong>Σ</strong> to a low-rank-plus-diagonal form, and constraints on weights. Naive mean-variance optimization on raw sample estimates is the finance equivalent of fitting a 125,000-parameter model without regularization and shipping it to production.</p>
+  </details>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. You hold a 50/50 mix of two assets and their correlation falls from +0.8 to +0.1 (volatilities unchanged). What happens?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Expected return rises and risk is unchanged</button>
+        <button class="quiz-opt" data-correct>Portfolio volatility falls; expected return is unchanged</button>
+        <button class="quiz-opt">Both expected return and volatility fall</button>
+        <button class="quiz-opt">Nothing changes until correlation goes negative</button>
+      </div>
+      <p class="quiz-explain">Expected return is a weighted average of the assets' returns, so correlation doesn't touch it. But ρ multiplies the cross term 2w(1−w)ρσ<sub>A</sub>σ<sub>B</sub> in the variance, so lower ρ means lower portfolio risk at the same return — the free lunch.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. Which kind of risk does holding 30 stocks instead of 1 essentially eliminate?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Systematic risk — market-wide shocks</button>
+        <button class="quiz-opt">All risk, if the stocks span enough sectors</button>
+        <button class="quiz-opt" data-correct>Idiosyncratic risk — company-specific shocks</button>
+      </div>
+      <p class="quiz-explain">Company-specific surprises average out across ~20–30 holdings (the 1/N term in portfolio variance). Market-wide shocks hit every holding at once — that systematic floor is why the decay curve in Figure 15.1 flattens near 15% instead of falling to zero.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. Risk-free rate 3%, equity risk premium 6%, stock beta 1.5. What expected return does CAPM assign?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">9%</button>
+        <button class="quiz-opt">13.5%</button>
+        <button class="quiz-opt" data-correct>12%</button>
+        <button class="quiz-opt">10.5%</button>
+      </div>
+      <p class="quiz-explain">E[r] = r<sub>f</sub> + β × ERP = 3% + 1.5 × 6% = 12%. Note that only systematic exposure (β) enters — the stock's total volatility is irrelevant under CAPM.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. Portfolio A: E[r] = 9%, σ = 20%. Portfolio B: E[r] = 6%, σ = 8%. Risk-free rate 2%. Which has the better risk-adjusted performance, and why can a leveraged investor prefer it even while wanting more risk?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-correct>B — Sharpe 0.50 vs 0.35; leverage along B's line beats A at any risk level</button>
+        <button class="quiz-opt">A — higher expected return always wins for aggressive investors</button>
+        <button class="quiz-opt">They're equivalent; Sharpe ratios can't be compared across volatility levels</button>
+      </div>
+      <p class="quiz-explain">Sharpe(A) = (9−2)/20 = 0.35; Sharpe(B) = (6−2)/8 = 0.50. Borrowing to hold 2.5× portfolio B gives σ = 20% with E[r] = 2% + 2.5 × 4% = 12% — same risk as A, three points more return. The slope of the line is what matters, not the point you start at.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. Why must the average actively managed dollar underperform the average passively managed dollar after costs?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Because markets are perfectly efficient, so no one can have skill</button>
+        <button class="quiz-opt">Because active managers take less systematic risk than the index</button>
+        <button class="quiz-opt" data-correct>Because active and passive investors jointly hold the market, so both earn the market return before costs — and active costs are higher</button>
+      </div>
+      <p class="quiz-explain">This is Sharpe's arithmetic: it needs no assumption about market efficiency or skill. Aggregate active holdings equal the market minus passive holdings, so gross returns match; net returns then differ only by costs, which are higher for active.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>Risk and return are summarized as mean and standard deviation of returns, annualized with the √time rule — a normal-distribution convenience that understates tail risk (<a href="#s16">Section 16</a>).</li>
+      <li>Diversification is covariance math: portfolio variance is w²σ<sub>A</sub>² + (1−w)²σ<sub>B</sub>² + 2w(1−w)ρσ<sub>A</sub>σ<sub>B</sub>, so lower correlation cuts risk at zero cost in expected return.</li>
+      <li>Roughly 20–30 holdings eliminate most idiosyncratic risk; the systematic (market) component is a floor nothing diversifies away.</li>
+      <li>Rational investors hold portfolios on the efficient frontier; adding a risk-free asset collapses the choice to one tangency portfolio plus a lending/borrowing dial along the capital market line, whose slope is the Sharpe ratio.</li>
+      <li>CAPM prices only systematic risk: E[r] = r<sub>f</sub> + β × ERP, with β the OLS slope against the market and alpha the regression intercept. It powers cost-of-equity estimates (<a href="#s13">Section 13</a>) even though the empirical beta-return line is flatter than it predicts.</li>
+      <li>Factors — value, size, momentum, quality, low-vol — are engineered features with historically positive premia, wide error bars, and a serious overfitting problem; judge any manager's alpha against a multi-factor regression.</li>
+      <li>Sharpe's arithmetic guarantees the average active dollar loses to passive after fees; about 90% of US large-cap funds trail their index over 15 years, and a 1% fee compounds into ~25% of final wealth over 30 years.</li>
+    </ul>
+  </div>
+</section>

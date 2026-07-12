@@ -1,0 +1,371 @@
+<section class="lesson" id="s16" data-num="16" data-title="Risk Management: Measuring and Taming Uncertainty">
+  <p class="eyebrow">Part IV · Investing &amp; Risk</p>
+  <h2>16. Risk Management: Measuring and Taming Uncertainty</h2>
+  <p class="lede">Every model in this book so far quietly assumed the future behaves. Risk management is the discipline that assumes it won't — it names the ways money vanishes, puts numbers on the danger, and buys insurance against the numbers being wrong. This is also the most realistic first job in finance for a data person, so you will meet the role by name before the section ends.</p>
+
+  <h3 id="s16-taxonomy">The risk taxonomy: six ways money disappears</h3>
+  <p>"Risk" is not one thing. On a trading floor it is a filing cabinet of distinct failure modes, each with its own desk, its own metrics, and its own war stories. Learn the six that matter, each with one vivid example, because half of risk management is correctly diagnosing <em>which</em> risk just walked in the door.</p>
+  <p><dfn class="term" tabindex="0" data-def="The risk that the market price of things you hold moves against you — stocks, rates, FX, commodities.">Market risk</dfn> is the one you already feel: prices move against you. In the COVID crash of March 2020 the <a href="#s07">S&amp;P 500</a> fell 34% in 33 days — a portfolio does nothing wrong and still loses a third of its value. <dfn class="term" tabindex="0" data-def="The risk that a borrower fails to pay interest or principal you are owed.">Credit risk</dfn> is the risk a borrower doesn't pay you back; when Lehman Brothers failed in 2008, its senior <a href="#s08">bonds</a> eventually paid holders roughly 8 cents on the dollar. <dfn class="term" tabindex="0" data-def="The risk you cannot sell an asset quickly near its fair value when you need to.">Liquidity risk</dfn> is subtler: you can own an asset "worth" $100 and discover that the only buyer today bids $70 — the asset is fine, the <em>exit</em> is broken (see <a href="#s06">Section 6</a> on why markets seize up).</p>
+  <p><dfn class="term" tabindex="0" data-def="The risk of loss from failed internal processes, people, systems, or external events — fraud, error, outages.">Operational risk</dfn> has nothing to do with markets and everything to do with humans and systems failing: in 1995 a single rogue trader hid £827 million of losses and destroyed Barings, a bank that had financed the Napoleonic Wars. <dfn class="term" tabindex="0" data-def="The risk that the other party to a contract defaults before settling what they owe you.">Counterparty risk</dfn> is credit risk's cousin, specific to contracts like <a href="#s09">derivatives</a>: in 2008 AIG had written insurance on mortgage bonds and simply could not pay the claims, which is why the government stepped in. And <dfn class="term" tabindex="0" data-def="The risk that the models you use to price or measure risk are wrong in a way that matters.">model risk</dfn> — the one this section keeps circling back to — is the risk your <em>measurement itself</em> is broken: your VaR model says the loss you just took was a once-in-a-billion-years event, and it says that every few years.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 390" role="img" aria-label="A map with a central box labeled portfolio and firm value at risk, connected by arrows to six risk categories, each with a one-line real example: market, credit, liquidity, operational, counterparty, and model risk">
+      <defs><marker id="s16-arrow" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" style="fill:var(--axis)"/></marker></defs>
+      <line x1="210" y1="196" x2="248" y2="56" style="stroke:var(--axis)" stroke-width="1.2" marker-end="url(#s16-arrow)"/>
+      <line x1="210" y1="196" x2="248" y2="196" style="stroke:var(--axis)" stroke-width="1.2" marker-end="url(#s16-arrow)"/>
+      <line x1="210" y1="196" x2="248" y2="336" style="stroke:var(--axis)" stroke-width="1.2" marker-end="url(#s16-arrow)"/>
+      <line x1="210" y1="196" x2="488" y2="56" style="stroke:var(--axis)" stroke-width="1.2" marker-end="url(#s16-arrow)"/>
+      <line x1="210" y1="196" x2="488" y2="196" style="stroke:var(--axis)" stroke-width="1.2" marker-end="url(#s16-arrow)"/>
+      <line x1="210" y1="196" x2="488" y2="336" style="stroke:var(--axis)" stroke-width="1.2" marker-end="url(#s16-arrow)"/>
+      <rect x="40" y="165" width="170" height="62" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)"/>
+      <text x="125" y="190" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Portfolio / firm</text>
+      <text x="125" y="210" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">value at risk</text>
+      <rect x="250" y="25" width="210" height="62" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="264" y="50" font-size="14" font-weight="600" style="fill:var(--ink)">Market risk</text>
+      <text x="264" y="70" font-size="12" style="fill:var(--muted)">S&amp;P 500 −34% in 33 days (2020)</text>
+      <rect x="250" y="165" width="210" height="62" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="264" y="190" font-size="14" font-weight="600" style="fill:var(--ink)">Credit risk</text>
+      <text x="264" y="210" font-size="12" style="fill:var(--muted)">Lehman bonds pay ~8¢ (2008)</text>
+      <rect x="250" y="305" width="210" height="62" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="264" y="330" font-size="14" font-weight="600" style="fill:var(--ink)">Liquidity risk</text>
+      <text x="264" y="350" font-size="12" style="fill:var(--muted)">worth $100, only sells at $70</text>
+      <rect x="490" y="25" width="215" height="62" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="504" y="50" font-size="14" font-weight="600" style="fill:var(--ink)">Operational risk</text>
+      <text x="504" y="70" font-size="12" style="fill:var(--muted)">rogue trader hides £827M (Barings)</text>
+      <rect x="490" y="165" width="215" height="62" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="504" y="190" font-size="14" font-weight="600" style="fill:var(--ink)">Counterparty risk</text>
+      <text x="504" y="210" font-size="12" style="fill:var(--muted)">AIG cannot honor its CDS (2008)</text>
+      <rect x="490" y="305" width="215" height="62" rx="8" style="fill:var(--surface-2);stroke:var(--accent)"/>
+      <text x="504" y="330" font-size="14" font-weight="600" style="fill:var(--ink)">Model risk</text>
+      <text x="504" y="350" font-size="12" style="fill:var(--muted)">"that loss was impossible"</text>
+    </svg>
+    <figcaption><strong>Figure 16.1</strong> — The six-drawer filing cabinet. A single dollar of loss can be booked to any of these; the first job of a risk desk is diagnosis, because market risk and operational risk are managed with completely different tools.</figcaption>
+  </figure>
+  <p>These categories leak into each other — that is the point. A 2008-style crisis is market risk (prices fall) triggering liquidity risk (no buyers) exposing counterparty risk (AIG can't pay) revealing model risk (the models said none of this could co-occur). The rest of this section builds the tools to measure the biggest of them, then honestly catalogs the times those tools failed.</p>
+
+  <h3 id="s16-drawdown">Volatility vs drawdown: what actually breaks you</h3>
+  <p><a href="#s15">Section 15</a> measured risk as <dfn class="term" tabindex="0" data-def="The standard deviation of returns; how widely outcomes scatter around the mean.">volatility</dfn> — the standard deviation of returns — because it makes the math clean. But volatility is symmetric: it counts a lucky +30% year as exactly as "risky" as a −30% year. No investor has ever been wiped out by an upside surprise. The number that actually ends careers and firms is <dfn class="term" tabindex="0" data-def="The peak-to-trough percentage decline in a portfolio's value before a new high is reached.">maximum drawdown</dfn>: the deepest peak-to-trough fall you ever endure.</p>
+  <p>Drawdown matters more than volatility for two brutally practical reasons. First, the recovery math is asymmetric and merciless. A loss of L takes a <em>gain</em> of L ÷ (1 − L) just to get back to even — a bigger number than L, and it explodes as L grows. Second, humans and institutions don't get to wait for the average to reassert itself: a fund that draws down 40% sees redemptions, a bank that draws down 40% sees a run, and both can be forced to sell at the bottom, converting a paper loss into a permanent one.</p>
+  <div class="formula">
+    <div class="formula-main">gain needed to recover = <span class="frac"><span>L</span><span>1 − L</span></span></div>
+    <div class="formula-legend">L = the drawdown as a fraction · a −50% loss needs +100%; a −90% loss needs +900%</div>
+  </div>
+  <div class="callout co-ex"><p class="co-label">Worked example: the hole gets deeper faster than you fell</p><p>Lose 10% and you need +11.1% back — barely worse than symmetric. Lose 20%, you need +25%. Lose 50%, you need +100% — the gain must be <em>twice</em> the loss. Lose 90% (crypto tokens do this routinely), and you need +900% just to break even. This is why capital preservation is not timidity: avoiding the deep hole is mathematically worth more than catching the big upside, because you compound off the survivors.</p></div>
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="A rising convex curve showing the gain required to recover from a given loss: gentle up to a 30 percent loss, then steepening sharply, with a minus 50 percent loss highlighted as requiring a plus 100 percent gain">
+      <line x1="80" y1="300" x2="680" y2="300" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="80" y1="40" x2="80" y2="300" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="80" y1="248" x2="680" y2="248" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="80" y1="196" x2="680" y2="196" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="80" y1="144" x2="680" y2="144" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="80" y1="92" x2="680" y2="92" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="72" y="304" text-anchor="end" font-size="12" style="fill:var(--muted)">0%</text>
+      <text x="72" y="252" text-anchor="end" font-size="12" style="fill:var(--muted)">50%</text>
+      <text x="72" y="200" text-anchor="end" font-size="12" style="fill:var(--muted)">100%</text>
+      <text x="72" y="148" text-anchor="end" font-size="12" style="fill:var(--muted)">150%</text>
+      <text x="72" y="96" text-anchor="end" font-size="12" style="fill:var(--muted)">200%</text>
+      <text x="72" y="44" text-anchor="end" font-size="12" style="fill:var(--muted)">250%</text>
+      <text x="160" y="318" text-anchor="middle" font-size="12" style="fill:var(--muted)">−10%</text>
+      <text x="240" y="318" text-anchor="middle" font-size="12" style="fill:var(--muted)">−20%</text>
+      <text x="320" y="318" text-anchor="middle" font-size="12" style="fill:var(--muted)">−30%</text>
+      <text x="400" y="318" text-anchor="middle" font-size="12" style="fill:var(--muted)">−40%</text>
+      <text x="480" y="318" text-anchor="middle" font-size="12" style="fill:var(--muted)">−50%</text>
+      <text x="560" y="318" text-anchor="middle" font-size="12" style="fill:var(--muted)">−60%</text>
+      <text x="640" y="318" text-anchor="middle" font-size="12" style="fill:var(--muted)">−70%</text>
+      <text x="380" y="336" text-anchor="middle" font-size="13" style="fill:var(--muted)">drawdown suffered</text>
+      <text x="86" y="32" font-size="13" style="fill:var(--muted)">gain required to get back to even →</text>
+      <path d="M80,300 L160,288.5 L240,274 L320,255.4 L400,230.7 L480,196 L560,144 L640,57.3" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>
+      <line x1="80" y1="196" x2="480" y2="196" style="stroke:var(--down)" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <line x1="480" y1="196" x2="480" y2="300" style="stroke:var(--down)" stroke-width="1.2" stroke-dasharray="4 4"/>
+      <circle cx="480" cy="196" r="6" style="fill:var(--down)"/>
+      <text x="330" y="180" font-size="13" font-weight="600" style="fill:var(--ink)">−50% needs +100%</text>
+      <text x="150" y="120" font-size="12" style="fill:var(--muted)">recovery = L ÷ (1 − L)</text>
+    </svg>
+    <figcaption><strong>Figure 16.2</strong> — The recovery curve is convex and gets vicious past a 30% loss. The distance from the diagonal "fair" line is the tax the arithmetic charges for deep holes — the reason risk managers obsess over the left tail, not the average.</figcaption>
+  </figure>
+  <div class="callout co-analogy"><p class="co-label">Analogy: this is just geometric vs arithmetic mean</p><p>You already know why: multiplicative processes are governed by the geometric mean, and variance <em>drags</em> the geometric mean below the arithmetic one by roughly σ²/2. A +50%/−50% pair averages to 0% arithmetically but leaves you at 0.75 of where you started (a −25% compound outcome). Volatility isn't just uncertainty around a fixed return — it actively eats the return. Big drawdowns are the extreme case of that same log-space penalty.</p></div>
+
+  <h3 id="s16-var">Value at Risk: the number every risk desk quotes</h3>
+  <p>Executives don't want a distribution; they want one number that answers "how bad can a bad day be?" That number is <dfn class="term" tabindex="0" data-def="Value at Risk: a loss threshold that will not be exceeded over a set horizon with a set probability.">Value at Risk</dfn> (VaR). Read it as a full sentence with three parts. "1-day 99% VaR = $1M" means: <em>over one day</em>, with <em>99% probability</em>, losses will <em>not exceed $1 million</em>. Equivalently, on the worst 1 day in 100 you expect to lose <em>at least</em> $1M — VaR is the door, not the size of the room behind it.</p>
+  <p>That last clause is the whole subtlety. VaR is a <em>quantile</em> of the loss distribution: the 99th percentile loss. It tells you the threshold you breach 1% of the time; it says nothing about how catastrophic the breach is when it happens. There are three standard ways to compute it, and honest practitioners know each one's failure mode.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Method</th><th>How it works</th><th>Pro</th><th>Con</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Historical</strong></td><td>Take the last N days of actual P&amp;L, sort them, read off the 1st percentile.</td><td>No distribution assumed; captures the real fat tails you actually lived through.</td><td>The future can only contain crashes your window already saw — a calm window hides the danger.</td></tr>
+      <tr><td><strong>Parametric</strong></td><td>Assume returns are normal; VaR ≈ z × σ√t × V − μtV. Just plug in mean and vol.</td><td>Fast, closed-form, needs only two numbers per asset.</td><td>The normal assumption denies fat tails — it systematically <em>under</em>states extreme risk.</td></tr>
+      <tr><td><strong>Monte Carlo</strong></td><td>Simulate thousands of random future paths from a chosen model, sort the outcomes.</td><td>Handles options, path-dependence, any distribution you can code.</td><td>Only as good as the model and correlations you feed it — garbage in, confident garbage out.</td></tr>
+    </tbody>
+  </table></div>
+  <p>The deeper fix for VaR's blind spot is to report the size of the room, not just the door. <dfn class="term" tabindex="0" data-def="Conditional VaR or expected shortfall: the average loss in the cases that are worse than the VaR threshold.">Conditional VaR</dfn> (CVaR, also called <dfn class="term" tabindex="0" data-def="Another name for CVaR: the mean loss conditional on being in the tail beyond VaR.">expected shortfall</dfn>) answers "<em>given</em> that we breach VaR, how much do we lose on average?" It is the mean of the tail beyond the cutoff, so it is always at least as large as VaR and it actually feels the shape of the disaster. Regulators shifted the bank trading book from VaR to expected shortfall precisely for this reason — it is the better tail measure, and the deep dive below explains the mathematical sense in which it is <em>coherent</em> where VaR is not.</p>
+  <div class="callout co-real"><p class="co-label">Real world: the risk analyst — your most realistic first job</p><p>This is you. A market-risk analyst spends the day computing exactly these numbers: pulling positions each morning, running the VaR and expected-shortfall engine, checking limits ("desk X is $2M over its VaR limit — why?"), investigating <dfn class="term" tabindex="0" data-def="A day when the actual loss exceeds the VaR estimate; too many breaches means the model is miscalibrated.">breaches</dfn>, and running the <dfn class="term" tabindex="0" data-def="Comparing yesterday's predicted VaR against the loss that actually occurred, day after day, to test the model.">backtest</dfn> that compares yesterday's VaR against yesterday's real P&amp;L. It is Python, pandas, SQL, and distributions all day — your exact stack — plus enough finance to know what the numbers mean. Model validation (stress-testing the risk models themselves) is the adjacent quant-heavy track. <a href="#s20">Section 20</a> maps the full path.</p></div>
+
+  <div class="widget" id="s16-varsim">
+    <div class="widget-head">
+      <h4>VaR simulator: 2,000 Monte Carlo draws</h4>
+      <p>Set your portfolio, drift, and volatility, then pick a horizon and confidence. The histogram is 2,000 simulated P&amp;L outcomes; the black line is VaR, the red bars are the CVaR tail. Watch the simulated VaR track the parametric formula — and hit Re-run to feel the sampling noise.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Portfolio value <input type="number" class="num-in" id="s16-vs-val" min="10000" max="100000000" step="50000" value="1000000"></label>
+        <label class="ctl">Expected annual return μ <output class="ctl-val" id="s16-vs-mu-out">6.0%</output><input type="range" id="s16-vs-mu" min="0" max="12" step="0.5" value="6"></label>
+        <label class="ctl">Annual volatility σ <output class="ctl-val" id="s16-vs-sig-out">20%</output><input type="range" id="s16-vs-sig" min="5" max="40" step="1" value="20"></label>
+      </div>
+      <div class="ctl-row">
+        <div class="btn-group" id="s16-vs-horizon" role="group" aria-label="Horizon">
+          <button class="btn" data-t="day" type="button">1 day</button>
+          <button class="btn is-active" data-t="month" type="button">1 month</button>
+          <button class="btn" data-t="year" type="button">1 year</button>
+        </div>
+        <div class="btn-group" id="s16-vs-conf" role="group" aria-label="Confidence">
+          <button class="btn" data-c="90" type="button">90%</button>
+          <button class="btn is-active" data-c="95" type="button">95%</button>
+          <button class="btn" data-c="99" type="button">99%</button>
+        </div>
+        <div class="btn-group"><button class="btn" id="s16-vs-rerun" type="button">↻ Re-run draws</button></div>
+      </div>
+      <svg id="s16-vs-svg" viewBox="0 0 720 390" role="img" aria-label="Histogram of 2,000 simulated profit and loss outcomes with a vertical Value at Risk cutoff line and the conditional VaR tail shaded">
+        <g id="s16-vs-plot"></g>
+        <text x="380" y="378" text-anchor="middle" font-size="13" style="fill:var(--muted)">simulated profit / loss over the horizon (2,000 draws)</text>
+      </svg>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">VaR (simulated)</span><span class="stat-value" id="s16-vs-var">—</span></div>
+        <div class="stat"><span class="stat-label">CVaR / expected shortfall</span><span class="stat-value" id="s16-vs-cvar">—</span></div>
+        <div class="stat"><span class="stat-label">Parametric VaR (check)</span><span class="stat-value" id="s16-vs-param">—</span></div>
+      </div>
+      <p id="s16-vs-sentence" style="color:var(--ink)">—</p>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s16-varsim');
+    if (!root) return;
+    var N = 2000;
+    var Z = { '90': 1.2816, '95': 1.6449, '99': 2.3263 };
+    var HL = { day: { t: 1 / 252, label: '1 day' }, month: { t: 1 / 12, label: '1 month' }, year: { t: 1, label: '1 year' } };
+    var state = { t: 'month', c: '95' };
+    var zdraws = new Array(N);
+    function $(id) { return root.querySelector('#' + id); }
+    function randn() { var u1 = Math.random(), u2 = Math.random(); if (u1 < 1e-12) u1 = 1e-12; return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2); }
+    function gen() { for (var i = 0; i < N; i++) zdraws[i] = randn(); }
+    function clampNum(el) { var v = parseFloat(el.value), mn = parseFloat(el.min), mx = parseFloat(el.max); if (isNaN(v)) v = mn; return Math.min(mx, Math.max(mn, v)); }
+    var muEl = $('s16-vs-mu'), sigEl = $('s16-vs-sig'), valEl = $('s16-vs-val');
+    function fmt(x) { var neg = x < 0; x = Math.abs(Math.round(x)); return (neg ? '−$' : '$') + x.toLocaleString('en-US'); }
+    function fmtC(x) { var neg = x < 0, v = Math.abs(x), s; if (v >= 1e6) s = (v / 1e6).toFixed(1) + 'M'; else if (v >= 1e3) s = Math.round(v / 1e3) + 'k'; else s = '' + Math.round(v); return (neg ? '−$' : '$') + s; }
+    function drawHist(pnl, varPnl, V, drift, vol) {
+      var X0 = 70, X1 = 690, YB = 320, YT = 55;
+      var center = V * drift, half = 4 * V * vol; if (half < 1e-6) half = Math.max(Math.abs(center), 1);
+      var lo = center - half, hi = center + half, range = hi - lo;
+      var BINS = 40, counts = new Array(BINS), b; for (b = 0; b < BINS; b++) counts[b] = 0;
+      for (var i = 0; i < pnl.length; i++) { var bi = Math.floor((pnl[i] - lo) / range * BINS); if (bi < 0) bi = 0; if (bi >= BINS) bi = BINS - 1; counts[bi]++; }
+      var maxC = 0; for (b = 0; b < BINS; b++) if (counts[b] > maxC) maxC = counts[b]; if (maxC === 0) maxC = 1;
+      function xm(p) { var x = X0 + (p - lo) / range * (X1 - X0); return Math.max(X0, Math.min(X1, x)); }
+      var binPx = (X1 - X0) / BINS, s = '';
+      for (b = 0; b < BINS; b++) {
+        var bc = lo + (b + 0.5) * range / BINS;
+        var h = counts[b] / maxC * (YB - YT);
+        var x = X0 + b * binPx + 1, w = binPx - 2, y = YB - h;
+        var tail = bc <= varPnl;
+        s += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + h.toFixed(1) + '" rx="2" style="fill:' + (tail ? 'var(--down)' : 'var(--c1)') + '"/>';
+      }
+      if (0 >= lo && 0 <= hi) { var xz = xm(0); s += '<line x1="' + xz.toFixed(1) + '" y1="' + YT + '" x2="' + xz.toFixed(1) + '" y2="' + YB + '" style="stroke:var(--axis)" stroke-width="1" stroke-dasharray="3 3"/>'; s += '<text x="' + xz.toFixed(1) + '" y="' + (YT - 6) + '" text-anchor="middle" font-size="12" style="fill:var(--muted)">break-even</text>'; }
+      var xv = xm(varPnl);
+      s += '<line x1="' + xv.toFixed(1) + '" y1="' + (YT - 2) + '" x2="' + xv.toFixed(1) + '" y2="' + YB + '" style="stroke:var(--ink)" stroke-width="2"/>';
+      s += '<text x="' + xv.toFixed(1) + '" y="' + (YB + 34) + '" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">VaR cutoff</text>';
+      s += '<text x="' + (xv - 8).toFixed(1) + '" y="' + (YT + 14) + '" text-anchor="end" font-size="12" style="fill:var(--down)">◀ CVaR tail</text>';
+      s += '<line x1="' + X0 + '" y1="' + YB + '" x2="' + X1 + '" y2="' + YB + '" style="stroke:var(--axis)" stroke-width="1.5"/>';
+      for (var k = 0; k <= 4; k++) { var pv = lo + range * k / 4; var xx = X0 + (X1 - X0) * k / 4; s += '<line x1="' + xx.toFixed(1) + '" y1="' + YB + '" x2="' + xx.toFixed(1) + '" y2="' + (YB + 5) + '" style="stroke:var(--axis)" stroke-width="1"/>'; s += '<text x="' + xx.toFixed(1) + '" y="' + (YB + 20) + '" text-anchor="middle" font-size="12" style="fill:var(--muted)">' + fmtC(pv) + '</text>'; }
+      $('s16-vs-plot').innerHTML = s;
+    }
+    function update() {
+      var mu = clampNum(muEl) / 100, sig = clampNum(sigEl) / 100, V = clampNum(valEl);
+      var t = HL[state.t].t, c = parseFloat(state.c) / 100, z = Z[state.c];
+      valEl.value = Math.round(V);
+      $('s16-vs-mu-out').textContent = (mu * 100).toFixed(1) + '%';
+      $('s16-vs-sig-out').textContent = (sig * 100).toFixed(0) + '%';
+      var drift = mu * t, vol = sig * Math.sqrt(t);
+      var pnl = new Array(N), i;
+      for (i = 0; i < N; i++) pnl[i] = V * (drift + vol * zdraws[i]);
+      var sorted = pnl.slice().sort(function (a, b) { return a - b; });
+      var idx = Math.floor((1 - c) * N); if (idx < 0) idx = 0; if (idx >= N) idx = N - 1;
+      var varPnl = sorted[idx];
+      var tailSum = 0; for (i = 0; i <= idx; i++) tailSum += sorted[i]; var cvarPnl = tailSum / (idx + 1);
+      var VaR = -varPnl, CVaR = -cvarPnl, paramVaR = V * (z * vol - drift);
+      $('s16-vs-var').textContent = VaR > 0 ? fmt(VaR) : 'no loss at ' + state.c + '%';
+      $('s16-vs-cvar').textContent = CVaR > 0 ? fmt(CVaR) : '—';
+      $('s16-vs-param').textContent = paramVaR > 0 ? fmt(paramVaR) : '—';
+      var vv = $('s16-vs-var'); vv.style.color = VaR > 0 ? 'var(--down)' : '';
+      var Vs = VaR > 0 ? fmt(VaR) : '$0', Cs = CVaR > 0 ? fmt(CVaR) : '$0';
+      $('s16-vs-sentence').textContent = 'With ' + state.c + '% confidence you will not lose more than ' + Vs + ' over ' + HL[state.t].label + '; when you do breach it, the average loss is ' + Cs + '.';
+      drawHist(pnl, varPnl, V, drift, vol);
+    }
+    function grp(sel, attr, onpick) { var btns = root.querySelectorAll(sel + ' .btn'); for (var j = 0; j < btns.length; j++) { (function (btn) { btn.addEventListener('click', function () { for (var m = 0; m < btns.length; m++) btns[m].classList.remove('is-active'); btn.classList.add('is-active'); onpick(btn.getAttribute(attr)); update(); }); })(btns[j]); } }
+    grp('#s16-vs-horizon', 'data-t', function (v) { state.t = v; });
+    grp('#s16-vs-conf', 'data-c', function (v) { state.c = v; });
+    muEl.addEventListener('input', update);
+    sigEl.addEventListener('input', update);
+    valEl.addEventListener('input', update);
+    valEl.addEventListener('change', update);
+    $('s16-vs-rerun').addEventListener('click', function () { gen(); update(); });
+    gen(); update();
+  })();
+  </script>
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="A bell-shaped return distribution with the left 5 percent tail shaded, a vertical line marking the VaR threshold, and a marker deeper in the tail showing that CVaR is the average of the shaded region">
+      <path d="M70,300 L110,299.9 L150,298.9 L190,294.1 L230,276.4 L270,230 L310,154.4 L350,81 L380,60 L410,81 L450,154.4 L490,230 L530,276.4 L570,294.1 L610,298.9 L650,299.9 L690,300" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>
+      <path d="M265,300 L265,237.7 L250,257.2 L230,276.4 L210,287.7 L190,294.1 L150,298.9 L110,299.9 L70,300 Z" style="fill:var(--down)" opacity="0.28"/>
+      <line x1="70" y1="300" x2="690" y2="300" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="265" y1="40" x2="265" y2="300" style="stroke:var(--ink)" stroke-width="2"/>
+      <line x1="236" y1="238" x2="236" y2="300" style="stroke:var(--down)" stroke-width="2" stroke-dasharray="4 3"/>
+      <circle cx="236" cy="238" r="5" style="fill:var(--down)"/>
+      <text x="265" y="32" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">VaR (95th percentile loss)</text>
+      <text x="150" y="160" text-anchor="middle" font-size="12" style="fill:var(--ink)">worst 5% of days</text>
+      <text x="150" y="178" text-anchor="middle" font-size="12" style="fill:var(--muted)">(shaded tail)</text>
+      <text x="236" y="330" text-anchor="middle" font-size="12" style="fill:var(--down)">CVaR = mean of the tail</text>
+      <text x="470" y="120" text-anchor="middle" font-size="13" style="fill:var(--muted)">most days cluster here</text>
+      <text x="640" y="292" text-anchor="middle" font-size="12" style="fill:var(--muted)">gains →</text>
+      <text x="100" y="292" text-anchor="middle" font-size="12" style="fill:var(--muted)">← losses</text>
+    </svg>
+    <figcaption><strong>Figure 16.3</strong> — VaR is a line in the sand at a chosen percentile; CVaR is the center of gravity of everything beyond it. VaR tells you where the tail begins, CVaR tells you how heavy it is — which is why regulators now prefer CVaR.</figcaption>
+  </figure>
+
+  <h3 id="s16-var-failed">Why VaR broke in 2008: the map is not the territory</h3>
+  <p>In the summer of 2007, David Viniar, CFO of Goldman Sachs, told the Financial Times his firm had seen "25-standard-deviation moves, several days in a row." Take that literally and it is absurd — under a normal distribution a 25-sigma day should not occur once in the entire age of the universe, let alone several times in a week. He was not describing the market. He was describing his <em>model</em>. This is model risk in one sentence.</p>
+  <p>VaR failed in 2008 for three compounding reasons every risk analyst should be able to recite. First, <dfn class="term" tabindex="0" data-def="Distributions where extreme outcomes are far more likely than a normal bell curve predicts.">fat tails</dfn>: real returns have far more extreme days than the normal curve allows, so parametric VaR systematically under-counts the disasters. Second, <dfn class="term" tabindex="0" data-def="In a crisis, previously diversifying assets all fall together as correlations jump toward one, erasing the diversification you thought you had.">correlation breakdown</dfn>: the diversification from <a href="#s15">Section 15</a> assumed correlations stay put, but in a crisis everything falls together and correlations that were 0.3 snap to nearly 1, so risks meant to offset instead <em>stack</em>. Third, VaR is silent on the tail's shape: a 99% VaR says nothing about the 1% of days that actually bankrupt you.</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall: trusting the number because it has a decimal point</p><p>A VaR figure is a claim about a distribution you estimated from the recent past, using assumptions (normality, stable correlations, sufficient liquidity to exit) that are exactly the assumptions a crisis violates. It is a genuinely useful management tool in normal times and a dangerously precise-looking fiction in the tail. The correct posture is the one Alan Greenspan learned the hard way: your model of the world is not the world. Treat every risk number as a hypothesis, and reserve capital for the case where it's wrong.</p></div>
+  <p>The intellectually honest response is not to throw VaR away — it's to surround it. Use expected shortfall to see the tail's weight, stress-test with correlations forced to 1, and hold a capital buffer sized for the model being wrong. That buffer is what the next subsection is about, and the reason it exists is everything you just read.</p>
+
+  <h3 id="s16-stress">Stress testing, scenarios, and why banks hold buffers</h3>
+  <p>If VaR asks "what's a normal bad day?", <dfn class="term" tabindex="0" data-def="Estimating losses under a specific severe but plausible scenario, ignoring how probable it is.">stress testing</dfn> asks "what happens in a specific catastrophe?" — and pointedly refuses to assign it a probability, because the whole failure of VaR was mis-estimating tail probabilities. A stress test picks a scenario (rates +300 basis points, equities −40%, the dollar spikes, credit spreads blow out) and simply revalues the entire book under it. <dfn class="term" tabindex="0" data-def="Building a small number of coherent, named future worlds and evaluating outcomes in each rather than assuming one distribution.">Scenario analysis</dfn> generalizes this to a handful of coherent, named worlds ("2008 replay," "1970s stagflation," "sovereign default").</p>
+  <p>Banks do this for real, and regulators make them. Since 2009 the US Federal Reserve has run an annual <dfn class="term" tabindex="0" data-def="The Fed's annual Comprehensive Capital Analysis and Review: a mandatory severe-recession stress test for large US banks.">CCAR / DFAST</dfn> exercise: it hands the biggest banks a hypothetical severe recession — unemployment to 10%, a housing bust, a market crash — and each bank must prove it would still have enough capital left to keep lending. Fail, and you're barred from dividends or buybacks until you raise more. The European and Bank of England tests follow the same template — the regulator forcing the industry to imagine the tail on purpose.</p>
+  <p>Which brings us to <dfn class="term" tabindex="0" data-def="The minimum equity capital a bank must hold against its risks, set by regulation as a buffer to absorb losses.">regulatory capital</dfn> and the <dfn class="term" tabindex="0" data-def="The Basel Accords: international banking rules setting minimum capital and liquidity buffers, negotiated in Basel, Switzerland.">Basel Accords</dfn>. A bank is a leveraged institution: it funds long-term loans with short-term deposits and holds only a thin sliver of its own equity underneath. That equity is the shock absorber that eats losses before depositors do. Basel III requires common equity of at least 4.5% of <dfn class="term" tabindex="0" data-def="Risk-weighted assets: a bank's assets scaled by how risky each is, so a mortgage counts less than a junk loan.">risk-weighted assets</dfn>, plus buffers pushing the practical minimum past 10%, plus liquidity rules to survive a 30-day run.</p>
+  <p>The logic is simple and it is the through-line of this whole section: because tail losses are underestimated by every model, you cannot fund a bank right up to the edge of its VaR. You hold a buffer sized for the models being wrong and the stress scenarios being real. A well-capitalized bank absorbs a bad scenario and keeps lending; an under-capitalized one becomes a bank run, which is precisely what happened to a bank we will autopsy in a moment.</p>
+
+  <h3 id="s16-hedging">Hedging in practice: paying to sleep at night</h3>
+  <p>Measuring risk is diagnosis; <dfn class="term" tabindex="0" data-def="Taking an offsetting position so that a loss in one exposure is cancelled by a gain in another.">hedging</dfn> is treatment. To hedge is to deliberately take a second position whose gains cancel your first position's losses. The tools are the <a href="#s09">derivatives</a> and <a href="#s10">FX/commodity</a> instruments from earlier sections; here is what they look like in three real businesses, with numbers.</p>
+  <p><strong>The airline fuel hedge.</strong> Jet fuel can be a third of an airline's costs, and management would rather sell tickets than gamble on oil. So the airline buys <dfn class="term" tabindex="0" data-def="Exchange-traded contracts to buy or sell an asset at a set price on a future date.">futures</dfn> or <dfn class="term" tabindex="0" data-def="A contract giving the right, not the obligation, to buy an asset at a set price; caps your purchase cost.">call options</dfn> on crude. Lock 10 million gallons at $2.50/gallon. If fuel jumps to $3.50, the physical fuel bill rises by $10M — but the futures gain $10M, and the airline's net cost is unchanged. The catch: if fuel <em>falls</em> to $1.50, the futures <em>lose</em> $10M, wiping out the windfall. That symmetry is the deal — you gave up the upside to kill the downside.</p>
+  <p><strong>The exporter's FX hedge.</strong> A German manufacturer sells a machine for $1.2M payable in 90 days, but its costs are in euros. If the euro strengthens from 1.10 to 1.20 $/€ before payment, that $1.2M converts to €1.0M instead of €1.09M — a €90k loss on a done deal, from currency alone. So the exporter sells the dollars forward at today's rate via a <dfn class="term" tabindex="0" data-def="A private contract to exchange currencies at a fixed rate on a future date, locking in today's exchange rate.">forward contract</dfn>, locking in €1.09M — while forfeiting the gain if the euro weakens instead.</p>
+  <p><strong>The portfolio put.</strong> An investor with $1M in equities fears a crash but doesn't want to sell. She buys <dfn class="term" tabindex="0" data-def="A contract giving the right to sell an asset at a set price; acts as portfolio insurance below that price.">put options</dfn> struck 10% below today for a $20,000 premium (2% of the portfolio) — insurance that pays off past that floor. If the market drops 30%, the portfolio loses $300k but the puts gain roughly $200k, cutting the net loss to about $120k. If the market rises, the $20k premium simply expires worthless — the cost of the insurance she didn't need.</p>
+  <div class="callout co-key"><p class="co-label">Key idea: hedging costs return — that's the whole trade</p><p>Every hedge has a price. The future forfeits your upside; the forward forfeits favorable moves; the put costs a premium every year whether or not you use it. Perfectly hedged means perfectly flat: you have converted an uncertain outcome into a certain, <em>lower</em> expected one. Hedging is not free money and not a way to beat the market — it is buying a smaller distribution. The right question is never "can I remove this risk?" but "is removing it worth the return I give up?"</p></div>
+  <div class="callout co-you"><p class="co-label">Your edge: a hedge is a control variate</p><p>If you've done variance reduction in Monte Carlo, you already own the intuition. A hedge is a control variate: you add a term with known, offsetting behavior to shrink the variance of your outcome without shifting its mean much. The airline doesn't change its expected fuel cost by hedging — it slashes the <em>variance</em> of that cost. Same math, real money.</p></div>
+
+  <h3 id="s16-blowups">Blowup case files</h3>
+  <p>Theory is cheap; the graveyard is instructive. Four failures, each a pure specimen of one risk type, each with a one-line lesson you should be able to quote in an interview.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Case</th><th>What happened</th><th>Primary risk</th><th>One-line lesson</th></tr></thead>
+    <tbody>
+      <tr><td><strong>LTCM</strong> (1998)</td><td>Nobel-laureate fund, ~25:1 leverage on tiny convergence spreads. Russia defaulted, spreads diverged, the models said impossible.</td><td>Model + leverage</td><td>Leverage turns a model error into insolvency.</td></tr>
+      <tr><td><strong>Barings</strong> (1995)</td><td>One trader, Nick Leeson, both traded and settled his own trades, hiding losses in account 88888 until they hit £827M.</td><td>Operational</td><td>Never let the same person take risk and check it.</td></tr>
+      <tr><td><strong>London Whale</strong> (2012)</td><td>A JPMorgan desk built a credit position so large it moved the market; unwinding it cost ~$6.2B. Its own VaR model was quietly re-tuned to hide the size.</td><td>Position size + oversight</td><td>A position you can't exit isn't a hedge, it's the risk.</td></tr>
+      <tr><td><strong>SVB</strong> (2023)</td><td>Silicon Valley Bank funded long-dated bonds with on-demand tech deposits. Rates rose, the bonds lost ~$15B on paper, depositors fled, forced sales made it real.</td><td>Duration + liquidity</td><td>A paper loss becomes fatal the moment you're forced to sell.</td></tr>
+    </tbody>
+  </table></div>
+  <p>SVB is worth a closer look because it braids together three earlier sections. The bank parked a flood of startup deposits into long-maturity <a href="#s08">Treasuries and mortgage bonds</a> with a <dfn class="term" tabindex="0" data-def="A bond's price sensitivity to interest rates; a duration of 5.6 means a 1% rate rise cuts the price about 5.6%.">duration</dfn> of roughly 5.6 years, while its funding — deposits repayable on demand — had a duration of essentially zero. That gap is a <dfn class="term" tabindex="0" data-def="Holding long-dated assets funded by short-dated liabilities, so rising rates crush asset values while funding can flee instantly.">duration mismatch</dfn>, and it is the oldest way to kill a bank.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="A duration number line from zero to ten years. On-demand deposits sit near zero; the long-dated bond portfolio sits at 5.6 years. The gap between them is the duration mismatch, and a callout computes the resulting loss when rates rose">
+      <rect x="55" y="45" width="250" height="64" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="69" y="70" font-size="14" font-weight="600" style="fill:var(--ink)">Funding: on-demand deposits</text>
+      <text x="69" y="90" font-size="12" style="fill:var(--muted)">~90% uninsured · duration ≈ 0</text>
+      <rect x="380" y="45" width="285" height="64" rx="8" style="fill:var(--surface-2);stroke:var(--accent)"/>
+      <text x="394" y="70" font-size="14" font-weight="600" style="fill:var(--ink)">Assets: long Treasuries &amp; MBS</text>
+      <text x="394" y="90" font-size="12" style="fill:var(--muted)">~$91B held-to-maturity · duration ≈ 5.6y</text>
+      <line x1="104" y1="109" x2="104" y2="204" style="stroke:var(--axis)" stroke-width="1.2"/>
+      <line x1="409" y1="109" x2="409" y2="204" style="stroke:var(--accent)" stroke-width="1.5"/>
+      <line x1="90" y1="210" x2="660" y2="210" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="90" y1="210" x2="90" y2="216" style="stroke:var(--axis)" stroke-width="1"/>
+      <line x1="204" y1="210" x2="204" y2="216" style="stroke:var(--axis)" stroke-width="1"/>
+      <line x1="318" y1="210" x2="318" y2="216" style="stroke:var(--axis)" stroke-width="1"/>
+      <line x1="432" y1="210" x2="432" y2="216" style="stroke:var(--axis)" stroke-width="1"/>
+      <line x1="546" y1="210" x2="546" y2="216" style="stroke:var(--axis)" stroke-width="1"/>
+      <line x1="660" y1="210" x2="660" y2="216" style="stroke:var(--axis)" stroke-width="1"/>
+      <text x="90" y="230" text-anchor="middle" font-size="12" style="fill:var(--muted)">0</text>
+      <text x="204" y="230" text-anchor="middle" font-size="12" style="fill:var(--muted)">2</text>
+      <text x="318" y="230" text-anchor="middle" font-size="12" style="fill:var(--muted)">4</text>
+      <text x="432" y="230" text-anchor="middle" font-size="12" style="fill:var(--muted)">6</text>
+      <text x="546" y="230" text-anchor="middle" font-size="12" style="fill:var(--muted)">8</text>
+      <text x="660" y="230" text-anchor="middle" font-size="12" style="fill:var(--muted)">10</text>
+      <text x="375" y="250" text-anchor="middle" font-size="13" style="fill:var(--muted)">modified duration (years) — see Section 8</text>
+      <circle cx="104" cy="210" r="6" style="fill:var(--c2)"/>
+      <circle cx="409" cy="210" r="6" style="fill:var(--accent)"/>
+      <line x1="104" y1="190" x2="409" y2="190" style="stroke:var(--down)" stroke-width="1.5"/>
+      <line x1="104" y1="186" x2="104" y2="194" style="stroke:var(--down)" stroke-width="1.5"/>
+      <line x1="409" y1="186" x2="409" y2="194" style="stroke:var(--down)" stroke-width="1.5"/>
+      <text x="256" y="182" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">duration gap ≈ 5.6 years</text>
+      <rect x="90" y="270" width="570" height="52" rx="8" style="fill:var(--accent-soft);stroke:var(--border)"/>
+      <text x="104" y="292" font-size="13" style="fill:var(--ink)">Rates rose ~3% → bond value ≈ −5.6 × 3% ≈ −17% (a ~$15B hole)…</text>
+      <text x="104" y="311" font-size="13" style="fill:var(--ink)">…but deposits can leave today. Forced sales turned the paper loss into a run.</text>
+    </svg>
+    <figcaption><strong>Figure 16.4</strong> — SVB's balance sheet in one picture: assets far out the duration axis, funding pinned at zero. Rising rates crushed the assets' value while the funding could — and did — vanish overnight. Market risk and liquidity risk, fused.</figcaption>
+  </figure>
+  <p>The kill sequence: the Fed raised rates through 2022, the bank's long bonds fell about 17%, and while that stayed a paper loss as long as SVB held them, its concentrated uninsured depositors got spooked and demanded cash all at once. To pay them, SVB had to <em>sell</em> the bonds, crystallizing the loss and revealing insolvency. The whole thing took about 48 hours — with nearly every risk in Figure 16.1 making an appearance.</p>
+
+  <details class="deep"><summary>Deep dive: why CVaR is "coherent" and VaR isn't</summary>
+    <p>There's a rigorous sense in which expected shortfall is the better measure, from Artzner et al.'s 1999 theory of <em>coherent risk measures</em>. A sensible risk measure should satisfy four axioms; the interesting one is <strong>subadditivity</strong>: the risk of a combined portfolio should never exceed the sum of the parts, ρ(A + B) ≤ ρ(A) + ρ(B) — diversification should never <em>increase</em> measured risk. VaR can violate this. Combine two bonds that each default rarely, and the merged book can show a <em>higher</em> VaR than the two standalone VaRs added together, because the quantile jumps discontinuously across the tail. That's not just ugly — it means a firm could reduce its reported VaR by <em>splitting</em> a portfolio, an arbitrage against the risk metric itself.</p>
+    <p>CVaR/expected shortfall is provably subadditive (and coherent) because it averages over the whole tail rather than reading a single quantile. This is not academic hair-splitting: it is why Basel's Fundamental Review of the Trading Book replaced 99% VaR with 97.5% expected shortfall for bank capital. When you pick a risk measure, you are picking the incentives it creates — choose one that rewards diversification instead of punishing it.</p>
+  </details>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. A hedge fund reports "1-day 99% VaR = $4M." What does this mean?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">The most the fund can ever lose in one day is $4M</button>
+        <button class="quiz-opt" data-correct>On about 1 day in 100, losses are expected to exceed $4M; on the other 99, they stay below it</button>
+        <button class="quiz-opt">The fund expects to lose $4M every day</button>
+        <button class="quiz-opt">The fund has a 99% chance of losing exactly $4M tomorrow</button>
+      </div>
+      <p class="quiz-explain">VaR is a threshold at a confidence level, not a maximum. 99% VaR of $4M means losses stay under $4M on 99% of days; it is silent on how bad the worst 1% get — that's what CVaR adds.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. Your portfolio suffers a 50% drawdown. What return do you now need just to get back to your original value?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">50%</button>
+        <button class="quiz-opt">75%</button>
+        <button class="quiz-opt" data-correct>100%</button>
+        <button class="quiz-opt">150%</button>
+      </div>
+      <p class="quiz-explain">Recovery = L ÷ (1 − L) = 0.5 ÷ 0.5 = 100%. Losing half means the remaining half must double. This asymmetry is why deep drawdowns are so much more dangerous than volatility alone suggests.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. In the 2008 crisis, a key reason VaR models understated the danger was that:</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Correlations between assets stayed exactly where the models assumed</button>
+        <button class="quiz-opt" data-correct>Correlations jumped toward 1 as everything fell together, erasing assumed diversification, on top of fat tails</button>
+        <button class="quiz-opt">The models used too much historical data</button>
+        <button class="quiz-opt">Volatility was too low to measure</button>
+      </div>
+      <p class="quiz-explain">In a crisis, previously diversifying assets crash together — correlations approach 1 — so risks stack instead of offsetting. Combined with fat tails (extreme moves being far more common than the normal curve allows), VaR badly under-counted the loss.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. Why do bank regulators (Basel) force banks to hold an equity capital buffer above their measured risk?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Because risk models are always exactly right, so the buffer is pure profit</button>
+        <button class="quiz-opt">To reduce the interest banks pay on deposits</button>
+        <button class="quiz-opt" data-correct>Because tail losses are systematically underestimated by models, so equity must absorb the scenario where the model is wrong before depositors are hit</button>
+        <button class="quiz-opt">To guarantee banks never make a loss in any year</button>
+      </div>
+      <p class="quiz-explain">Capital is the shock absorber that eats losses before depositors do. Because VaR and similar models understate the tail, the buffer is sized for the models being wrong and the stress scenarios being real — a well-capitalized bank survives the bad scenario and keeps lending.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. An airline hedges next year's fuel by buying futures at $2.50/gallon. Fuel then falls to $1.50. What is the result of the hedge?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-correct>The physical fuel is cheaper, but the futures lose money, so the net cost stays near $2.50 — the hedge gave up the windfall</button>
+        <button class="quiz-opt">The airline profits twice: cheaper fuel and a futures gain</button>
+        <button class="quiz-opt">The hedge protects the airline from the price drop</button>
+        <button class="quiz-opt">The futures expire worthless with no effect</button>
+      </div>
+      <p class="quiz-explain">A futures hedge is symmetric. It cancels the downside of rising fuel but also cancels the upside of falling fuel, locking cost near $2.50. That forfeited windfall is the price of certainty — hedging trades away return for a smaller distribution.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>Risk isn't one thing: market, credit, liquidity, operational, counterparty, and model risk are distinct failure modes — and in a crisis they cascade into one another.</li>
+      <li>Volatility is symmetric and understates the danger; maximum drawdown is what breaks investors and firms, because recovery = L ÷ (1 − L), so a −50% loss needs a +100% gain.</li>
+      <li>Read VaR as a full sentence — horizon, confidence, threshold. It is a tail quantile computed three ways (historical, parametric, Monte Carlo), each with an honest weakness; CVaR/expected shortfall reports the tail's <em>average</em> and is the better, coherent measure.</li>
+      <li>VaR broke in 2008 because of fat tails, correlations snapping to 1, and its silence about the tail's shape — model risk is the risk that your measurement itself is wrong.</li>
+      <li>Stress testing evaluates named catastrophes without assigning probabilities; regulatory capital buffers (Basel III) exist precisely because tail losses are systematically underestimated.</li>
+      <li>Hedging with futures, forwards, and puts converts an uncertain outcome into a certain, lower one — it costs return by design; the question is whether removing the risk is worth what you give up.</li>
+      <li>The graveyard teaches cleanly: LTCM (leverage × model error), Barings (no separation of duties), London Whale (a position too big to exit), SVB (duration mismatch turning a paper loss into a run). The market-risk analyst role that manages all of this is your most realistic entry point (<a href="#s20">Section 20</a>).</li>
+    </ul>
+  </div>
+</section>

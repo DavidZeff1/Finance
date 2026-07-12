@@ -1,0 +1,374 @@
+<section class="lesson" id="s04" data-num="04" data-title="Central Banks and Monetary Policy">
+  <p class="eyebrow">Part I · Economic Foundations</p>
+  <h2>4. Central Banks and Monetary Policy</h2>
+  <p class="lede">One committee of twelve people in Washington sets a single interest rate, and within months it moves your mortgage, your savings yield, the stock market, and the value of the dollar. By the end of this section you'll understand how that machine works — and be able to read a Fed headline the way a trader does.</p>
+
+  <h3 id="s04-what-it-is">What a central bank is (and is not)</h3>
+  <p>A central bank is a bank for banks and for the government — not for you. You can't open an account at the Federal Reserve. Its customers are commercial banks, which hold accounts there filled with <dfn class="term" tabindex="0" data-def="Money commercial banks keep in their accounts at the central bank; the ultimate settlement asset between banks.">reserves</dfn>, the electronic cash banks use to settle payments with each other. On top of that plumbing role, a central bank issues the currency, supervises banks, acts as <dfn class="term" tabindex="0" data-def="The institution that lends to solvent banks facing a cash crunch when no one else will, to stop panics from spreading.">lender of last resort</dfn> during panics, and — the part markets obsess over — conducts <dfn class="term" tabindex="0" data-def="Managing interest rates and the money supply to steer inflation and employment.">monetary policy</dfn>: steering interest rates to keep the economy on track.</p>
+  <p>The United States' central bank is the Federal Reserve (the "Fed"), created in 1913. It's deliberately weird in structure: a seven-member Board of Governors in Washington (appointed by the President, confirmed by the Senate, with staggered 14-year terms) plus twelve regional Federal Reserve Banks (New York, Chicago, San Francisco, and so on). Interest-rate decisions are made by the <dfn class="term" tabindex="0" data-def="Federal Open Market Committee — the Fed body that votes on interest rates; 12 voters, meets 8 times a year.">FOMC</dfn> (Federal Open Market Committee): the seven governors, the New York Fed president, and four of the other eleven regional presidents on a rotating basis — twelve votes in all, eight scheduled meetings a year.</p>
+  <p>Congress gave the Fed a <dfn class="term" tabindex="0" data-def="The Fed's two legal goals: stable prices (about 2% inflation) and maximum employment.">dual mandate</dfn>: stable prices and maximum employment. In practice "stable prices" means <a href="#s03">inflation</a> around 2% per year, measured by the <dfn class="term" tabindex="0" data-def="Personal Consumption Expenditures price index — the inflation gauge the Fed targets; broader than CPI and usually runs a bit cooler.">PCE</dfn> (Personal Consumption Expenditures) index. The two goals often conflict: cooling inflation usually means slowing the economy, which costs jobs. Monetary policy is the art of trading one against the other, in real time, with noisy data.</p>
+  <p>Why does everyone insist central banks be <em>independent</em> — free to set rates without political approval? Because politicians face elections, and cheap money feels great for about a year before the inflation bill arrives. The classic cautionary tale: in the early 1970s, Fed chair Arthur Burns kept rates low under pressure from President Nixon, helping ignite the inflation that took a decade — and a brutal recession under chair Paul Volcker, with rates near 20% — to extinguish. Countries with independent central banks reliably have lower, steadier inflation. Independence isn't decoration; it's the whole trick that makes the 2% promise believable.</p>
+  <p>The pattern is global. The European Central Bank (ECB) sets policy for the 20 euro-area countries, with a single primary mandate — price stability at 2% — and a Governing Council instead of the FOMC. The Bank of England (BoE, founded 1694, the granddaddy of them all) targets 2% inflation through its Monetary Policy Committee. The Bank of Japan (BoJ) spent three decades fighting the opposite problem — deflation — and pioneered nearly every unconventional tool in the modern kit, including quantitative easing (2001) and negative interest rates (2016), which it finally exited in 2024. Different acronyms, same machine.</p>
+  <div class="callout co-key"><p class="co-label">Key idea</p><p>A central bank doesn't set "the" interest rate on your loans directly. It sets one overnight rate at the very base of the system, and lets arbitrage and expectations propagate it outward — like changing a root constant that every other rate in the economy is computed from.</p></div>
+
+  <h3 id="s04-money-creation">How banks create money (yes, really)</h3>
+  <p>Here's the fact that surprises almost everyone: most money is created not by the government printing it, but by commercial banks making loans. When a bank approves your $900 loan, it doesn't hand you someone else's savings from a vault. It simply credits your account with $900 — a keystroke. Your deposit is brand new money that didn't exist a moment earlier. Loans create deposits, not the other way around.</p>
+  <p>This works because of <dfn class="term" tabindex="0" data-def="A banking system where banks keep only a fraction of deposits as reserves and lend or invest the rest.">fractional-reserve banking</dfn>: banks keep only a fraction of deposits on hand and put the rest to work. The textbook version chains it into a loop. Say banks hold 10% of each deposit as reserves. You deposit $1,000. Your bank keeps $100 and lends $900. The borrower spends it; the recipient deposits $900 at another bank, which keeps $90 and lends $810. That gets deposited, and $729 gets lent. Each round is 90% of the last — a geometric series, straight out of the same math as <a href="#s01">Section 1's</a> compounding.</p>
+  <div class="formula">
+    <div class="formula-main">Total deposits = Initial deposit × <span class="frac"><span>1</span><span>reserve ratio</span></span> = $1,000 × <span class="frac"><span>1</span><span>0.10</span></span> = $10,000</div>
+    <div class="formula-legend">The 1/reserve-ratio factor is the money multiplier — here 10×, so $1,000 of base money supports up to $10,000 of deposits ($9,000 newly created)</div>
+  </div>
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="Diagram showing a 1000 dollar deposit cascading through three banks: each bank keeps 10 percent as reserves and lends 90 percent, which becomes a new deposit at the next bank, growing total deposits from 1000 to 2710 dollars in three rounds.">
+      <defs>
+        <marker id="s04-arr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 Z" style="fill:var(--axis)"/>
+        </marker>
+      </defs>
+      <text x="130" y="26" text-anchor="middle" font-size="13" style="fill:var(--muted)">Round 1 — Bank A</text>
+      <text x="370" y="26" text-anchor="middle" font-size="13" style="fill:var(--muted)">Round 2 — Bank B</text>
+      <text x="610" y="26" text-anchor="middle" font-size="13" style="fill:var(--muted)">Round 3 — Bank C</text>
+
+      <rect x="40" y="36" width="180" height="36" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)"/>
+      <text x="130" y="59" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">New deposit: $1,000</text>
+      <line x1="130" y1="72" x2="130" y2="100" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s04-arr1)"/>
+      <rect x="40" y="104" width="72" height="36" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="76" y="119" text-anchor="middle" font-size="11" style="fill:var(--muted)">Keeps</text>
+      <text x="76" y="133" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">$100</text>
+      <rect x="120" y="104" width="100" height="36" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="170" y="126" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">Lends $900</text>
+      <path d="M220,122 L250,122 L250,54 L272,54" fill="none" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s04-arr1)"/>
+
+      <rect x="280" y="36" width="180" height="36" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)"/>
+      <text x="370" y="59" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">New deposit: $900</text>
+      <line x1="370" y1="72" x2="370" y2="100" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s04-arr1)"/>
+      <rect x="280" y="104" width="72" height="36" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="316" y="119" text-anchor="middle" font-size="11" style="fill:var(--muted)">Keeps</text>
+      <text x="316" y="133" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">$90</text>
+      <rect x="360" y="104" width="100" height="36" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="410" y="126" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">Lends $810</text>
+      <path d="M460,122 L490,122 L490,54 L512,54" fill="none" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s04-arr1)"/>
+
+      <rect x="520" y="36" width="180" height="36" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)"/>
+      <text x="610" y="59" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">New deposit: $810</text>
+      <line x1="610" y1="72" x2="610" y2="100" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s04-arr1)"/>
+      <rect x="520" y="104" width="72" height="36" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="556" y="119" text-anchor="middle" font-size="11" style="fill:var(--muted)">Keeps</text>
+      <text x="556" y="133" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">$81</text>
+      <rect x="600" y="104" width="100" height="36" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="650" y="126" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">Lends $729</text>
+      <line x1="650" y1="140" x2="650" y2="162" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s04-arr1)"/>
+      <text x="650" y="182" text-anchor="middle" font-size="13" style="fill:var(--muted)">…and so on</text>
+
+      <rect x="40" y="240" width="660" height="66" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="370" y="267" text-anchor="middle" font-size="14" style="fill:var(--ink)">Total deposits so far: $1,000 → $1,900 → $2,710 → …</text>
+      <text x="370" y="290" text-anchor="middle" font-size="13" style="fill:var(--muted)">With a 10% reserve ratio, the geometric series converges to $1,000 ÷ 0.10 = $10,000</text>
+    </svg>
+    <figcaption><strong>Figure 4.1</strong> — Money creation is a loop: each loan becomes someone else's deposit, and each new deposit funds another loan. Three rounds turn $1,000 into $2,710 of deposits; the limit is $10,000.</figcaption>
+  </figure>
+  <div class="callout co-warn"><p class="co-label">Common pitfall: the multiplier is a teaching device</p><p>The clean 1/reserve-ratio story is a useful mental model, not a literal description of 2020s banking. The US cut reserve requirements to <em>zero</em> in March 2020, and banks today are limited by capital rules, risk appetite, and whether profitable borrowers exist — not by a reserve count. In the real world causality mostly runs backwards: banks find creditworthy borrowers first, create the deposits, and obtain reserves afterwards. Keep the multiplier as intuition for how banking amplifies base money; don't use it to forecast.</p></div>
+  <p>Money creation has a dark twin: money destruction. Because a bank promises deposits back on demand but has locked the funds into long-term loans — a <dfn class="term" tabindex="0" data-def="Funding long-term, hard-to-sell assets with short-term liabilities that can be withdrawn at any time.">maturity mismatch</dfn> — no bank can survive everyone asking at once. If depositors merely <em>believe</em> a bank might fail, they rush to withdraw, forcing it to dump assets at fire-sale prices, which causes the failure they feared. That self-fulfilling stampede is a <dfn class="term" tabindex="0" data-def="A rush of depositors withdrawing at once because they fear a bank will fail — which itself can cause the failure.">bank run</dfn>.</p>
+  <p>Two defenses exist. <dfn class="term" tabindex="0" data-def="A government guarantee (FDIC in the US) that deposits up to a limit are safe even if the bank fails — currently $250,000 per depositor per bank.">Deposit insurance</dfn> — the FDIC (Federal Deposit Insurance Corporation) guarantees up to $250,000 per depositor, per bank — removes the reason for small depositors to run at all. And the central bank stands as lender of last resort for solvent banks caught short. Neither is foolproof: in March 2023, Silicon Valley Bank's clients (mostly startups with balances far above the insured cap) tried to pull $42 billion in a single day, coordinating on Twitter and moving money by app. The mechanics of that failure — an interest-rate bet gone wrong — get a full autopsy in <a href="#s16">Section 16 (Risk Management)</a>, and the wider banking system in <a href="#s06">Section 6</a>.</p>
+
+  <h3 id="s04-policy-rate">The policy rate: what the Fed actually sets</h3>
+  <p>Turn on financial news and you'll hear "the Fed raised rates." The rate in question is the <dfn class="term" tabindex="0" data-def="The overnight, unsecured interest rate at which banks lend reserves to each other; the Fed's main policy target.">federal funds rate</dfn> — what banks charge each other for overnight, unsecured loans of reserves. It's the shortest, safest lending rate in the economy, which makes it the base of the entire interest-rate stack. The FOMC doesn't decree a single number; it sets a target <em>range</em>, like 4.25%–4.50%, and then uses its tools to pin the market rate inside it. Rate moves are quoted in <dfn class="term" tabindex="0" data-def="One hundredth of a percentage point; 25 basis points = 0.25%.">basis points</dfn> (bp): a "25 bp hike" lifts the range by 0.25 percentage points.</p>
+  <p>How does it pin the rate? The old textbook answer was daily <dfn class="term" tabindex="0" data-def="Central bank purchases or sales of securities that add or drain bank reserves.">open market operations</dfn> (OMO): buy Treasury securities to inject reserves and nudge the rate down, sell to drain reserves and nudge it up. That's still the right intuition for how reserves enter the system, but since 2008 the Fed has run an "ample reserves" regime — banks hold trillions in reserves, so tiny daily tweaks to reserve supply no longer move the price. Instead the Fed sets the rate administratively, with two floors:</p>
+  <p>First, <dfn class="term" tabindex="0" data-def="Interest on Reserve Balances — the rate the Fed pays banks on reserves parked at the Fed; sets a floor on what banks will accept to lend.">IORB</dfn> (Interest on Reserve Balances): the Fed simply pays banks interest on reserves parked at the Fed. No bank will lend overnight for less than it can earn risk-free by doing nothing — so IORB acts as a floor for banks. Second, the <dfn class="term" tabindex="0" data-def="Overnight Reverse Repurchase facility — lets money-market funds and other non-banks park cash at the Fed overnight at a set rate; the floor for non-banks.">ON RRP</dfn> (Overnight Reverse Repurchase) facility does the same job for money-market funds and other non-banks that can't earn IORB: they can always park cash at the Fed at the ON RRP rate, so they won't lend below it either. Move those two administered rates and the whole overnight market moves with them — no daily fine-tuning required. (A third backstop, the <dfn class="term" tabindex="0" data-def="The Fed facility where banks can borrow directly, against collateral, at a rate slightly above the target range — the ceiling of the system.">discount window</dfn>, lets banks borrow directly from the Fed at a slightly higher rate, capping spikes.)</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 300" role="img" aria-label="Diagram of the Fed's floor system: a shaded target range from 4.25 to 4.50 percent, with the IORB rate at 4.40 percent as the banks' floor, the ON RRP rate at 4.25 percent as the non-banks' floor, and the effective federal funds rate trading between them at about 4.33 percent.">
+      <line x1="70" y1="55" x2="70" y2="240" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <rect x="70" y="80" width="360" height="125" style="fill:var(--accent-soft)"/>
+      <text x="250" y="70" text-anchor="middle" font-size="13" style="fill:var(--muted)">Target range: 4.25% – 4.50%</text>
+      <line x1="70" y1="130" x2="430" y2="130" style="stroke:var(--c1)" stroke-width="2.5"/>
+      <text x="445" y="134" font-size="13" font-weight="600" style="fill:var(--ink)">IORB 4.40% — the banks&#8217; floor</text>
+      <line x1="70" y1="165" x2="430" y2="165" style="stroke:var(--axis)" stroke-width="2.5" stroke-dasharray="6 5"/>
+      <text x="445" y="169" font-size="13" style="fill:var(--ink)">Fed funds trades here: &#8776;4.33%</text>
+      <line x1="70" y1="205" x2="430" y2="205" style="stroke:var(--c2)" stroke-width="2.5"/>
+      <text x="445" y="209" font-size="13" font-weight="600" style="fill:var(--ink)">ON RRP 4.25% — everyone else&#8217;s floor</text>
+      <text x="62" y="84" text-anchor="end" font-size="13" style="fill:var(--muted)">4.50%</text>
+      <text x="62" y="134" text-anchor="end" font-size="13" style="fill:var(--muted)">4.40%</text>
+      <text x="62" y="169" text-anchor="end" font-size="13" style="fill:var(--muted)">4.33%</text>
+      <text x="62" y="209" text-anchor="end" font-size="13" style="fill:var(--muted)">4.25%</text>
+      <text x="70" y="268" font-size="13" style="fill:var(--muted)">Nobody lends below what the Fed will pay them risk-free — so two administered rates pin the market.</text>
+    </svg>
+    <figcaption><strong>Figure 4.2</strong> — The modern "floor system." The Fed doesn't hunt the fed funds rate with daily trades; it pays IORB and ON RRP, and arbitrage keeps the market rate inside the band.</figcaption>
+  </figure>
+  <div class="callout co-you"><p class="co-label">Your edge</p><p>Think of IORB as a risk-free <code>max()</code> bound in an optimization: no rational lender accepts less than the guaranteed alternative. The entire floor system is one arbitrage constraint, enforced by trillions of self-interested dollars — a distributed system with no central scheduler that still converges every night.</p></div>
+
+  <h3 id="s04-transmission">Transmission: one rate moves everything (slowly)</h3>
+  <p>The fed funds rate itself applies only to overnight loans between banks. Its power comes from <dfn class="term" tabindex="0" data-def="The chain of channels through which a policy-rate change spreads to loans, spending, hiring, and prices across the economy.">transmission</dfn> — the chain reaction that carries it into every corner of the economy. Follow the channels:</p>
+  <p><strong>Consumer borrowing.</strong> Banks price loans off their own funding cost. The <dfn class="term" tabindex="0" data-def="The benchmark rate banks charge their best business customers; in the US it moves in lockstep at the fed funds rate plus 3 percentage points.">prime rate</dfn> — the benchmark for credit cards and many business loans — sits mechanically at fed funds + 3 points, so every hike passes through within days. Credit-card APRs (prime plus a fat margin) topped 21% on average during the 2023 peak. Thirty-year mortgages price off long-term Treasury yields (see <a href="#s08">Section 8</a>) rather than the overnight rate, but expectations drag them along: when the Fed turned hawkish in 2022, mortgage rates went from below 3% to about 7% in a year. On a $400,000 loan, that's $1,633 a month at 2.75% versus $2,528 at 6.5% — roughly $322,000 more over the life of the loan. That freezes homebuying, which freezes construction, which cuts jobs.</p>
+  <p><strong>Business investment.</strong> Companies greenlight projects when expected returns beat the cost of capital (<a href="#s14">Section 14</a>). Raise rates and the hurdle rises; marginal factories, data centers, and startups don't get funded. <strong>Asset prices.</strong> Stocks and bonds are priced by discounting future cash flows (<a href="#s01">Section 1</a>, <a href="#s13">Section 13</a>); a higher discount rate mechanically lowers today's value, hitting long-duration growth stocks hardest — one reason 2022 was brutal for tech. <strong>The dollar.</strong> Higher US yields attract global capital, bidding up the dollar (<a href="#s10">Section 10</a>): imports get cheaper (disinflationary), US exports get pricier abroad. <strong>Expectations.</strong> If firms and workers believe the Fed will keep inflation at 2%, they set prices and wages accordingly — belief does half the work.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 410" role="img" aria-label="Map of monetary policy transmission: a central box labeled policy rate plus one percentage point, with arrows radiating to six channels — mortgages and housing, credit cards and auto loans, bank lending, business investment, asset prices, and the US dollar.">
+      <defs>
+        <marker id="s04-arr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 Z" style="fill:var(--axis)"/>
+        </marker>
+      </defs>
+      <line x1="300" y1="163" x2="172" y2="102" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s04-arr2)"/>
+      <line x1="420" y1="163" x2="548" y2="102" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s04-arr2)"/>
+      <line x1="268" y1="195" x2="212" y2="195" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s04-arr2)"/>
+      <line x1="452" y1="195" x2="508" y2="195" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s04-arr2)"/>
+      <line x1="300" y1="227" x2="172" y2="294" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s04-arr2)"/>
+      <line x1="420" y1="227" x2="548" y2="294" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s04-arr2)"/>
+
+      <rect x="270" y="165" width="180" height="60" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)"/>
+      <text x="360" y="190" text-anchor="middle" font-size="15" font-weight="700" style="fill:var(--ink)">Policy rate</text>
+      <text x="360" y="210" text-anchor="middle" font-size="13" style="fill:var(--muted)">+1 percentage point</text>
+
+      <rect x="30" y="40" width="190" height="56" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="125" y="63" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Mortgages &amp; housing</text>
+      <text x="125" y="82" text-anchor="middle" font-size="12" style="fill:var(--muted)">payments &#8593;, building &#8595;</text>
+
+      <rect x="500" y="40" width="190" height="56" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="595" y="63" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Cards &amp; auto loans</text>
+      <text x="595" y="82" text-anchor="middle" font-size="12" style="fill:var(--muted)">APRs track prime &#8593;</text>
+
+      <rect x="25" y="167" width="185" height="56" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="117" y="190" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Bank lending</text>
+      <text x="117" y="209" text-anchor="middle" font-size="12" style="fill:var(--muted)">standards tighten</text>
+
+      <rect x="510" y="167" width="185" height="56" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="602" y="190" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Business investment</text>
+      <text x="602" y="209" text-anchor="middle" font-size="12" style="fill:var(--muted)">fewer projects clear the bar</text>
+
+      <rect x="30" y="298" width="190" height="56" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="125" y="321" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">Asset prices</text>
+      <text x="125" y="340" text-anchor="middle" font-size="12" style="fill:var(--muted)">stocks &amp; bonds reprice &#8595;</text>
+
+      <rect x="500" y="298" width="190" height="56" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="595" y="321" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">US dollar</text>
+      <text x="595" y="340" text-anchor="middle" font-size="12" style="fill:var(--muted)">stronger; imports cheaper</text>
+
+      <text x="360" y="392" text-anchor="middle" font-size="13" style="fill:var(--muted)">All channels operate with &#8220;long and variable lags&#8221; — typically 12–18 months to full effect.</text>
+    </svg>
+    <figcaption><strong>Figure 4.3</strong> — Transmission channels of a rate hike. One overnight rate radiates outward through borrowing costs, investment hurdles, asset valuations, and the currency — but none of it lands instantly.</figcaption>
+  </figure>
+  <p>Now the catch that makes central banking genuinely hard: the <strong>lag</strong>. Milton Friedman's famous phrase is that monetary policy works with "long and variable lags" — most estimates say 12–18 months for a hike to fully hit inflation and jobs. The Fed is steering by looking through a delayed feed: today's inflation print reflects decisions from over a year ago. Tighten until inflation visibly breaks and you've almost certainly overdone it.</p>
+  <div class="callout co-analogy"><p class="co-label">Analogy</p><p>It's a thermostat wired to a radiator with a 15-minute delay. Crank the heat until the room finally feels warm and you've guaranteed a sauna. Good central banking, like good control engineering, means acting on the forecast, not the current reading — and accepting you'll sometimes be wrong in public, at scale.</p></div>
+
+  <div class="widget" id="s04-policy-sim">
+    <div class="widget-head">
+      <h4>Monetary policy simulator</h4>
+      <p>Drag the policy rate and watch it ripple through a mortgage, your savings, business borrowing, and the dollar — or jump to a historical moment with the presets.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Fed policy rate <output class="ctl-val" id="s04-sim-rate-out">3.00%</output>
+          <input type="range" id="s04-sim-rate" min="0" max="8" step="0.25" value="3">
+        </label>
+      </div>
+      <div class="btn-group" id="s04-sim-presets">
+        <button class="btn" data-rate="0" data-key="zero">2008: cut to zero</button>
+        <button class="btn" data-rate="5.25" data-key="hike">2022: fastest hikes in 40 years</button>
+        <button class="btn is-active" data-rate="3" data-key="neutral">Neutral ~3%</button>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">30-yr mortgage rate (policy + 2.5)</span><span class="stat-value" id="s04-sim-mrate">5.50%</span></div>
+        <div class="stat"><span class="stat-label">Monthly payment, $400k loan</span><span class="stat-value" id="s04-sim-mpay">$2,271/mo</span></div>
+        <div class="stat"><span class="stat-label">High-yield savings on $10k</span><span class="stat-value" id="s04-sim-save">2.50% · $250/yr</span></div>
+        <div class="stat"><span class="stat-label">Business loan (prime rate)</span><span class="stat-value" id="s04-sim-biz">6.00%</span></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">US dollar</span><span class="stat-value" id="s04-sim-usd">&#9670; near neutral</span></div>
+        <div class="stat"><span class="stat-label">Inflation pressure</span><span class="stat-value" id="s04-sim-infl">&#9670; roughly balanced</span></div>
+        <div class="stat"><span class="stat-label">Jobs &amp; hiring</span><span class="stat-value" id="s04-sim-jobs">&#9670; roughly balanced</span></div>
+      </div>
+      <div style="max-width:340px">
+        <svg viewBox="0 0 300 60" role="img" aria-label="Dollar strength gauge: a needle moves right as the policy rate rises, indicating a stronger dollar.">
+          <rect x="20" y="29" width="260" height="6" rx="3" style="fill:var(--surface-2);stroke:var(--border)"/>
+          <rect x="85" y="29" width="65" height="6" style="fill:var(--accent-soft)"/>
+          <text x="117.5" y="16" text-anchor="middle" font-size="11" style="fill:var(--muted)">neutral zone</text>
+          <g id="s04-sim-needle" transform="translate(117.5,29)"><path d="M0,0 L-6,-11 L6,-11 Z" style="fill:var(--accent)"/></g>
+          <text x="20" y="52" font-size="12" style="fill:var(--muted)">0% · weaker $</text>
+          <text x="280" y="52" text-anchor="end" font-size="12" style="fill:var(--muted)">8% · stronger $</text>
+        </svg>
+      </div>
+      <p id="s04-sim-note" style="color:var(--ink-2)">Around 2.5–3% is many economists&#8217; guess at the neutral rate — the setting that neither stimulates nor restrains the economy. Nobody can observe it directly; the Fed steers toward it like a driver aiming at a line seen only in the rearview mirror.</p>
+      <p style="color:var(--muted);font-size:.9em">Inflation and jobs arrows show the <em>direction of pressure</em>, which takes 12–18 months to fully arrive. Simplifications: mortgages actually price off 10-year Treasury yields plus a spread; the savings figure assumes a high-yield account paying policy minus 0.5 points (big banks often pay far less); prime = policy + 3 points is the real US convention.</p>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s04-policy-sim');
+    if (!root) return;
+    var slider = root.querySelector('#s04-sim-rate');
+    var rateOut = root.querySelector('#s04-sim-rate-out');
+    var mrateEl = root.querySelector('#s04-sim-mrate');
+    var mpayEl = root.querySelector('#s04-sim-mpay');
+    var saveEl = root.querySelector('#s04-sim-save');
+    var bizEl = root.querySelector('#s04-sim-biz');
+    var usdEl = root.querySelector('#s04-sim-usd');
+    var inflEl = root.querySelector('#s04-sim-infl');
+    var jobsEl = root.querySelector('#s04-sim-jobs');
+    var noteEl = root.querySelector('#s04-sim-note');
+    var needle = root.querySelector('#s04-sim-needle');
+    var btns = root.querySelectorAll('#s04-sim-presets .btn');
+    var NOTES = {
+      zero: 'December 2008: with Lehman Brothers gone and credit markets frozen, the Fed slashed its target to 0–0.25% — zero for the first time in its history. It stayed there for seven years, and the Fed turned to QE because conventional policy had run out of room.',
+      hike: 'March 2022 – July 2023: the Fed raised rates from ~0% to 5.25–5.50% — eleven hikes in sixteen months, the fastest tightening since the early 1980s. Mortgage rates roughly doubled, long-duration tech stocks sank, and banks that had bet on low rates forever (see SVB, Section 16) did not all survive.',
+      neutral: 'Around 2.5–3% is many economists’ guess at the neutral rate — the setting that neither stimulates nor restrains the economy. Nobody can observe it directly; the Fed steers toward it like a driver aiming at a line seen only in the rearview mirror.',
+      custom: 'Custom setting. Compare it with the presets to see how far you are from the extremes the Fed has actually visited: zero (2008–2015, 2020–2022) and 5.25–5.50% (2023–2024).'
+    };
+    function fmt(n, d) {
+      return n.toLocaleString('en-US', { minimumFractionDigits: d, maximumFractionDigits: d });
+    }
+    function payment(P, annualPct, years) {
+      var r = annualPct / 100 / 12, n = years * 12;
+      if (r <= 0) return P / n;
+      var f = Math.pow(1 + r, n);
+      return P * r * f / (f - 1);
+    }
+    function setDir(el, mode, upText, downText, midText) {
+      if (mode > 0) { el.textContent = '▲ ' + upText; el.style.color = 'var(--up)'; }
+      else if (mode < 0) { el.textContent = '▼ ' + downText; el.style.color = 'var(--down)'; }
+      else { el.textContent = '◆ ' + midText; el.style.color = ''; }
+    }
+    function update() {
+      var rate = parseFloat(slider.value);
+      if (isNaN(rate)) rate = 3;
+      rate = Math.min(8, Math.max(0, rate));
+      rateOut.textContent = fmt(rate, 2) + '%';
+      var mr = rate + 2.5;
+      mrateEl.textContent = fmt(mr, 2) + '%';
+      mpayEl.textContent = '$' + fmt(Math.round(payment(400000, mr, 30)), 0) + '/mo';
+      var sy = Math.max(0.05, rate - 0.5);
+      saveEl.textContent = fmt(sy, 2) + '% · $' + fmt(Math.round(10000 * sy / 100), 0) + '/yr';
+      bizEl.textContent = fmt(rate + 3, 2) + '%';
+      var stance = rate >= 3.75 ? 1 : (rate <= 2.25 ? -1 : 0);
+      setDir(usdEl, stance, 'stronger (capital flows in)', 'weaker (yield less attractive)', 'near neutral');
+      setDir(inflEl, -stance, 'heating up — lands in 12–18 mo', 'cooling — lands in 12–18 mo', 'roughly balanced');
+      setDir(jobsEl, -stance, 'hiring supported', 'hiring cools, layoffs risk', 'roughly balanced');
+      needle.setAttribute('transform', 'translate(' + (20 + rate / 8 * 260) + ',29)');
+    }
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function () {
+        for (var j = 0; j < btns.length; j++) btns[j].classList.remove('is-active');
+        this.classList.add('is-active');
+        slider.value = this.getAttribute('data-rate');
+        noteEl.textContent = NOTES[this.getAttribute('data-key')] || NOTES.custom;
+        update();
+      });
+    }
+    slider.addEventListener('input', function () {
+      for (var j = 0; j < btns.length; j++) btns[j].classList.remove('is-active');
+      noteEl.textContent = NOTES.custom;
+      update();
+    });
+    update();
+  })();
+  </script>
+  <div class="callout co-ex"><p class="co-label">Worked example: check the widget's math</p><p>Set the slider to 4.00%. The mortgage rate becomes 4.00 + 2.50 = 6.50%. Monthly rate r = 0.065 ÷ 12 = 0.005417, n = 360 payments, so payment = 400,000 × r × (1+r)<sup>360</sup> ÷ ((1+r)<sup>360</sup> − 1) = <strong>$2,528 a month</strong>. Same formula as <a href="#s01">Section 1's</a> annuity math — monetary policy is just the time value of money with a committee attached.</p></div>
+
+  <h3 id="s04-qe-qt">QE and QT: policy by balance sheet</h3>
+  <p>In December 2008 the Fed hit a wall: the fed funds rate reached zero and the economy was still collapsing. You can't meaningfully cut below zero — savers would rather hold cash — a constraint called the <dfn class="term" tabindex="0" data-def="The floor near 0% below which a central bank cannot usefully cut its policy rate, since holding cash yields zero.">zero lower bound</dfn>. So the Fed reached for a second lever: instead of changing the <em>price</em> of overnight money, change the supply and price of <em>long-term</em> money directly.</p>
+  <p>That lever is <dfn class="term" tabindex="0" data-def="Quantitative easing — large-scale central bank purchases of long-term bonds, paid for with newly created reserves, to push long-term rates down.">quantitative easing</dfn> (QE): the central bank buys huge quantities of long-term government bonds and mortgage-backed securities, paying with newly created reserves. Extra demand pushes bond prices up, and — the seesaw you'll master in <a href="#s08">Section 8</a> — when a bond's price rises, its <dfn class="term" tabindex="0" data-def="The annual return a bond offers at its current price; moves inversely to the bond price.">yield</dfn> falls. Lower long-term yields mean cheaper mortgages and corporate debt even when the overnight rate is already at zero. Investors who sold their safe bonds to the Fed then reach for other assets — corporate bonds, stocks — easing conditions further. And the purchase program itself is a loud signal that rates will stay low, which shapes expectations.</p>
+  <p>The reverse gear is <dfn class="term" tabindex="0" data-def="Quantitative tightening — shrinking the central bank balance sheet, mainly by letting bonds mature without reinvesting the proceeds.">quantitative tightening</dfn> (QT): the Fed lets bonds mature without buying replacements, so reserves quietly drain out of the system month by month. No dramatic sales — more like slowly releasing pressure from a valve, precisely because everyone remembers how violently markets react to abrupt moves (the 2013 "taper tantrum," when merely <em>talking</em> about slowing QE spiked yields).</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 360" role="img" aria-label="Area chart of the Federal Reserve balance sheet from 2007 to 2024, rising from under one trillion dollars through three QE waves to about 4.5 trillion, dipping during the first QT, spiking to nearly 9 trillion during COVID QE, then declining under the second QT.">
+      <line x1="60" y1="213" x2="690" y2="213" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="60" y1="127" x2="690" y2="127" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="60" y1="40" x2="690" y2="40" style="stroke:var(--grid)" stroke-width="1"/>
+      <text x="52" y="217" text-anchor="end" font-size="13" style="fill:var(--muted)">$3T</text>
+      <text x="52" y="131" text-anchor="end" font-size="13" style="fill:var(--muted)">$6T</text>
+      <text x="52" y="44" text-anchor="end" font-size="13" style="fill:var(--muted)">$9T</text>
+      <path d="M60,274 L97,236 L134,236 L171,234 L208,216 L245,216 L282,184 L319,170 L356,170 L394,171 L431,171 L468,182 L505,187 L542,86 L579,47 L616,46 L653,78 L690,101 L690,300 L60,300 Z" style="fill:var(--accent-soft)"/>
+      <path d="M60,274 L97,236 L134,236 L171,234 L208,216 L245,216 L282,184 L319,170 L356,170 L394,171 L431,171 L468,182 L505,187 L542,86 L579,47 L616,46 L653,78 L690,101" fill="none" style="stroke:var(--accent)" stroke-width="2.5"/>
+      <line x1="60" y1="40" x2="60" y2="300" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="60" y1="300" x2="690" y2="300" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="116" y="224" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">QE1</text>
+      <text x="212" y="204" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">QE2</text>
+      <text x="300" y="158" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">QE3</text>
+      <text x="484" y="168" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">QT #1</text>
+      <text x="528" y="68" text-anchor="end" font-size="13" font-weight="600" style="fill:var(--ink)">COVID QE</text>
+      <text x="664" y="62" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">QT #2</text>
+      <text x="97" y="322" text-anchor="middle" font-size="13" style="fill:var(--muted)">2008</text>
+      <text x="245" y="322" text-anchor="middle" font-size="13" style="fill:var(--muted)">2012</text>
+      <text x="394" y="322" text-anchor="middle" font-size="13" style="fill:var(--muted)">2016</text>
+      <text x="542" y="322" text-anchor="middle" font-size="13" style="fill:var(--muted)">2020</text>
+      <text x="685" y="322" text-anchor="middle" font-size="13" style="fill:var(--muted)">2024</text>
+      <text x="66" y="345" font-size="13" style="fill:var(--muted)">Fed total assets, $ trillions (illustrative shape)</text>
+    </svg>
+    <figcaption><strong>Figure 4.4</strong> — The Fed's balance sheet, 2007–2024: under $1T before 2008, ~$4.5T after three QE rounds, and a COVID-era spike to nearly $9T in 2022, followed by slow QT. Balance-sheet policy went from emergency improvisation to a standard tool in fifteen years.</figcaption>
+  </figure>
+  <p>The scale is worth staring at. Before 2008 the Fed held under $1 trillion in assets. Three rounds of QE took it to about $4.5 trillion by 2014. Then COVID: in 2020 the Fed bought $120 billion of bonds <em>per month</em> at the peak, and the balance sheet touched nearly $9 trillion in 2022 before QT began shaving it back.</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall: "QE is just printing money, so hyperinflation is coming"</p><p>QE creates bank reserves, not wallets full of cash — reserves sit inside the banking system and don't buy groceries. A decade of massive QE (2009–2019) coincided with inflation stubbornly <em>below</em> 2%. The 2021–2022 inflation burst had QE in the mix, but alongside pandemic supply-chain chaos and trillions in direct fiscal transfers (<a href="#s05">Section 5</a>) — checks that, unlike reserves, really did land in spendable accounts. Be suspicious of one-variable explanations of inflation.</p></div>
+  <details class="deep"><summary>Deep dive: September 2019, when QT broke the plumbing</summary>
+    <p>The first QT experiment ended with a bang. By September 2019 the Fed had drained reserves from about $2.8 trillion to $1.4 trillion — and discovered, live, that "ample" had quietly become "scarce." On September 17, the repo rate (overnight lending against Treasury collateral) spiked from about 2% to nearly 10% intraday as banks ran short of spare cash on a corporate-tax-payment day. The fed funds rate broke above its target range — the one thing the system is built to prevent.</p>
+    <p>The Fed responded within hours, injecting tens of billions through repo operations and soon resuming asset purchases to rebuild the reserve buffer. The lesson analysts took away: nobody, including the Fed, knows exactly where the minimum comfortable level of reserves sits — so QT is always a game of approaching an invisible cliff slowly. When you hear "reserves are getting scarce" in 2020s Fed coverage, this episode is the ghost in the room.</p>
+  </details>
+
+  <h3 id="s04-reading-the-fed">Reading the Fed like a market participant</h3>
+  <p>Eight times a year, the FOMC meets for two days and releases a statement at 2:00 p.m. Eastern, followed by the chair's press conference at 2:30. Those ninety minutes are the closest thing markets have to a scheduled earthquake. Detailed minutes follow three weeks later, and four meetings a year (March, June, September, December) come with the Summary of Economic Projections (SEP) — including the famous <dfn class="term" tabindex="0" data-def="A quarterly chart where each Fed official anonymously marks where they think the policy rate should be in coming years; the median dot is the headline.">dot plot</dfn>, where each of the 19 Fed officials anonymously plots where they think the policy rate should sit at the end of each of the next few years. The median dot becomes the headline: "the Fed projects two cuts next year."</p>
+  <p>Fed-watchers sort officials into <dfn class="term" tabindex="0" data-def="An official who leans toward higher rates and tighter policy, prioritizing the inflation fight.">hawks</dfn> — who lean toward higher rates because they weight the inflation mandate — and <dfn class="term" tabindex="0" data-def="An official who leans toward lower rates and easier policy, prioritizing jobs and growth.">doves</dfn>, who lean toward lower rates to protect employment. Handicapping the committee's hawk–dove balance, and who holds a vote this year, is a legitimate full-time job on trading desks.</p>
+  <p>Why do markets convulse over a single adjective? Because modern monetary policy works substantially through <dfn class="term" tabindex="0" data-def="Central bank communication about the likely future path of rates, used to steer markets today.">forward guidance</dfn> — communication about the future path of rates. Ten-year yields, mortgage rates, and stock valuations depend on the expected path over years, not tonight's rate. So when the Fed's statement drops the word "patient," or the chair says "some time" instead of "considerable time," markets reprice the entire path within seconds. The current setting is almost old news; the path is the product. Traders read expectations straight off <dfn class="term" tabindex="0" data-def="Exchange-traded contracts whose prices imply the probability markets assign to each future Fed rate decision.">fed funds futures</dfn> — that's what a headline like "markets price a 78% chance of a March cut" means (futures live in <a href="#s09">Section 9</a>).</p>
+  <div class="callout co-you"><p class="co-label">Your edge</p><p>Traders literally run a diff on the FOMC statement — news wires publish red-lined versions minutes after release, word-level changes highlighted like a pull request. With your background you could build that pipeline in an afternoon: scrape the statements, diff the token streams, timestamp the changes against tick data. That's an event study, and it's a standard quant research pattern you'll meet again in <a href="#s18">Section 18</a>.</p></div>
+  <p>A practical reading list for any Fed event, in the order the market processes it: (1) the rate decision itself — usually fully priced in advance; (2) the statement diff — what changed since last time; (3) the dot plot, if it's a SEP meeting — where the median moved; (4) the press conference — where an unscripted sentence can move markets more than the decision did. If the Fed does exactly what futures predicted and says nothing new, prices barely move; surprise, not action, is what moves markets — a theme <a href="#s17">Section 17</a> makes precise.</p>
+  <div class="callout co-real"><p class="co-label">Real world: one word, trillions repriced</p><p>In January 2015 the Swiss National Bank abandoned its currency cap with no warning at all; the franc moved ~20% against the euro in minutes and several brokers went insolvent. That's the extreme case of why central banks now telegraph moves — and why, when a Fed chair merely hints ("we're not even thinking about thinking about raising rates" — Jerome Powell, 2020), it is front-page financial news.</p></div>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. The Fed's dual mandate consists of which two goals?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Maximizing GDP growth and minimizing government debt</button>
+        <button class="quiz-opt" data-correct>Stable prices and maximum employment</button>
+        <button class="quiz-opt">A strong dollar and a rising stock market</button>
+        <button class="quiz-opt">Low mortgage rates and high savings yields</button>
+      </div>
+      <p class="quiz-explain">Congress assigned the Fed price stability (interpreted as ~2% PCE inflation) and maximum employment. The dollar, stocks, and specific loan rates are affected by policy but are not mandate targets.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. When a commercial bank makes a new loan, what happens to the money supply?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Nothing — the bank just transfers existing savers' money to the borrower</button>
+        <button class="quiz-opt">It shrinks, because the bank now holds less cash</button>
+        <button class="quiz-opt" data-correct>It grows — the bank credits the borrower with a brand-new deposit</button>
+      </div>
+      <p class="quiz-explain">Loans create deposits: the bank credits the borrower's account with new money that didn't exist before. This is how most money in the economy comes into being.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. How does the Fed keep the federal funds rate inside its target range today?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt" data-correct>It sets the IORB and ON RRP rates, which act as floors no lender will go below</button>
+        <button class="quiz-opt">It adjusts reserve requirements up and down each week</button>
+        <button class="quiz-opt">It caps by law the rates banks may charge each other</button>
+        <button class="quiz-opt">It buys and sells small amounts of bonds every morning to fine-tune reserve scarcity</button>
+      </div>
+      <p class="quiz-explain">In the modern ample-reserves "floor system," the Fed pays interest on reserves (IORB) and offers the ON RRP facility to non-banks; arbitrage keeps the market rate pinned near those administered rates. Reserve requirements are zero, and daily fine-tuning OMO is history.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. The Fed hikes rates by a surprise 100 basis points. Which reaction is most likely, all else equal?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Existing bond prices rise as investors seek safety</button>
+        <button class="quiz-opt">The dollar weakens as investors flee US assets</button>
+        <button class="quiz-opt">Inflation falls within the same month</button>
+        <button class="quiz-opt" data-correct>The dollar strengthens and existing bond prices fall</button>
+      </div>
+      <p class="quiz-explain">Higher US yields attract foreign capital (stronger dollar) and make existing lower-coupon bonds less attractive (prices fall as yields rise). The inflation effect is real but takes 12–18 months, not a month.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. What does the dot plot show?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">The Fed's binding commitment for future rate decisions</button>
+        <button class="quiz-opt" data-correct>Each official's individual projection of the appropriate policy rate in coming years</button>
+        <button class="quiz-opt">Market-implied probabilities of the next rate move</button>
+      </div>
+      <p class="quiz-explain">Each of the 19 officials anonymously marks where they think rates should be at future year-ends; the median is quoted as "the Fed's projection." It's a forecast snapshot, not a promise — and market-implied odds come from fed funds futures instead.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>A central bank is the bank for banks and the government; the Fed's FOMC sets policy under a dual mandate of ~2% inflation (PCE) and maximum employment, and its independence is what makes the inflation target credible.</li>
+      <li>Most money is created by commercial banks when loans create deposits; the money multiplier (1 ÷ reserve ratio) is useful intuition, but modern banks are constrained by capital and loan demand, not reserve counts.</li>
+      <li>Bank runs are self-fulfilling panics born of maturity mismatch; deposit insurance (FDIC, $250k) and the lender of last resort exist to prevent them — SVB 2023 showed the app-era version.</li>
+      <li>The federal funds rate is an overnight bank-to-bank rate steered through a floor system: IORB for banks, ON RRP for money funds, with rates quoted in basis points (25 bp = 0.25%).</li>
+      <li>Transmission runs through mortgages, credit cards (prime = policy + 3), business hurdle rates, asset prices, and the dollar — with a 12–18 month lag that forces the Fed to steer by forecast.</li>
+      <li>QE buys long-term bonds with new reserves to push long yields down when the policy rate hits zero; QT lets them run off. It is not literal money-printing into wallets, and its inflation effect is contested.</li>
+      <li>Markets trade the expected <em>path</em> of rates, not the current level — so statement wording, dot plots, and press-conference phrasing move prices more than the decision itself.</li>
+    </ul>
+  </div>
+</section>

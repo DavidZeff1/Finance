@@ -1,0 +1,412 @@
+<section class="lesson" id="s18" data-num="18" data-title="Quantitative Finance and Data Analytics: Your Home Turf">
+  <p class="eyebrow">Part V · Your Edge: Data Meets Finance</p>
+  <h2>18. Quantitative Finance and Data Analytics: Your Home Turf</h2>
+  <p class="lede">This is the section where your two worlds finally shake hands: everything the last seventeen chapters taught you about finance now meets the pandas-and-scikit-learn muscle memory you already own. By the end you'll know which quant roles fit your profile, how financial data lies to you, why returns (not prices) are the thing you model, and how to run a backtest honestly enough that you don't fool yourself — the single skill that separates employable quants from expensive tourists.</p>
+
+  <h3 id="s18-roles">The role landscape, up close</h3>
+  <p>Finance uses the word "quant" the way tech uses "engineer" — as a blurry umbrella over jobs that share a toolkit but differ wildly in what they do all day. Before you apply to anything, learn the map, because the titles are not interchangeable and one of them is a much better landing spot for a CS-and-data background than the others.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Role</th><th>What they actually do all day</th><th>Fit for you</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Quant researcher</strong></td><td>Invents and tests trading signals and pricing models; lives in research notebooks, statistics, and papers. Often a PhD in physics, math, or stats.</td><td>Aspirational — strong stats/ML helps, but the bar is high and finance-domain deep.</td></tr>
+      <tr><td><strong>Quant developer</strong></td><td>Builds the production systems the researchers dream up: fast backtesters, data pipelines, execution engines. Software engineering first, finance second.</td><td>Excellent — this is CS with a finance skin.</td></tr>
+      <tr><td><strong>Risk quant</strong></td><td>Measures and models what could go wrong: <a href="#s16">VaR, stress tests</a>, credit and counterparty exposure. Careful, regulated, model-validation heavy.</td><td>Very good — a common, stable entry door.</td></tr>
+      <tr><td><strong>Data scientist</strong> (bank / asset manager / fintech)</td><td>Fraud models, credit scoring, churn, personalization, NLP on documents. Standard DS work, financial domain.</td><td>Best immediate fit — your certificates map almost one-to-one.</td></tr>
+      <tr><td><strong>Financial data analyst</strong></td><td>Cleans, joins, and reports on financial datasets; SQL, dashboards, some Python. The on-ramp role.</td><td>Realistic first job — undervalues you, but opens doors.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Read the table as a gradient, not a menu. On the far end sits the <dfn class="term" tabindex="0" data-def="A researcher who invents and statistically tests trading signals or pricing models, usually at a hedge fund or trading firm.">quant researcher</dfn> — glamorous, competitive, and usually gated behind a doctorate. That is a destination, not an entry point. In the middle, the <dfn class="term" tabindex="0" data-def="An engineer who builds the production software quant research runs on: data pipelines, backtesters, and execution systems.">quant developer</dfn> and <dfn class="term" tabindex="0" data-def="A quant who measures and models potential losses: value at risk, stress scenarios, credit and counterparty exposure.">risk quant</dfn> roles reward exactly what you already have — clean code, systems thinking, numerical care.</p>
+  <p>But look hardest at the two rightmost rows. A <dfn class="term" tabindex="0" data-def="A data scientist working in finance: fraud, credit, churn, and document-NLP models built with standard ML tooling.">data scientist</dfn> at a bank, asset manager, or <dfn class="term" tabindex="0" data-def="A technology company delivering financial services — payments, lending, trading, or banking — built software-first.">fintech</dfn> does work that is 80% identical to a data-science job anywhere; the finance is a domain you layer on top, not a new discipline you must master first. And the <dfn class="term" tabindex="0" data-def="An analyst who cleans, joins, and reports on financial datasets, typically with SQL, Python, and dashboards.">financial data analyst</dfn> role — the one that looks beneath you — is the classic Trojan horse: it puts you inside the building, next to the data and the people who use it, from where every other role becomes an internal transfer.</p>
+  <div class="callout co-you"><p class="co-label">Your edge: you are not starting over</p><p>Every course you finished — pandas, scikit-learn, train/test discipline, cross-validation, feature engineering — is directly billable in three of these five roles on day one. Finance did not invent a new kind of gradient descent. What you're missing is <em>domain vocabulary and data instincts</em>, and that gap is measured in months, not years. Treat this whole section as the crash course that closes it.</p></div>
+
+  <h3 id="s18-data">Financial data and its horror list</h3>
+  <p>Data is the raw material of every role above, and financial data has textures a general-purpose data scientist has never touched. Learn the taxonomy first, then learn the ways it will silently ruin your models.</p>
+  <p>The first family is <dfn class="term" tabindex="0" data-def="Data describing traded prices and quantities: quotes, trades, and the order book.">market data</dfn> — the price side. Its coarsest form is <dfn class="term" tabindex="0" data-def="Open, High, Low, Close, Volume: the four daily prices and traded quantity that summarize a bar.">OHLCV</dfn> bars (open, high, low, close, volume), one row per day per <dfn class="term" tabindex="0" data-def="A short code identifying a traded security, like AAPL for Apple.">ticker</dfn>. Zoom in and you get <dfn class="term" tabindex="0" data-def="A record of every individual trade or quote update, timestamped to the microsecond.">tick data</dfn> — every single trade and quote, microsecond-stamped, gigabytes per day. Zoom in further and you reach the <dfn class="term" tabindex="0" data-def="The live list of all outstanding buy and sell orders at each price level for a security.">order book</dfn>, the live ledger of every resting buy and sell order at each price. The second family is <dfn class="term" tabindex="0" data-def="Data from company financial statements: revenue, earnings, assets, debt, and the ratios built from them.">fundamental data</dfn> — the numbers from the <a href="#s11">financial statements</a>. The third is <dfn class="term" tabindex="0" data-def="Economy-wide series such as GDP, inflation, unemployment, and interest rates.">macro data</dfn> — GDP, inflation, rates. The fourth, and the frontier, is <dfn class="term" tabindex="0" data-def="Non-traditional signals like satellite imagery, credit-card spend, web traffic, or shipping data used to infer economic activity.">alternative data</dfn>: satellite images of parking lots, aggregated card spending, app-download counts — anything that hints at reality before the official numbers land.</p>
+  <p>Where do you get it? The professional world runs on three expensive vendors: <dfn class="term" tabindex="0" data-def="A dominant financial-data and messaging terminal; its keyboard and chat are industry infrastructure.">Bloomberg</dfn> (its terminal is a rite of passage), Refinitiv (formerly Reuters), and FactSet. A terminal costs on the order of $30,000 per user per year, which tells you how valuable clean, timely data is. But you can build a serious portfolio for free: <code>yfinance</code> for daily equity prices, <dfn class="term" tabindex="0" data-def="The Federal Reserve Bank of St. Louis economic data portal — thousands of free macro time series.">FRED</dfn> for macro series, and <dfn class="term" tabindex="0" data-def="The SEC's Electronic Data Gathering system, hosting every US public company filing for free.">EDGAR</dfn> for the raw <dfn class="term" tabindex="0" data-def="Documents companies must submit to the SEC, such as the annual 10-K and quarterly 10-Q.">SEC filings</dfn> behind fundamental data. The free stack is genuinely enough to learn on.</p>
+  <p>Now the part that separates the careful from the doomed. Financial data carries booby traps that inflate backtest results and then detonate in production. Memorize this list; interviewers ask about it precisely because it weeds people out.</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall: the four data-quality horrors</p>
+    <p><strong>Survivorship bias.</strong> Your dataset only contains companies that <em>survived</em>. The 400 stocks that went bankrupt or delisted are gone, so any strategy tested on today's index constituents looks brilliant — you accidentally only bet on winners you couldn't have known in advance.</p>
+    <p><strong>Look-ahead bias.</strong> Using information that wasn't available yet at decision time — a quarter's earnings on the quarter-end date, when they were actually reported six weeks later. This is the finance name for what you'd call <em>data leakage</em>.</p>
+    <p><strong>Corporate-action adjustments.</strong> Splits, dividends, and mergers make raw prices discontinuous. A 2-for-1 split halves the price overnight with no loss to holders; if you don't use adjusted prices you'll record a fake −50% return.</p>
+    <p><strong>Point-in-time data.</strong> Databases get <em>restated</em> — a company revises last quarter's revenue, and naive vendors overwrite the old number. A <dfn class="term" tabindex="0" data-def="Data stored as it actually appeared on each historical date, including values later revised — no hindsight overwrites.">point-in-time</dfn> dataset preserves what was known on each date, so your backtest sees only what a trader could have seen.</p>
+  </div>
+  <div class="callout co-you"><p class="co-label">Your edge: this is leakage, renamed</p><p>You already fight three of these four every time you build a model. Look-ahead bias is train-test leakage. Survivorship bias is a biased sampling frame. Point-in-time discipline is just "compute features from data as of the prediction timestamp." Finance simply has richer, sneakier versions — but your instinct to ask "could this feature actually have been known then?" is exactly the right reflex, and most finance grads never developed it.</p></div>
+
+  <h3 id="s18-returns">Returns math for data people</h3>
+  <p>Here is a rule that will feel wrong until it clicks: <strong>you almost never model prices. You model returns.</strong> Prices are <dfn class="term" tabindex="0" data-def="A series whose statistical properties (mean, variance) change over time, so past behavior doesn't pin down future behavior.">non-stationary</dfn> — Apple at $5 and Apple at $200 are different worlds with different variances, and every time-series and ML tool you own assumes some stability. Returns, the percentage changes, are far closer to <dfn class="term" tabindex="0" data-def="A series whose statistical properties are stable over time, making it suitable for standard statistical modeling.">stationary</dfn>, so they're what you feed your models.</p>
+  <p>There are two ways to compute a return, and knowing when to use each is a genuine competence signal. The <dfn class="term" tabindex="0" data-def="The percentage change in price: (P_t minus P_t-1) divided by P_t-1.">simple return</dfn> is the everyday percentage change. The <dfn class="term" tabindex="0" data-def="The natural log of the price ratio: ln(P_t divided by P_t-1); also called the continuously compounded return.">log return</dfn> is the natural log of the price ratio.</p>
+  <div class="formula">
+    <div class="formula-main">R<sub>simple</sub> = (P<sub>t</sub> − P<sub>t−1</sub>) ÷ P<sub>t−1</sub> &nbsp;&nbsp;&nbsp; r<sub>log</sub> = ln(P<sub>t</sub> ÷ P<sub>t−1</sub>) = ln(1 + R<sub>simple</sub>)</div>
+    <div class="formula-legend">P<sub>t</sub> = price today · P<sub>t−1</sub> = price yesterday · ln = natural logarithm</div>
+  </div>
+  <p>Why keep both? <strong>Log returns add across time; simple returns add across assets.</strong> A stock that goes +10% then −10% in simple terms is not flat — it's at 0.99, a −1% loss — but the log returns +0.0953 and −0.1054 sum cleanly to −0.0101, matching ln(0.99). That additivity makes log returns the natural currency for compounding a single series over time. Simple returns, meanwhile, aggregate correctly across a portfolio: a portfolio's simple return is the weighted average of its holdings' simple returns, which is not true for logs. Use logs down the time axis, simples across the holdings axis.</p>
+  <p>For small daily moves the two are nearly identical — ln(1.001) ≈ 0.0009995 — which is why people get sloppy. But the gap explodes for large moves, and that's exactly when it matters.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 360" role="img" aria-label="A chart plotting log return against simple return. The identity line and the log curve overlap near zero but diverge sharply for large moves, with a minus 50 percent simple return mapping to minus 69 percent in log terms.">
+      <line x1="70" y1="153.75" x2="690" y2="153.75" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="380" y1="40" x2="380" y2="320" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <text x="694" y="150" font-size="12" style="fill:var(--muted)">r = 0</text>
+      <text x="384" y="52" font-size="12" style="fill:var(--muted)">simple return →</text>
+      <line x1="70" y1="258.75" x2="690" y2="48.75" style="stroke:var(--muted)" stroke-width="1.6" stroke-dasharray="5 4"/>
+      <path d="M70,314.1 L121.67,275.0 L173.33,243.14 L225,216.2 L276.67,192.8 L328.33,172.2 L380,153.75 L431.67,137.1 L483.33,121.85 L535,107.83 L586.67,94.86 L638.33,82.79 L690,71.5" fill="none" style="stroke:var(--c1)" stroke-width="2.75"/>
+      <text x="628" y="60" text-anchor="end" font-size="13" font-weight="600" style="fill:var(--c1)">r<tspan font-size="10">log</tspan> = ln(1+R)</text>
+      <text x="250" y="250" font-size="13" style="fill:var(--muted)">identity (simple)</text>
+      <line x1="121.67" y1="241.25" x2="121.67" y2="275.0" style="stroke:var(--down)" stroke-width="1.4"/>
+      <circle cx="121.67" cy="275.0" r="4" style="fill:var(--down)"/>
+      <text x="128" y="298" font-size="12" style="fill:var(--down)">−50% price = −69% log</text>
+      <text x="70" y="338" font-size="12.5" style="fill:var(--muted)">−60%</text>
+      <text x="360" y="338" font-size="12.5" style="fill:var(--muted)">0%</text>
+      <text x="668" y="338" font-size="12.5" style="fill:var(--muted)">+60%</text>
+    </svg>
+    <figcaption><strong>Figure 18.1</strong> — Near the origin log and simple returns coincide; in the tails they diverge. Because a −100% loss is ln(0) = −∞ in log space, logs correctly punish catastrophic moves that simple returns understate.</figcaption>
+  </figure>
+  <p>Two more essentials. First, <dfn class="term" tabindex="0" data-def="Scaling a per-period statistic to a yearly figure using the number of periods per year.">annualization</dfn>. There are about 252 trading days in a US year, so a daily mean return scales by ×252, but daily <em>volatility</em> scales by ×√252 ≈ 15.87, because variance adds with time and standard deviation is its square root. A daily standard deviation of 1% is therefore about 15.9% annualized — the √-of-time rule you'll type a thousand times.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example: annualizing</p><p>Suppose SPY's daily log returns have mean 0.0003 and standard deviation 0.011. Annualized return ≈ 0.0003 × 252 = 0.0756, so about 7.6%. Annualized volatility ≈ 0.011 × √252 = 0.011 × 15.87 = 0.1746, about 17.5%. A crude annualized <a href="#s16">Sharpe-style</a> ratio (ignoring the risk-free rate) is 0.0756 ÷ 0.1746 ≈ 0.43 — realistic for a broad equity index.</p></div>
+  <p>Second, returns have famous <dfn class="term" tabindex="0" data-def="Empirical regularities seen in nearly all financial return series, robust across markets and eras.">stylized facts</dfn> — regularities so universal they show up in every market. Volatility <dfn class="term" tabindex="0" data-def="The tendency of large price moves to be followed by large moves and calm to follow calm; volatility comes in bursts.">clusters</dfn>: turbulent days bunch together, so today's volatility predicts tomorrow's even though the return's <em>sign</em> doesn't. Returns have <dfn class="term" tabindex="0" data-def="Distributions with more extreme outliers than a normal bell curve predicts; crashes are far more common than Gaussian math allows.">fat tails</dfn>: crashes and rallies are far more frequent than a normal distribution says, which is why a "6-sigma" day happens every few years, not every million. And returns themselves show <dfn class="term" tabindex="0" data-def="Almost no linear relationship between a return and the previous return; direction is essentially unforecastable.">near-zero autocorrelation</dfn> — you cannot predict tomorrow's direction from yesterday's, even though you <em>can</em> predict its magnitude. That combination is the signature of a market that's hard, but not impossible, to beat.</p>
+
+  <h3 id="s18-backtest">Backtesting done honestly</h3>
+  <p>A <dfn class="term" tabindex="0" data-def="Simulating a trading strategy on historical data to estimate how it would have performed.">backtest</dfn> answers "how would this strategy have done?" — and it is the most dangerous tool in finance, because it is trivially easy to build one that lies to you. The whole craft is a discipline for not lying to yourself. The honest workflow runs in one direction and never skips a step.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 230" role="img" aria-label="A pipeline of six boxes: hypothesis, point-in-time data, signal, portfolio rules, costs and slippage, out-of-sample test, with a return loop underneath labeled most ideas die here.">
+      <text x="360" y="26" text-anchor="middle" font-size="14" font-weight="600" style="fill:var(--ink)">The honest research pipeline — one direction, no shortcuts</text>
+      <g font-size="12" font-weight="600">
+        <rect x="18" y="66" width="104" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="70" y="92" text-anchor="middle" style="fill:var(--ink)">1 Hypothesis</text><text x="70" y="110" text-anchor="middle" font-size="10.5" font-weight="400" style="fill:var(--muted)">an economic why</text>
+        <rect x="134" y="66" width="104" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="186" y="92" text-anchor="middle" style="fill:var(--ink)">2 Data</text><text x="186" y="110" text-anchor="middle" font-size="10.5" font-weight="400" style="fill:var(--muted)">point-in-time</text>
+        <rect x="250" y="66" width="104" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="302" y="92" text-anchor="middle" style="fill:var(--ink)">3 Signal</text><text x="302" y="110" text-anchor="middle" font-size="10.5" font-weight="400" style="fill:var(--muted)">the rule</text>
+        <rect x="366" y="66" width="104" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="418" y="92" text-anchor="middle" style="fill:var(--ink)">4 Portfolio</text><text x="418" y="110" text-anchor="middle" font-size="10.5" font-weight="400" style="fill:var(--muted)">sizing rules</text>
+        <rect x="482" y="66" width="104" height="60" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/><text x="534" y="92" text-anchor="middle" style="fill:var(--ink)">5 Costs</text><text x="534" y="110" text-anchor="middle" font-size="10.5" font-weight="400" style="fill:var(--muted)">fees + slippage</text>
+        <rect x="598" y="66" width="104" height="60" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)"/><text x="650" y="92" text-anchor="middle" style="fill:var(--ink)">6 Out-of-</text><text x="650" y="108" text-anchor="middle" style="fill:var(--ink)">sample</text>
+      </g>
+      <g style="stroke:var(--axis)" stroke-width="1.6">
+        <line x1="122" y1="96" x2="132" y2="96" marker-end="url(#s18-ar)"/>
+        <line x1="238" y1="96" x2="248" y2="96" marker-end="url(#s18-ar)"/>
+        <line x1="354" y1="96" x2="364" y2="96" marker-end="url(#s18-ar)"/>
+        <line x1="470" y1="96" x2="480" y2="96" marker-end="url(#s18-ar)"/>
+        <line x1="586" y1="96" x2="596" y2="96" marker-end="url(#s18-ar)"/>
+      </g>
+      <path d="M650,126 L650,182 L70,182 L70,126" fill="none" style="stroke:var(--down)" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#s18-ar2)"/>
+      <text x="360" y="205" text-anchor="middle" font-size="12.5" style="fill:var(--down)">fails out-of-sample? discard and restart — most ideas die here, and that is the job</text>
+      <defs>
+        <marker id="s18-ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,1 L7,4 L0,7 Z" style="fill:var(--axis)"/></marker>
+        <marker id="s18-ar2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,1 L7,4 L0,7 Z" style="fill:var(--down)"/></marker>
+      </defs>
+    </svg>
+    <figcaption><strong>Figure 18.2</strong> — The pipeline flows left to right and you only look at step 6 <em>once</em>. Every time you peek at the out-of-sample result and tweak the signal, you quietly turn your test set into a training set.</figcaption>
+  </figure>
+  <p>Two steps deserve extra fear. Step 5, <dfn class="term" tabindex="0" data-def="Trading fees, commissions, and the bid-ask spread paid on every transaction.">transaction costs</dfn> and <dfn class="term" tabindex="0" data-def="The gap between the price you expected and the price you actually got, because your order moved the market or the quote shifted.">slippage</dfn>, kills more strategies than any other. A signal that trades daily and looks like a goldmine at zero cost can be a slow bleed once you subtract even 0.1% per trade — high-turnover strategies are especially fragile. And step 6 guards against the cardinal sin: <dfn class="term" tabindex="0" data-def="Tuning a strategy so tightly to historical data that it captures noise, not signal, and fails on new data.">overfitting</dfn>. This is the exact enemy you already know from ML — a model that memorizes the training set. The defense is identical: a strict train/test split, where the <dfn class="term" tabindex="0" data-def="A test on data the strategy was never fitted or tuned on, held back to estimate honest future performance.">out-of-sample</dfn> period is quarantined and touched exactly once.</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall: the multiple-testing problem</p><p>Here's the subtler trap. Try 100 unrelated strategies on the same data at a 5% significance level, and by pure luck roughly 5 will look "significant" — the finance version of <dfn class="term" tabindex="0" data-def="Running many tests and reporting the few that pass, ignoring that some will look good by chance alone.">p-hacking</dfn>. If you test enough moving-average combinations, one will have crushed history for no reason but noise. This is why a real research process demands an economic <em>reason</em> the signal should work <strong>before</strong> the backtest, and penalizes the number of things you tried. A backtest is a hypothesis test, and running a thousand of them silently destroys your p-values.</p></div>
+  <figure class="fig">
+    <svg viewBox="0 0 720 320" role="img" aria-label="Two equity curves split by a vertical line. Left of the line, in-sample, the strategy soars above the benchmark. Right of the line, out-of-sample, the strategy flattens and falls below the benchmark.">
+      <line x1="60" y1="40" x2="60" y2="280" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <line x1="60" y1="280" x2="690" y2="280" style="stroke:var(--axis)" stroke-width="1.5"/>
+      <rect x="60" y="40" width="330" height="240" style="fill:var(--accent-soft)" opacity="0.5"/>
+      <line x1="390" y1="40" x2="390" y2="280" style="stroke:var(--ink-2)" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <path d="M60,248 L120,222 L180,186 L240,146 L300,112 L360,86 L390,78" fill="none" style="stroke:var(--c1)" stroke-width="2.75"/>
+      <path d="M390,78 L450,104 L510,92 L570,132 L630,120 L690,152" fill="none" style="stroke:var(--c1)" stroke-width="2.75" stroke-dasharray="2 3"/>
+      <path d="M60,252 L200,214 L390,182 L540,150 L690,124" fill="none" style="stroke:var(--muted)" stroke-width="2.25"/>
+      <text x="205" y="62" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--ink)">in-sample: looks brilliant</text>
+      <text x="545" y="62" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--down)">out-of-sample: edge evaporates</text>
+      <text x="120" y="200" font-size="12.5" font-weight="600" style="fill:var(--c1)">strategy</text>
+      <text x="600" y="112" font-size="12.5" style="fill:var(--muted)">buy &amp; hold</text>
+    </svg>
+    <figcaption><strong>Figure 18.3</strong> — The overfit signature: a strategy tuned to fit the shaded in-sample window keeps rising there, then reverts to noise (and underperforms plain buy-and-hold) the moment it meets data it never saw.</figcaption>
+  </figure>
+  <p>Reading about overfitting is one thing. Feeling it happen under your own hands is another — so let's build one.</p>
+
+  <div class="widget" id="s18-backtest-sandbox">
+    <div class="widget-head">
+      <h4>Backtest sandbox: a moving-average crossover</h4>
+      <p>The strategy is long the asset when the fast moving average is above the slow one, and in cash otherwise. Tune the two sliders until the strategy beats buy-and-hold — then hit <strong>Regenerate</strong> and watch your "winning" settings lose on a fresh random market. That whiplash <em>is</em> overfitting.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Fast MA <output class="ctl-val" id="s18-fast-out">20</output><input type="range" id="s18-fast" min="5" max="50" step="1" value="20"></label>
+        <label class="ctl">Slow MA <output class="ctl-val" id="s18-slow-out">100</output><input type="range" id="s18-slow" min="20" max="200" step="1" value="100"></label>
+        <div class="btn-group" id="s18-cost" role="group" aria-label="Transaction cost">
+          <button class="btn is-active" data-c="0" type="button">No cost</button>
+          <button class="btn" data-c="1" type="button">0.1% / trade</button>
+        </div>
+        <div class="btn-group"><button class="btn" id="s18-regen" type="button">↻ Regenerate market</button></div>
+      </div>
+      <svg id="s18-svg" viewBox="0 0 720 480" role="img" aria-label="Top panel: a synthetic price line with fast and slow moving averages and buy and sell markers, shaded where the strategy is long. Bottom panel: strategy equity curve versus buy-and-hold equity curve.">
+        <g id="s18-plot"></g>
+      </svg>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">Strategy CAGR</span><span class="stat-value" id="s18-scagr">—</span></div>
+        <div class="stat"><span class="stat-label">Buy &amp; hold CAGR</span><span class="stat-value" id="s18-bcagr">—</span></div>
+        <div class="stat"><span class="stat-label">Strategy max drawdown</span><span class="stat-value" id="s18-sdd">—</span></div>
+        <div class="stat"><span class="stat-label">Buy &amp; hold max drawdown</span><span class="stat-value" id="s18-bdd">—</span></div>
+        <div class="stat"><span class="stat-label">Trades</span><span class="stat-value" id="s18-trades">—</span></div>
+      </div>
+      <p id="s18-verdict" style="color:var(--ink)">—</p>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s18-backtest-sandbox');
+    if (!root) return;
+    var N = 750, P0 = 100;
+    var price = new Array(N);
+    function $(id) { return root.querySelector('#' + id); }
+    function randn() { var u1 = Math.random(), u2 = Math.random(); if (u1 < 1e-12) u1 = 1e-12; return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2); }
+    function gen() {
+      var cp1 = 190 + Math.floor(Math.random() * 130);
+      var cp2 = cp1 + 130 + Math.floor(Math.random() * 130);
+      if (cp2 > N - 60) cp2 = N - 60;
+      var jit = function () { return (Math.random() - 0.5); };
+      var reg = [
+        { mu: 0.18 + 0.10 * jit(), vol: 0.13 + 0.03 * jit() },
+        { mu: -0.16 + 0.14 * jit(), vol: 0.30 + 0.06 * jit() },
+        { mu: 0.10 + 0.12 * jit(), vol: 0.17 + 0.04 * jit() }
+      ];
+      price[0] = P0;
+      for (var i = 1; i < N; i++) {
+        var r = i < cp1 ? reg[0] : (i < cp2 ? reg[1] : reg[2]);
+        var md = r.mu / 252, sd = r.vol / Math.sqrt(252);
+        var lr = (md - 0.5 * sd * sd) + sd * randn();
+        price[i] = price[i - 1] * Math.exp(lr);
+        if (price[i] < 1) price[i] = 1;
+      }
+    }
+    function sma(arr, w) {
+      var out = new Array(arr.length), sum = 0;
+      for (var i = 0; i < arr.length; i++) {
+        sum += arr[i];
+        if (i >= w) sum -= arr[i - w];
+        out[i] = (i >= w - 1) ? sum / w : null;
+      }
+      return out;
+    }
+    function clampInt(el) { var v = parseInt(el.value, 10), mn = parseInt(el.min, 10), mx = parseInt(el.max, 10); if (isNaN(v)) v = mn; return Math.min(mx, Math.max(mn, v)); }
+    function pct(x) { return (x >= 0 ? '' : '−') + Math.abs(x * 100).toFixed(1) + '%'; }
+    var fastEl = $('s18-fast'), slowEl = $('s18-slow');
+    var costState = 0;
+    function update() {
+      var fastW = clampInt(fastEl), slowW = clampInt(slowEl);
+      if (fastW >= slowW) { fastW = slowW - 1; if (fastW < 5) { fastW = 5; slowW = 20; } }
+      fastEl.value = fastW; slowEl.value = slowW;
+      $('s18-fast-out').textContent = fastW; $('s18-slow-out').textContent = slowW;
+      var C = costState ? 0.001 : 0;
+      var fastMA = sma(price, fastW), slowMA = sma(price, slowW);
+      var eqS = 1, eqB = 1, prevPos = 0, trades = 0;
+      var peakS = 1, peakB = 1, ddS = 0, ddB = 0, days = 0;
+      var curveS = new Array(N), curveB = new Array(N);
+      var segs = [], buys = [], sells = [], segStart = -1;
+      for (var i = 0; i < N; i++) { curveS[i] = null; curveB[i] = null; }
+      for (i = slowW; i < N; i++) {
+        var pos = (fastMA[i - 1] > slowMA[i - 1]) ? 1 : 0;
+        if (pos !== prevPos) {
+          trades++;
+          if (C) eqS *= (1 - C);
+          if (pos === 1) { buys.push(i); segStart = i; }
+          else { sells.push(i); if (segStart >= 0) { segs.push([segStart, i]); segStart = -1; } }
+        }
+        var ret = price[i] / price[i - 1] - 1;
+        eqS *= (1 + pos * ret);
+        eqB *= (1 + ret);
+        prevPos = pos;
+        curveS[i] = eqS; curveB[i] = eqB;
+        if (eqS > peakS) peakS = eqS; var dS = (peakS - eqS) / peakS; if (dS > ddS) ddS = dS;
+        if (eqB > peakB) peakB = eqB; var dB = (peakB - eqB) / peakB; if (dB > ddB) ddB = dB;
+        days++;
+      }
+      if (segStart >= 0) segs.push([segStart, N - 1]);
+      var yrs = days / 252;
+      var cagrS = Math.pow(eqS, 1 / yrs) - 1, cagrB = Math.pow(eqB, 1 / yrs) - 1;
+      $('s18-scagr').textContent = pct(cagrS); $('s18-scagr').style.color = cagrS >= 0 ? 'var(--up)' : 'var(--down)';
+      $('s18-bcagr').textContent = pct(cagrB); $('s18-bcagr').style.color = cagrB >= 0 ? 'var(--up)' : 'var(--down)';
+      $('s18-sdd').textContent = '−' + (ddS * 100).toFixed(1) + '%'; $('s18-sdd').style.color = 'var(--down)';
+      $('s18-bdd').textContent = '−' + (ddB * 100).toFixed(1) + '%'; $('s18-bdd').style.color = 'var(--down)';
+      $('s18-trades').textContent = trades;
+      var win = eqS > eqB;
+      $('s18-verdict').innerHTML = win
+        ? 'On <em>this</em> market the strategy won (final $' + eqS.toFixed(2) + ' vs $' + eqB.toFixed(2) + '). Now hit Regenerate — the same sliders will often lose. You fit the noise, not a signal.'
+        : 'On <em>this</em> market buy-and-hold won (strategy $' + eqS.toFixed(2) + ' vs $' + eqB.toFixed(2) + '). Try tuning the sliders to beat it — then regenerate and watch the win vanish.';
+      draw(fastMA, slowMA, curveS, curveB, segs, buys, sells);
+    }
+    function draw(fastMA, slowMA, curveS, curveB, segs, buys, sells) {
+      var X0 = 54, X1 = 706, TY0 = 46, TY1 = 250, BY0 = 306, BY1 = 452;
+      function x(i) { return X0 + i / (N - 1) * (X1 - X0); }
+      var pmin = Infinity, pmax = -Infinity, i, v;
+      for (i = 0; i < N; i++) {
+        v = price[i]; if (v < pmin) pmin = v; if (v > pmax) pmax = v;
+        if (fastMA[i] != null) { if (fastMA[i] < pmin) pmin = fastMA[i]; if (fastMA[i] > pmax) pmax = fastMA[i]; }
+        if (slowMA[i] != null) { if (slowMA[i] < pmin) pmin = slowMA[i]; if (slowMA[i] > pmax) pmax = slowMA[i]; }
+      }
+      if (pmax - pmin < 1e-6) pmax = pmin + 1;
+      function yP(val) { return TY1 - (val - pmin) / (pmax - pmin) * (TY1 - TY0); }
+      var emin = Infinity, emax = -Infinity;
+      for (i = 0; i < N; i++) {
+        if (curveS[i] != null) { if (curveS[i] < emin) emin = curveS[i]; if (curveS[i] > emax) emax = curveS[i]; }
+        if (curveB[i] != null) { if (curveB[i] < emin) emin = curveB[i]; if (curveB[i] > emax) emax = curveB[i]; }
+      }
+      if (!isFinite(emin)) { emin = 0.9; emax = 1.1; }
+      var pad = (emax - emin) * 0.08; if (pad < 1e-6) pad = 0.05; emin -= pad; emax += pad;
+      function yE(val) { return BY1 - (val - emin) / (emax - emin) * (BY1 - BY0); }
+      var s = '';
+      // long-position shading (top panel)
+      for (i = 0; i < segs.length; i++) {
+        var xa = x(segs[i][0]), xb = x(segs[i][1]);
+        s += '<rect x="' + xa.toFixed(1) + '" y="' + TY0 + '" width="' + (xb - xa).toFixed(1) + '" height="' + (TY1 - TY0).toFixed(1) + '" style="fill:var(--accent-soft)"/>';
+      }
+      // panel frames / baselines
+      s += '<line x1="' + X0 + '" y1="' + TY1 + '" x2="' + X1 + '" y2="' + TY1 + '" style="stroke:var(--axis)" stroke-width="1.2"/>';
+      s += '<line x1="' + X0 + '" y1="' + BY1 + '" x2="' + X1 + '" y2="' + BY1 + '" style="stroke:var(--axis)" stroke-width="1.2"/>';
+      // equity = 1 reference line
+      if (1 >= emin && 1 <= emax) { var y1 = yE(1); s += '<line x1="' + X0 + '" y1="' + y1.toFixed(1) + '" x2="' + X1 + '" y2="' + y1.toFixed(1) + '" style="stroke:var(--grid)" stroke-width="1" stroke-dasharray="3 3"/>'; }
+      function pathOf(getX, getY, arr, isPrice) {
+        var d = '', started = false;
+        for (var j = 0; j < N; j++) {
+          var val = isPrice ? arr[j] : arr[j];
+          if (val == null) { started = false; continue; }
+          d += (started ? 'L' : 'M') + getX(j).toFixed(1) + ',' + getY(val).toFixed(1) + ' ';
+          started = true;
+        }
+        return d;
+      }
+      // price + MAs
+      s += '<path d="' + pathOf(x, yP, price, true) + '" fill="none" style="stroke:var(--c1)" stroke-width="1.4" opacity="0.85"/>';
+      s += '<path d="' + pathOf(x, yP, fastMA, false) + '" fill="none" style="stroke:var(--c2)" stroke-width="2"/>';
+      s += '<path d="' + pathOf(x, yP, slowMA, false) + '" fill="none" style="stroke:var(--c3)" stroke-width="2"/>';
+      // markers
+      for (i = 0; i < buys.length; i++) { var bx = x(buys[i]), by = yP(price[buys[i]]); s += '<path d="M' + (bx - 4).toFixed(1) + ',' + (by + 6).toFixed(1) + ' L' + (bx + 4).toFixed(1) + ',' + (by + 6).toFixed(1) + ' L' + bx.toFixed(1) + ',' + (by - 2).toFixed(1) + ' Z" style="fill:var(--up)"/>'; }
+      for (i = 0; i < sells.length; i++) { var sx = x(sells[i]), sy = yP(price[sells[i]]); s += '<path d="M' + (sx - 4).toFixed(1) + ',' + (sy - 6).toFixed(1) + ' L' + (sx + 4).toFixed(1) + ',' + (sy - 6).toFixed(1) + ' L' + sx.toFixed(1) + ',' + (sy + 2).toFixed(1) + ' Z" style="fill:var(--down)"/>'; }
+      // equity curves
+      s += '<path d="' + pathOf(x, yE, curveB, false) + '" fill="none" style="stroke:var(--muted)" stroke-width="2"/>';
+      s += '<path d="' + pathOf(x, yE, curveS, false) + '" fill="none" style="stroke:var(--accent)" stroke-width="2.5"/>';
+      // labels
+      s += '<text x="' + X0 + '" y="36" font-size="13" font-weight="600" style="fill:var(--ink)">Price &amp; moving averages</text>';
+      s += '<text x="' + X1 + '" y="36" text-anchor="end" font-size="12" style="fill:var(--muted)"><tspan style="fill:var(--c2)">■</tspan> fast  <tspan style="fill:var(--c3)">■</tspan> slow  ·  shaded = long</text>';
+      s += '<text x="' + X0 + '" y="296" font-size="13" font-weight="600" style="fill:var(--ink)">Equity of $1 invested</text>';
+      s += '<text x="' + X1 + '" y="296" text-anchor="end" font-size="12" style="fill:var(--muted)"><tspan style="fill:var(--accent)">■</tspan> strategy  <tspan style="fill:var(--muted)">■</tspan> buy &amp; hold</text>';
+      s += '<text x="' + ((X0 + X1) / 2).toFixed(0) + '" y="474" text-anchor="middle" font-size="12" style="fill:var(--muted)">750 trading days (~3 years) of one synthetic market with two hidden regime shifts</text>';
+      $('s18-plot').innerHTML = s;
+    }
+    var costBtns = root.querySelectorAll('#s18-cost .btn');
+    for (var k = 0; k < costBtns.length; k++) {
+      (function (btn) {
+        btn.addEventListener('click', function () {
+          for (var m = 0; m < costBtns.length; m++) costBtns[m].classList.remove('is-active');
+          btn.classList.add('is-active');
+          costState = parseInt(btn.getAttribute('data-c'), 10);
+          update();
+        });
+      })(costBtns[k]);
+    }
+    fastEl.addEventListener('input', update);
+    slowEl.addEventListener('input', update);
+    $('s18-regen').addEventListener('click', function () { gen(); update(); });
+    gen(); update();
+  })();
+  </script>
+
+  <p>Notice what the shading teaches: the strategy is a <dfn class="term" tabindex="0" data-def="A strategy that is either fully invested or fully in cash, never short — it only bets on up moves.">long/flat</dfn> filter that sits out downturns, so it usually has a smaller <a href="#s16">drawdown</a> than buy-and-hold even when it earns less. That's a real property. But whether it <em>beats</em> the market on any given run is mostly luck — which is the whole lesson.</p>
+
+  <h3 id="s18-ml">Machine learning in finance, honestly</h3>
+  <p>You arrived with ML skills, so here is the blunt truth about where they pay off in finance and where they'll break your heart. The dividing line is <dfn class="term" tabindex="0" data-def="The ratio of true predictable structure to random noise in a dataset; low ratios make accurate prediction nearly impossible.">signal-to-noise ratio</dfn>. ML is spectacular when the signal is strong and abundant, and nearly useless when the noise drowns everything — and financial problems span that entire range.</p>
+  <figure class="fig">
+    <svg viewBox="0 0 720 320" role="img" aria-label="A ladder of financial ML tasks ranked by signal-to-noise. Fraud detection and credit scoring have long bars meaning strong signal; volatility forecasting and price direction have short bars meaning weak signal.">
+      <text x="18" y="28" font-size="13.5" font-weight="600" style="fill:var(--ink)">Where ML earns its keep — bar length = signal-to-noise</text>
+      <g font-size="12.5">
+        <text x="18" y="76" style="fill:var(--ink)">Fraud detection</text><rect x="250" y="63" width="389" height="24" rx="4" style="fill:var(--up)"/>
+        <text x="18" y="118" style="fill:var(--ink)">Credit scoring</text><rect x="250" y="105" width="328" height="24" rx="4" style="fill:var(--up)"/>
+        <text x="18" y="160" style="fill:var(--ink)">NLP on filings / news</text><rect x="250" y="147" width="254" height="24" rx="4" style="fill:var(--c2)"/>
+        <text x="18" y="202" style="fill:var(--ink)">Execution optimization</text><rect x="250" y="189" width="205" height="24" rx="4" style="fill:var(--c2)"/>
+        <text x="18" y="244" style="fill:var(--ink)">Volatility forecasting</text><rect x="250" y="231" width="131" height="24" rx="4" style="fill:var(--down)"/>
+        <text x="18" y="286" style="fill:var(--ink)">Price direction (point forecast)</text><rect x="250" y="273" width="49" height="24" rx="4" style="fill:var(--down)"/>
+      </g>
+      <line x1="250" y1="52" x2="250" y2="300" style="stroke:var(--axis)" stroke-width="1.2"/>
+      <text x="645" y="76" font-size="11.5" style="fill:var(--muted)">strong signal ✓</text>
+      <text x="305" y="290" font-size="11.5" style="fill:var(--muted)">brutal noise ✗</text>
+    </svg>
+    <figcaption><strong>Figure 18.4</strong> — The higher on the ladder, the better ML works. The dream job of "predict tomorrow's price" sits at the very bottom, where a well-tuned model barely beats a coin flip.</figcaption>
+  </figure>
+  <p>Where ML genuinely works, it works because the problem is really a classification task with rich, labeled, high-signal data. <strong>Fraud detection</strong> is a near-ideal ML problem — millions of transactions, clear labels, strong patterns. <strong>Credit scoring</strong> predicts default from applicant features, a decades-old ML staple. <strong>Execution optimization</strong> — slicing a big order to minimize slippage — has fast feedback and measurable outcomes. And <strong>NLP on filings and news</strong> extracts structured signals (sentiment, topics, risk-factor changes) from the mountain of text in <a href="#s11">10-Ks</a> and headlines. These are the roles hiring your profile right now.</p>
+  <p>Where ML struggles is the seductive one: <strong>point forecasts of prices.</strong> Because returns have near-zero autocorrelation and fat tails, the predictable component is a whisper under a roar of noise. A model that gets 51% directional accuracy can be genuinely valuable at scale — but that is a different game from the 95% accuracy you're used to on clean datasets, and beginners routinely mistake an overfit backtest for the former. Respect the noise floor.</p>
+  <div class="callout co-warn"><p class="co-label">Common pitfall: finance-specific feature leakage</p><p>Leakage in finance wears clever disguises. <strong>Using the close to predict the same day's return</strong> — the close <em>is</em> part of the return. <strong>Normalizing features using the full dataset's mean and standard deviation</strong> before splitting — your scaler peeked at the future. <strong>Labeling with a forward return but computing a feature that spans the label window.</strong> <strong>Filling missing prices by interpolation</strong>, which quietly injects future values into the past. Each one turns a mediocre model into a fake genius that dies in production.</p></div>
+  <div class="callout co-you"><p class="co-label">Your edge: cross-validation, but time-aware</p><p>Your instinct to k-fold cross-validate is right — but plain k-fold shuffles the future into the training set and leaks. Finance uses <dfn class="term" tabindex="0" data-def="Cross-validation that always trains on the past and tests on the future, sometimes with a gap between them to prevent leakage.">walk-forward validation</dfn>: train on 2015–2018, test on 2019, roll forward, repeat. Add a <dfn class="term" tabindex="0" data-def="A deliberately discarded gap between the training and test periods so information near the boundary cannot leak across.">purge/embargo gap</dfn> so the boundary can't leak. It's the same discipline you know, with the arrow of time enforced — and mentioning it in an interview marks you as someone who's done real financial ML.</p></div>
+
+  <h3 id="s18-stack">The starter stack and a project ladder</h3>
+  <p>You already know most of this toolkit; here it is with the financial dialect attached. <code>pandas</code> is your workhorse — its <code>DatetimeIndex</code>, <code>resample</code>, and <code>pct_change</code> were practically built for price series. <code>numpy</code> handles the vectorized return math. <code>matplotlib</code> draws the equity curves. <code>statsmodels</code> gives you the econometric tools finance loves — OLS with proper standard errors, ARIMA, stationarity tests like the augmented Dickey-Fuller. And <code>scikit-learn</code> covers the classification and regression you already do, as long as you swap its default k-fold for time-aware splits. That's the whole starter stack, and it's free.</p>
+  <p>Knowledge without a portfolio is invisible to recruiters, so climb this ladder. Each rung adds exactly one hard idea, and by the top you have an artifact that proves you understand honest backtesting — the thing most applicants fake.</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>#</th><th>Project</th><th>New skill it forces</th></tr></thead>
+    <tbody>
+      <tr><td class="td-num">1</td><td>Download SPY with <code>yfinance</code>, plot the adjusted close</td><td>Data access, corporate-action adjustment, plotting</td></tr>
+      <tr><td class="td-num">2</td><td>Compute daily log returns; chart the return distribution and its fat tails</td><td>Returns math, stylized facts, histograms vs normal</td></tr>
+      <tr><td class="td-num">3</td><td>Build the moving-average crossover backtest from the sandbox above</td><td>Signal → position → equity curve, no look-ahead</td></tr>
+      <tr><td class="td-num">4</td><td>Add transaction costs and a strict train/test split; report both</td><td>Costs, out-of-sample discipline, honest reporting</td></tr>
+      <tr><td class="td-num">5</td><td>A small factor backtest (e.g. momentum) with a walk-forward, cost-aware, out-of-sample report</td><td>Cross-sectional signals, multiple-testing awareness, the full honest pipeline</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout co-real"><p class="co-label">Real world: what a hiring manager reads</p><p>Two candidates submit a "trading strategy" notebook. The first shows a gorgeous equity curve and a 3.0 Sharpe ratio. The second shows a modest curve, an explicit out-of-sample section that underperforms the in-sample one, a costs line, and a paragraph on why the edge is fragile. The second gets hired every time — because the first either doesn't understand overfitting or is hoping you don't. Honesty about limitations is the most senior signal a junior can send.</p></div>
+  <div class="callout co-you"><p class="co-label">Your edge: you can build the second notebook this month</p><p>Nothing on that ladder needs a Bloomberg terminal, a PhD, or capital. It needs the exact skills on your résumé plus the finance vocabulary from this section. Ship rungs 1–5 as a clean public repo with an honest README, and you've manufactured the one thing every entry-level applicant lacks: evidence you won't fool yourself. We'll package this into a full job-search plan in <a href="#s20">Section 20 (Career Roadmap)</a>.</p></div>
+  <details class="deep"><summary>Deep dive: why 252, and does the day-count matter?</summary><p>The 252 comes from roughly 365 calendar days minus about 104 weekend days minus around 9 US market holidays. Other conventions exist — some fixed-income math uses 360, some risk systems use 260 — and the exact figure barely moves annualized returns but does nudge annualized volatility, since it enters as √252 versus √260. The rule: pick one convention, apply it consistently, and document it. Mismatched day-counts are a classic "why don't my numbers tie out?" bug when you join two vendors — a debugging skill you already have from reconciling datasets.</p></details>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. You backtest a stock strategy using only the companies currently in the S&amp;P 500. Which bias does this most directly introduce?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Look-ahead bias</button>
+        <button class="quiz-opt" data-correct>Survivorship bias</button>
+        <button class="quiz-opt">Slippage</button>
+        <button class="quiz-opt">Non-stationarity</button>
+      </div>
+      <p class="quiz-explain">Today's index excludes every company that went bankrupt or was delisted, so you only test on survivors you couldn't have identified in advance — survivorship bias, which systematically inflates results.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. A daily return series has a standard deviation of 1.2%. Roughly what is the annualized volatility?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">About 3.0%</button>
+        <button class="quiz-opt">About 302%</button>
+        <button class="quiz-opt" data-correct>About 19%</button>
+        <button class="quiz-opt">About 1.2%</button>
+      </div>
+      <p class="quiz-explain">Volatility scales by the square root of time: 1.2% × √252 ≈ 1.2% × 15.87 ≈ 19%. (Returns scale by ×252, but volatility by ×√252 because variance adds with time.)</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. Why do quant researchers insist on an economic reason for a signal before running the backtest?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Backtests are too slow to run more than once</button>
+        <button class="quiz-opt">Regulators require a written thesis</button>
+        <button class="quiz-opt" data-correct>Testing many strategies guarantees some look great by luck; a prior reason guards against the multiple-testing problem</button>
+        <button class="quiz-opt">Economic reasons make the code run faster</button>
+      </div>
+      <p class="quiz-explain">Run 100 tests at 5% significance and about 5 pass by chance alone. Demanding a hypothesis first — and penalizing how many things you tried — is the defense against p-hacking your own backtest.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. Which financial ML task has the WORST signal-to-noise ratio and is hardest to do well?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">Fraud detection on card transactions</button>
+        <button class="quiz-opt">Credit-default scoring</button>
+        <button class="quiz-opt" data-correct>Point-forecasting tomorrow's stock price direction</button>
+        <button class="quiz-opt">Classifying sentiment in earnings-call transcripts</button>
+      </div>
+      <p class="quiz-explain">Returns are nearly unforecastable (near-zero autocorrelation, fat tails), so directional price prediction lives at the bottom of the ladder — a good model barely clears 51%. The others have far stronger, more learnable signal.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. A stock rises +25% then falls −20%. What is the correct total simple return, and how do the log returns behave?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">+5%, because you just add 25% and −20%</button>
+        <button class="quiz-opt" data-correct>0%, and the log returns (+0.2231 and −0.2231) sum to exactly zero</button>
+        <button class="quiz-opt">−5%, and log returns can't be summed</button>
+        <button class="quiz-opt">+25%, the fall is ignored</button>
+      </div>
+      <p class="quiz-explain">1.25 × 0.80 = 1.00, a 0% total simple return — you cannot add simple returns across time. Log returns can be added: ln(1.25) = +0.2231 and ln(0.80) = −0.2231 sum to 0, matching ln(1.00) = 0.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>The five quant-adjacent roles form a gradient: data scientist and financial data analyst are your fastest doors in, quant developer and risk quant reward your engineering, and quant researcher is a destination, not an entry point.</li>
+      <li>Financial data comes in market, fundamental, macro, and alternative flavors — and carries booby traps (survivorship, look-ahead, corporate actions, point-in-time) that are just leakage and sampling bias wearing finance costumes.</li>
+      <li>Model returns, not prices: prices are non-stationary, returns aren't. Use log returns down the time axis (they add), simple returns across holdings (they aggregate). Annualize returns by ×252 and volatility by ×√252.</li>
+      <li>Stylized facts are universal: volatility clusters, tails are fat, and direction has near-zero autocorrelation — you can forecast magnitude better than sign.</li>
+      <li>Honest backtesting is a one-way pipeline ending in a single out-of-sample test; the cardinal sins are overfitting, ignoring transaction costs, and the multiple-testing problem that turns 100 tries into 5 fake winners.</li>
+      <li>ML works best where signal is strong and labeled — fraud, credit, execution, document NLP — and worst on point price forecasts, where noise dominates. Guard against finance-specific leakage with walk-forward validation and a purge gap.</li>
+      <li>Climb the five-project ladder on the free pandas/numpy/statsmodels/scikit-learn stack; the honest out-of-sample report at the top is the artifact that proves you won't fool yourself — and hiring managers know it.</li>
+    </ul>
+  </div>
+</section>

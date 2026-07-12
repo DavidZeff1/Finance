@@ -1,0 +1,449 @@
+<section class="lesson" id="s14" data-num="14" data-title="Corporate Finance: Decisions Inside the Firm">
+  <p class="eyebrow">Part III · Corporate Finance &amp; Accounting</p>
+  <h2>14. Corporate Finance: Decisions Inside the Firm</h2>
+  <p class="lede">So far you have watched companies from the outside — reading their statements, computing their ratios, estimating their value. This section walks you through the door: how the people running the firm decide what to build, how to pay for it, and what to hand back to shareholders, using the exact toolkit you have already assembled.</p>
+
+  <h3 id="s14-three">The CFO's three questions</h3>
+  <p>Strip away the org charts and the earnings calls, and a <dfn class="term" tabindex="0" data-def="Chief financial officer: the executive responsible for a company's money — investing it, raising it, and returning it.">CFO</dfn>'s job reduces to three questions about every dollar the firm touches:</p>
+  <ul>
+    <li><strong>What should we invest in?</strong> This is <dfn class="term" tabindex="0" data-def="The process of deciding which long-term projects a firm should spend money on.">capital budgeting</dfn> — build the factory, fund the R&amp;D, buy the rival, or do nothing.</li>
+    <li><strong>How should we fund it?</strong> This is <dfn class="term" tabindex="0" data-def="The mix of debt and equity a firm uses to finance its assets.">capital structure</dfn> — borrow money, issue shares, or use retained profits.</li>
+    <li><strong>What should we give back?</strong> This is <dfn class="term" tabindex="0" data-def="A firm's choice of how much cash to return to shareholders, and whether via dividends or share buybacks.">payout policy</dfn> — dividends, buybacks, or reinvest everything.</li>
+  </ul>
+  <p>Every corporate headline you will ever read maps to one of the three. "Apple announces $110B buyback" — payout. "Microsoft acquires Activision" — capital budgeting (an acquisition is just a very large project). "Tesla raises $5B in new shares" — capital structure. Once you have this map, financial news stops being noise and becomes a stream of labeled training data.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 310" role="img" aria-label="Diagram showing cash inside the firm flowing to three decisions: invest it (capital budgeting), fund it (capital structure), and return it (payout policy)">
+      <defs>
+        <marker id="s14-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" style="fill:var(--axis)"/></marker>
+      </defs>
+      <rect x="250" y="18" width="220" height="56" rx="8" style="fill:var(--accent-soft);stroke:var(--accent)"/>
+      <text x="360" y="42" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">Cash inside the firm</text>
+      <text x="360" y="62" text-anchor="middle" font-size="13" style="fill:var(--muted)">every dollar must pick a lane</text>
+      <line x1="300" y1="74" x2="140" y2="126" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s14-arrow)"/>
+      <line x1="360" y1="74" x2="360" y2="126" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s14-arrow)"/>
+      <line x1="420" y1="74" x2="580" y2="126" style="stroke:var(--axis)" stroke-width="1.5" marker-end="url(#s14-arrow)"/>
+      <rect x="22" y="132" width="212" height="140" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <rect x="254" y="132" width="212" height="140" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <rect x="486" y="132" width="212" height="140" rx="8" style="fill:var(--surface-2);stroke:var(--border)"/>
+      <text x="128" y="158" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">1 · Invest it</text>
+      <text x="128" y="180" text-anchor="middle" font-size="13" style="fill:var(--c1)">capital budgeting</text>
+      <text x="128" y="206" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">factories, R&amp;D, M&amp;A</text>
+      <text x="128" y="226" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">tools: NPV, IRR,</text>
+      <text x="128" y="246" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">hurdle rate</text>
+      <text x="360" y="158" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">2 · Fund it</text>
+      <text x="360" y="180" text-anchor="middle" font-size="13" style="fill:var(--c2)">capital structure</text>
+      <text x="360" y="206" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">debt vs equity</text>
+      <text x="360" y="226" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">tax shield vs</text>
+      <text x="360" y="246" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">distress risk</text>
+      <text x="592" y="158" text-anchor="middle" font-size="15" font-weight="600" style="fill:var(--ink)">3 · Return it</text>
+      <text x="592" y="180" text-anchor="middle" font-size="13" style="fill:var(--c3)">payout policy</text>
+      <text x="592" y="206" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">dividends vs buybacks</text>
+      <text x="592" y="226" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">taxes, signaling,</text>
+      <text x="592" y="246" text-anchor="middle" font-size="13" style="fill:var(--ink-2)">reinvestment needs</text>
+    </svg>
+    <figcaption><strong>Figure 14.1</strong> — Every corporate finance decision is one of three: invest, fund, or return. Headlines about buybacks, debt raises, and acquisitions are just these boxes wearing costumes.</figcaption>
+  </figure>
+
+  <div class="callout co-key"><p class="co-label">Key idea</p><p>This section is where the course converges. <a href="#s01">Section 1</a> gave you discounting, <a href="#s11">Section 11</a> gave you the statements, <a href="#s12">Section 12</a> gave you ROE and ROIC, and <a href="#s13">Section 13</a> gave you valuation. Corporate finance is those four tools pointed inward: the CFO runs the same math on the firm's own projects that an analyst runs on the firm's stock.</p></div>
+
+  <h3 id="s14-npv">Capital budgeting I: the NPV rule</h3>
+  <p>Suppose your firm can spend $1,000 today on a project that returns cash over five years. Should it? The gold-standard answer is <dfn class="term" tabindex="0" data-def="Net present value: the sum of all a project's cash flows discounted to today; positive NPV means the project adds value.">net present value (NPV)</dfn>: discount every future cash flow back to today at the appropriate rate, add them up (including the negative outlay), and accept the project if the total is positive.</p>
+  <div class="formula">
+    <div class="formula-main">NPV = Σ<sub>t=0</sub><sup>n</sup> CF<sub>t</sub> ÷ (1 + r)<sup>t</sup></div>
+    <div class="formula-legend">CF<sub>t</sub> = cash flow in year t (CF<sub>0</sub> is usually negative) · r = discount rate · accept if NPV &gt; 0</div>
+  </div>
+  <p>Nothing here is new. This is literally the time-value machinery from <a href="#s01">Section 1</a> applied to a project instead of a bank deposit, and it is the same present-value engine that powered the DCF in <a href="#s13">Section 13</a>. A firm is a portfolio of projects; a DCF values the whole portfolio, capital budgeting values one candidate at a time.</p>
+  <div class="callout co-ex"><p class="co-label">Worked example: two rival projects</p>
+    <p>Project A ("Steady") costs $1,000 and pays $300 a year for five years. Project B ("Moonshot") costs $1,000, pays nothing for four years, then $2,000 in year 5. At a 10% discount rate:</p>
+    <p>NPV<sub>A</sub> = −1,000 + 300×(1 − 1.10<sup>−5</sup>)÷0.10 = −1,000 + 300×3.7908 = <strong>+$137</strong><br>
+    NPV<sub>B</sub> = −1,000 + 2,000÷1.10<sup>5</sup> = −1,000 + 2,000×0.6209 = <strong>+$242</strong></p>
+    <p>Both add value, but if they are <dfn class="term" tabindex="0" data-def="Projects where accepting one means rejecting the other — e.g. two designs for the same factory site.">mutually exclusive</dfn>, take B: it adds $105 more in today's dollars. Hold that thought — a popular rival metric is about to disagree.</p>
+  </div>
+  <p>A useful picture is the <dfn class="term" tabindex="0" data-def="A chart of a project's NPV across a range of discount rates; it slopes down for normal projects.">NPV profile</dfn>: plot NPV against the discount rate. At r = 0 the curve starts at the raw sum of cash flows; as r rises, distant cash gets crushed and the curve falls; where it crosses zero is a rate with a famous name you'll meet next.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 340" role="img" aria-label="Anatomy of an NPV profile: NPV starts at the undiscounted sum of cash flows, slopes downward as the discount rate rises, and crosses zero at the IRR">
+      <line x1="70" y1="202.7" x2="700" y2="202.7" style="stroke:var(--axis)" stroke-width="1"/>
+      <line x1="70" y1="20" x2="70" y2="294" style="stroke:var(--axis)" stroke-width="1"/>
+      <line x1="194" y1="20" x2="194" y2="294" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="318" y1="20" x2="318" y2="294" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="442" y1="20" x2="442" y2="294" style="stroke:var(--grid)" stroke-width="1"/>
+      <line x1="566" y1="20" x2="566" y2="294" style="stroke:var(--grid)" stroke-width="1"/>
+      <polyline fill="none" style="stroke:var(--c1)" stroke-width="2.5" points="70.0,50.4 94.8,63.8 119.6,76.6 144.4,88.8 169.2,100.5 194.0,111.7 218.8,122.4 243.6,132.6 268.4,142.4 293.2,151.9 318.0,160.9 342.8,169.6 367.6,177.9 392.4,185.9 417.2,193.6 442.0,200.9 466.8,208.1 491.6,214.9 516.4,221.5 541.2,227.8 566.0,234.0 590.8,239.9 615.6,245.6 640.4,251.1 665.2,256.4 690.0,261.5"/>
+      <circle cx="70" cy="50.4" r="5" style="fill:var(--c1)"/>
+      <text x="84" y="42" font-size="13" style="fill:var(--ink)">at r = 0: NPV = raw sum of cash flows (+$500)</text>
+      <circle cx="447.9" cy="202.7" r="5" style="fill:var(--accent)"/>
+      <text x="452" y="190" font-size="13" font-weight="600" style="fill:var(--ink)">IRR: the rate where NPV = 0</text>
+      <text x="140" y="232" font-size="13" style="fill:var(--up)">NPV &gt; 0 → accept</text>
+      <text x="530" y="284" font-size="13" style="fill:var(--down)">NPV &lt; 0 → reject</text>
+      <text x="70" y="318" text-anchor="middle" font-size="13" style="fill:var(--muted)">0%</text>
+      <text x="194" y="318" text-anchor="middle" font-size="13" style="fill:var(--muted)">5%</text>
+      <text x="318" y="318" text-anchor="middle" font-size="13" style="fill:var(--muted)">10%</text>
+      <text x="442" y="318" text-anchor="middle" font-size="13" style="fill:var(--muted)">15%</text>
+      <text x="566" y="318" text-anchor="middle" font-size="13" style="fill:var(--muted)">20%</text>
+      <text x="385" y="338" text-anchor="middle" font-size="13" style="fill:var(--muted)">discount rate</text>
+      <text x="60" y="205" text-anchor="end" font-size="13" style="fill:var(--muted)">$0</text>
+      <text x="60" y="55" text-anchor="end" font-size="13" style="fill:var(--muted)">$500</text>
+    </svg>
+    <figcaption><strong>Figure 14.2</strong> — Anatomy of an NPV profile for Project A. The steeper the curve, the more back-loaded the cash flows — distant money is punished hardest by high rates.</figcaption>
+  </figure>
+
+  <div class="callout co-you"><p class="co-label">Your edge</p><p>NPV is a fold: <code>cashflows.reduce((s, cf, t) =&gt; s + cf / (1 + r) ** t, 0)</code>. One line of code, and it is the single most consequential formula in corporate life. When you build financial models, most of the complexity is estimating the <em>inputs</em> (the cash flows), not the math.</p></div>
+
+  <h3 id="s14-irr">Capital budgeting II: IRR, payback, and their traps</h3>
+  <p>In practice, executives quote a project's <dfn class="term" tabindex="0" data-def="Internal rate of return: the discount rate at which a project's NPV equals zero — its implied annualized return.">IRR (internal rate of return)</dfn> more often than its NPV. IRR is the discount rate that makes NPV exactly zero — the project's implied annualized return. The decision rule: accept if IRR exceeds your <dfn class="term" tabindex="0" data-def="The minimum acceptable return on a project; usually the firm's cost of capital, sometimes with a buffer.">hurdle rate</dfn>. It is intuitive ("this project yields 15%") and unit-free, which is exactly why people love it — and exactly where it bites:</p>
+  <ul>
+    <li><strong>Scale-blindness.</strong> A $1 project returning $2 next year has a 100% IRR and adds about $0.82 of value at r = 10%. A $1,000 project returning $1,300 has a mere 30% IRR and adds $182. IRR picks the first; your bank account prefers the second. Percentages don't pay salaries — dollars do.</li>
+    <li><strong>Multiple IRRs.</strong> If cash flows change sign more than once (invest, earn, then pay cleanup costs), the NPV polynomial can have several roots. The flows −100, +230, −132 have IRRs at <em>both</em> 10% and 20% — the number "the" IRR is simply undefined. (Check: at 15%, NPV = −100 + 230/1.15 − 132/1.15² = +0.19, positive between the two roots.)</li>
+    <li><strong>The reinvestment assumption.</strong> IRR implicitly assumes every interim cash flow gets reinvested at the IRR itself. A 40% IRR project assumes you can redeploy each payout at 40% — usually fantasy. NPV assumes reinvestment at the discount rate, which is honest.</li>
+  </ul>
+  <p>The third tool you will meet in the wild is the <dfn class="term" tabindex="0" data-def="The time it takes for a project's cumulative cash flows to repay the initial investment.">payback period</dfn>: how long until cumulative cash flows cover the outlay. Project A pays back in 1,000 ÷ 300 ≈ 3.3 years; Project B not until year 5. Payback is a fine quick-and-dirty liquidity check, but it ignores the time value of money <em>and</em> everything after the payback date — by payback logic, a project that returns your money in year 3 and then explodes beats one that pays a fortune in year 6.</p>
+  <p>Now the main event. Below, Projects A and B from the worked example face off across every discount rate at once. B has the bigger prize but makes you wait; A drip-feeds cash early. B's curve therefore starts higher but falls faster — and the curves cross. Note the paradox: A has the <em>higher</em> IRR (15.2% vs 14.9%), yet at any rate below ~14.4%, B has the higher NPV. IRR and NPV genuinely disagree, and when they do, trust NPV: it measures dollars of value created at your actual cost of capital.</p>
+
+  <div class="widget" id="s14-duel">
+    <div class="widget-head">
+      <h4>Project duel — NPV vs IRR</h4>
+      <p>Drag the discount rate. Watch the verdict flip as you cross ~14.4% (rankings swap) and ~15.2% (both go negative) — and notice IRR would have picked A the whole time.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Discount rate <output class="ctl-val" id="s14-duel-rout">8.0%</output>
+          <input type="range" id="s14-duel-r" min="0" max="25" step="0.1" value="8">
+        </label>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">NPV A · Steady (IRR 15.2%)</span><span class="stat-value" id="s14-duel-npva">—</span></div>
+        <div class="stat"><span class="stat-label">NPV B · Moonshot (IRR 14.9%)</span><span class="stat-value" id="s14-duel-npvb">—</span></div>
+        <div class="stat"><span class="stat-label">Verdict</span><span class="stat-value" id="s14-duel-verdict">—</span></div>
+      </div>
+      <p id="s14-duel-note" style="color:var(--ink-2)">—</p>
+      <svg id="s14-duel-chart" viewBox="0 0 720 360" role="img" aria-label="Interactive chart of NPV versus discount rate for projects A and B, with curves crossing near 14.4%"></svg>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s14-duel');
+    if (!root) return;
+    var NS = 'http://www.w3.org/2000/svg';
+    var A = [-1000, 300, 300, 300, 300, 300];
+    var B = [-1000, 0, 0, 0, 0, 2000];
+    var IRRA = 0.15238, IRRB = 0.14870, CROSS = 0.14430;
+    var X0 = 64, X1 = 700, Y0 = 16, Y1 = 320, RMAX = 0.25, VLO = -450, VHI = 1050;
+    function npv(r, cfs) { var s = 0, t; for (t = 0; t < cfs.length; t++) s += cfs[t] / Math.pow(1 + r, t); return s; }
+    function xs(r) { return X0 + (r / RMAX) * (X1 - X0); }
+    function ys(v) { return Y1 - ((v - VLO) / (VHI - VLO)) * (Y1 - Y0); }
+    function el(tag, attrs, styles) {
+      var e = document.createElementNS(NS, tag), k;
+      for (k in attrs) e.setAttribute(k, attrs[k]);
+      if (styles) for (k in styles) e.style[k] = styles[k];
+      return e;
+    }
+    function txt(x, y, str, anchor, size, color, weight) {
+      var t = el('text', { x: x, y: y, 'text-anchor': anchor || 'start', 'font-size': size || 13 }, { fill: color });
+      if (weight) t.setAttribute('font-weight', weight);
+      t.textContent = str;
+      return t;
+    }
+    var svg = root.querySelector('#s14-duel-chart');
+    var i, r, g;
+    // gridlines + y labels
+    var yticks = [-250, 0, 250, 500, 750, 1000];
+    for (i = 0; i < yticks.length; i++) {
+      var yy = ys(yticks[i]);
+      svg.appendChild(el('line', { x1: X0, y1: yy, x2: X1, y2: yy, 'stroke-width': 1 }, { stroke: yticks[i] === 0 ? 'var(--axis)' : 'var(--grid)' }));
+      svg.appendChild(txt(X0 - 8, yy + 4, '$' + yticks[i].toLocaleString('en-US'), 'end', 12, 'var(--muted)'));
+    }
+    // x ticks
+    for (i = 0; i <= 25; i += 5) {
+      var xx = xs(i / 100);
+      svg.appendChild(el('line', { x1: xx, y1: Y1, x2: xx, y2: Y1 + 5, 'stroke-width': 1 }, { stroke: 'var(--axis)' }));
+      svg.appendChild(txt(xx, Y1 + 20, i + '%', 'middle', 12, 'var(--muted)'));
+    }
+    svg.appendChild(txt((X0 + X1) / 2, Y1 + 38, 'discount rate', 'middle', 13, 'var(--muted)'));
+    // crossover dashed line
+    svg.appendChild(el('line', { x1: xs(CROSS), y1: 22, x2: xs(CROSS), y2: Y1, 'stroke-width': 1, 'stroke-dasharray': '4 4' }, { stroke: 'var(--muted)' }));
+    svg.appendChild(txt(xs(CROSS), 14, 'rankings flip at 14.4%', 'middle', 12, 'var(--muted)'));
+    // curves
+    function pathFor(cfs) {
+      var d = '', n = 60, j, rr;
+      for (j = 0; j <= n; j++) {
+        rr = (j / n) * RMAX;
+        d += (j === 0 ? 'M' : 'L') + xs(rr).toFixed(1) + ',' + ys(npv(rr, cfs)).toFixed(1);
+      }
+      return d;
+    }
+    var pA = el('path', { d: pathFor(A), fill: 'none', 'stroke-width': 2.5 }, { stroke: 'var(--c1)' });
+    var pB = el('path', { d: pathFor(B), fill: 'none', 'stroke-width': 2.5 }, { stroke: 'var(--c2)' });
+    svg.appendChild(pA); svg.appendChild(pB);
+    svg.appendChild(txt(X1 - 6, ys(npv(RMAX, A)) - 10, 'A · Steady', 'end', 13, 'var(--c1)', 600));
+    svg.appendChild(txt(X1 - 6, ys(npv(RMAX, B)) + 16, 'B · Moonshot', 'end', 13, 'var(--c2)', 600));
+    // IRR markers on the zero line
+    svg.appendChild(el('circle', { cx: xs(IRRA), cy: ys(0), r: 4.5 }, { fill: 'var(--c1)' }));
+    svg.appendChild(el('circle', { cx: xs(IRRB), cy: ys(0), r: 4.5 }, { fill: 'var(--c2)' }));
+    svg.appendChild(txt(xs(IRRA) + 8, ys(0) + 20, 'IRR A 15.2%', 'start', 12, 'var(--c1)'));
+    svg.appendChild(txt(xs(IRRB) - 8, ys(0) - 12, 'IRR B 14.9%', 'end', 12, 'var(--c2)'));
+    // moving marker
+    var mLine = el('line', { x1: xs(0.08), y1: Y0, x2: xs(0.08), y2: Y1, 'stroke-width': 1.5 }, { stroke: 'var(--accent)' });
+    var dotA = el('circle', { r: 6 }, { fill: 'var(--c1)', stroke: 'var(--surface)', strokeWidth: '2px' });
+    var dotB = el('circle', { r: 6 }, { fill: 'var(--c2)', stroke: 'var(--surface)', strokeWidth: '2px' });
+    svg.appendChild(mLine); svg.appendChild(dotA); svg.appendChild(dotB);
+    var slider = root.querySelector('#s14-duel-r');
+    var rOut = root.querySelector('#s14-duel-rout');
+    var sA = root.querySelector('#s14-duel-npva');
+    var sB = root.querySelector('#s14-duel-npvb');
+    var sV = root.querySelector('#s14-duel-verdict');
+    var note = root.querySelector('#s14-duel-note');
+    function money(v) {
+      var s = '$' + Math.abs(Math.round(v)).toLocaleString('en-US');
+      return v < 0 ? '−' + s : '+' + s;
+    }
+    function update() {
+      var rv = Math.min(25, Math.max(0, parseFloat(slider.value) || 0)) / 100;
+      var a = npv(rv, A), b = npv(rv, B);
+      rOut.textContent = (rv * 100).toFixed(1) + '%';
+      mLine.setAttribute('x1', xs(rv)); mLine.setAttribute('x2', xs(rv));
+      dotA.setAttribute('cx', xs(rv)); dotA.setAttribute('cy', ys(a));
+      dotB.setAttribute('cx', xs(rv)); dotB.setAttribute('cy', ys(b));
+      sA.textContent = money(a);
+      sA.style.color = a >= 0 ? 'var(--up)' : 'var(--down)';
+      sB.textContent = money(b);
+      sB.style.color = b >= 0 ? 'var(--up)' : 'var(--down)';
+      if (a <= 0 && b <= 0) {
+        sV.textContent = 'Take neither';
+        sV.style.color = 'var(--down)';
+        note.textContent = 'At r = ' + (rv * 100).toFixed(1) + '%, both NPVs are negative — and both IRRs are below the hurdle. NPV and IRR agree: pass.';
+      } else if (a >= b) {
+        sV.textContent = 'Take A · Steady';
+        sV.style.color = 'var(--up)';
+        note.textContent = 'At r = ' + (rv * 100).toFixed(1) + '%, A adds more value — and IRR agrees (15.2% beats 14.9%). Above the crossover, the two rules reconcile.';
+      } else {
+        sV.textContent = 'Take B · Moonshot';
+        sV.style.color = 'var(--up)';
+        note.textContent = 'At r = ' + (rv * 100).toFixed(1) + '%, NPV says take B — but IRR still prefers A (15.2% > 14.9%). This is the disagreement zone: trust the dollars, not the percentage.';
+      }
+    }
+    slider.addEventListener('input', update);
+    update();
+  })();
+  </script>
+
+  <div class="callout co-warn"><p class="co-label">Common pitfall</p><p>Private equity marketing decks lean hard on IRR because early cash returns inflate it. A fund that returns your money fast at a modest multiple can post a dazzling IRR while creating less wealth than a slower fund with a bigger multiple. Always ask for the dollar multiple alongside the percentage.</p></div>
+
+  <h3 id="s14-wacc">The hurdle rate: WACC and the value-creation test</h3>
+  <p>NPV needs a discount rate — but which one? The firm's money comes from two groups with claims on it: lenders and shareholders. Each demands a return: the <dfn class="term" tabindex="0" data-def="The interest rate a firm pays on its borrowings, after the tax deduction for interest.">cost of debt</dfn> is observable (it is roughly the yield on the firm's bonds, from <a href="#s08">Section 8</a>), while the <dfn class="term" tabindex="0" data-def="The return shareholders require for holding a firm's stock, given its risk; often estimated with the CAPM.">cost of equity</dfn> is the return shareholders require given the stock's risk. Blend them by their share of the capital pie and you get the <dfn class="term" tabindex="0" data-def="Weighted average cost of capital: the blended after-tax return a firm must earn to satisfy both its lenders and its shareholders.">WACC</dfn> — the weighted average cost of capital.</p>
+  <div class="formula">
+    <div class="formula-main">WACC = (E ÷ V) × r<sub>E</sub> + (D ÷ V) × r<sub>D</sub> × (1 − t)</div>
+    <div class="formula-legend">E, D = market value of equity, debt · V = E + D · r<sub>E</sub>, r<sub>D</sub> = cost of equity, debt · t = tax rate (interest is tax-deductible)</div>
+  </div>
+  <p>Worked: a firm financed 70% with equity costing 9% and 30% with debt costing 5% pre-tax, at a 21% tax rate. After-tax debt costs 5% × 0.79 = 3.95%, so WACC = 0.70×9% + 0.30×3.95% = 6.3% + 1.185% ≈ <strong>7.5%</strong>. That 7.5% is not an accounting cost — it is an <em>opportunity cost</em>. Investors could earn it elsewhere at similar risk, so any project earning less makes them poorer than the alternative.</p>
+  <p>This closes the loop you started in <a href="#s12">Section 12</a>. There you learned to compute <dfn class="term" tabindex="0" data-def="Return on invested capital: after-tax operating profit divided by the debt-plus-equity capital invested in the business.">ROIC</dfn>, the return a business earns on the capital tied up inside it. Now you have the benchmark to judge it:</p>
+  <div class="callout co-key"><p class="co-label">Key idea: the value-creation inequality</p><p><strong>A firm creates value if and only if ROIC &gt; WACC.</strong> Earn 15% on capital that costs 7.5% and every reinvested dollar is worth more than a dollar; earn 6% and growth actively destroys value — the firm is a machine for converting good money into bad projects. Revenue can grow, EPS can grow, the CEO can ring the opening bell, and value still burns. This single inequality explains most of what separates great compounders from value traps in <a href="#s13">Section 13</a>-style valuations.</p></div>
+  <p>In practice firms set a hurdle rate at or slightly above WACC and require project sponsors to clear it. The quiet failure mode: divisions with risky projects using the company-wide WACC, understating their true cost of capital — a subsidy from the boring divisions to the exciting ones.</p>
+
+  <h3 id="s14-structure">Capital structure: the debt–equity trade-off</h3>
+  <p>Now the funding question. Debt is cheaper than equity — lenders take less risk (they get paid first) and interest is tax-deductible. So why not fund everything with debt? Because debt is a hard promise, and hard promises turn bad years into fatal ones. The trade-off has two arms.</p>
+  <p><strong>The prize: the tax shield.</strong> Interest is deductible, dividends are not. Borrow $100M at 6% and the $6M interest bill cuts taxable income by $6M, saving $6M × 21% = $1.26M in tax every year — a <dfn class="term" tabindex="0" data-def="The tax saving a firm gets because interest payments are deductible from taxable income.">tax shield</dfn>. If the debt is permanent, that stream, discounted at 6%, is worth 1.26 ÷ 0.06 = $21M, i.e. tax rate × debt. Real money, courtesy of the tax code.</p>
+  <p><strong>The price: financial distress.</strong> Pile on debt and the probability of missing a payment rises. <dfn class="term" tabindex="0" data-def="The costs a firm suffers when high debt threatens default: legal fees, fleeing customers and suppliers, fire sales, lost investment.">Financial distress costs</dfn> are not just bankruptcy lawyers — customers abandon a company that might not honor warranties, suppliers demand cash upfront, star employees leave, and management cancels good projects to hoard cash. Value leaks long before any default.</p>
+
+  <figure class="fig">
+    <svg viewBox="0 0 720 320" role="img" aria-label="Firm value versus leverage: value rises with the debt tax shield, then bends downward as expected distress costs grow, creating a humped curve with an interior optimum">
+      <line x1="80" y1="280" x2="660" y2="280" style="stroke:var(--axis)" stroke-width="1"/>
+      <line x1="80" y1="30" x2="80" y2="280" style="stroke:var(--axis)" stroke-width="1"/>
+      <line x1="80" y1="210" x2="660" y2="210" style="stroke:var(--grid)" stroke-width="1" stroke-dasharray="5 5"/>
+      <text x="88" y="228" font-size="13" style="fill:var(--muted)">value with zero debt (all-equity)</text>
+      <line x1="80" y1="210" x2="660" y2="95" style="stroke:var(--c2)" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <text x="560" y="82" font-size="13" style="fill:var(--c2)">+ tax shield only</text>
+      <path d="M80,210 C200,190 315,162 390,156 C470,150 570,190 660,245" fill="none" style="stroke:var(--c1)" stroke-width="2.5"/>
+      <text x="230" y="145" font-size="13" font-weight="600" style="fill:var(--c1)">actual firm value</text>
+      <line x1="390" y1="156" x2="390" y2="280" style="stroke:var(--accent)" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <circle cx="390" cy="156" r="5" style="fill:var(--accent)"/>
+      <text x="390" y="304" text-anchor="middle" font-size="13" font-weight="600" style="fill:var(--accent)">optimal mix</text>
+      <line x1="600" y1="112" x2="600" y2="200" style="stroke:var(--down)" stroke-width="1.5"/>
+      <line x1="594" y1="118" x2="600" y2="112" style="stroke:var(--down)" stroke-width="1.5"/>
+      <line x1="606" y1="118" x2="600" y2="112" style="stroke:var(--down)" stroke-width="1.5"/>
+      <line x1="594" y1="194" x2="600" y2="200" style="stroke:var(--down)" stroke-width="1.5"/>
+      <line x1="606" y1="194" x2="600" y2="200" style="stroke:var(--down)" stroke-width="1.5"/>
+      <text x="608" y="168" font-size="13" style="fill:var(--down)">distress costs</text>
+      <text x="660" y="304" text-anchor="end" font-size="13" style="fill:var(--muted)">debt ÷ total capital →</text>
+      <text x="80" y="20" font-size="13" style="fill:var(--muted)">firm value ↑</text>
+    </svg>
+    <figcaption><strong>Figure 14.3</strong> — The trade-off theory of capital structure: the tax shield lifts value as leverage rises, distress costs drag it back down, and somewhere in between sits an optimal mix. Stable-cash-flow firms (utilities) can sit far right; volatile ones (biotech) belong far left.</figcaption>
+  </figure>
+
+  <p>Between prize and price sits <dfn class="term" tabindex="0" data-def="Using borrowed money to amplify the returns (and losses) on equity; measured as assets divided by equity, or debt-to-equity.">leverage</dfn>'s defining property: it amplifies. Take a firm with $100M of assets. Unlevered, a 12% asset return means 12% <dfn class="term" tabindex="0" data-def="Return on equity: net income divided by shareholders' equity — the return owners earn on their stake.">ROE</dfn>. Now fund it with $50M equity + $50M debt at 5% (interest $2.5M, taxes ignored for clarity):</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Scenario</th><th class="td-num">Asset return</th><th class="td-num">Profit after interest</th><th class="td-num">ROE (on $50M equity)</th></tr></thead>
+    <tbody>
+      <tr><td>Good year</td><td class="td-num">+12% → $12.0M</td><td class="td-num">$12.0M − $2.5M = $9.5M</td><td class="td-num" style="color:var(--up)">+19.0%</td></tr>
+      <tr><td>Bad year</td><td class="td-num">−4% → −$4.0M</td><td class="td-num">−$4.0M − $2.5M = −$6.5M</td><td class="td-num" style="color:var(--down)">−13.0%</td></tr>
+    </tbody>
+  </table></div>
+  <p>Same business, same swings in asset returns — but the equity holder's ride goes from (12%, −4%) to (19%, −13%). Leverage is a gain knob on the whole distribution, exactly the DuPont mechanism from <a href="#s12">Section 12</a> seen from the driver's seat. The general formula, with debt costing r<sub>D</sub> and leverage L = assets ÷ equity: ROE = L × ROA − (L − 1) × r<sub>D</sub>. Check: 2 × 12% − 1 × 5% = 19%. ✓</p>
+
+  <div class="widget" id="s14-lev">
+    <div class="widget-head">
+      <h4>Leverage amplifier</h4>
+      <p>Set the asset return and the leverage ratio (debt costs 5%). Watch what leverage does to a bad year.</p>
+    </div>
+    <div class="widget-body">
+      <div class="ctl-row">
+        <label class="ctl">Asset return (ROA) <output class="ctl-val" id="s14-lev-roaout">8.0%</output>
+          <input type="range" id="s14-lev-roa" min="-10" max="20" step="0.5" value="8">
+        </label>
+        <label class="ctl">Leverage (assets ÷ equity) <output class="ctl-val" id="s14-lev-lout">2.0×</output>
+          <input type="range" id="s14-lev-l" min="1" max="5" step="0.25" value="2">
+        </label>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="stat-label">ROE unlevered (1×)</span><span class="stat-value" id="s14-lev-roeu">—</span></div>
+        <div class="stat"><span class="stat-label">ROE at your leverage</span><span class="stat-value" id="s14-lev-roe">—</span></div>
+      </div>
+      <p id="s14-lev-note" style="color:var(--ink-2)">—</p>
+    </div>
+  </div>
+  <script>
+  (function () {
+    var root = document.getElementById('s14-lev');
+    if (!root) return;
+    var COST = 5;
+    var roaIn = root.querySelector('#s14-lev-roa');
+    var lIn = root.querySelector('#s14-lev-l');
+    var roaOut = root.querySelector('#s14-lev-roaout');
+    var lOut = root.querySelector('#s14-lev-lout');
+    var roeU = root.querySelector('#s14-lev-roeu');
+    var roeS = root.querySelector('#s14-lev-roe');
+    var note = root.querySelector('#s14-lev-note');
+    function pct(v) { return (v > 0 ? '+' : v < 0 ? '−' : '') + Math.abs(v).toFixed(1) + '%'; }
+    function update() {
+      var roa = Math.min(20, Math.max(-10, parseFloat(roaIn.value) || 0));
+      var L = Math.min(5, Math.max(1, parseFloat(lIn.value) || 1));
+      var roe = L * roa - (L - 1) * COST;
+      roaOut.textContent = roa.toFixed(1) + '%';
+      lOut.textContent = L.toFixed(2).replace(/\.?0+$/, '') + '×';
+      roeU.textContent = pct(roa);
+      roeU.style.color = roa >= 0 ? 'var(--up)' : 'var(--down)';
+      roeS.textContent = pct(roe);
+      roeS.style.color = roe >= 0 ? 'var(--up)' : 'var(--down)';
+      if (L === 1) {
+        note.textContent = 'No debt: ROE equals ROA. Move the leverage slider to switch on the amplifier.';
+      } else if (roa > COST) {
+        note.textContent = 'Assets earn ' + roa.toFixed(1) + '%, debt costs 5%: the spread is positive, so each turn of leverage lifts ROE. Leverage multiplies both directions — this is the friendly one.';
+      } else if (roa >= 0) {
+        note.textContent = 'Assets earn less than the 5% cost of debt: leverage now grinds ROE down even though the business is profitable. Borrowing at 5% to earn ' + roa.toFixed(1) + '% is a losing spread.';
+      } else {
+        note.textContent = 'A ' + Math.abs(roa).toFixed(1) + '% asset loss becomes a ' + Math.abs(roe).toFixed(1) + '% equity loss at ' + L.toFixed(2).replace(/\.?0+$/, '') + '× leverage. Leverage multiplies both directions — this is the one that kills firms.';
+      }
+    }
+    roaIn.addEventListener('input', update);
+    lIn.addEventListener('input', update);
+    update();
+  })();
+  </script>
+
+  <p>One paragraph of theory to frame it all: in 1958, <dfn class="term" tabindex="0" data-def="Nobel-winning result: in a frictionless market (no taxes, no distress costs, no information gaps) capital structure does not change firm value.">Modigliani and Miller</dfn> proved that in a perfectly frictionless world — no taxes, no distress costs, no information asymmetries — capital structure is <em>irrelevant</em>: slicing the pizza into different pieces doesn't change how much pizza there is. That sounds like a useless result, but it is the opposite: it tells you that capital structure matters <em>only through the frictions</em>. Taxes, distress, and signaling are not footnotes to the theory — they are the whole game. It is the finance equivalent of a no-free-lunch theorem: it tells you exactly where to look for the lunch.</p>
+
+  <h3 id="s14-payout">Payout policy: dividends vs buybacks</h3>
+  <p>When a firm generates more cash than its positive-NPV projects can absorb, holding it is itself a capital-budgeting decision — one that usually earns money-market returns while shareholders' opportunity cost is the WACC. Time for question three: return it. There are two pipes.</p>
+  <p>A <dfn class="term" tabindex="0" data-def="A cash payment a company makes to shareholders, typically quarterly, per share owned.">dividend</dfn> is a direct cash payment per share; once established, markets treat it as a quasi-promise, which is why cuts are rare and brutal for the stock. A <dfn class="term" tabindex="0" data-def="A company using its cash to repurchase its own shares, reducing the share count.">buyback</dfn> (share repurchase) uses the cash to buy the firm's own shares in the market, shrinking the share count so each remaining share owns a bigger slice. Mechanically the two are close cousins; practically they differ in three ways:</p>
+  <ul>
+    <li><strong>Taxes.</strong> Dividends force a taxable event on every shareholder every quarter. Buybacks tax only those who choose to sell, and only on their gains — everyone else compounds untaxed. This is a big reason US payout has shifted heavily toward buybacks since the 1980s (SEC rule 10b-18 made them safe from manipulation charges in 1982; a 1% excise tax was added in 2023).</li>
+    <li><strong>Flexibility and <dfn class="term" tabindex="0" data-def="Information conveyed by an action rather than words — e.g. a dividend hike signaling management's confidence in future cash flows.">signaling</dfn>.</strong> A dividend hike says "we are confident this cash level is permanent." A buyback authorization is a maybe — it can be quietly abandoned. Markets price the difference.</li>
+    <li><strong>Price sensitivity.</strong> A dividend's value doesn't depend on the stock price. A buyback's does — completely.</li>
+  </ul>
+  <div class="callout co-ex"><p class="co-label">Worked example: when buybacks create or destroy value</p>
+    <p>A firm has 100M shares trading at $50, and $500M of cash it will spend buying back 10M shares. Suppose your analysis (<a href="#s13">Section 13</a>) says intrinsic value is $70/share — total intrinsic equity $7,000M. After the buyback, remaining intrinsic value is $7,000M − $500M cash out = $6,500M across 90M shares = <strong>$72.22/share</strong>. Continuing holders gained $2.22 of value per share, transferred from sellers who accepted $50 for $70 of value.</p>
+    <p>Now flip it: intrinsic value is only $40 (the stock is overpriced at $50). Post-buyback: ($4,000M − $500M) ÷ 90M = <strong>$38.89</strong>. Management just paid $50 for $40 bills, and continuing holders footed the difference. A buyback is simply an investment in your own stock — the NPV rule applies to it like everything else. The empirical embarrassment: corporate America's buyback volume peaks near market tops and dries up in crashes, i.e. firms systematically buy high. Funding buybacks with debt at cycle peaks compounds the error with leverage.</p>
+  </div>
+  <p>Neither pipe creates value by itself — moving cash from the company's pocket to yours is plumbing, not alchemy. Value was created earlier, by ROIC &gt; WACC projects. Payout policy decides who holds the cash and what tax bill attaches; the best payout policy is the honest one: return cash when internal projects can't beat the hurdle, retain it when they can.</p>
+
+  <h3 id="s14-ma">M&amp;A: buying growth, and why it usually disappoints</h3>
+  <p><dfn class="term" tabindex="0" data-def="Mergers and acquisitions: one company combining with or purchasing another.">M&amp;A</dfn> is capital budgeting at maximum stakes: instead of building a project, you buy someone else's — typically paying a 20–40% <dfn class="term" tabindex="0" data-def="The excess over the target's pre-announcement market price that an acquirer pays to gain control.">control premium</dfn> over the market price. Two species of buyer roam this market. A <dfn class="term" tabindex="0" data-def="An acquirer (usually a company in the same or adjacent industry) that buys a target to combine operations and capture synergies.">strategic buyer</dfn> is a company buying a company — it can justify a higher price because it expects <dfn class="term" tabindex="0" data-def="Extra value from combining two firms: cost savings, cross-selling, shared technology — famously easier to project than to deliver.">synergies</dfn>: shared costs, cross-sold products, a merged data platform. A <dfn class="term" tabindex="0" data-def="An acquirer (private equity fund, etc.) that buys a business as an investment, often with heavy debt, intending to improve and resell it.">financial buyer</dfn> — typically a private equity fund running a leveraged buyout — buys with borrowed money, applies the leverage amplifier you just played with, and aims to resell in five to seven years.</p>
+  <p>Synergies deserve your skepticism. The premium is paid on day one, in cash or shares, with certainty; the synergies arrive later, if integration goes well, if key staff stay, if customers don't flee, if the cultures mesh. Study after study finds most deals transfer value <em>to the target's shareholders</em> (who pocket the premium) rather than create it for the acquirer's. And when several bidders compete, the one who wins is the one who overestimated the target most — the <dfn class="term" tabindex="0" data-def="In competitive bidding, the winner tends to be whoever most overestimated the value — so winning often means overpaying.">winner's curse</dfn>, straight out of auction theory.</p>
+  <p>Wall Street's quick screen for a stock deal is <dfn class="term" tabindex="0" data-def="Whether a merger raises (accretive) or lowers (dilutive) the acquirer's earnings per share in year one.">accretion/dilution</dfn>: does the acquirer's earnings per share rise or fall? Here is the arithmetic for an all-stock deal:</p>
+  <div class="tbl-wrap"><table>
+    <thead><tr><th>Line</th><th class="td-num">BigCo (acquirer)</th><th class="td-num">SmallCo (target)</th><th class="td-num">Combined</th></tr></thead>
+    <tbody>
+      <tr><td>Net income</td><td class="td-num">$1,000M</td><td class="td-num">$200M</td><td class="td-num">$1,200M</td></tr>
+      <tr><td>Shares outstanding</td><td class="td-num">500M</td><td class="td-num">—</td><td class="td-num">500M + 90M new = 590M</td></tr>
+      <tr><td>Share price / deal price</td><td class="td-num">$40 (P/E 20)</td><td class="td-num">$3,600M (P/E 18)</td><td class="td-num">—</td></tr>
+      <tr><td>EPS</td><td class="td-num">$2.00</td><td class="td-num">—</td><td class="td-num">$1,200M ÷ 590M = <strong>$2.03</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>BigCo pays $3,600M in its own stock (3,600 ÷ 40 = 90M new shares) and EPS rises 1.7% — <em>accretive</em>. But look at why: BigCo's shares are "worth" 20× earnings while it paid only 18× for SmallCo's. Whenever you buy earnings at a lower P/E than your own using stock, EPS mechanically rises — even if the deal is a disaster. Accretion is arithmetic, not value creation; the NPV question (are the synergies worth more than the premium?) is the only one that matters.</p>
+  <div class="callout co-real"><p class="co-label">Real world: one funeral, one wedding</p>
+    <p><strong>AOL–Time Warner (2000):</strong> the largest merger ever announced (~$165B, all stock), sold on internet–media synergy at the very peak of the dot-com bubble. AOL paid with wildly overvalued shares, cultures clashed, dial-up collapsed, and in 2002 the company recorded a ~$99B write-down — for years the largest annual corporate loss in US history. Every failure mode in this section in a single deal: peak-cycle timing, phantom synergies, winner's optimism.</p>
+    <p><strong>Disney–Pixar (2006):</strong> $7.4B in stock for a studio Disney distributed but couldn't replicate. The synergy was real and specific — Pixar's creative engine plugged into Disney's merchandising, parks, and distribution machine — and Disney protected it by leaving Pixar's leadership in charge of animation. <em>Frozen</em>, <em>Toy Story 3</em>, and a revived Walt Disney Animation followed; the price looks almost quaint in hindsight. Good deals tend to share this shape: a specific, verifiable synergy and a plan to protect what you bought.</p>
+  </div>
+
+  <details class="deep"><summary>Deep dive: Modigliani–Miller's two propositions, slightly less compressed</summary>
+    <p><strong>Proposition I</strong> (the pizza theorem): with frictionless markets, firm value is set by the cash flows the assets generate, not by how claims on them are sliced. The arbitrage proof is elegant — if a levered firm traded at a premium to an identical unlevered one, you could manufacture "homemade leverage" by borrowing personally to buy the cheap unlevered shares, replicating the expensive firm's payoff and pocketing the difference.</p>
+    <p><strong>Proposition II</strong>: the cost of equity rises linearly with leverage: r<sub>E</sub> = r<sub>0</sub> + (D÷E) × (r<sub>0</sub> − r<sub>D</sub>), where r<sub>0</sub> is the unlevered cost of capital. Swapping "expensive" equity for "cheap" debt makes the remaining equity riskier and thus costlier, and in a frictionless world the WACC stays exactly flat. So when a CFO claims a debt raise "lowers our cost of capital," the honest version is: only via the tax shield, and only until distress costs eat it. The hump in Figure 14.3 is the empirical world's amendment to MM.</p>
+  </details>
+
+  <div class="quiz">
+    <h4>Check your understanding</h4>
+    <div class="quiz-item">
+      <p class="quiz-q">1. Two mutually exclusive projects: X has IRR 22% and NPV +$3M at the firm's 9% WACC; Y has IRR 15% and NPV +$11M. Which should the firm take?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">X — the higher IRR means a more efficient use of capital</button>
+        <button class="quiz-opt" data-correct>Y — NPV measures dollars of value created at the actual cost of capital</button>
+        <button class="quiz-opt">Both — each clears the 9% hurdle</button>
+        <button class="quiz-opt">Neither — the metrics conflict, so the data is unreliable</button>
+      </div>
+      <p class="quiz-explain">When rankings conflict, NPV wins: it counts dollars added at the true opportunity cost of capital. IRR is scale-blind and assumes reinvestment at the IRR itself. "Both" fails because the projects are mutually exclusive.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">2. A firm's WACC is 8%. It reinvests heavily in projects returning 6%, and its EPS grows every year. What is happening to shareholder value?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">It grows — rising EPS is the definition of value creation</button>
+        <button class="quiz-opt">It is unchanged — growth and value always offset</button>
+        <button class="quiz-opt" data-correct>It shrinks — every reinvested dollar earns less than it costs</button>
+      </div>
+      <p class="quiz-explain">ROIC (6%) is below WACC (8%), so each dollar retained turns into less than a dollar of value. Growth amplifies value destruction when returns are below the cost of capital — EPS growth notwithstanding.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">3. A firm runs at 3× leverage (assets ÷ equity) with debt costing 5%. Its assets return −2% this year. Roughly what is its ROE?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">−2% — leverage doesn't change the asset return</button>
+        <button class="quiz-opt">−6% — three times the asset return</button>
+        <button class="quiz-opt" data-correct>−16% — three times the asset return minus two turns of interest</button>
+        <button class="quiz-opt">−11% — asset return minus total interest cost</button>
+      </div>
+      <p class="quiz-explain">ROE = L×ROA − (L−1)×r<sub>D</sub> = 3×(−2%) − 2×5% = −6% − 10% = −16%. The interest on two turns of debt is owed regardless of how the assets performed — that is the downside of the amplifier.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">4. Management buys back stock at $80 when a careful intrinsic-value estimate says shares are worth $60. Who wins?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">All shareholders — fewer shares means higher EPS for everyone</button>
+        <button class="quiz-opt" data-correct>Selling shareholders — they receive $80 for $60 of value, paid for by those who stay</button>
+        <button class="quiz-opt">Remaining shareholders — their ownership percentage rises</button>
+      </div>
+      <p class="quiz-explain">A buyback is an investment in the firm's own stock, so the NPV rule applies: paying $80 for $60 of value transfers the $20 difference from continuing holders to sellers. Higher EPS and a bigger ownership slice don't offset overpaying.</p>
+    </div>
+    <div class="quiz-item">
+      <p class="quiz-q">5. An all-stock acquisition is immediately EPS-accretive because the acquirer trades at P/E 24 and paid P/E 16 for the target. What does the accretion prove about value creation?</p>
+      <div class="quiz-opts">
+        <button class="quiz-opt">The deal creates value — earnings per share rose</button>
+        <button class="quiz-opt">The synergies must exceed the premium paid</button>
+        <button class="quiz-opt" data-correct>Nothing — buying lower-P/E earnings with higher-P/E stock is mechanically accretive</button>
+        <button class="quiz-opt">The target was undervalued by the market</button>
+      </div>
+      <p class="quiz-explain">Swapping high-multiple paper for low-multiple earnings raises EPS by pure arithmetic, even for a value-destroying deal. Whether value is created depends on whether synergies exceed the control premium — a separate, NPV question.</p>
+    </div>
+  </div>
+
+  <div class="kt">
+    <h4>Key takeaways</h4>
+    <ul>
+      <li>Corporate finance is three questions: what to invest in (capital budgeting), how to fund it (capital structure), and what to return (payout policy). Every corporate headline maps to one.</li>
+      <li>NPV — <a href="#s01">Section 1</a>'s discounting applied to projects — is the gold standard: accept positive-NPV projects, and when rankings conflict, trust dollars over percentages.</li>
+      <li>IRR is scale-blind, can have multiple roots when cash flows change sign twice, and assumes reinvestment at itself; payback ignores time value and everything after the payback date.</li>
+      <li>WACC is the blended opportunity cost of the firm's capital; value is created if and only if ROIC &gt; WACC — growth below the hurdle destroys value even while EPS rises.</li>
+      <li>Debt buys a tax shield but sells insurance against bad years: leverage multiplies ROE in both directions (2× leverage turns +12%/−4% asset returns into +19%/−13% on equity).</li>
+      <li>Modigliani–Miller says capital structure is irrelevant <em>without</em> frictions — so taxes, distress costs, and signaling are precisely where structure matters.</li>
+      <li>Dividends and buybacks are plumbing, not alchemy: buybacks add value only below intrinsic value, and destroy it when firms buy high — which, empirically, is when they buy most.</li>
+      <li>M&amp;A premiums are certain, synergies are hypotheses; accretion is arithmetic, not proof of value; and in competitive auctions, beware the winner's curse.</li>
+    </ul>
+  </div>
+</section>
