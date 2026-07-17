@@ -821,7 +821,8 @@
     font-weight: 700;
     color: var(--ink-2);
   }
-  .audio-btn {
+  .audio-btn,
+  .audio-control-btn {
     background: var(--surface);
     color: var(--ink);
     border: 1px solid var(--border);
@@ -830,7 +831,8 @@
     font-size: 0.95rem;
     cursor: pointer;
   }
-  .audio-btn:hover {
+  .audio-btn:hover,
+  .audio-control-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
   }
@@ -838,6 +840,20 @@
     font-size: 0.95rem;
     color: var(--muted);
     min-width: 160px;
+  }
+  .section-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    margin: 20px 0 18px;
+  }
+  .audio-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
   }
   .stat-row {
     display: flex;
@@ -4107,7 +4123,22 @@
       data-title="Microeconomics: How Markets Work"
     >
       <p class="eyebrow">Part I · Economic Foundations</p>
-      <h2>2. Microeconomics: How Markets Work</h2>
+      <div class="section-head">
+        <h2>2. Microeconomics: How Markets Work</h2>
+        <div class="audio-header" aria-label="Section 2 audio controls">
+          <button class="audio-btn" type="button" data-audio="2-1">2-1</button>
+          <button class="audio-btn" type="button" data-audio="2-2">2-2</button>
+          <button class="audio-control-btn" type="button" data-action="toggle">
+            Play
+          </button>
+          <span
+            class="audio-status"
+            id="s02-audio-status"
+            aria-live="polite"
+          ></span>
+          <audio id="s02-audio-player" preload="none"></audio>
+        </div>
+      </div>
       <p class="lede">
         Strip away the tickers and the jargon, and every market — the corner
         coffee shop, the used-car lot, the New York Stock Exchange — runs on the
@@ -4116,22 +4147,6 @@
         everything, including the stocks and bonds you'll meet later, and shows
         exactly what happens when that machinery breaks.
       </p>
-
-      <div class="audio-toolbar" aria-label="Section 2 audio controls">
-        <span class="audio-label">Listen to Section 2:</span>
-        <button class="audio-btn" type="button" data-audio="2-1">
-          Play 2-1
-        </button>
-        <button class="audio-btn" type="button" data-audio="2-2">
-          Play 2-2
-        </button>
-        <span
-          class="audio-status"
-          id="s02-audio-status"
-          aria-live="polite"
-        ></span>
-        <audio id="s02-audio-player" preload="none"></audio>
-      </div>
 
       <h3 id="s02-scarcity">
         Scarcity, opportunity cost, and thinking at the margin
@@ -44422,20 +44437,29 @@
       var audioButtons = document.querySelectorAll(
         "button.audio-btn[data-audio]",
       );
-      if (!audioSection || !audioPlayer || !audioButtons.length) return;
+      var audioToggle = document.querySelector(
+        'button.audio-control-btn[data-action="toggle"]',
+      );
+      if (!audioSection || !audioPlayer || !audioButtons.length || !audioToggle)
+        return;
       var prefix =
         location.pathname.indexOf("/finance-course-build/") !== -1 ? "../" : "";
       function setStatus(text) {
         if (audioStatus) audioStatus.textContent = text || "";
       }
-      function playAudio(file) {
+      function setToggleText(isPlaying) {
+        if (audioToggle) audioToggle.textContent = isPlaying ? "Pause" : "Play";
+      }
+      function loadAndPlay(file) {
         var src = prefix + "audio-files/" + file + ".mp3";
         if (audioPlayer.dataset.current === file && !audioPlayer.paused) {
           audioPlayer.pause();
           return;
         }
-        audioPlayer.dataset.current = file;
-        audioPlayer.src = src;
+        if (audioPlayer.dataset.current !== file) {
+          audioPlayer.dataset.current = file;
+          audioPlayer.src = src;
+        }
         audioPlayer
           .play()
           .then(function () {
@@ -44449,14 +44473,31 @@
       }
       audioButtons.forEach(function (button) {
         button.addEventListener("click", function () {
-          playAudio(this.getAttribute("data-audio"));
+          loadAndPlay(this.getAttribute("data-audio"));
         });
       });
-      audioPlayer.addEventListener("ended", function () {
-        setStatus("Finished " + (audioPlayer.dataset.current || "audio"));
+      audioToggle.addEventListener("click", function () {
+        if (!audioPlayer.src) {
+          setStatus("Select an audio clip first.");
+          return;
+        }
+        if (audioPlayer.paused) {
+          audioPlayer.play();
+        } else {
+          audioPlayer.pause();
+        }
+      });
+      audioPlayer.addEventListener("play", function () {
+        setToggleText(true);
+        setStatus("Playing " + (audioPlayer.dataset.current || "audio"));
       });
       audioPlayer.addEventListener("pause", function () {
+        setToggleText(false);
         if (!audioPlayer.ended) setStatus("Paused");
+      });
+      audioPlayer.addEventListener("ended", function () {
+        setToggleText(false);
+        setStatus("Finished " + (audioPlayer.dataset.current || "audio"));
       });
     })();
   })();
