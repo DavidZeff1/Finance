@@ -855,6 +855,38 @@
     align-items: center;
     gap: 8px;
   }
+  .play-audio {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    vertical-align: middle;
+    margin-left: 10px;
+    padding: 4px 12px 4px 10px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    color: var(--accent);
+    font: 600 12px/1 var(--font-body);
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, opacity 0.15s;
+  }
+  .play-audio:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+  }
+  .play-audio svg {
+    width: 13px;
+    height: 13px;
+    fill: currentColor;
+  }
+  .play-audio.is-playing {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+  }
+  .play-audio.is-missing {
+    display: none;
+  }
   .stat-row {
     display: flex;
     flex-wrap: wrap;
@@ -44233,6 +44265,65 @@
     sidebar.addEventListener("click", function (e) {
       if (e.target.closest("a")) closeNav();
     });
+
+    /* ---- section audio ---- */
+    (function () {
+      var PLAY_SVG =
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
+      var PAUSE_SVG =
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+      var player = new Audio();
+      var current = null;
+      var counters = {};
+
+      function setIdle(btn) {
+        btn.classList.remove("is-playing");
+        btn.innerHTML = PLAY_SVG + "<span>Listen</span>";
+      }
+
+      player.addEventListener("ended", function () {
+        if (current) setIdle(current);
+        current = null;
+      });
+
+      document.querySelectorAll('h3[id^="s"]').forEach(function (h) {
+        var m = /^s0*(\d+)-/.exec(h.id);
+        if (!m) return;
+        var chapter = m[1];
+        counters[chapter] = (counters[chapter] || 0) + 1;
+        var src = "audio-files/" + chapter + "-" + counters[chapter] + ".mp3";
+
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "play-audio is-missing";
+        btn.setAttribute("aria-label", "Play audio for this section");
+        setIdle(btn);
+        h.appendChild(btn);
+
+        /* reveal only when the file actually exists */
+        var probe = new Audio();
+        probe.preload = "metadata";
+        probe.addEventListener("loadedmetadata", function () {
+          btn.classList.remove("is-missing");
+        });
+        probe.src = src;
+
+        btn.addEventListener("click", function () {
+          if (current === btn) {
+            player.pause();
+            setIdle(btn);
+            current = null;
+            return;
+          }
+          if (current) setIdle(current);
+          player.src = src;
+          player.play();
+          current = btn;
+          btn.classList.add("is-playing");
+          btn.innerHTML = PAUSE_SVG + "<span>Pause</span>";
+        });
+      });
+    })();
 
     /* ---- quiz engine ---- */
     document.querySelectorAll(".quiz-item").forEach(function (item) {
