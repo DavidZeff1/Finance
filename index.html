@@ -191,6 +191,10 @@
     font-family: var(--font-display);
     font-size: 16px;
     font-weight: 600;
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .nav-toggle {
     background: var(--surface-2);
@@ -395,7 +399,7 @@
     }
     .main {
       margin-left: 0;
-      padding-top: 54px;
+      padding-top: var(--topbar-h, 54px);
     }
     .main-inner {
       padding: 28px 18px 70px;
@@ -1181,6 +1185,188 @@
   @media (prefers-reduced-motion: reduce) {
     .to-top,
     .term::after {
+      transition: none;
+    }
+  }
+
+  /* ============ PAGED READER ============ */
+  .lesson,
+  .hero,
+  .lpage {
+    display: none;
+  }
+  .lesson.is-current,
+  .hero.is-current,
+  .lpage.is-current {
+    display: block;
+  }
+  .lesson {
+    padding: 10px 0 8px;
+    border-bottom: 0;
+  }
+  .reader-bar {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: -40px -40px 0;
+    padding: 12px 40px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .rb-mid {
+    flex: 1;
+    min-width: 0;
+  }
+  .rb-top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .rb-kicker {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .rb-count {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .rb-dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 7px;
+  }
+  .rb-dots:empty {
+    display: none;
+  }
+  .rb-dot {
+    width: 24px;
+    height: 5px;
+    padding: 0;
+    border: 0;
+    border-radius: 3px;
+    background: var(--border);
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  .rb-dot:hover {
+    background: var(--ink-2);
+  }
+  .rb-dot.is-on {
+    background: var(--accent);
+  }
+  .rb-dot.is-seen {
+    background: var(--accent-soft);
+  }
+  .rb-arrow {
+    flex: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      border-color 0.15s ease,
+      color 0.15s ease;
+  }
+  .rb-arrow:hover:not(:disabled) {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .rb-arrow:disabled {
+    opacity: 0.3;
+    cursor: default;
+  }
+  .reader-foot {
+    display: flex;
+    gap: 12px;
+    margin: 36px 0 20px;
+  }
+  .rf-btn {
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--ink);
+    text-align: left;
+    cursor: pointer;
+    transition:
+      border-color 0.15s ease,
+      background 0.15s ease;
+  }
+  .rf-next {
+    text-align: right;
+  }
+  .rf-btn:hover:not(:disabled) {
+    border-color: var(--accent);
+    background: var(--accent-soft);
+  }
+  .rf-btn:disabled {
+    opacity: 0.28;
+    cursor: default;
+  }
+  .rf-dir {
+    display: block;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .rf-title {
+    display: block;
+    margin-top: 3px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--ink-2);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lesson-foot {
+    border-top: 0;
+  }
+  @media (max-width: 1080px) {
+    .reader-bar {
+      top: var(--topbar-h, 54px);
+      margin: -28px -18px 0;
+      padding: 10px 18px;
+    }
+    .rb-arrow {
+      width: 38px;
+      height: 38px;
+      font-size: 20px;
+    }
+    .reader-foot {
+      gap: 8px;
+    }
+    .rf-title {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rb-dot,
+    .rb-arrow,
+    .rf-btn {
       transition: none;
     }
   }
@@ -2082,6 +2268,13 @@
           </p>
         </div>
       </div>
+      <p class="hero-note">
+        One idea per screen — use the <strong>‹ ›</strong> arrows at the top, the
+        Back / Next buttons at the bottom, or your keyboard's <strong>←</strong>
+        and <strong>→</strong> keys to move through the course. The dashes under
+        the section name show where you are inside the current section; click one
+        to jump.
+      </p>
       <p class="hero-note">
         Everything here is for education, not investment advice. Figures use
         simplified, illustrative numbers unless a real historical event is
@@ -51959,83 +52152,306 @@
       });
       paintBtn();
       foot.appendChild(btn);
-      var pager = document.createElement("nav");
-      pager.className = "pager";
-      if (i > 0) {
-        var prev = lessons[i - 1];
-        var a = document.createElement("a");
-        a.href = "#" + prev.id;
-        a.textContent =
-          "← " + i + ". " + (prev.getAttribute("data-title") || "Previous");
-        pager.appendChild(a);
-      }
-      if (i < total - 1) {
-        var next = lessons[i + 1];
-        var b = document.createElement("a");
-        b.href = "#" + next.id;
-        b.textContent =
-          i + 2 + ". " + (next.getAttribute("data-title") || "Next") + " →";
-        pager.appendChild(b);
-      }
-      foot.appendChild(pager);
       sec.appendChild(foot);
     });
     refreshProgress();
 
-    /* ---- scrollspy ---- */
+    /* ---- nav references ---- */
     var navItems = Array.prototype.slice.call(
       document.querySelectorAll(".nav-item"),
     );
     var subLinks = Array.prototype.slice.call(
       document.querySelectorAll(".nav-subs a"),
     );
-    var ticking = false;
-    function spy() {
-      ticking = false;
-      var y = window.scrollY + 120;
-      var current = null;
-      lessons.forEach(function (s) {
-        if (s.offsetTop <= y) current = s;
-      });
-      navItems.forEach(function (li) {
-        li.classList.toggle(
-          "is-active",
-          !!current && li.getAttribute("data-sec") === current.id,
+
+    /* ---- keep the sticky offsets in step with the mobile top bar ---- */
+    (function () {
+      var topbar = document.querySelector(".topbar");
+      if (!topbar) return;
+      function measure() {
+        var h = topbar.offsetHeight;
+        document.documentElement.style.setProperty(
+          "--topbar-h",
+          (h ? h : 54) + "px",
         );
-      });
-      if (current) {
-        var heads = Array.prototype.slice.call(
-          current.querySelectorAll("h3[id]"),
-        );
-        var curHead = null;
-        heads.forEach(function (h) {
-          if (
-            h.offsetTop + current.offsetTop - current.offsetTop >= 0 &&
-            h.getBoundingClientRect().top < 140
-          )
-            curHead = h;
+      }
+      measure();
+      window.addEventListener("resize", measure);
+    })();
+
+    /* ---- paged reader: one sub-topic per screen, arrows to move ---- */
+    (function () {
+      var PAGE_KEY = "fe-zero2master-page";
+      var mainInner = document.querySelector(".main-inner");
+      var hero = document.querySelector(".hero");
+      var siteFooter = document.querySelector(".site-footer");
+      if (!mainInner) return;
+
+      var flow = []; // one entry per screen
+      var byId = {}; // element id -> flow index
+      var secFirst = {}; // section id -> flow index of its first page
+
+      function cleanText(node) {
+        var c = node.cloneNode(true);
+        Array.prototype.forEach.call(c.querySelectorAll("button"), function (b) {
+          b.parentNode.removeChild(b);
         });
-        subLinks.forEach(function (a) {
-          a.classList.toggle(
-            "is-here",
-            !!curHead && a.getAttribute("href") === "#" + curHead.id,
-          );
+        return (c.textContent || "").replace(/\s+/g, " ").trim();
+      }
+
+      if (hero) {
+        flow.push({
+          el: hero,
+          sec: null,
+          title: "Course overview",
+          kicker: "Start here",
+          anchor: "top",
         });
       }
-      var toTop = document.getElementById("to-top");
-      if (toTop) toTop.classList.toggle("is-on", window.scrollY > 900);
-    }
+
+      lessons.forEach(function (sec, si) {
+        /* split the section's direct children into groups, breaking at each
+           h3 sub-heading and at the closing quiz / key-takeaways blocks */
+        var groups = [];
+        var cur = null;
+        Array.prototype.slice.call(sec.children).forEach(function (node) {
+          var cls = node.classList;
+          var isBreak =
+            node.tagName === "H3" ||
+            (cls && (cls.contains("quiz") || cls.contains("kt")));
+          if (isBreak || !cur) {
+            cur = { nodes: [], head: isBreak ? node : null };
+            groups.push(cur);
+          }
+          cur.nodes.push(node);
+        });
+
+        var start = flow.length;
+        secFirst[sec.id] = start;
+        groups.forEach(function (g, gi) {
+          var page = document.createElement("div");
+          page.className = "lpage";
+          g.nodes.forEach(function (n) {
+            page.appendChild(n);
+          });
+          sec.appendChild(page);
+
+          var title;
+          if (!g.head) title = sec.getAttribute("data-title") || "Introduction";
+          else if (g.head.tagName === "H3") title = cleanText(g.head);
+          else if (g.head.classList.contains("quiz"))
+            title = "Check your understanding";
+          else title = "Key takeaways";
+
+          flow.push({
+            el: page,
+            sec: sec,
+            secIdx: si,
+            secStart: start,
+            pageIdx: gi,
+            pageCount: groups.length,
+            title: title,
+            kicker:
+              si + 1 + ". " + (sec.getAttribute("data-title") || "Section"),
+            anchor: g.head && g.head.id ? g.head.id : sec.id,
+          });
+        });
+      });
+
+      if (flow.length < 2) return;
+
+      flow.forEach(function (p, i) {
+        if (p.el.id && byId[p.el.id] === undefined) byId[p.el.id] = i;
+        Array.prototype.forEach.call(
+          p.el.querySelectorAll("[id]"),
+          function (n) {
+            if (byId[n.id] === undefined) byId[n.id] = i;
+          },
+        );
+      });
+
+      /* ---- chrome ---- */
+      var bar = document.createElement("div");
+      bar.className = "reader-bar";
+      bar.innerHTML =
+        '<button class="rb-arrow" type="button" data-dir="-1" aria-label="Previous page">‹</button>' +
+        '<div class="rb-mid"><div class="rb-top"><span class="rb-kicker"></span><span class="rb-count"></span></div><div class="rb-dots"></div></div>' +
+        '<button class="rb-arrow" type="button" data-dir="1" aria-label="Next page">›</button>';
+      mainInner.insertBefore(bar, mainInner.firstChild);
+
+      var foot = document.createElement("nav");
+      foot.className = "reader-foot";
+      foot.setAttribute("aria-label", "Page navigation");
+      foot.innerHTML =
+        '<button class="rf-btn rf-prev" type="button" data-dir="-1"><span class="rf-dir">← Back</span><span class="rf-title"></span></button>' +
+        '<button class="rf-btn rf-next" type="button" data-dir="1"><span class="rf-dir">Next →</span><span class="rf-title"></span></button>';
+      if (siteFooter) mainInner.insertBefore(foot, siteFooter);
+      else mainInner.appendChild(foot);
+
+      var kickerEl = bar.querySelector(".rb-kicker");
+      var countEl = bar.querySelector(".rb-count");
+      var dotsEl = bar.querySelector(".rb-dots");
+      var arrows = Array.prototype.slice.call(bar.querySelectorAll(".rb-arrow"));
+      var prevBtn = foot.querySelector(".rf-prev");
+      var nextBtn = foot.querySelector(".rf-next");
+
+      var idx = -1;
+
+      function setBtn(btn, p, cur, dirLabel) {
+        btn.disabled = !p;
+        btn.querySelector(".rf-dir").textContent = dirLabel;
+        var label = "";
+        if (p) {
+          /* crossing into a different section? name the section too */
+          label =
+            p.sec && p.sec !== (cur && cur.sec)
+              ? "Section " + (p.secIdx + 1) + " · " + p.title
+              : p.title;
+        }
+        btn.querySelector(".rf-title").textContent = label;
+      }
+
+      function render(i) {
+        i = Math.max(0, Math.min(flow.length - 1, i));
+        if (i === idx) return;
+        idx = i;
+        var p = flow[idx];
+
+        flow.forEach(function (q, j) {
+          q.el.classList.toggle("is-current", j === idx);
+        });
+        lessons.forEach(function (s) {
+          s.classList.toggle("is-current", s === p.sec);
+        });
+        if (siteFooter)
+          siteFooter.style.display = idx === flow.length - 1 ? "" : "none";
+
+        kickerEl.textContent = p.kicker;
+        countEl.textContent = p.sec ? p.pageIdx + 1 + " / " + p.pageCount : "";
+        dotsEl.innerHTML = "";
+        if (p.sec) {
+          for (var k = 0; k < p.pageCount; k++) {
+            var d = document.createElement("button");
+            d.type = "button";
+            d.className =
+              "rb-dot" +
+              (k === p.pageIdx ? " is-on" : k < p.pageIdx ? " is-seen" : "");
+            d.setAttribute("data-jump", p.secStart + k);
+            d.title = flow[p.secStart + k].title;
+            d.setAttribute("aria-label", flow[p.secStart + k].title);
+            dotsEl.appendChild(d);
+          }
+        }
+        arrows[0].disabled = idx === 0;
+        arrows[1].disabled = idx === flow.length - 1;
+        setBtn(prevBtn, idx > 0 ? flow[idx - 1] : null, p, "← Back");
+        setBtn(
+          nextBtn,
+          idx < flow.length - 1 ? flow[idx + 1] : null,
+          p,
+          "Next →",
+        );
+
+        navItems.forEach(function (li) {
+          li.classList.toggle(
+            "is-active",
+            !!p.sec && li.getAttribute("data-sec") === p.sec.id,
+          );
+        });
+        subLinks.forEach(function (a) {
+          a.classList.toggle("is-here", a.getAttribute("href") === "#" + p.anchor);
+        });
+
+        window.scrollTo(0, 0);
+        try {
+          history.replaceState(null, "", "#" + p.anchor);
+        } catch (e) {}
+        try {
+          localStorage.setItem(PAGE_KEY, p.anchor);
+        } catch (e) {}
+      }
+
+      function goToId(id) {
+        var i = byId[id];
+        if (i === undefined) i = secFirst[id];
+        if (i === undefined) return false;
+        render(i);
+        return true;
+      }
+
+      function step(d) {
+        render(idx + d);
+      }
+
+      document.addEventListener("click", function (e) {
+        var t = e.target;
+        if (!t || !t.closest) return;
+        var dirBtn = t.closest("[data-dir]");
+        if (dirBtn && !dirBtn.disabled) {
+          step(parseInt(dirBtn.getAttribute("data-dir"), 10));
+          return;
+        }
+        var dot = t.closest("[data-jump]");
+        if (dot) {
+          render(parseInt(dot.getAttribute("data-jump"), 10));
+          return;
+        }
+        var a = t.closest('a[href^="#"]');
+        if (a) {
+          var id = a.getAttribute("href").slice(1);
+          if (id === "top") {
+            e.preventDefault();
+            render(0);
+            return;
+          }
+          if (id && goToId(id)) e.preventDefault();
+        }
+      });
+
+      document.addEventListener("keydown", function (e) {
+        if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+        var t = e.target;
+        if (
+          t &&
+          (t.tagName === "INPUT" ||
+            t.tagName === "TEXTAREA" ||
+            t.tagName === "SELECT" ||
+            t.isContentEditable)
+        )
+          return;
+        if (e.key === "ArrowRight") {
+          e.preventDefault();
+          step(1);
+        } else if (e.key === "ArrowLeft") {
+          e.preventDefault();
+          step(-1);
+        }
+      });
+
+      window.addEventListener("hashchange", function () {
+        var id = location.hash.slice(1);
+        if (id) goToId(id);
+      });
+
+      /* ---- opening position: URL hash, then last-read, then the cover ---- */
+      var startId = location.hash.slice(1);
+      var saved = null;
+      try {
+        saved = localStorage.getItem(PAGE_KEY);
+      } catch (e) {}
+      idx = -1;
+      if (!(startId && goToId(startId)) && !(saved && goToId(saved))) render(0);
+    })();
+
+    /* ---- back-to-top affordance for the longer pages ---- */
     window.addEventListener(
       "scroll",
       function () {
-        if (!ticking) {
-          ticking = true;
-          window.requestAnimationFrame(spy);
-        }
+        var toTop = document.getElementById("to-top");
+        if (toTop) toTop.classList.toggle("is-on", window.scrollY > 900);
       },
       { passive: true },
     );
-    spy();
 
     var toTopBtn = document.getElementById("to-top");
     if (toTopBtn)
