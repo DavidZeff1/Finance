@@ -1,0 +1,17 @@
+Open any quote page and you face a wall of numbers. Here's the decoder ring.
+
+O H L C is the day's open, high, low and close, the atomic unit of price data. Volume is how many shares traded, and a price move on heavy volume carries more conviction than the same move on a trickle. The fifty two week range instantly locates today's price in its recent history.
+
+Beta measures how the stock moves with the overall market. A beta of one point two means it tends to move one point two percent for every one percent market move. And it is literally the slope coefficient from regressing the stock's returns on the market's. Three lines of Python.
+
+Float is the share count actually available to trade after excluding insiders' locked up holdings. A small float plus heavy demand is the recipe for violent price moves, which is the entire meme stock story of twenty twenty one. A newly listed company might have ninety percent of its shares locked up for six months after the I P O, and when that lockup expires, supply floods the market. Checking the float and the lockup calendar is standard diligence before touching a recent listing.
+
+Now the trap that catches everyone. A stock trades at sixty dollars. Its investor deck leads with a P E of twenty four. Its annual filing implies fifty. Both are true.
+
+Under generally accepted accounting principles, trailing twelve months, earnings per share is one dollar twenty, so the P E is fifty. That includes everything, audited. Stock compensation, restructuring, impairments. On management's adjusted number, excluding items it deems non recurring, earnings are two dollars ten, so the P E is twenty eight point six. And on forward analyst consensus, a forecast of an adjusted number by people the company talks to, earnings are two fifty and the P E is twenty four.
+
+The largest single adjustment is almost always stock based compensation. Excluding it has a real defence, no cash left the building, and a real rebuttal, it diluted your ownership, which is the same thing. Those are two views of the identical event.
+
+So three habits worth forming permanently. One: whenever someone quotes a P E, ask, on which E? Generally accepted, adjusted, forward, or averaged through the cycle. Two: pull the reconciliation table that every American filer must publish between the audited and adjusted numbers, and read what's being excluded. Non recurring charges that recur every year are a red flag. Three: when you build a screener, store all three fields, because half the apparent alpha in naive value screens is really a definition mismatch between data vendors.
+
+And here's your edge on all of this. Every field on that screen is a column in a dataset. Price series are freely downloadable, beta is a linear regression, cap weighting is a normalized vector, and total return is a cumulative product. Most finance professionals can read the screen. Far fewer can rebuild it.

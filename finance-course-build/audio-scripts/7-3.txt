@@ -1,0 +1,15 @@
+Owning a stock pays you in exactly two ways. The price can rise, which is price appreciation, and the company can mail you cash, which is a dividend. Add them together and you get total return, the only return that matters. Ending price minus starting price, plus dividends, all divided by the starting price.
+
+Dividends look small. A two or three percent yield next to double digit price swings. But reinvested over decades they are enormous, because reinvesting buys more shares, which pay more dividends, which buy more shares. It's the compounding loop running on two engines at once. Your per share price grows at the price return while your share count grows at the dividend yield, so wealth compounds at roughly one plus g, times one plus d.
+
+Let me show you. Ten thousand dollars in a stock returning five percent in price with a three percent yield, dividends reinvested, for thirty years. The compound rate is one point zero five times one point zero three, which is eight point one five percent. After thirty years you have about a hundred and four thousand nine hundred dollars. Price alone would give you forty three thousand two hundred. The small dividend, reinvested, ends up responsible for more than half the final wealth, and your share count has grown two point four three times along the way.
+
+Now scale that to a century. American large cap stocks from nineteen twenty six to twenty twenty three returned about six point two percent a year on price alone, turning a dollar into roughly three hundred and sixty. On total return with dividends reinvested, about ten point three percent, turning a dollar into roughly fourteen thousand nine hundred. Forty times more money, from a four point a year difference.
+
+So a practical rule for anyone building datasets. Check whether your series is price or total return before you compute a single statistic. Comparing a stock's price series to a total return benchmark will make almost any strategy look good, and it's one of the most common errors in amateur backtests.
+
+How much do equities pay for all this risk? Over the last century American stocks delivered roughly seven percent a year after inflation, and the equity risk premium over safe government debt has been around four to six percentage points. At seven percent real, purchasing power doubles about every ten years.
+
+The catch is the ride. Volatility runs fifteen to twenty percent a year, and the market suffers a drawdown of thirty to fifty percent roughly once a decade. Minus eighty six percent in nineteen twenty nine to thirty two. About minus fifty in seventy three, in two thousand, and in two thousand eight. Minus thirty four percent in five weeks in March twenty twenty. That seven percent average is earned through those crashes, not around them.
+
+Which is why time horizon is the single most important variable in equity investing. Over one year, stocks are close to a coin flip. Over twenty or thirty years the historical odds of beating cash have been overwhelming. Money you need next year does not belong in stocks.

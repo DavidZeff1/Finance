@@ -1,0 +1,13 @@
+A stock index is a rule based basket of stocks used to measure the market. The S and P five hundred holds the largest American companies and is the default. The Nasdaq one hundred is the largest non financial Nasdaq listings, tech heavy. The Russell two thousand is American small caps. M S C I World covers developed markets globally. And the Dow Jones Industrial Average is thirty blue chip names picked by a committee.
+
+Almost every serious index is cap weighted. Each company's weight is its market cap divided by the sum of all members' caps. That's just a weighted average, and it has a beautiful property. The index holds each company in proportion to its actual size, and it rebalances itself for free as prices move.
+
+The Dow, by contrast, is price weighted. It effectively holds one share of each member, so a company's influence depends on its per share price, which we just established is meaningless.
+
+Let me make that concrete. Take five companies. MegaTech at three hundred dollars a share with ten million shares, so a three billion dollar cap. BigBank at fifty dollars with forty million shares, so two billion. By economic size, BigBank is thirty percent of the index. By price weight, it's seven percent. A price weighted index thinks a company is important because of an arbitrary decision about how many pieces to cut its equity into. That is the Dow, and it's why no serious analyst uses it. It survives on brand recognition, not merit.
+
+Now, you can't buy an index directly. It's a formula, not a product. The practical vehicles are index funds and E T Fs, which hold the index's stocks at the index's weights and charge a tiny expense ratio. As low as zero point zero three percent a year, versus around one percent for typical actively managed funds. That fee gap, compounded over thirty years, eats roughly a quarter of your final wealth, which is why cheap index funds have absorbed trillions of dollars. One E T F share can make you part owner of five hundred, or eight thousand, businesses at once.
+
+But here's something to watch right now. The S and P five hundred is cap weighted, and by twenty twenty four its ten largest companies were roughly thirty five percent of the entire index. The highest concentration in decades. So when you buy the market, you're buying a portfolio with about a third of its money in ten correlated technology adjacent names.
+
+And you can measure that effect directly. Compare the cap weighted S and P E T F against the equal weighted version of the same five hundred companies over any recent period. The gap between them is the concentration effect, stated in return terms. That's a genuinely useful exercise, and it takes about ten lines of code.

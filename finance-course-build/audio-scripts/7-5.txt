@@ -1,0 +1,15 @@
+Is a stock cheap or expensive? Not by its price. By its price relative to what you get.
+
+The workhorse metrics. Earnings per share is net profit divided by shares outstanding. And the price to earnings ratio, the P E, is what you pay per dollar of annual profit. Price per share divided by earnings per share. A stock at a hundred and eighty four dollars with earnings per share of seven dollars forty nine trades at a P E of about twenty four point six.
+
+Now flip it over. The earnings yield is just one divided by the P E. A P E of twenty five means each dollar invested currently produces four cents of annual profit. And that's the useful move, because it puts stocks in the same units as bonds. Is four point one percent of growing corporate earnings better than four and a half percent of fixed bond coupons? That question is half of finance.
+
+Here's the key idea though. A high P E is not overpriced, and a low P E is not a bargain. A P E is a claim about the future. Paying forty five times current earnings only makes sense if you believe earnings will grow fast. Paying eleven times says you expect stagnation.
+
+Look at four companies carrying four completely different stories. A regulated utility at a P E of eighteen: earnings are boring and near certain, priced like a bond with a small growth kicker. Enterprise software growing twenty five percent at a P E of forty five: today's earnings are irrelevant, you're buying year ten, and any growth stumble re rates it violently. A large bank at nine: cheap because earnings are leveraged and cyclical, and one credit cycle can erase several years of them. And a homebuilder at a cycle peak trading at five times earnings, a twenty percent earnings yield.
+
+That last one is a trap, and it has a name. The value trap. The earnings are at a peak that will not repeat. For cyclicals, miners, homebuilders, chipmakers, airlines, a low P E is a warning, not an opportunity. The standard fix is to divide price by average earnings over a full cycle, which is exactly what the Shiller measure does with a ten year average.
+
+P E has other sharp edges. If earnings are negative, the ratio is meaningless. A company losing money has no P E, not a low one. And one off items, a lawsuit settlement, an asset sale, can distort a single year's earnings badly.
+
+Finally, use the earnings yield for cross asset comparison, because it's genuinely powerful. If the ten year Treasury pays four and a half percent and the index earnings yield is four percent, you're accepting less current yield than a risk free bond, betting entirely on earnings growth. In the year two thousand, the index earnings yield fell to about three percent against six percent Treasuries. In twenty eleven it was eight percent against two percent Treasuries. You don't need a model to know which of those was the better entry point.
