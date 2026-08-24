@@ -1,0 +1,13 @@
+You now have the dashboard. Output, prices, jobs. What you need next is a way to reason about how a shock, an oil spike, a stimulus bill, a pandemic, actually moves those needles. The workhorse model is aggregate demand and aggregate supply. It's a deliberate echo of the supply and demand cross from chapter two, except now the whole economy is on the axes. Total real output along the bottom, the overall price level up the side.
+
+Aggregate demand is total spending. C plus I plus G plus net exports again, now drawn as a curve. It slopes down, because a lower price level stretches money and wealth further and tends to come with lower interest rates, and both of those coax out more spending.
+
+Aggregate supply slopes up in the short run for a very human reason. Wages and many prices are sticky. They get renegotiated slowly. So when selling prices rise before costs catch up, producing more is temporarily profitable. In the long run wages catch up, and output settles at the economy's potential, set by those productivity fundamentals from earlier.
+
+Now every macro headline turns into a two step question. Which curve moved, and which way? Stimulus cheques, tax cuts, rate cuts: demand shifts right, so output and prices both rise. An oil spike or a supply chain breakdown: supply shifts left, so output falls while prices rise. A financial crisis or a collapse in confidence: demand shifts left, so output and prices both fall.
+
+And that gives you the single most useful diagnostic in macro. If output and prices move in the same direction, you're looking at a demand shock, and the central bank's job is easy, because one lever fixes both. If they move in opposite directions, it's a supply shock, and the central bank is trapped. Fighting the inflation deepens the slump, and cushioning the slump entrenches the inflation. That one sentence is the entire policy dilemma of nineteen seventy three, nineteen seventy nine, and twenty twenty two.
+
+Watch it work on the pandemic. Twenty twenty hit both curves at once. Supply left as factories shut, demand left as spending froze. Output cratered while prices barely moved. Then twenty twenty one reversed the demand side violently. Trillions in stimulus plus reopening shoved demand hard right while supply was still crippled. Demand up plus supply down is the textbook recipe, and inflation ran to about nine percent.
+
+That nasty supply shock case earned its own word in the seventies. Stagflation. It broke the era's favourite relationship, the Phillips curve, which through the sixties traced a tidy trade off between unemployment and inflation that policymakers treated like a menu. Then the oil shock shifted supply left, and the dots jumped clean off the curve.

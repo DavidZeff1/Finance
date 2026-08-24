@@ -1,0 +1,15 @@
+Every cross border transaction a country makes is recorded in its balance of payments. And this is literally double entry bookkeeping at national scale, which means it contains an identity you can lean on like a conservation law.
+
+The current account tracks trade in goods and services plus cross border income. The capital account, formally the financial account, tracks who bought what assets. And by construction the two must mirror each other. Current account plus capital account equals zero.
+
+Follow one import and you'll see why. An American buys a thousand dollar machine from Osaka. The Japanese exporter now holds a thousand American dollars, which are useless in Japan until they come back, as a purchase of something American. If not American goods, because that would cancel the deficit, then American assets. Treasuries, Apple shares, a Cleveland apartment block.
+
+So a trade deficit is not money leaking into the void. It means the country is consuming and investing more than it produces, with foreigners financing the gap by accumulating claims on it. And here's the same identity rearranged: a current account deficit exactly equals the gap between domestic investment and domestic savings.
+
+Now a pitfall worth naming. A trade deficit is not losing at trade, and a surplus is not winning. Germany ran huge surpluses through a decade of stagnant wages, while the United States ran huge deficits through its strongest growth runs. The deficit is an accounting mirror of savings and investment choices, and its twin is foreigners' eagerness to hold American assets. Judge it by what the borrowed resources bought. Productive investment is a very different story from consumption.
+
+In actual magnitudes: foreign investors hold roughly eight trillion dollars of American Treasury securities, with Japan and China the largest official holders at roughly one point one trillion and zero point eight trillion. The American net international investment position is around minus twenty trillion dollars. The world owns far more of America than America owns of the world.
+
+And here's the twist that confuses people. Despite that deeply negative position, the United States has usually earned positive net investment income. Foreigners buy safe, low yield American assets like Treasuries. Americans buy risky, high yield foreign assets. Factories, equity stakes. Being the world's banker means borrowing cheaply and lending dearly, which is the exorbitant privilege a French finance minister complained about back in the nineteen sixties.
+
+There's one more structural piece to the American case. The dollar is the world's reserve currency, so global demand for safe dollar assets is enormous and structural. Foreigners line up to buy Treasuries, and that capital inflow is the mirror image of the persistent trade deficit.

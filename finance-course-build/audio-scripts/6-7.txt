@@ -1,0 +1,15 @@
+You tap Buy on your phone. What actually happens? More than you'd think, across three very different timescales.
+
+Milliseconds, for routing and execution. Your broker's systems validate the order and route it to an execution venue. A public exchange, or, for most retail orders, a wholesale market maker who pays the broker for the privilege. The venue's matching engine crosses your order against the book, and you get a confirmation before your thumb leaves the screen. Economically, the shares are yours from that instant.
+
+Hours, for clearing. Overnight, a clearing house performs novation. It inserts itself as buyer to every seller and seller to every buyer, so nobody needs to trust a stranger. It also does netting. A firm that bought five million shares and sold four point nine million settles only the net hundred thousand. Netting routinely shrinks settlement obligations by about ninety eight percent, a compression trick any data engineer will appreciate.
+
+One day, for settlement and custody. On T plus one, trade date plus one business day, the American standard since May twenty twenty four, cash and shares actually swap at the Depository Trust Company, the central vault where nearly all American securities live as electronic entries. The whole apparatus exists to crush counterparty risk. The risk that the stranger on the other side simply doesn't pay.
+
+Two practical consequences. For you: I have the money is false for one to three days, and buying with unsettled proceeds in a cash account can trigger a good faith violation. For the system: every day between trade and settlement is a day someone can fail, which is why the clearing house demands collateral.
+
+Which is exactly what went wrong in January twenty twenty one. When meme stock volumes exploded, the clearing house demanded billions more in collateral from brokers to cover the settlement gap. Several brokers restricted buying in GameStop because they literally could not post the deposit fast enough. The invisible plumbing became front page news, and the episode accelerated the move to T plus one.
+
+And here's a seam worth noticing, because this is the kind of thing an analyst gets paid to spot. American equities now settle in one day, while standard spot currency trades still settle in two. So a European fund buying American shares must fund dollars before its currency trade settles. It either pre funds, borrows overnight, or trades in a shorter, more expensive window. A plumbing change in one market became a daily funding cost in another.
+
+One last thing worth knowing. Most American retail brokers charge zero commission because of payment for order flow. Wholesalers pay the broker a fraction of a cent per share to execute your order internally. Why? Because retail orders are uninformed in the statistical sense. A random retail buy predicts nothing about the next price move, so making markets against retail is safer than quoting on an exchange where sharper counterparties lurk. Free means the spread, not the commission, is where the money moves.

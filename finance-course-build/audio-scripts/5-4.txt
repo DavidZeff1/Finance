@@ -1,0 +1,13 @@
+Here is the single most useful equation in fiscal policy. Let d be the debt to GDP ratio, r the average nominal interest rate the government pays, and g the nominal growth rate of GDP. Next year's ratio equals this year's ratio, times one plus r over one plus g, plus the primary deficit. And the primary deficit just means the gap between spending and revenue before interest.
+
+The intuition is clean. Interest makes the numerator, debt, compound at r. Growth plus inflation make the denominator, GDP, compound at g. So if g exceeds r, the ratio has a built in shrink factor every year. The economy outgrows its old debts, and even a permanent modest deficit just glides toward a finite plateau. If r exceeds g, interest compounds faster than income, and only primary surpluses can hold the line.
+
+Let's run thirty years. Start at debt equal to a hundred percent of GDP, with r at two percent, g at six percent, and a permanent primary deficit of one percent of GDP. Year one gives ninety seven point two percent. Year two, ninety four point six. After ten years, seventy six point five. After thirty, forty nine point seven percent. Half the starting ratio, despite never once balancing the budget. Growth did all the work.
+
+And this is exactly how the United States escaped its Second World War debts. In nineteen forty six, federal debt held by the public was near a hundred and six percent of GDP. By nineteen seventy four it was about twenty three percent. Washington never paid it off. Primary budgets were only roughly balanced. Instead nominal GDP grew around seven percent a year while the average interest rate on the debt stayed near two or three, helped by financial repression. Rate caps and regulations that kept captive savers in low yielding bonds. Each year the denominator quietly outran the numerator.
+
+The opposite regime is a grind. Italy ran primary surpluses through most of the nineteen nineties and two thousands and barely held its ratio flat, because high rates kept refilling the tub as fast as it drained.
+
+Now, for anyone with a discrete systems background, notice what this actually is. It's a linear recurrence, d next equals a times d plus b, where a is one plus r over one plus g. It converges to a fixed point when the magnitude of a is below one, which is exactly when g exceeds r, and it diverges when a exceeds one. The entire sustainability debate, all of it, is a fight about one eigenvalue.
+
+And here's the uncomfortable implication. r minus g is not a policy choice. It's set by global rates and demographics. A country controls only the primary balance, which is why fiscal debates are ultimately about a number most voters have never heard of.

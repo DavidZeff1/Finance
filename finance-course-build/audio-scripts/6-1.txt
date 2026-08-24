@@ -1,0 +1,17 @@
+Strip away the glass towers and the jargon, and the financial system does exactly one job. It moves money from people who have more than they currently need, savers, to people who can put it to productive use. Firms building factories, governments building roads, households buying homes. In exchange, those users hand back a security or a promise. A share, a bond, a loan agreement. A claim on future cash.
+
+And there are exactly two routes that money can take. In direct finance, you buy the claim yourself in a market. You purchase Apple shares or a Treasury bond, and your money flows roughly straight to the firm or government. In indirect finance, you hand your money to an intermediary, a bank, a pension fund, an insurer, and it decides who gets funded. Your checking account is indirect finance. The bank pools your deposit with millions of others and lends the pool out as mortgages and business loans.
+
+So why do intermediaries exist at all, when a market could match savers and borrowers directly? Three reasons.
+
+Information. Lending suffers from information asymmetry. The borrower knows far more about their repayment odds than you do. A bank employs credit analysts, sees the borrower's cash flows, and screens thousands of applications. It amortizes the cost of due diligence over a huge loan book, the way one trained model serves millions of queries.
+
+Maturity transformation. Savers want their money back on demand. Borrowers want it for thirty years. A bank borrows short and lends long, betting that not everyone withdraws at once. That is enormously useful and inherently fragile, and when everyone does withdraw at once, you get a bank run.
+
+And diversification. With a thousand dollars you can fund a slice of one borrower. A fund with ten billion holds thousands of loans, so one default barely dents it.
+
+Think of the whole thing as the internet's routing layer for money. Savers are clients, users of capital are servers, markets are peer to peer connections, and intermediaries are load balancers. They pool traffic, hide the messy topology, and add redundancy, at the cost of a fee and a new single point of failure.
+
+Now, follow ten thousand dollars down four routes and you'll see the real difference. A bank savings account ends up in the bank's mortgage book, and if it goes wrong the bank's equity eats it first, then deposit insurance. A corporate bond fund puts you into loans to a thousand companies, and you eat the loss directly and immediately in the price. A private credit fund lends to a few dozen mid sized firms, you eat the loss, and you might not find out for a year.
+
+Which gives you the three questions to ask about any financial product for the rest of your life. Who bears the credit loss. How fast can you get out. And who is marking the price.

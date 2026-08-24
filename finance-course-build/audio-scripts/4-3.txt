@@ -1,0 +1,13 @@
+Turn on financial news and you'll hear that the Fed raised rates. The rate in question is the federal funds rate. What banks charge each other for overnight, unsecured loans of reserves. It is the shortest, safest lending rate in the economy, which makes it the base of the entire interest rate stack.
+
+Two details of vocabulary. The F O M C doesn't decree a single number, it sets a target range, something like four point two five to four point five percent. And rate moves are quoted in basis points. A twenty five basis point hike lifts the range by a quarter of a percentage point.
+
+So how does it pin the rate? The old textbook answer was daily open market operations. Buy Treasury securities to inject reserves and nudge the rate down, sell to drain reserves and nudge it up. That's still the right intuition for how reserves enter the system. But since two thousand eight the Fed has run an ample reserves regime. Banks hold trillions in reserves, so tiny daily tweaks no longer move the price.
+
+Instead the Fed sets the rate administratively, with two floors. First, interest on reserve balances, I O R B. The Fed simply pays banks interest on reserves parked at the Fed. No bank will lend overnight for less than it can earn risk free by doing nothing, so that acts as a floor for banks. Second, the overnight reverse repo facility does the same job for money market funds and other non banks that can't earn I O R B. They can always park cash at the Fed at that rate, so they won't lend below it either. Move those two administered rates and the whole overnight market moves with them.
+
+Here's your edge in seeing this. Think of I O R B as a risk free lower bound in an optimization. No rational lender accepts less than the guaranteed alternative. The entire floor system is one arbitrage constraint, enforced by trillions of self interested dollars. A distributed system with no central scheduler that still converges every single night.
+
+Now watch what happened when the Fed raised from near zero to five and a quarter percent across twenty twenty two and twenty three. Three month Treasury bills followed almost exactly, about a hundred percent pass through. Money market funds passed through about ninety five percent. Credit card rates, ninety seven percent. But the average large bank savings account went from zero point zero one percent to zero point four two percent. About eight percent pass through.
+
+Banks passed the hike to borrowers almost fully and to savers barely at all. The industry calls that gap deposit beta, and a low one is pure profit. Savers eventually noticed. Money market fund assets climbed from roughly four point six trillion to over six trillion dollars.

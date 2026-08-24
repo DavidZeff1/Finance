@@ -1,0 +1,15 @@
+Financial headlines assume you already know who everyone is. So let me introduce the cast, and give you one trick for placing anybody in it.
+
+The trick is three questions. Does the firm hold other people's money? Then it's a channel. Does it charge per deal or per trade? Then it's a service. Does it run the marketplace itself? Then it's plumbing.
+
+Start with the channels. A commercial bank takes deposits, makes loans and runs payments, earning the interest spread. It charges borrowers more than it pays depositors. An asset manager runs mutual funds, index funds and E T Fs for the public, and earns a management fee, a percentage of assets per year. That's BlackRock, Vanguard, Fidelity. A hedge fund runs flexible, often leveraged strategies for institutions and the wealthy, classically charging two and twenty. Two percent of assets plus twenty percent of profits. Private equity buys whole companies to restructure them, venture capital funds startups, and both earn fees plus a share of exit profits called carry. Pension funds invest retirement savings over decades. Insurers collect premiums, invest the pool, which they call the float, and pay claims. And sovereign wealth funds invest a nation's surplus, like Norway's one point seven trillion dollar oil fund.
+
+Now the services. An investment bank helps firms issue stocks and bonds, advises on mergers, and trades. Goldman Sachs, Morgan Stanley. It earns fees on deals and underwriting. A broker routes your orders to venues, earning commissions, interest on cash, and payment for order flow. A market maker quotes two sided prices all day so you can always trade, earning the bid ask spread many thousands of times a day. Citadel Securities, Jane Street. A rating agency grades bond issuers' default risk, and note the conflict worth remembering: issuers pay to be rated.
+
+And the plumbing. Exchanges run the marketplace and publish prices, earning trading fees, listing fees, and increasingly, selling market data. Custodians safekeep assets and track ownership records, taking small fees on enormous piles.
+
+Now, scale. BlackRock alone manages over eleven trillion dollars. More than the GDP of every country except America and China. So when you hear institutional investors, picture a handful of asset managers, pension funds and sovereign funds that collectively own most of the stock market. Retail investors are a minority of volume in most markets.
+
+Pull the ownership page of almost any big American company and you'll see the same faces. Vanguard around eight or nine percent. BlackRock six to eight. State Street three to five. The big three index managers together typically hold about twenty percent of a large public company, and they vote those shares at every annual meeting.
+
+That's a genuinely new feature of capitalism. The largest shareholders of most public companies are institutions legally required not to have an opinion on whether the business is any good. Whether that's a governance problem is a live debate, and a very good interview topic.

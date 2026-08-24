@@ -1,0 +1,13 @@
+Inflation is a sustained rise in the overall price level, which is exactly the same thing as a fall in what each dollar buys. We measure it as the rate of change of a price index, and the most famous index is the consumer price index, the C P I.
+
+The construction is beautifully simple. The Bureau of Labor Statistics defines a basket of what a typical urban household buys, sends people out to collect roughly eighty thousand prices every month, and averages the price changes using weights taken from surveys of real household budgets. Shelter gets about a third of the weight. Food about thirteen percent. Energy about seven. The change in that weighted average is inflation.
+
+Now, here's your edge as a data person. C P I is literally a weighted average. A dot product of budget share weights and price changes. Two things fall straight out of that. First, your personal inflation rate differs from the headline whenever your budget weights differ. A renter in a hot city genuinely lives a higher inflation rate than the index. Second, big weight items dominate. A five percent move in shelter moves the index more than a twenty percent move in gasoline.
+
+Let's make that concrete. Say the basket is thirty five percent rent, fifteen percent food, five percent gasoline, forty five percent everything else. Rent rises five percent, food two, gas twenty, everything else one. Multiply and add, and inflation is three point five percent. Notice the twenty percent gas spike, the thing everyone sees on street signs, contributes only one single point.
+
+Because food and energy whipsaw with weather and geopolitics, analysts also watch core inflation, which strips both out. Headline is what households feel. Core is what forecasts better.
+
+So why target two percent rather than zero? Measured inflation slightly overstates true inflation, so two percent measured is closer to zero or one percent real. A buffer above zero keeps you away from deflation. Mild inflation greases labour markets, because a firm can cut real wages by freezing pay, which is far easier than cutting paycheques. And it leaves room to push real interest rates below zero in a crisis.
+
+And deflation sounds lovely. Falling prices! It is anything but. If prices fall steadily, waiting becomes profitable, so spending stalls, so firms cut prices and jobs, so spending stalls further. Worse, debts are fixed in dollars, so falling prices make every mortgage heavier in real terms. That is the deflation trap, and it is why central banks fear zero percent far more than three.
