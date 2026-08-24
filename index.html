@@ -1370,6 +1370,40 @@
       transition: none;
     }
   }
+  .explainer {
+    border-radius: 10px;
+    padding: 15px 18px;
+    margin: 26px 0;
+    max-width: 44em;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--c6);
+    background: color-mix(in srgb, var(--c6) 6%, var(--surface));
+    font-size: 0.97em;
+  }
+  .explainer p {
+    margin: 0.5em 0;
+    max-width: none;
+  }
+  .explainer p:first-of-type {
+    margin-top: 0;
+  }
+  .explainer p:last-child {
+    margin-bottom: 0;
+  }
+  .ex-label {
+    font-family: var(--font-body);
+    font-size: 11.5px !important;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--c6);
+    margin: 0 0 7px !important;
+  }
+  .explainer .ex-case {
+    margin: 0.3em 0;
+    padding-left: 14px;
+    border-left: 2px solid color-mix(in srgb, var(--c6) 45%, transparent);
+  }
 </style>
 
 <div class="topbar">
@@ -8076,6 +8110,46 @@
           Nepal, GNI runs well above GDP. Always check which one your data series is.
         </p>
       </div>
+      <aside class="explainer" data-explainer="s03-gdp">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Real GDP answers one question: did the country actually make more
+          stuff, or did the same stuff just get more expensive?
+        </p>
+        <p>
+          You take the growth measured in dollars and strip out the growth in
+          prices. What is left is real growth. Roughly, nominal growth minus
+          inflation — and the price index doing the stripping is the deflator.
+        </p>
+        <p>
+          The reason anyone cares is that you cannot tell these apart from the
+          headline. Both of them look like growth.
+        </p>
+        <p class="ex-case">
+          Economy A: nominal GDP up 6%, prices up 4% → real growth 1.9%. A bad
+          year.
+        </p>
+        <p class="ex-case">
+          Economy B: nominal GDP up 6%, prices up 1% → real growth 4.9%. A boom.
+        </p>
+        <p>
+          Same headline, opposite reality. The only thing that changed is the
+          deflator.
+        </p>
+        <p>
+          So pick your number by the question you are asking. Did output grow?
+          Use real. How big is the market I am selling into? Use nominal,
+          because your own prices are nominal too. Are people better off? Use
+          real per capita — never total GDP, which mostly counts heads.
+        </p>
+        <p>
+          That covers the rest of the words. The deflator is the price index
+          that does the stripping. "Final" goods means you count the bread but
+          not the flour, so the same value is not counted three times. And C + I
+          + G + NX is one total sorted by who spent the money, not a ranking of
+          what matters.
+        </p>
+      </aside>
       <h3 id="s03-growth">Growth: why 1% is a big deal</h3>
       <p>
         Growth rates look boring — 1.5% versus 3% barely moves a chart for a
@@ -8226,6 +8300,49 @@
           points a year, held for four decades.
         </figcaption>
       </figure>
+      <aside class="explainer" data-explainer="s03-growth">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Growth answers one question: is this improvement a one-off, or does it
+          repeat every year?
+        </p>
+        <p>
+          A one-off lifts the level once and stops. A growth rate lifts it again
+          next year, off the new higher base, forever. In budget terms: a
+          one-time saving versus a run-rate saving.
+        </p>
+        <p>
+          The reason anyone cares is that the one-off almost always looks bigger
+          when you compare them, and almost always loses.
+        </p>
+        <p class="ex-case">
+          Proposal A: output jumps 5% once, permanently. By year 17, still 5%
+          ahead.
+        </p>
+        <p class="ex-case">
+          Proposal B: the growth rate rises from 2.0% to 2.3% — three tenths of
+          a point. By year 17 it has caught A, by year 40 it is 12.5% ahead, and
+          it never stops pulling away.
+        </p>
+        <p>
+          Opposite verdicts depending on when you look. The only thing that
+          changed is whether the gain repeats — and the crossover sits at year
+          17, which is why a government facing an election and a pension fund
+          facing 2070 rank these two differently and both are right.
+        </p>
+        <p>
+          So the test on any growth claim: does it move the level or the rate?
+          Tax rebates, a one-time investment, a commodity windfall move the
+          level. Tooling, training, competition, infrastructure move the rate.
+        </p>
+        <p>
+          Productivity is just the name for the rate — output per hour worked,
+          the one input that repeats. And the rule of 70 gives you the crossover
+          fast: 70 divided by the growth rate is the doubling time, which tells
+          you whether your horizon is long enough for a rate change to have paid
+          off yet.
+        </p>
+      </aside>
       <h3 id="s03-inflation">
         Inflation: how the CPI is built, and why 2% is the target
       </h3>
@@ -8939,6 +9056,49 @@
           construction better than most people who quote the number.
         </p>
       </div>
+      <aside class="explainer" data-explainer="s03-inflation">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Inflation answers one question: how much less will a fixed sum of
+          money buy by the time you spend it?
+        </p>
+        <p>
+          Which makes every price you fix in advance a bet. You lock a number
+          today; inflation decides what it is worth later. Fix below the
+          inflation that arrives and you win. Fix above it and you lose.
+        </p>
+        <p>
+          The reason anyone cares is that this happens silently, in contracts
+          nobody files as financial.
+        </p>
+        <p class="ex-case">
+          Three-year supply deal priced off 2% expected inflation. Inflation
+          arrives at 6% → by year three you pay about 12% below the real market
+          rate. Your supplier ate it.
+        </p>
+        <p class="ex-case">
+          Same deal, same clause. Inflation arrives at 0% → you are locked into
+          rises nobody else is paying, out of your own margin.
+        </p>
+        <p>
+          Same contract, opposite outcome. The only thing that changed is the
+          inflation rate that turned up.
+        </p>
+        <p>
+          So choose your index by purpose. Forecast on core, which drops food
+          and energy because they spike and fall back. Pay on headline, because
+          a cost-of-living rise has to cover what people actually buy. Swap them
+          and you either underpay staff through an energy spike, or bake that
+          spike into a three-year baseline.
+        </p>
+        <p>
+          The rest follows. CPI is a weighted average of a basket, so your rate
+          differs whenever your spending does. The 2% target is a promise about
+          the number everyone indexes to. And deflation is the same bet
+          inverted: falling prices make every fixed debt heavier, which is why
+          borrowers fear it and lenders do not.
+        </p>
+      </aside>
       <h3 id="s03-unemployment">Unemployment: one number, many stories</h3>
       <p>
         The
@@ -9145,6 +9305,51 @@
           and the employment-to-population ratio alongside it.
         </figcaption>
       </figure>
+      <aside class="explainer" data-explainer="s03-unemployment">
+        <p class="ex-label">Make it click</p>
+        <p>
+          The unemployment rate answers one question: of the people who want a
+          job, what share cannot find one?
+        </p>
+        <p>
+          Note what that leaves out. The denominator is not everyone — it is
+          only people working or actively looking. Stop looking and you leave
+          the denominator entirely, and the rate improves. So a falling rate
+          means one of two opposite things, and the rate alone cannot tell you
+          which.
+        </p>
+        <p>
+          It matters because this is true of every ratio you
+          report, not just this one.
+        </p>
+        <p class="ex-case">
+          Cost per active user falls from $4.00 to $3.20. Total cost fell
+          $400k → $320k, users steady at 100,000. You saved $80,000.
+        </p>
+        <p class="ex-case">
+          Cost per active user falls from $4.00 to $3.20. Cost held at $400k;
+          "active" was redefined and users went 100,000 → 125,000. You saved
+          nothing.
+        </p>
+        <p>
+          Same 20% improvement, opposite reality. The only thing that changed is
+          whether the numerator fell or the denominator grew.
+        </p>
+        <p>
+          So the check is two questions: which line actually moved, and is there
+          a version of this metric whose denominator cannot walk away?
+          Unemployment has one — the employment-to-population ratio, where the
+          denominator is everybody. Read it next to the headline and the
+          ambiguity disappears.
+        </p>
+        <p>
+          The remaining terms sit on that. U-3 is the headline rate, U-6 the
+          wider one that counts discouraged and part-time workers. Frictional,
+          structural and cyclical are causes rather than measures, and the split
+          matters because only cyclical unemployment responds to the interest
+          rate lever in the next chapter.
+        </p>
+      </aside>
       <h3 id="s03-cycles">Business cycles: the economy's heartbeat</h3>
       <p>
         Zoom out on any real GDP chart and you see a rising trend with a wobble
@@ -9528,6 +9733,50 @@
           growth was expected to.
         </p>
       </div>
+      <aside class="explainer" data-explainer="s03-cycles">
+        <p class="ex-label">Make it click</p>
+        <p>
+          A leading indicator answers one question: is a downturn more likely
+          than it was last month?
+        </p>
+        <p>
+          Notice it does not answer "when." The yield curve has inverted before
+          every US recession in sixty years, but the gap between the signal and
+          the recession has run anywhere from 6 to 24 months. A signal with that
+          much timing error is worth acting on as a probability and worthless as
+          a date.
+        </p>
+        <p>
+          The reason anyone cares is that those two readings produce opposite
+          instructions from the same data.
+        </p>
+        <p class="ex-case">
+          Read as a date: the curve inverts in December 2005, so freeze hiring
+          and defer capex now. The recession arrives December 2007 — you spent
+          two years shrinking while competitors grew.
+        </p>
+        <p class="ex-case">
+          Read as a probability: same December 2005 signal, so write the
+          downside plan, agree what gets cut and in what order, draw the credit
+          line while terms are good — and change nothing until payrolls actually
+          turn.
+        </p>
+        <p>
+          Same signal, same accuracy, opposite outcomes. The only thing that
+          changed is whether it triggered action or triggered preparation.
+        </p>
+        <p>
+          So the rule is to match your response to the signal's timing error.
+          Wide error, you prepare. Narrow error, you act.
+        </p>
+        <p>
+          That is what the three families of indicator are for. Leading ones —
+          permits, jobless claims, the curve — shift the probability. Coincident
+          ones — payrolls, industrial production — are your trigger. Lagging
+          ones — unemployment, CPI — only confirm, which is why the official
+          recession call took fifteen months and is never a plan.
+        </p>
+      </aside>
       <h3 id="s03-adas">AD–AS: one mental model for every shock</h3>
       <p>
         You now have the dashboard: output, prices, jobs. What you need is a way
@@ -10245,6 +10494,50 @@
           and 2022 in one sentence.
         </p>
       </div>
+      <aside class="explainer" data-explainer="s03-adas">
+        <p class="ex-label">Make it click</p>
+        <p>
+          AD–AS answers one question: when something hits the economy, will the
+          central bank be able to help?
+        </p>
+        <p>
+          You read it off the signs. If output and prices move the same way, it
+          was demand — one lever fixes both, and the bank will pull it. If they
+          move opposite ways, it was supply — every lever fixes one and worsens
+          the other, so the bank is stuck.
+        </p>
+        <p>
+          This matters because the same fall in your revenue is
+          survivable in one case and not the other.
+        </p>
+        <p class="ex-case">
+          2008 — output and prices both fall. Rates cut to zero. Your revenue
+          drops 3%, your input costs ease, your borrowing gets cheaper. Cheap
+          money bridges the gap.
+        </p>
+        <p class="ex-case">
+          2022 — output weakens while prices rise. Your revenue drops the same
+          3%, but input costs jump about 9% and the policy rate goes from near
+          zero to 5.3%. Revenue, costs and financing all move against you at
+          once.
+        </p>
+        <p>
+          Same 3% revenue fall, opposite survivability. The only thing that
+          changed is whether prices fell with output or rose against it.
+        </p>
+        <p>
+          So you can call it off the first two data releases, months before
+          anyone names the recession — and phase your contingency accordingly:
+          short and supported, or long with no rescue coming.
+        </p>
+        <p>
+          Stagflation is just the name for the second case. Sticky wages are why
+          the supply curve slopes up at all — pay is renegotiated slowly, so
+          rising prices are briefly profitable. And the Phillips curve broke
+          because it assumed only demand shocks existed, which stopped being
+          true in 1973.
+        </p>
+      </aside>
       <h3 id="s03-releases">Reading macro data like an analyst</h3>
       <p>
         Here's the part textbooks skip. In markets, macro data isn't trivia —
@@ -10484,6 +10777,51 @@
           sank them because growth meant more hikes.
         </figcaption>
       </figure>
+      <aside class="explainer" data-explainer="s03-releases">
+        <p class="ex-label">Make it click</p>
+        <p>
+          A data release answers one question: was the news better or worse than
+          what was already expected?
+        </p>
+        <p>
+          Not better or worse in absolute terms — better or worse than
+          consensus, the published average of economists' forecasts. Prices
+          already contain consensus before the number lands, so only the gap
+          between actual and consensus moves anything. Beat it and markets
+          react as though the news were good, however grim the level.
+        </p>
+        <p>
+          The reason anyone cares is that the same number can be a rally or a
+          selloff.
+        </p>
+        <p class="ex-case">
+          Payrolls come in at +180,000, consensus was +150,000. A beat. Yields
+          rise, rate-cut bets get pushed back.
+        </p>
+        <p class="ex-case">
+          Payrolls come in at +180,000, consensus was +200,000. A miss. Yields
+          fall, rate-cut bets get pulled forward.
+        </p>
+        <p>
+          Identical jobs number, opposite market reaction. The only thing that
+          changed is the number people were already expecting.
+        </p>
+        <p>
+          Which tells you where forecasting effort pays. If a consensus exists
+          and is free, your own forecast is only worth the gap between it and
+          consensus — and for CPI, payrolls and GDP, dozens of paid economists
+          make that gap very hard to earn. For your own input costs, your
+          regional wage pressure, what your suppliers are about to pass through,
+          no consensus exists. Same hours, real return.
+        </p>
+        <p>
+          Two habits carry over. Store the surprise, actual minus consensus, not
+          the level. And use point-in-time data: payrolls get restated by tens
+          of thousands over the following two months, so scoring an old forecast
+          against today's revised series marks you against an answer sheet that
+          was rewritten afterwards.
+        </p>
+      </aside>
       <div class="quiz">
         <h4>Check your understanding</h4>
         <div class="quiz-item">
@@ -10865,6 +11203,49 @@
           capture it, which is what makes the 2% promise believable.
         </figcaption>
       </figure>
+      <aside class="explainer" data-explainer="s04-what-it-is">
+        <p class="ex-label">Make it click</p>
+        <p>
+          A central bank answers one question for you: when inflation and jobs
+          pull in opposite directions, which one will it protect?
+        </p>
+        <p>
+          The mandate tells you, in three cases out of four. Inflation high and
+          unemployment low — no conflict, expect rate rises. Inflation low and
+          unemployment high — no conflict, expect cuts. Both bad at once, and the
+          mandate gives no answer at all; that is when rate forecasting gets hard.
+        </p>
+        <p>
+          It matters because a mandate only binds if the person
+          holding it cannot be removed for obeying it.
+        </p>
+        <p class="ex-case">
+          US, 1979 — inflation at 14.8%, and the chair cannot be fired for the
+          cure. Rates go to 20%, unemployment hits 10.8%, Congress drafts
+          impeachment bills, and inflation is back near 3% by 1983.
+        </p>
+        <p class="ex-case">
+          Turkey, 2019 — inflation accelerating, and the president can fire the
+          governor. Three are removed in two years, rates are cut from 19% to
+          8.5%, and inflation peaks above 85%.
+        </p>
+        <p>
+          Same problem, opposite outcome. The only thing that changed is whether
+          the person setting rates could be removed for setting them.
+        </p>
+        <p>
+          So before you trust a published inflation target, check that one fact.
+          Where the governor is protected, treat the target as a plan. Where
+          they are not, treat it as a preference and plan for worse.
+        </p>
+        <p>
+          Everything else here follows from that. Reserves are the accounts
+          banks hold at the central bank, which is why it is a bank for banks
+          and you cannot open an account. And the fourteen-year terms, twelve
+          regional banks and rotating votes are all machinery built to make that
+          firing question answer "no."
+        </p>
+      </aside>
       <h3 id="s04-money-creation">How banks create money (yes, really)</h3>
       <p>
         Here's the fact that surprises almost everyone: most money is created
@@ -11354,6 +11735,53 @@
           it.
         </p>
       </div>
+      <aside class="explainer" data-explainer="s04-money-creation">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Bank lending answers one question: where does the money you borrow
+          actually come from?
+        </p>
+        <p>
+          Not from someone else's savings. The bank types your loan into its
+          assets and the matching deposit into its liabilities in the same
+          keystroke. The money is new. Which means lending is not limited by a
+          pile of cash sitting somewhere — it is limited by whether the bank
+          judges you good for it.
+        </p>
+        <p>
+          The reason anyone cares is that judgements change with the weather,
+          and cash in a vault would not.
+        </p>
+        <p class="ex-case">
+          February 2020, uncommitted facility: the paperwork says "subject to
+          lender approval at drawdown." You ask for $20m in March. It is a
+          request. Declined.
+        </p>
+        <p class="ex-case">
+          February 2020, committed facility: you have been paying about 35 basis
+          points a year for the privilege. You ask for $20m in March. It is an
+          obligation the bank already booked. Funded.
+        </p>
+        <p>
+          Same company, same numbers, same month, opposite answer. The only
+          thing that changed is whether the promise was made before conditions
+          turned or after.
+        </p>
+        <p>
+          So price the promise, not the paperwork. A committed line costs real
+          money in every year you don't draw it, and is worth all of it in the
+          year you do. An uncommitted line is free because it is worth nothing
+          under stress.
+        </p>
+        <p>
+          The rest of the vocabulary follows. Maturity mismatch is borrowing
+          short and lending long, which is why a bank cannot survive everyone
+          asking at once — that is a bank run, and deposit insurance exists to
+          stop small depositors starting one. Repayment destroys money exactly
+          as lending created it, which is why credit contractions feed
+          themselves.
+        </p>
+      </aside>
       <h3 id="s04-policy-rate">The policy rate: what the Fed actually sets</h3>
       <p>
         Turn on financial news and you'll hear "the Fed raised rates." The rate
@@ -11630,6 +12058,50 @@
           of the threads that pulled Silicon Valley Bank apart in March 2023.
         </p>
       </div>
+      <aside class="explainer" data-explainer="s04-policy-rate">
+        <p class="ex-label">Make it click</p>
+        <p>
+          The policy rate answers one question: what does completely safe,
+          overnight money earn right now?
+        </p>
+        <p>
+          Everything else is priced off that floor. The central bank sets it by
+          offering to pay that rate itself, so nobody lends to anyone else for
+          less. But the floor only reaches you if you go and stand on it — your
+          bank is under no obligation to pass it on, and mostly doesn't.
+        </p>
+        <p>
+          The reason anyone cares is the size of the gap between the rate that
+          exists and the rate you are getting.
+        </p>
+        <p class="ex-case">
+          $50m left in the operating account through 2022–23. Banks passed on
+          about 8% of the rise, so it paid 0.42%. You earn $210,000.
+        </p>
+        <p class="ex-case">
+          $50m swept into T-bills over the same period, at 5.3%. You earn
+          $2.65m — and take less credit risk, since deposits above $250,000 are
+          unsecured claims on a bank.
+        </p>
+        <p>
+          Same cash, same period, $2.4m apart. The only thing that changed is
+          whether somebody had written a sweep policy.
+        </p>
+        <p>
+          The asymmetry is the rule worth budgeting on: what you owe reprices
+          almost fully, what you are owed barely moves. Credit cards passed
+          through 97%, T-bills 100%, savings accounts 8%. So model floating debt
+          at full pass-through and cash income at nearly none, unless someone is
+          actively moving the money.
+        </p>
+        <p>
+          Deposit beta is the name for the share your bank hands on — a low one
+          is their profit. Basis points are hundredths of a percent, so 25bp is
+          a quarter point. And IORB and the ON RRP are simply the two windows
+          where the central bank pays that floor rate: one for banks, one for
+          money funds.
+        </p>
+      </aside>
       <h3 id="s04-transmission">
         Transmission: one rate moves everything (slowly)
       </h3>
@@ -12304,6 +12776,51 @@
           — this is why the Fed cannot predict its own transmission precisely.
         </p>
       </div>
+      <aside class="explainer" data-explainer="s04-transmission">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Transmission answers one question: how long after a rate change do you
+          actually feel it?
+        </p>
+        <p>
+          Longer than you would guess, and it varies by channel. The prime rate
+          moves in days, so credit cards and floating business loans reprice
+          almost immediately. Mortgages take weeks. Hiring, investment and
+          defaults take 12 to 18 months. So the pain from a hike peaks well
+          after the hike does.
+        </p>
+        <p>
+          This is what decides which quarter you put the
+          contingency in.
+        </p>
+        <p class="ex-case">
+          Budget the squeeze for the quarter rates peak — say Q3 2023 — then
+          ease off. Demand and defaults bottom out in late 2024, by which point
+          you have already released the contingency.
+        </p>
+        <p class="ex-case">
+          Budget the squeeze for the year <em>after</em> the peak, while
+          headlines are announcing relief and the central bank is cutting. The
+          contingency is still standing when it is needed.
+        </p>
+        <p>
+          Same rate path, opposite preparedness. The only thing that changed is
+          which quarter you assumed the damage lands in.
+        </p>
+        <p>
+          The lag runs both ways, which catches people twice: a cut will not
+          rescue this quarter either. Anything justified on an expected cut
+          needs its own bridge for a year.
+        </p>
+        <p>
+          That is all "long and variable lags" means, and it is why the Fed acts
+          on forecasts rather than current readings. The channels are just the
+          routes it travels: borrowing costs, investment hurdles, asset prices,
+          the dollar, and expectations — of which expectations is the fastest,
+          because believing a hike is coming is enough to change behaviour
+          before it lands.
+        </p>
+      </aside>
       <h3 id="s04-qe-qt">QE and QT: policy by balance sheet</h3>
       <p>
         In December 2008 the Fed hit a wall: the fed funds rate reached zero and
@@ -12633,6 +13150,51 @@
           partly-administered price.
         </p>
       </div>
+      <aside class="explainer" data-explainer="s04-qe-qt">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Quantitative easing answers one question: what can a central bank do
+          once the overnight rate is already at zero?
+        </p>
+        <p>
+          It buys long-term government bonds and pays with newly created reserves.
+          More buyers push bond prices up, and a bond's price and its yield move in
+          opposite directions — pay more for the same fixed payments and your
+          return is lower. So long-term borrowing gets cheaper, which is what
+          mortgages and corporate debt are priced off. QT is the same machine
+          reversed.
+        </p>
+        <p>
+          The reason anyone cares is that people assume this is money printing
+          and that inflation has to follow. Sometimes it does. The difference is
+          where the money lands.
+        </p>
+        <p class="ex-case">
+          2009–2019: roughly $3.5tn of bond buying. Inflation ran below the 2%
+          target for most of a decade.
+        </p>
+        <p class="ex-case">
+          2020–2021: bond buying again, but alongside trillions in direct
+          payments to households. Inflation reached about 9%.
+        </p>
+        <p>
+          Same tool, opposite inflation. The only thing that changed is whether
+          the new money stayed as reserves inside the banking system or landed
+          in accounts people could spend from.
+        </p>
+        <p>
+          So when you see a central bank expanding its balance sheet, the
+          question to ask is not how big but who receives it.
+        </p>
+        <p>
+          The rest of the vocabulary sits on that. Reserves are bank money that
+          cannot buy groceries. The zero lower bound is the floor the policy
+          rate hit in 2008, because nobody lends at negative rates while cash
+          exists. And the taper tantrum is what happens when buying is merely
+          expected to slow — yields jumped on the announcement, long before a
+          single bond was sold.
+        </p>
+      </aside>
       <h3 id="s04-reading-the-fed">
         Reading the Fed like a market participant
       </h3>
@@ -12840,6 +13402,50 @@
           excellent portfolio project.
         </figcaption>
       </figure>
+      <aside class="explainer" data-explainer="s04-reading-the-fed">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Fed watching answers one question: what do rates do next, and does the
+          market already know?
+        </p>
+        <p>
+          You can read it off a price rather than guessing. Fed funds futures
+          settle at 100 minus the average rate for that month, so 100 minus the
+          price is the expected rate. A March contract at 95.83 implies 4.17%;
+          against a current 4.33% that is 0.6 of a quarter-point cut — read as a
+          60% chance of one.
+        </p>
+        <p>
+          The reason anyone cares is that the decision itself usually moves
+          nothing. The gap between the decision and what was priced moves
+          everything.
+        </p>
+        <p class="ex-case">
+          Fed holds rates. Market had priced a hold. Yields barely move, the
+          press conference is the only news.
+        </p>
+        <p class="ex-case">
+          Fed holds rates. Market had priced a cut at 80%. Yields jump, equities
+          fall, the dollar strengthens — on a decision to do nothing.
+        </p>
+        <p>
+          Identical action, opposite market reaction. The only thing that
+          changed is what was already expected.
+        </p>
+        <p>
+          So before any Fed meeting, look up the priced probability first. It
+          costs nothing and it tells you whether you are exposed to the
+          decision or only to the surprise.
+        </p>
+        <p>
+          The remaining terms are all about that expected path. Forward guidance
+          is the Fed talking about future rates in order to move today's
+          long-term rates. The dot plot is each official's own forecast of where
+          rates should sit — a snapshot, not a promise. Hawks weight inflation,
+          doves weight employment. And when the dots and the futures curve
+          disagree, one of them is about to reprice.
+        </p>
+      </aside>
       <div class="quiz">
         <h4>Check your understanding</h4>
         <div class="quiz-item">
@@ -13225,6 +13831,51 @@
           they are usually assuming different states of the world — ask which.
         </figcaption>
       </figure>
+      <aside class="explainer" data-explainer="s05-fiscal">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Fiscal policy answers one question: if the government spends a dollar,
+          how much total spending does that dollar create?
+        </p>
+        <p>
+          More than a dollar, if recipients spend most of what they get — their
+          spending is someone else's income, which gets partly spent again. Take
+          the fraction spent each round and the total is the original divided by
+          one minus that fraction: at 60 cents in the dollar, $100bn becomes
+          $250bn. That is the ceiling, not the estimate. Real measurements land
+          between 0.5 and 1.5.
+        </p>
+        <p>
+          The reason anyone cares is that the same package is worth five times
+          as much in one year as another, and you can check which in advance.
+        </p>
+        <p class="ex-case">
+          $100bn in 2009: unemployment near 10%, factories idle, rates already
+          at zero. Nothing to crowd out and no offsetting hike → roughly $150bn
+          of activity.
+        </p>
+        <p class="ex-case">
+          $100bn into a full-employment economy: the central bank raises rates
+          to hold inflation at target, cancelling the demand it just received →
+          closer to $30bn, and mostly higher prices.
+        </p>
+        <p>
+          Same $100bn, opposite result. The only thing that changed is whether
+          there was spare capacity and whether the central bank let it through.
+        </p>
+        <p>
+          So whenever someone quotes a multiplier, ask which state of the world
+          they assumed. It is the assumption, not the arithmetic, that is doing
+          the work.
+        </p>
+        <p>
+          Two terms left. Automatic stabilisers are the part that needs no vote:
+          in a downturn tax receipts fall and benefit payments rise by
+          themselves, so the deficit widens before anyone legislates. And the
+          marginal propensity to consume is just that fraction spent each round
+          — the higher it is, the bigger the multiplier.
+        </p>
+      </aside>
       <h3 id="s05-deficit-debt">Deficit vs debt: a flow and a stock</h3>
       <p>
         These two words get mangled daily, and the distinction is one you
@@ -13456,6 +14107,48 @@
           arithmetic of the next subsection arriving as a budget line.
         </figcaption>
       </figure>
+      <aside class="explainer" data-explainer="s05-deficit-debt">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Deficit and debt answer one question: when someone says the national
+          debt is rising, should you care?
+        </p>
+        <p>
+          Two numbers get mixed up. The deficit is this year's shortfall — a
+          per-year flow. The debt is every past deficit added together — a
+          running total. Any deficit at all adds to the total, which is why "we
+          halved the deficit" and "the debt keeps growing" are both true at the
+          same time.
+        </p>
+        <p>
+          The reason anyone cares is that neither number means anything alone.
+          What matters is debt measured against the income available to service
+          it. And that ratio can fall while the debt itself rises.
+        </p>
+        <p class="ex-case">
+          Debt $30tn, GDP $25tn — a 120% ratio. Borrow 3% more while GDP grows
+          5% → $30.9tn against $26.25tn. Ratio falls to 117.7%.
+        </p>
+        <p class="ex-case">
+          Same 3% more borrowing, but GDP grows 1% → $30.9tn against $25.25tn.
+          Ratio climbs to 122.4%.
+        </p>
+        <p>
+          Identical borrowing, opposite trajectory. The only thing that changed
+          is how fast the economy grew underneath it.
+        </p>
+        <p>
+          So the question is never "how much debt," it is "debt against what,
+          growing how fast" — which the next section turns into an equation.
+        </p>
+        <p>
+          Two more terms. About three quarters of US federal debt is held by
+          Americans or by other arms of government, so the interest mostly moves
+          money between citizens rather than out of the country. And net
+          interest is the line worth watching, because it is the only large
+          budget item nobody votes on.
+        </p>
+      </aside>
       <h3 id="s05-broke">Can a government go broke?</h3>
       <p>
         It depends entirely on <em>what currency the debt is in</em>. A
@@ -13627,6 +14320,53 @@
           not a sovereign's.
         </figcaption>
       </figure>
+      <aside class="explainer" data-explainer="s05-broke">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Sovereign default answers one question: can a government actually run
+          out of money?
+        </p>
+        <p>
+          Only if it owes something it cannot create. A government borrowing in
+          its own currency can always produce more of it, so default is a choice
+          rather than an arithmetic outcome. A government borrowing in someone
+          else's currency must earn or refinance it, exactly like a company.
+        </p>
+        <p>
+          This matters because the debt level tells you almost
+          nothing on its own. The currency it is written in tells you nearly
+          everything.
+        </p>
+        <p class="ex-case">
+          Japan: debt above 250% of GDP, the highest in the developed world,
+          borrowed in yen it issues. Ten-year yields sat near zero for a decade.
+          No default.
+        </p>
+        <p class="ex-case">
+          Greece 2010: debt around 130% of GDP — half Japan's — but in euros
+          Athens cannot print. Yields passed 30% and the restructuring wrote off
+          roughly €200bn.
+        </p>
+        <p>
+          Half the debt, catastrophically worse outcome. The only thing that
+          changed is whether the borrower can create what it owes.
+        </p>
+        <p>
+          So when you read a sovereign debt headline, find the currency before
+          you react to the percentage. The literature calls borrowing in
+          someone else's money "original sin," and it explains most
+          emerging-market crises of the past fifty years.
+        </p>
+        <p>
+          Two limits on that comfort. Printing to cover deficits is called
+          monetisation, and it pays the bill through inflation instead — a tax
+          on everyone holding the currency. And own-currency status buys
+          patience, not immunity: in 2022 the UK announced unfunded tax cuts,
+          bond yields jumped more than a point in days, and the policy was
+          reversed within a month. No default, just the bond market repricing
+          credibility.
+        </p>
+      </aside>
       <h3 id="s05-r-vs-g">Debt sustainability: the r vs g race</h3>
       <p>
         Here is the single most useful equation in fiscal policy. Let d be the
@@ -14363,6 +15103,51 @@
           voters have never heard of.
         </p>
       </div>
+      <aside class="explainer" data-explainer="s05-r-vs-g">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Debt sustainability answers one question: is this debt shrinking on
+          its own, or does someone have to do something about it?
+        </p>
+        <p>
+          Compare two rates. Interest makes the debt grow; economic growth makes
+          the income behind it grow. If growth is faster, the burden shrinks every
+          year by itself, even while the government keeps borrowing. If interest is
+          faster, only a surplus holds the line.
+        </p>
+        <p>
+          This is what decides whether austerity is
+          necessary or pointless, and the two cases look identical from the debt
+          number alone.
+        </p>
+        <p class="ex-case">
+          US after 1946: debt 106% of GDP. Interest around 2%, nominal growth
+          around 7%. Budgets never balanced — and by 1974 the ratio was 23%.
+          Growth did all of it.
+        </p>
+        <p class="ex-case">
+          Italy in the 1990s and 2000s: ran primary surpluses year after year,
+          genuinely painful ones. Interest above growth meant the ratio barely
+          moved.
+        </p>
+        <p>
+          One country never balanced its budget and escaped; the other ran
+          surpluses for two decades and stood still. The only thing that changed
+          is which of the two rates was larger.
+        </p>
+        <p>
+          So the test on any debt story is: compare the average interest rate on
+          the debt against nominal GDP growth. If growth wins, the deficit
+          debate is smaller than it sounds.
+        </p>
+        <p>
+          The primary deficit is the gap before interest — the part policy
+          actually controls, since interest is set by markets and growth by the
+          economy. And financial repression is the historical thumb on the
+          scale: rules that kept savers in low-yielding government bonds, which
+          held the interest rate down artificially.
+        </p>
+      </aside>
       <h3 id="s05-trade">Trade: why it isn't zero-sum</h3>
       <p>
         Switch from one government's books to the links between countries. The
@@ -15041,6 +15826,49 @@
           charged them a tariff," mentally substitute "we taxed our own importers."
         </p>
       </div>
+      <aside class="explainer" data-explainer="s05-trade">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Trade theory answers one question: if another country makes everything
+          more cheaply than you, is there any reason to trade with them?
+        </p>
+        <p>
+          Yes, because "better at" is the wrong test. What matters is what each
+          side gives up. Every hour Acadia spends on shirts is an hour not spent
+          on chips, where its advantage is much bigger — so Acadia should make
+          chips and buy shirts, even though it could make shirts faster too.
+          Whoever sacrifices less should make the thing.
+        </p>
+        <p>
+          The reason anyone cares is that the gains spread thinly across
+          everyone and the losses land on a few people, so the same policy can
+          be scored as a success or a disaster.
+        </p>
+        <p class="ex-case">
+          The 2018 washing machine tariff, counted in jobs: about 1,800 US
+          manufacturing jobs created. A win.
+        </p>
+        <p class="ex-case">
+          The same tariff, counted in cost: washer prices up about 12%, at
+          roughly $815,000 of consumer cost per job per year. A loss.
+        </p>
+        <p>
+          Same policy, opposite verdict. The only thing that changed is whether
+          you counted the concentrated benefit or the diffuse cost.
+        </p>
+        <p>
+          So when a tariff is announced, ask who actually writes the cheque.
+          Measurements of 2018–19 found pass-through was near complete: import
+          prices rose by close to the full tariff, so American importers and
+          buyers paid it.
+        </p>
+        <p>
+          Comparative advantage is the name for that opportunity-cost test.
+          Absolute advantage — just being faster — is what it replaces. And
+          deadweight loss is the part that reaches nobody: output made at higher
+          cost than necessary, plus the purchases that simply stopped.
+        </p>
+      </aside>
       <h3 id="s05-bop">The balance of payments: a forced mirror</h3>
       <p>
         Every cross-border transaction a country makes is recorded in its
@@ -15319,6 +16147,52 @@
           privilege" a French finance minister complained about in the 1960s.
         </p>
       </div>
+      <aside class="explainer" data-explainer="s05-bop">
+        <p class="ex-label">Make it click</p>
+        <p>
+          The balance of payments answers one question: when a country buys more
+          than it sells, where do the dollars go?
+        </p>
+        <p>
+          They come back, because dollars are only good for buying dollar
+          things. An American buys a $1,000 machine from Osaka; the Japanese
+          seller now holds $1,000 that is useless in Japan. They can buy
+          American goods with it — which would cancel the trade gap — or buy
+          American assets: Treasuries, shares, property. So a trade deficit is
+          the same event as a capital inflow, counted from the other side. The
+          two accounts have to sum to zero.
+        </p>
+        <p>
+          The reason anyone cares is that "trade deficit" gets read as losing,
+          and the record does not support it.
+        </p>
+        <p class="ex-case">
+          Germany, 2010s: large, sustained trade surpluses — alongside a decade
+          of stagnant real wages.
+        </p>
+        <p class="ex-case">
+          US, same period: large, sustained trade deficits — alongside its
+          strongest growth run in the developed world.
+        </p>
+        <p>
+          Opposite balances, and the surplus country had the worse decade. The
+          only thing the balance told you was whether the country saved more
+          than it invested.
+        </p>
+        <p>
+          So the useful question is not the sign of the deficit but what the
+          borrowed resources bought. Financing productive investment is a very
+          different story from financing consumption, and the headline number
+          cannot tell them apart.
+        </p>
+        <p>
+          Two terms left. The current account is trade in goods, services and
+          income; the financial account is who bought which assets. And reserve
+          currency status is why the US case is extreme — the world wants safe
+          dollar assets, that demand is a permanent capital inflow, and its
+          mirror image is a permanent trade deficit.
+        </p>
+      </aside>
       <h3 id="s05-fx">
         Exchange rates: floating, pegged, and the Big Mac test
       </h3>
@@ -15557,6 +16431,49 @@
           positions unwound at once, and the Nikkei fell 12.4% in a session.
         </figcaption>
       </figure>
+      <aside class="explainer" data-explainer="s05-fx">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Exchange rates answer one question: if you can borrow at 0.1% in one
+          country and lend at 5.3% in another, why isn't that free money?
+        </p>
+        <p>
+          Because you change currencies twice, and the rate can move in between.
+          Borrow yen, convert to dollars, buy Treasury bills, convert back to
+          repay. The interest gap is yours only if the exchange rate stands still;
+          if the yen strengthens, your dollars buy back fewer yen than you owe.
+        </p>
+        <p>
+          It matters because this trade pays reliably and small,
+          then loses violently and all at once.
+        </p>
+        <p class="ex-case">
+          Rate holds at ¥148: borrow ¥100m at 0.1%, earn 5.3% on T-bills,
+          convert back → about +5.2% for taking no view on anything.
+        </p>
+        <p class="ex-case">
+          Yen strengthens to ¥132: identical trade, identical interest earned →
+          about −6%. At the 5–10× leverage normal in this trade, that is a
+          30–60% loss.
+        </p>
+        <p>
+          Same position, same interest income, opposite outcome. The only thing
+          that changed is the exchange rate on the way back.
+        </p>
+        <p>
+          That is not hypothetical. In August 2024 an unexpected Bank of Japan
+          hike strengthened the yen in days, carry positions unwound at once,
+          and the Nikkei fell 12.4% in a single session — its worst day since
+          1987.
+        </p>
+        <p>
+          Purchasing power parity is the long-run anchor: the same goods should
+          cost the same everywhere once converted, which is what the Big Mac
+          index measures. It is a reasonable guide over decades and a terrible
+          one over months. A peg is a promise to hold the rate fixed, defended
+          with reserves — and it holds until the reserves run out.
+        </p>
+      </aside>
       <div class="quiz">
         <h4>Check your understanding</h4>
         <div class="quiz-item">
@@ -16122,6 +17039,49 @@
           no fourth option where you get both.
         </p>
       </div>
+      <aside class="explainer" data-explainer="s06-plumbing">
+        <p class="ex-label">Make it click</p>
+        <p>
+          The financial system answers one question: when you hand over money,
+          who takes the loss if the borrower doesn't pay?
+        </p>
+        <p>
+          There are only two arrangements. Direct — you buy the claim yourself,
+          and the loss is yours immediately, visible in the price. Indirect —
+          you give the money to a bank or fund, which lends it on and stands
+          between you and the borrower. Someone else absorbs the first loss, and
+          charges you for it in return you don't receive.
+        </p>
+        <p>
+          The reason anyone cares is that identical lending can be safe or risky
+          to you depending only on the wrapper around it.
+        </p>
+        <p class="ex-case">
+          $10,000 in a savings account. The bank's mortgage borrower defaults →
+          the bank's equity absorbs it, then deposit insurance. You still have
+          $10,000.
+        </p>
+        <p class="ex-case">
+          $10,000 in a corporate bond fund lending to similar borrowers. One
+          defaults → the fund's price marks down that day. You have $9,700.
+        </p>
+        <p>
+          Same credit risk underneath, opposite exposure. The only thing that
+          changed is whether anyone stood between you and the borrower.
+        </p>
+        <p>
+          So three questions settle any financial product: who bears the credit
+          loss, how fast can you get out, and who sets the price you are shown.
+          Nothing gives you the buffer and the higher return at once — the gap
+          between them is what the buffer costs.
+        </p>
+        <p>
+          Maturity transformation is the trick that makes banks useful and
+          fragile at the same time: your money is withdrawable today, the
+          mortgage it funded runs thirty years. It works right up until everyone
+          asks at once.
+        </p>
+      </aside>
       <h3 id="s06-cast">The cast, mapped</h3>
       <p>
         Financial headlines assume you know who everyone is. Here is the full
@@ -16481,6 +17441,50 @@
           exchange never touches the money at all.
         </figcaption>
       </figure>
+      <aside class="explainer" data-explainer="s06-cast">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Every financial firm answers one question about itself: how does it get
+          paid — and what does that make it want?
+        </p>
+        <p>
+          Three payment models cover almost everyone. A percentage of assets
+          held, which rewards gathering and keeping money. A fee per
+          transaction, which rewards activity. Or a spread, the gap between the
+          buying and selling price, which rewards volume. Find the model and you
+          have found the incentive.
+        </p>
+        <p>
+          This matters because the same recommendation means
+          different things from differently-paid people.
+        </p>
+        <p class="ex-case">
+          Adviser paid 1% of assets a year. You ask about moving $500,000 out to
+          repay a mortgage. Their revenue falls $5,000 a year if you do.
+        </p>
+        <p class="ex-case">
+          Adviser paid a flat $3,000 for the review. Same question, same
+          $500,000, same answer either way — their revenue does not move.
+        </p>
+        <p>
+          Same advice sought, opposite pressure on the person giving it. The
+          only thing that changed is what their fee is calculated on.
+        </p>
+        <p>
+          So read the fee before the advice. This is not about dishonesty — it
+          is that incentives shape which options get raised at all, and the
+          option that costs the adviser money tends not to come up.
+        </p>
+        <p>
+          The cast then sorts into three groups. Firms that hold other people's
+          money are channels: banks, asset managers, pension funds, insurers.
+          Firms paid per deal or per trade are services: investment banks,
+          brokers, market makers. Firms running the marketplace itself are
+          infrastructure: exchanges, custodians. And a rating agency is worth
+          singling out — the issuer being rated pays for the rating, which is a
+          conflict that has mattered before.
+        </p>
+      </aside>
       <h3 id="s06-regulators">The referees: who regulates what</h3>
       <p>
         In <a href="#s02">Section 2</a> you met market failures: information
@@ -16665,6 +17669,50 @@
           nobody was paid to look at.
         </figcaption>
       </figure>
+      <aside class="explainer" data-explainer="s06-regulators">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Financial regulation answers one question: who is checking that this
+          firm can do what it promises?
+        </p>
+        <p>
+          The answer is assigned by legal category, not by activity. Securities
+          go to the SEC, bank safety to the Fed, deposits to the FDIC,
+          derivatives to the CFTC. Which means the question has a gap in it: if
+          a business does something that looks like banking but is not legally a
+          bank, no one owns it. Risk drifts toward whichever category is watched
+          least.
+        </p>
+        <p>
+          The reason anyone cares is that this is where losses actually happen —
+          not in the regulated middle, but at the edges.
+        </p>
+        <p class="ex-case">
+          A hedge fund's leverage is visible to its prime brokers and to the
+          SEC. It gets margined and monitored.
+        </p>
+        <p class="ex-case">
+          Archegos ran the same strategies as a family office, which was exempt
+          from most registration. No regulator and no single bank could see the
+          total position. Banks lost about $10bn.
+        </p>
+        <p>
+          Same trades, same leverage, opposite oversight. The only thing that
+          changed was the legal wrapper the money sat in.
+        </p>
+        <p>
+          So the practical test on any fast-growing financial product: name the
+          regulator. If the answer is "it's not technically a bank" or "it's
+          structured as a technology company," you have found the seam, and the
+          seam is where the last several crises came from.
+        </p>
+        <p>
+          Regulatory arbitrage is the name for deliberately choosing the wrapper
+          with the lightest supervision. And systemic risk is why any of this is
+          public business at all — a failing bank damages people who never
+          banked there, which is a cost the bank had no reason to price.
+        </p>
+      </aside>
       <h3 id="s06-sides">Buy side vs sell side: the industry's two halves</h3>
       <p>
         Practitioners split the industry into two camps, and the split shows up
@@ -17017,6 +18065,49 @@
           reproducible pipeline replaces five people with spreadsheets.
         </p>
       </div>
+      <aside class="explainer" data-explainer="s06-sides">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Buy side and sell side answer one question about any finance job: does
+          this firm get paid for being right, or for being useful?
+        </p>
+        <p>
+          The buy side manages money and charges a percentage of it, so its
+          revenue depends on performance and on assets staying put. The sell
+          side provides execution, research and deals, and charges per
+          transaction, so its revenue depends on activity. One is paid for
+          outcomes, the other for volume.
+        </p>
+        <p>
+          The reason anyone cares is that it predicts the shape of the job
+          before you read a word about responsibilities.
+        </p>
+        <p class="ex-case">
+          Asset manager, $50bn at 0.5%: $250m of revenue arriving whether
+          markets rise or fall. Steady headcount, bad year means outflows.
+        </p>
+        <p class="ex-case">
+          M&amp;A team: nothing until a deal closes, then $12m on a $1bn
+          transaction. Same market conditions, revenue swings to zero when deals
+          stop.
+        </p>
+        <p>
+          Same industry, opposite revenue stability. The only thing that changed
+          is whether the fee is charged on a stock of money or on an event.
+        </p>
+        <p>
+          So when you see a posting, work out revenue per head. High revenue and
+          small teams means automation and leverage, and it is where someone who
+          can build a reproducible pipeline replaces five people with
+          spreadsheets. Low revenue per head means the firm needs volume, and
+          your work will be judged on throughput.
+        </p>
+        <p>
+          That also explains the hiring cycles: sell-side headcount booms and
+          crashes with deal flow, while large asset managers grind along, which
+          is why the same CV gets very different responses in different years.
+        </p>
+      </aside>
       <h3 id="s06-primary">
         Primary vs secondary markets: issuance and trading
       </h3>
@@ -17189,6 +18280,51 @@
           next.
         </figcaption>
       </figure>
+      <aside class="explainer" data-explainer="s06-primary">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Primary and secondary markets answer one question: when you buy a
+          share, does the company get your money?
+        </p>
+        <p>
+          Once, and only once. A security is sold by the issuer in the primary
+          market, and that is the only time the company receives cash. Every
+          trade afterwards is in the secondary market, between investors, and
+          the company gets nothing. Apple can trade $10bn in a day without a
+          cent reaching Apple.
+        </p>
+        <p>
+          This matters because the two markets set prices by
+          completely different processes.
+        </p>
+        <p class="ex-case">
+          Airbnb's IPO price, December 2020: $68. Negotiated between the company
+          and its bankers, based on demand they canvassed.
+        </p>
+        <p class="ex-case">
+          Airbnb's price at the close of its first trading day: about $145.
+          Set by open bidding among everyone who wanted in.
+        </p>
+        <p>
+          Same company, same week, more than double the price. The only thing
+          that changed is whether the price was negotiated or discovered.
+        </p>
+        <p>
+          So "the IPO popped 113%" is a statement about the bankers' pricing, not
+          about the business — and that gap, roughly $3.5bn here, was value that
+          went to allocated investors rather than to the company.
+        </p>
+        <p>
+          Underwriting is the banks' job of valuing, marketing and buying the
+          shares to resell, and the gross spread is their fee, typically around
+          7%. A direct listing skips it: existing shares simply start trading,
+          raising no new money — useful when a company needs liquidity for its
+          shareholders rather than cash for itself. And the secondary market
+          matters to issuers even though they earn nothing from it, because
+          nobody buys a thirty-year bond at issue without knowing they can sell
+          it on Tuesday.
+        </p>
+      </aside>
       <h3 id="s06-microstructure">
         Market microstructure: inside the order book
       </h3>
@@ -18250,6 +19386,50 @@
           >. If you want a portfolio project that gets attention, build one.
         </p>
       </div>
+      <aside class="explainer" data-explainer="s06-microstructure">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Market microstructure answers one question: when you place a trade,
+          what price do you actually get?
+        </p>
+        <p>
+          Not the price on the screen — that is the best price for a small amount.
+          Orders sit stacked at rising prices and a large one eats through them
+          upward, so your average fill is worse than the quote. That gap is
+          slippage, and it grows with your size relative to what is resting.
+        </p>
+        <p>
+          It matters because a strategy can be profitable on paper
+          and lossmaking in practice on this alone.
+        </p>
+        <p class="ex-case">
+          Buy 200 shares with 200 offered at $100.05 → you pay $100.05. The
+          quoted price was the real price.
+        </p>
+        <p class="ex-case">
+          Buy 1,000 shares from the same book → you take $100.05, then $100.10,
+          then $100.15, then $100.20. Average $100.115, or $65 of cost that
+          didn't exist at 200 shares.
+        </p>
+        <p>
+          Same stock, same second, same quoted price, and one trade cost nothing
+          extra while the other paid up. The only thing that changed is size
+          relative to what was resting.
+        </p>
+        <p>
+          So the number that matters is your order as a share of daily volume. A
+          fund buying 25% of a day's volume can expect around 35 basis points of
+          impact — enough to turn a strategy that backtests at +50bp per trade
+          into roughly +12bp live, and a loser after fees.
+        </p>
+        <p>
+          A market order takes whatever is there and pays the spread. A limit
+          order names a price and waits, earning the spread but risking no fill.
+          Market makers are the firms posting both sides all day to collect that
+          spread. And the spread itself is simply the price of trading right
+          now instead of waiting.
+        </p>
+      </aside>
       <h3 id="s06-lifecycle">A trade, end to end</h3>
       <p>
         You tap Buy on your phone. What actually happens? More than you'd think,
@@ -18732,6 +19912,51 @@
           plumbing change in one market became a daily funding cost in another.
         </p>
       </div>
+      <aside class="explainer" data-explainer="s06-lifecycle">
+        <p class="ex-label">Make it click</p>
+        <p>
+          Settlement answers one question: you sold on Monday — when is the money
+          actually yours?
+        </p>
+        <p>
+          Not Monday. The trade executes in milliseconds and you stop owning the
+          shares immediately, but cash and shares only change hands the next
+          business day. That gap is settlement, currently one day in US
+          equities. Between execution and settlement you have neither the shares
+          nor the money, and someone could still fail to deliver.
+        </p>
+        <p>
+          The reason anyone cares is that the gap is where obligations pile up
+          and someone has to post collateral against them.
+        </p>
+        <p class="ex-case">
+          Normal volumes: the clearing house nets everyone's trades against each
+          other, cancelling roughly 98% of obligations. Collateral required from
+          a broker is modest.
+        </p>
+        <p class="ex-case">
+          January 2021, meme-stock volumes: same one-day gap, but position sizes
+          exploded. Collateral demands ran to billions, and several brokers
+          restricted buying because they could not post it in time.
+        </p>
+        <p>
+          Same settlement system, opposite outcome for customers. The only thing
+          that changed is how large and one-sided the unsettled positions got.
+        </p>
+        <p>
+          So if you are timing a payment against a sale, count business days and
+          add the broker's own transfer delay — "I have the money" is false for
+          one to three days, and spending unsettled proceeds can breach your
+          account terms.
+        </p>
+        <p>
+          Clearing is the step in between: the clearing house inserts itself as
+          the counterparty to both sides, so neither has to trust the other.
+          Netting is the cancelling-out that shrinks obligations by 98%. And
+          custody is who holds the record that the shares are yours — which is
+          the only reason a broker failing does not mean your shares vanish.
+        </p>
+      </aside>
       <div class="quiz">
         <h4>Check your understanding</h4>
         <div class="quiz-item">
